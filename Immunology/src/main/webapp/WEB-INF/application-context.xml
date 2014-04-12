@@ -16,5 +16,6 @@
 	<mvc:annotation-driven />
 	
 	<import resource="data-source.xml" />
+	<import resource="application-security.xml" />
 	
 </beans>

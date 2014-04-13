@@ -27,16 +27,18 @@ public class Role {
 		return id;
 	}
 
-	public void setId(long id) {
+	public Role setId(long id) {
 		this.id = id;
+		return this;
 	}
 
 	public String getRoleName() {
 		return roleName;
 	}
 
-	public void setRoleName(String roleName) {
+	public Role setRoleName(String roleName) {
 		this.roleName = roleName;
+		return this;
 	}
 	
 	public List<User> getUsers() {

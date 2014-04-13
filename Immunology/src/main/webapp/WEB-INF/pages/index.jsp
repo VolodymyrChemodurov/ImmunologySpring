@@ -7,12 +7,11 @@
 
 <html>
 <head>
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
-	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <link href="resources/css/bootstrap.min.css" rel="stylesheet">
+    <link href="resources/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="resources/css/sb-admin.css" rel="stylesheet">
 </head>
 <body>
 	<h2>Hello World!</h2>
-	<security:authentication property="principal.username" />
 </body>
 </html>

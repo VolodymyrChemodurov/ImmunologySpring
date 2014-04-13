@@ -6,35 +6,45 @@
 
 <html>
 <head>
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <link href="resources/css/bootstrap.min.css" rel="stylesheet">
+    <link href="resources/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="resources/css/sb-admin.css" rel="stylesheet">
 </head>
 <body>
-	<!--login modal-->
-	<div id="loginModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h1 class="text-center">Login</h1>
-				</div>
-				<div class="modal-body">
-					<form class="form col-md-12 center-block" action="<c:url value='j_spring_security_check' />" method="POST">
-						<div class="form-group">
-							<input type="text" class="form-control input-lg" placeholder="Email" id="inputLogin" name='j_username'>
-						</div>
-						<div class="form-group">
-							<input type="password" id="inputPassword"  name='j_password' class="form-control input-lg" placeholder="Password">
-						</div>
-						<div class="form-group">
-							<button type="submit" class="btn btn-primary btn-lg btn-block">Sign In</button>
-						</div>
-					</form>
-				</div>
-				<div class="modal-footer">
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4">
+				<div class="login-panel panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Please Sign In</h3>
+					</div>
+					<div class="panel-body">
+						<form role="form" action="<c:url value='j_spring_security_check' />" method="POST">
+							<fieldset>
+								<div class="form-group">
+									<input class="form-control" placeholder="login" autofocus id="inputLogin" name='j_username'>
+								</div>
+								<div class="form-group">
+									<input class="form-control" placeholder="Password" type="password" id="inputPassword" name='j_password'>
+								</div>
+								<div class="checkbox">
+									<label> <input name="remember" type="checkbox"
+										value="Remember Me">Remember Me
+									</label>
+								</div>
+								<button type="submit" class="btn btn-lg btn-success btn-block">Login</button>
+							</fieldset>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
+    <script src="resources/js/jquery-1.10.2.js"></script>
+    <script src="resources/js/bootstrap.min.js"></script>
+    <script src="resources/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="resources/js/sb-admin.js"></script>
 </body>
 </html>

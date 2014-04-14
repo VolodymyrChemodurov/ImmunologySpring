@@ -9,8 +9,8 @@
 		<intercept-url pattern="/admin" access="ROLE_ADMIN" />
 		<intercept-url pattern="/index" access="ROLE_USER, ROLE_DOCTOR" />
 		<form-login login-page="/login" default-target-url="/index"
-			authentication-failure-url="/login" />
-		<logout logout-success-url="/" />
+			authentication-failure-url="/login?fail" />
+		<logout logout-success-url="/login" />
 	</http>
 
 	<beans:bean id="daoAuthenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">

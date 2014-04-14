@@ -13,5 +13,6 @@
 </head>
 <body>
 	<h2>Hello World!</h2>
+	<a href="Immunology/<c:url value="j_spring_security_logout" />">Logout</a>
 </body>
 </html>

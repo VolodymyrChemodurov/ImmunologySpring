@@ -22,6 +22,11 @@
 					<div class="panel-body">
 						<form role="form" action="<c:url value='j_spring_security_check' />" method="POST">
 							<fieldset>
+								<c:if test="${param.fail == true}">
+									<div id="error_block" class="form-group has-error">
+										<label class="control-label" for="inputError">Wrong login or password</label>
+									</div>
+								</c:if>
 								<div class="form-group">
 									<input class="form-control" placeholder="login" autofocus id="inputLogin" name='j_username'>
 								</div>
@@ -41,7 +46,7 @@
 			</div>
 		</div>
 	</div>
-
+	
     <script src="resources/js/jquery-1.10.2.js"></script>
     <script src="resources/js/bootstrap.min.js"></script>
     <script src="resources/js/plugins/metisMenu/jquery.metisMenu.js"></script>

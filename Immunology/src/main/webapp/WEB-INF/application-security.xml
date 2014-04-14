@@ -9,7 +9,7 @@
 		<intercept-url pattern="/admin" access="ROLE_ADMIN" />
 		<intercept-url pattern="/index" access="ROLE_USER, ROLE_DOCTOR" />
 		<form-login login-page="/login" default-target-url="/index"
-			authentication-failure-url="/login?fail" />
+			authentication-failure-url="/login?fail=true" />
 		<logout logout-success-url="/login" />
 	</http>
 
@@ -32,4 +32,5 @@
 	</authentication-manager>
 
 	<beans:bean id="webexpressionHandler" class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
+	
 </beans:beans>

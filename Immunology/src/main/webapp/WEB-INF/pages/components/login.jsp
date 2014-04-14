@@ -1,14 +1,13 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
 <head>
-    <link href="resources/css/bootstrap.min.css" rel="stylesheet">
-    <link href="resources/font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link href="resources/css/sb-admin.css" rel="stylesheet">
+     <jsp:include page="/WEB-INF/pages/head.jsp"/>
 </head>
 <body>
 
@@ -47,9 +46,6 @@
 		</div>
 	</div>
 	
-    <script src="resources/js/jquery-1.10.2.js"></script>
-    <script src="resources/js/bootstrap.min.js"></script>
-    <script src="resources/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="resources/js/sb-admin.js"></script>
+    <jsp:include page="/WEB-INF/pages/base-scripts.jsp"/>
 </body>
 </html>

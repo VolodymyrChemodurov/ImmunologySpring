@@ -10,6 +10,6 @@ public class CabinetController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String cabinet() {
-		return "cabinet";
+		return "user/cabinet";
 	}
 }

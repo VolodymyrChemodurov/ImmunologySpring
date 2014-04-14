@@ -5,7 +5,7 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -33,14 +33,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 		    String username = userEntity.getLogin();
 		    String password = userEntity.getPassword();
-		    boolean enabled = true;//userEntity.isActive();
-		    boolean accountNonExpired = true;//userEntity.isActive();
-		    boolean credentialsNonExpired = true;//userEntity.isActive();
-		    boolean accountNonLocked = true;//userEntity.isActive();
+		    boolean enabled = true;
+		    boolean accountNonExpired = true;
+		    boolean credentialsNonExpired = true;
+		    boolean accountNonLocked = true;
 
 		    Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		    for (Role role : userEntity.getRoles()) {
-		      authorities.add(new GrantedAuthorityImpl(role.getRoleName()));
+		      authorities.add(new SimpleGrantedAuthority(role.getRoleName()));
 		    }
 
 		    User user = new User(username, password, enabled,

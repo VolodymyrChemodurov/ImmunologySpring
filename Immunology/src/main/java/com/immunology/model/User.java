@@ -43,55 +43,62 @@ public class User {
 		return lastName;
 	}
 
-	public void setLastName(String lastName) {
+	public User setLastName(String lastName) {
 		this.lastName = lastName;
+		return this;
 	}
 
 	public long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public User setId(long id) {
 		this.id = id;
+		return this;
 	}
 
 	public String getFirstName() {
 		return firstName;
 	}
 
-	public void setFirstName(String firstName) {
+	public User setFirstName(String firstName) {
 		this.firstName = firstName;
+		return this;
 	}
 
 	public String getMiddleName() {
 		return middleName;
 	}
 
-	public void setMiddleName(String middleName) {
+	public User setMiddleName(String middleName) {
 		this.middleName = middleName;
+		return this;
 	}
 
 	public String getLogin() {
 		return login;
 	}
 
-	public void setLogin(String login) {
+	public User setLogin(String login) {
 		this.login = login;
+		return this;
 	}
 	
 	public Set<Role> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(Set<Role> roles) {
+	public User setRoles(Set<Role> roles) {
 		this.roles = roles;
+		return this;
 	}
 	
 	public String getPassword() {
 		return password;
 	}
 
-	public void setPassword(String password) {
+	public User setPassword(String password) {
 		this.password = password;
+		return this;
 	}
 }

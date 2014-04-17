@@ -30,7 +30,7 @@
 		<div class="sidebar-collapse">
 			<ul class="nav" id="side-menu">
 				<li>
-					<a href="index.html"><i class="fa fa-user fa-fw"></i>Users</a>
+					<a href="admin/users"><i class="fa fa-user fa-fw"></i>Users</a>
 				</li>
 			</ul>
 		</div>

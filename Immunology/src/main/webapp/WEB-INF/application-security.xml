@@ -25,9 +25,11 @@
 		</beans:property>
 	</beans:bean>
 
+	<beans:bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+
 	<authentication-manager>
 		<authentication-provider user-service-ref="userDetailsServiceImpl">
-			<password-encoder hash="md5"/>
+			<password-encoder ref="encoder"/>
 		</authentication-provider>
 	</authentication-manager>
 

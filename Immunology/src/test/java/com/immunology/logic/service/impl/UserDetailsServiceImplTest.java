@@ -16,13 +16,14 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.immunology.logic.dao.UserDao;
+import com.immunology.logic.utils.enums.USER_ROLES;
 import com.immunology.model.Role;
 import com.immunology.model.User;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserDetailsServiceImplTest extends TestCase {
 
-	private static final String ROLE_TEST = "ROLE_TEST";
+	private static final USER_ROLES ROLE_TEST = USER_ROLES.ROLE_ADMIN;
 	private static final String PASSWORD = "1111";
 	private static final String LOGIN = "login";
 

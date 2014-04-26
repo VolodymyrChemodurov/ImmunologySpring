@@ -8,10 +8,13 @@
 	<http auto-config="true">
 		<intercept-url pattern="/admin*" access="ROLE_ADMIN" />
 		<intercept-url pattern="/cabinet*" access="ROLE_USER, ROLE_DOCTOR" />
+		<access-denied-handler ref="customAccessDeniedHandlerImpl"/>
 		<form-login login-page="/login" default-target-url="/index"
 			authentication-failure-url="/login?fail=true" />
 		<logout logout-success-url="/login" />
 	</http>
+
+	<beans:bean id="customAccessDeniedHandlerImpl" class="com.immunology.logic.controller.AccessDeniedHandlerImpl"/>
 
 	<beans:bean id="daoAuthenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
 		<beans:property name="userDetailsService" ref="userDetailsServiceImpl" />

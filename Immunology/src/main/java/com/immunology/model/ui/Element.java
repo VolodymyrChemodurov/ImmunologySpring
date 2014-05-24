@@ -10,6 +10,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonSubTypes;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 
@@ -41,6 +42,8 @@ public class Element {
 	@Column(name = "element_id")
 	private long id;
 	private String name;
+	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "panel_id")
 	private Panel panel;
@@ -51,6 +54,23 @@ public class Element {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public Panel getPanel() {
+		return panel;
+	}
+
+	public void setPanel(Panel panel) {
+		this.panel = panel;
 	}
 
 	@Override

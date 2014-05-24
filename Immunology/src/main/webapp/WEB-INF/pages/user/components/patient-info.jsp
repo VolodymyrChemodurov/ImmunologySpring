@@ -9,7 +9,7 @@
 </div>
 
 <div class="row">
-	<div class="col-xs-12">
+	<div class="col-xs-9">
 		<div class="box">
 			<div class="box-header">
 				<div class="box-name">
@@ -74,16 +74,30 @@
 		Select2Script(DemoSelect2);
 		// Load example of form validation
 		BootstrapValidatorScript(DemoFormValidator);
-		WinMove();
+		//WinMove();
 	});
+
 	function sendRequest() {
+		var containerStr = "";
+		
 		$.ajax({
 			type : "get",
 			url : "/Immunology/cabinet/patient/form/first", //here you can use servlet,jsp, etc
 			dataType : "json",
 			success : function(response) {
 				console.log(response);
-			//	$('#container')
+				$(response.panels).each(function(){
+					containerStr = containerStr +"<fieldset><legend>"+ this.title+"</legend>";
+					$(this.elements).each(function(){
+						if(this.objectType === "TextBox"){
+							containerStr = containerStr +'<div class="form-group"><label class="col-sm-3 control-label">'+this.text+'</label>';
+							containerStr = containerStr + '<div class="col-sm-5"><input type="text" class=\"form-control\"></div></div>';
+						}
+					});
+					containerStr = containerStr +"</fieldset>";
+					
+				});
+				$("#container").html(containerStr);
 			},
 			error : function() {
 				console.log('ERROR');

@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 @Entity
 public class Panel {
 
@@ -19,6 +21,7 @@ public class Panel {
 	@Column(name = "panel_id")
 	private long id;
 	private String title;
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "form_id")
 	private Form form;
@@ -42,6 +45,12 @@ public class Panel {
 	}
 	public void setElements(List<Element> elements) {
 		this.elements = elements;
+	}
+	public Form getForm() {
+		return form;
+	}
+	public void setForm(Form form) {
+		this.form = form;
 	}
 	@Override
 	public String toString() {

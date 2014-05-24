@@ -115,7 +115,7 @@
 			<artifactId>postgresql</artifactId>
 			<version>${postgresql-connector.version}</version>
 		</dependency>
-            
+
 		<!-- Hibernate dependencies -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -129,6 +129,18 @@
 		</dependency>
 		<!-- Hibernate dependencies end -->
 		<!-- DB dependencies -->
+		<!-- JACKSON dependencies -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+		<!-- JACKSON dependencies End-->
 
 		<!-- loggining -->
 		<dependency>
@@ -152,8 +164,8 @@
 			<version>${log4j.version}</version>
 		</dependency>
 		<!-- loggining end -->
-		
-		<!--  Junit -->
+
+		<!-- Junit -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -227,8 +239,8 @@
 			<type>jar</type>
 			<scope>test</scope>
 		</dependency>
-		<!--  Junit  end -->
-		
+		<!-- Junit end -->
+
 	</dependencies>
 
 	<build>

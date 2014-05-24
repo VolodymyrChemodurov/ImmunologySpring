@@ -6,7 +6,11 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+
 import com.immunology.model.ui.Element;
+
+@JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.PROPERTY, property="objectType")
 
 @Entity
 @Table(name = "dropdowns")
@@ -22,4 +26,10 @@ public class Dropdown extends Element{
 	public void setValues(Map<String, Double> values) {
 		this.values = values;
 	}
+
+	@Override
+	public String toString() {
+		return "Dropdown [values=" + values + "]";
+	}
+	
 }

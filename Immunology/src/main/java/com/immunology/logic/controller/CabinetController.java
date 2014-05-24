@@ -43,12 +43,6 @@ public class CabinetController {
 	
 	@RequestMapping(value="/my-patients",  method=RequestMethod.GET )
     public ModelAndView getMyPatients(Model model) {
-		//User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		//model.addAttribute("userTest", userService.getUserByLogin(user.getUsername()));
-		//ModelAndView myModel = new ModelAndView("user/my-patients");
-		//List<Patient> patients = patientService.getAllPatients();
-		//model.addAttribute("patients",patients);
-		//myModel.addObject("patients",patients);
         return new ModelAndView("user/component/all-patients");
     }
 	

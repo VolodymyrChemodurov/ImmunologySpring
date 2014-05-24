@@ -32,8 +32,8 @@
 					</div>
 					<div id="tabs-2">
 
-						<h1>Here will be Medical card page</h1>
-
+						<button onclick="sendRequest()">Send request</button>
+						<div id="container"></div>
 					</div>
 					<div id="tabs-3">
 						<p>Other page</p>
@@ -65,27 +65,6 @@
 		//LoadTimePickerScript(AllTimePickers);
 		// Create jQuery-UI tabs
 		$("#tabs").tabs();
-		// Sortable for elements
-		//$(".sort").sortable({
-		//	items: "div.col-sm-2",
-		//	appendTo: 'div.box-content'
-		//});
-		// Droppable for example of trash
-		//$(".drop div.col-sm-2").draggable({containment: '.dropbox' });
-		//$('#trash').droppable({
-		//	drop: function(event, ui) {
-		//		$(ui.draggable).remove();
-		//	}
-		//});
-		//var icons = {
-		//	header: "ui-icon-circle-arrow-e",
-		//	activeHeader: "ui-icon-circle-arrow-s"
-		//};
-		// Make accordion feature of jQuery-UI
-		//$("#accordion").accordion({icons: icons });
-		// Create UI spinner
-		//$("#ui-spinner").spinner();
-
 		$('#input_date').datepicker({
 			setDate : new Date()
 		});
@@ -97,4 +76,19 @@
 		BootstrapValidatorScript(DemoFormValidator);
 		WinMove();
 	});
+	function sendRequest() {
+		$.ajax({
+			type : "get",
+			url : "/Immunology/cabinet/patient/form/first", //here you can use servlet,jsp, etc
+			dataType : "json",
+			success : function(response) {
+				console.log(response);
+			//	$('#container')
+			},
+			error : function() {
+				console.log('ERROR');
+			}
+
+		});
+	}
 </script>

@@ -10,6 +10,28 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.codehaus.jackson.annotate.JsonSubTypes;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+
+import com.immunology.model.ui.elements.CheckBox;
+import com.immunology.model.ui.elements.Dropdown;
+import com.immunology.model.ui.elements.TextBox;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Text;
+
+
+
+
+
+@JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.PROPERTY, property="objectType")
+@JsonSubTypes({
+
+        @JsonSubTypes.Type(value=CheckBox.class),
+        @JsonSubTypes.Type(value=Dropdown.class),
+        @JsonSubTypes.Type(value=TextBox.class),
+        
+})
+
+
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Element {
@@ -29,6 +51,11 @@ public class Element {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return "Element [id=" + id + ", name=" + name + "]";
 	}
 
 }

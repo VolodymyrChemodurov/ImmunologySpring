@@ -16,7 +16,7 @@ import com.immunology.logic.utils.RoleUtils;
 public class AccessDeniedHandlerImpl implements AccessDeniedHandler{
 
 	public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException deniedException) throws IOException, ServletException {
-		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		User user = (User)SecurityContextHolder.getContext().getAuthentication();
 		if(RoleUtils.isAdmin(user)) {
 			response.sendRedirect("/Immunology/admin");
 		} else {

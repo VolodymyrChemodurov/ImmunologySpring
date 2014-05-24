@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -39,6 +40,9 @@ public class User {
 				joinColumns = {@JoinColumn(name = "user_id")},
 				inverseJoinColumns = {@JoinColumn(name = "role_id")})
 	private Set<Role> roles;
+	
+	@OneToMany(mappedBy="user")
+	private Set<Patient> patients;
 	
 	public String getLastName() {
 		return lastName;
@@ -102,4 +106,13 @@ public class User {
 		this.password = password;
 		return this;
 	}
+
+	public Set<Patient> getPatients() {
+		return patients;
+	}
+
+	public void setPatients(Set<Patient> patients) {
+		this.patients = patients;
+	}
+	
 }

@@ -29,11 +29,15 @@ public class UserServiceImpl implements UserService{
 	}
 
 	public User updateUser(User user) {
-		user.setPassword(encoder.encode(user.getPassword()));
+		//user.setPassword(encoder.encode(user.getPassword()));
 		return crudDao.saveOrUpdate(user);
 	}
 
 	public List<User> getAllUsers() {
 		return crudDao.getAll(User.class);
+	}
+
+	public User getUserByLogin(String login) {
+		return userDao.findByLogin(login);
 	}
 }

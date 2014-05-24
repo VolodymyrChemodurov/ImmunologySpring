@@ -14,7 +14,6 @@
 	<context:annotation-config />
 	<context:component-scan base-package="com.immunology" />
 	<mvc:annotation-driven />
-	
 	<import resource="data-source.xml" />
 	<import resource="application-security.xml" />
 	

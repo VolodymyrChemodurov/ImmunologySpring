@@ -17,25 +17,16 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 import com.immunology.model.ui.elements.CheckBox;
 import com.immunology.model.ui.elements.Dropdown;
 import com.immunology.model.ui.elements.TextBox;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Text;
-
-
-
-
 
 @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.PROPERTY, property="objectType")
 @JsonSubTypes({
-
         @JsonSubTypes.Type(value=CheckBox.class),
         @JsonSubTypes.Type(value=Dropdown.class),
         @JsonSubTypes.Type(value=TextBox.class),
-        
 })
-
-
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Element {
+public abstract class Element {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
@@ -56,7 +47,6 @@ public class Element {
 		this.name = name;
 	}
 	
-
 	public long getId() {
 		return id;
 	}

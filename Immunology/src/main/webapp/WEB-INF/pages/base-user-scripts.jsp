@@ -19,4 +19,5 @@
 <!-- All functions for this theme + document.ready processing -->
 
 <script src="${param.baseURL}/resources/js/user-page/js/devoops.js"></script>
+<script src="${param.baseURL}/resources/js/plugins/form-builder.js"></script>
 -

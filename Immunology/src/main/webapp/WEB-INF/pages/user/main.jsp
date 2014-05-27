@@ -78,16 +78,13 @@
 	
 <script type="text/javascript">
 function doAjaxGet(pageName) {
-	//console.info('doAjaxPost()');
     $.ajax({
         type: "GET",
         url: "/Immunology/cabinet/"+pageName,
         success: function(response) {
-           // console.log(response);
             $("#content").html(response);
         }
     });
-  //  console.info('done doAjaxPost()');
 }
 function doAjaxPost(pageName) {
 	console.info('doAjaxPost()');
@@ -95,11 +92,9 @@ function doAjaxPost(pageName) {
         type: "POST",
         url: "/Immunology/cabinet/"+pageName,
         success: function(response) {
-           // console.log(response);
             $("#content").html(response);
         }
     });
-  //  console.info('done doAjaxPost()');
 }
 
 </script>

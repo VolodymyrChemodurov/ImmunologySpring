@@ -4,6 +4,7 @@ import java.util.Map;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonTypeInfo;
@@ -14,9 +15,9 @@ import com.immunology.model.ui.Element;
 
 @Entity
 @Table(name = "dropdowns")
-public class Dropdown extends Element{
+public class DropDown extends Element{
 
-	@ElementCollection
+	@ElementCollection(fetch = FetchType.EAGER)
 	private Map<String, Double> values;
 
 	public Map<String, Double> getValues() {

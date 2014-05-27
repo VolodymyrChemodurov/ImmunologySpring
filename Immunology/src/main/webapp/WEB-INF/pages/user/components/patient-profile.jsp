@@ -28,9 +28,9 @@
 							<label class="col-sm-3 control-label">Select sex</label>
 							<div class="col-sm-5">
 								<select class="populate placeholder" name="sex" id="sex" >
-									<option value="">-- Select a sex --</option>
-									<option value="male">Male</option>
-									<option value="female">Female</option>
+									<option value="${patient.sex}">${patient.sex}</option>
+									<option value="Male">Male</option>
+									<option value="Female">Memale</option>
 									
 									
 								</select>
@@ -54,7 +54,7 @@
 							<label class="col-sm-3 control-label">Country</label>
 							<div class="col-sm-5">
 								<select class="populate placeholder" name="country" id="country">
-									<option value="">-- Select a country --</option>
+									<option value="${patient.country}">${patient.country}</option>
 									<option value="Ukraine">Ukraine</option>
 									<option value="France">France</option>
 									<option value="Germany">Germany</option>

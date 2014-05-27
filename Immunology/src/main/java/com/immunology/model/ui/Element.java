@@ -15,13 +15,13 @@ import org.codehaus.jackson.annotate.JsonSubTypes;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 
 import com.immunology.model.ui.elements.CheckBox;
-import com.immunology.model.ui.elements.Dropdown;
+import com.immunology.model.ui.elements.DropDown;
 import com.immunology.model.ui.elements.TextBox;
 
 @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.PROPERTY, property="objectType")
 @JsonSubTypes({
         @JsonSubTypes.Type(value=CheckBox.class),
-        @JsonSubTypes.Type(value=Dropdown.class),
+        @JsonSubTypes.Type(value=DropDown.class),
         @JsonSubTypes.Type(value=TextBox.class),
 })
 @Entity

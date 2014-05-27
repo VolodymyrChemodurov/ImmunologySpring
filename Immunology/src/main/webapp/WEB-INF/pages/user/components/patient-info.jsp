@@ -31,8 +31,6 @@
 
 					</div>
 					<div id="tabs-2">
-
-						<button id="render_form_button">Send request</button>
 						<div id="container"></div>
 					</div>
 					<div id="tabs-3">
@@ -75,10 +73,9 @@
 		Select2Script(DemoSelect2);
 		// Load example of form validation
 		BootstrapValidatorScript(DemoFormValidator);
-		//WinMove();
-		$('#render_form_button').click(function() {
-			renderForm($('#container'));
-		});
+		formData ="";
+		renderForm($('#container'));
+		
 	});
 
 

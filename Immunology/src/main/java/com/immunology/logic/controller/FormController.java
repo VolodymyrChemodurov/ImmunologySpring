@@ -23,6 +23,7 @@ public class FormController {
 	@RequestMapping(value = "/first", method = RequestMethod.GET)
 	public @ResponseBody Form getFirstForm(Model model) {
 		Form form = formServive.getFormById(1L);
+		System.out.println(form);
 		LOG.info(form);
 		return form;
 	}

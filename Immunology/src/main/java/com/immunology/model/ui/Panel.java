@@ -1,6 +1,6 @@
 package com.immunology.model.ui;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,7 +26,7 @@ public class Panel {
 	@JoinColumn(name = "form_id")
 	private Form form;
 	@OneToMany(mappedBy = "panel", fetch = FetchType.EAGER)
-	private List<Element> elements;
+	private Set<Element> elements;
 	
 	public long getId() {
 		return id;
@@ -40,10 +40,10 @@ public class Panel {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public List<Element> getElements() {
+	public Set<Element> getElements() {
 		return elements;
 	}
-	public void setElements(List<Element> elements) {
+	public void setElements(Set<Element> elements) {
 		this.elements = elements;
 	}
 	public Form getForm() {

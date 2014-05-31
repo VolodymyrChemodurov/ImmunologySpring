@@ -10,7 +10,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import com.immunology.model.User;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -20,7 +24,13 @@ public abstract class Form {
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	@Column(name = "form_id")
 	private long id;
+	
 	private String name;
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="user_id")
+	private User user;
+	
 	@OneToMany(mappedBy = "form", fetch = FetchType.EAGER )
 	private Set<Panel> panels;
 
@@ -31,6 +41,12 @@ public abstract class Form {
 		this.id = id;
 	}
 	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	public String getName() {
 		return name;
 	}

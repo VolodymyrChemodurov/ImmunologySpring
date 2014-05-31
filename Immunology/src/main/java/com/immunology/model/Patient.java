@@ -1,6 +1,6 @@
 package com.immunology.model;
 
-import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.immunology.model.ui.Form;
 
 @Entity
 @Table(name = "patient")
@@ -51,6 +54,17 @@ public class Patient {
 	
 	@Column(name = "house")
 	private String house;
+
+	@OneToMany(fetch=FetchType.EAGER, mappedBy="user")
+	private List<Form> userForms;
+	
+	public List<Form> getUserForms() {
+		return userForms;
+	}
+
+	public void setUserForms(List<Form> userForms) {
+		this.userForms = userForms;
+	}
 
 	public long getId() {
 		return id;

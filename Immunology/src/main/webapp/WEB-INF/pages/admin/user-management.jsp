@@ -19,7 +19,7 @@
 
 	<div id="wrapper">
 
-		<jsp:include page="admin-navbar.jsp" />
+		<jsp:include page="components/admin-navbar.jsp" />
 
 		<div id="page-wrapper">
 			<div class="row">

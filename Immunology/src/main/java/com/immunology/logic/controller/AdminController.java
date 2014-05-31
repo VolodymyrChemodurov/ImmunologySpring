@@ -18,14 +18,14 @@ public class AdminController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String admin() {
-		return "components/admin/admin";
+		return "/admin/admin";
 	}
 	
 	@RequestMapping(value = "/users", method = RequestMethod.GET)
 	public ModelAndView getUsersManagmentPage(ModelAndView model) {
 		
 		model.addObject("users", userService.getAllUsers());
-		model.setViewName("components/admin/user-management");
+		model.setViewName("/admin/user-management");
 		return model;
 	}
 	

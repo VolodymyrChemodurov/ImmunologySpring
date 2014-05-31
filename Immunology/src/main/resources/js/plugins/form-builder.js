@@ -19,7 +19,7 @@ function renderForm(form) {
 			renderDropDownStyle();
 		},
 		error: function (request, status, error) {
-	        alert(request.responseText);
+			alert(error);
 	    }
 
 	});

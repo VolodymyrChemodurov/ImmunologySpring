@@ -11,8 +11,8 @@
 </div>
 <div>
 
-	<button type="button"
-			class="btn btn btn-primary" onclick="doAjaxGet('patient/new')">Add new Patient</button>
+<!--  	<button type="button"
+			class="btn btn btn-primary" onclick="doAjaxGet('patient/new')">Add new Patient</button> -->
 </div>
 <div class="row">
 	<div class="col-xs-12">

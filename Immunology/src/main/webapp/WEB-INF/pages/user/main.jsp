@@ -33,13 +33,18 @@
 	<div class="row">
 		<div id="sidebar-left" class="col-xs-2 col-sm-2">
 			<ul class="nav main-menu">
-				<li>
-					<!--<a href="/Immunology/cabinet/my-patients" class="active" id="MyPatients" "> -->
-					<a href="#" class="active"  onclick="doAjaxGet('patients/my');">
+				
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle">
 						<i class="fa fa-user"></i>
-						<span class="hidden-xs">My Patients</span>
+						 <span class="hidden-xs">My patiens</span>
 					</a>
+					<ul class="dropdown-menu">
+						<li><a class="ajax-link" href="#" onclick="doAjaxGet('patient/new');">Add new patient</a></li>
+						<li><a class="ajax-link" href="#" onclick="doAjaxGet('patients/my');">List of my patiens</a></li>
+					</ul>
 				</li>
+				
 				<li>
 					<a href="#" class="" onclick="doAjaxGet('patients/all');">
 						<i class="fa fa-users"></i>
@@ -76,6 +81,8 @@
 	</jsp:include>
 	
 	
+	
+	
 <script type="text/javascript">
 function doAjaxGet(pageName) {
     $.ajax({
@@ -97,6 +104,10 @@ function doAjaxPost(pageName) {
     });
 }
 
+
+$( document ).ready(function() {
+	  doAjaxGet("patients/my");
+	});
 </script>
 	
 </body>

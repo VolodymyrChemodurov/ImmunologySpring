@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.immunology.logic.service.FormServive;
-import com.immunology.model.ui.Form;
+import com.immunology.logic.service.MedicalCardFormService;
+import com.immunology.model.ui.MedicalCardForm;
 
 @Controller
 @RequestMapping(value = "/cabinet/patient/form")
@@ -20,10 +21,12 @@ public class FormController {
 	@Autowired
 	private FormServive formServive;
 
+	@Autowired
+	private MedicalCardFormService medicalCardService;
+	
 	@RequestMapping(value = "/first", method = RequestMethod.GET)
-	public @ResponseBody Form getFirstForm(Model model) {
-		Form form = formServive.getFormById(1L);
-		System.out.println(form);
+	public @ResponseBody MedicalCardForm getFirstForm(Model model) {
+		MedicalCardForm form = medicalCardService.getById(1);
 		LOG.info(form);
 		return form;
 	}

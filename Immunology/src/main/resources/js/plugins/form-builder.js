@@ -18,9 +18,9 @@ function renderForm(form) {
 			$(form).html(formData);
 			renderDropDownStyle();
 		},
-		error : function() {
-			console.log('ERROR');
-		}
+		error: function (request, status, error) {
+	        alert(request.responseText);
+	    }
 
 	});
 };

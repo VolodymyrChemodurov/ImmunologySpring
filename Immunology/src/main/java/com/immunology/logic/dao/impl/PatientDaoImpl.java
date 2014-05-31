@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 
 import com.immunology.logic.dao.PatientDao;
 import com.immunology.model.Patient;
-import com.immunology.model.User;
 @Repository
 public class PatientDaoImpl implements PatientDao{
 	

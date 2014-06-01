@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 
@@ -26,6 +27,7 @@ public class Panel {
 	@JoinColumn(name = "form_id")
 	private Form form;
 	@OneToMany(mappedBy = "panel", fetch = FetchType.EAGER)
+	@OrderBy("place ASC")
 	private Set<Element> elements;
 	
 	public long getId() {

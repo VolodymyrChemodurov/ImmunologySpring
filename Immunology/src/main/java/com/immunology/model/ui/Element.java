@@ -39,6 +39,8 @@ public abstract class Element {
 	@JoinColumn(name = "panel_id")
 	private Panel panel;
 
+	private int place;
+	
 	public String getName() {
 		return name;
 	}
@@ -63,9 +65,17 @@ public abstract class Element {
 		this.panel = panel;
 	}
 
+	public int getOrder() {
+		return place;
+	}
+
+	public void setOrder(int order) {
+		this.place = order;
+	}
+
 	@Override
 	public String toString() {
-		return "Element [id=" + id + ", name=" + name + "]";
+		return "Element [id=" + id + ", name=" + name + ", place=" + place + "]";
 	}
 
 }

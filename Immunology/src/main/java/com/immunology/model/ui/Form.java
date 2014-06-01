@@ -14,8 +14,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonSubTypes;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+
 import com.immunology.model.User;
 
+@JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.PROPERTY, property="objectType")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value=MedicalCardForm.class),
+})
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Form {
@@ -29,9 +37,10 @@ public abstract class Form {
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="user_id")
+	@JsonIgnore
 	private User user;
 	
-	@OneToMany(mappedBy = "form", fetch = FetchType.EAGER )
+	@OneToMany(mappedBy = "form", fetch = FetchType.EAGER)
 	private Set<Panel> panels;
 
 	public long getId() {

@@ -4,3 +4,17 @@
 .marg-top-8px{
 	margin-top: 8px;
 }
+fieldset  .border{
+	border: solid 1px;
+}
+
+.group-panel{
+	margin-bottom: 10px;
+	margin-top: 25px;
+}
+.groupe-padding{
+	padding-left: 0 !important;
+}
+.panel-fieldset{
+	 margin-bottom: 3px;
+}

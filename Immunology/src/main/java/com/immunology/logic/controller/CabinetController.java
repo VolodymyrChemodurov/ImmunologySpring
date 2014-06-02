@@ -5,28 +5,28 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.immunology.logic.ImmunologyTestSuite;
 import com.immunology.logic.service.PatientService;
 import com.immunology.logic.service.UserService;
 import com.immunology.model.Patient;
+
 @Transactional
 @Controller
 @RequestMapping(value = "/cabinet")
 public class CabinetController {
 	
-	private static final Logger LOG = Logger.getLogger(CabinetController.class);
+	private static final Logger LOG = LoggerFactory.getLogger(CabinetController.class);
 	
 	@Autowired
 	UserService userService;
@@ -99,7 +99,7 @@ public class CabinetController {
 		try {
 			response.sendRedirect("/Immunology/cabinet");
 		} catch (IOException e) {
-			LOG.error(e);
+			LOG.error(e.toString());
 		}
         return "forward:cabinet";
     }

@@ -1,0 +1,43 @@
+<configuration>
+	<timestamp key="bySecond" datePattern="yyyy_MM_dd_HH_mm_ss" />
+
+	<appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%level] %logger{50} - %msg %n</pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>TRACE</level>
+		</filter>
+	</appender>
+
+	<appender name="libsProblemsConsoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%level] %logger{50} - %msg %n</pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>WARN</level>
+		</filter>
+	</appender>
+
+	<appender name="fileAppender" class="ch.qos.logback.core.FileAppender">
+		<file>D:\logs\immunology\log-${bySecond}.txt</file>
+		<append>true</append>
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} %-5level %logger{50} - %msg %n</pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>Trace</level>
+		</filter>
+	</appender>
+
+	<logger name="com.immunology" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="consoleAppender" />
+	</logger>
+
+	<root>
+		<level value="DEBUG" />
+		<appender-ref ref="fileAppender" />
+		<appender-ref ref="libsProblemsConsoleAppender" />
+	</root>
+</configuration>

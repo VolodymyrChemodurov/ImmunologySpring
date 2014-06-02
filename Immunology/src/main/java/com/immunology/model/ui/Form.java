@@ -13,6 +13,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonSubTypes;
@@ -41,6 +42,7 @@ public abstract class Form {
 	private User user;
 	
 	@OneToMany(mappedBy = "form", fetch = FetchType.EAGER)
+	@OrderBy("place ASC")
 	private Set<Panel> panels;
 
 	public long getId() {

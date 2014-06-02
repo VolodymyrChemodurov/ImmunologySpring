@@ -21,15 +21,26 @@ public class Panel {
 	@GeneratedValue
 	@Column(name = "panel_id")
 	private long id;
+	
 	private String title;
+	
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "form_id")
 	private Form form;
+	
 	@OneToMany(mappedBy = "panel", fetch = FetchType.EAGER)
 	@OrderBy("place ASC")
 	private Set<Element> elements;
 	
+	private int place;
+	
+	public int getPlace() {
+		return place;
+	}
+	public void setPlace(int place) {
+		this.place = place;
+	}
 	public long getId() {
 		return id;
 	}

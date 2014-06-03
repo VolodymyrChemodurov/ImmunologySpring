@@ -14,13 +14,13 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonSubTypes;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 
-import com.immunology.model.ui.elements.CheckBox;
 import com.immunology.model.ui.elements.DropDown;
+import com.immunology.model.ui.elements.Panel;
 import com.immunology.model.ui.elements.TextBox;
 
 @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.PROPERTY, property="objectType")
 @JsonSubTypes({
-        @JsonSubTypes.Type(value=CheckBox.class),
+        @JsonSubTypes.Type(value=Panel.class),
         @JsonSubTypes.Type(value=DropDown.class),
         @JsonSubTypes.Type(value=TextBox.class),
 })
@@ -32,15 +32,18 @@ public abstract class Element {
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	@Column(name = "element_id")
 	private long id;
+	
 	private String name;
+	
+	private int place;
+	
+	private boolean checked;
 	
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "panel_id")
 	private Panel panel;
 
-	private int place;
-	
 	public String getName() {
 		return name;
 	}
@@ -71,6 +74,22 @@ public abstract class Element {
 
 	public void setOrder(int order) {
 		this.place = order;
+	}
+
+	public int getPlace() {
+		return place;
+	}
+
+	public void setPlace(int place) {
+		this.place = place;
+	}
+
+	public boolean isCheked() {
+		return checked;
+	}
+
+	public void setCheked(boolean cheked) {
+		this.checked = cheked;
 	}
 
 	@Override

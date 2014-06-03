@@ -20,6 +20,7 @@ import org.codehaus.jackson.annotate.JsonSubTypes;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 
 import com.immunology.model.User;
+import com.immunology.model.ui.elements.Panel;
 
 @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.PROPERTY, property="objectType")
 @JsonSubTypes({
@@ -34,6 +35,7 @@ public abstract class Form {
 	@Column(name = "form_id")
 	private long id;
 	
+	@Column(name = "form_name")
 	private String name;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
@@ -48,6 +50,7 @@ public abstract class Form {
 	public long getId() {
 		return id;
 	}
+	
 	public void setId(long id) {
 		this.id = id;
 	}
@@ -55,21 +58,27 @@ public abstract class Form {
 	public User getUser() {
 		return user;
 	}
+	
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
 	public String getName() {
 		return name;
 	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 	public Set<Panel> getPanels() {
 		return panels;
 	}
+	
 	public void setPanels(Set<Panel> panels) {
 		this.panels = panels;
 	}
+	
 	@Override
 	public String toString() {
 		return "Form [id=" + id + ", name=" + name + ", panels=" + panels + "]";

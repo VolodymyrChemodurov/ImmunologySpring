@@ -18,18 +18,22 @@ public class MedicalCardForm extends Form {
 	@Temporal(TemporalType.DATE)
 	@Column(name="creation_date")
 	private Date creationDate;
+	
 	@Column(name="additional_info")
 	private String additionalInfo;
 	
 	public Date getCreationDate() {
 		return creationDate;
 	}
+	
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
 	}
+	
 	public String getAdditionInfo() {
 		return additionalInfo;
 	}
+	
 	public void setAdditionInfo(String additionInfo) {
 		this.additionalInfo = additionInfo;
 	}

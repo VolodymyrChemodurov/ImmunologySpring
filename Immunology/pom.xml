@@ -273,7 +273,7 @@
 							<configuration>
 								<srcFiles>
 									<srcFile>src\main\changelog\roles.sql</srcFile>
-									<srcFile>src\main\changelog\test_users.sql</srcFile>
+									<srcFile>src\main\changelog\test_data.sql</srcFile>
 								</srcFiles>
 							</configuration>
 						</execution>

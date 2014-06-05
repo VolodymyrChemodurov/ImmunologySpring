@@ -1,5 +1,5 @@
 var container;
-var formData = "";
+var formStructure = "";
 var dropDownIdArr = [];
 
 function renderForm(form) {
@@ -10,14 +10,8 @@ function renderForm(form) {
 		dataType : "json",
 		success : function(response) {
 			console.log(response);
-			formData += '<form class="form-horizontal">';
-			renderMedcardFields(response);
-			$(response.panels).each(function() {
-				
-				renderPanel(this);
-			});
-			formData += "</form>";
-			$(form).html(formData);
+			renderMedicalForm(response);
+			$(form).html(formStructure);
 			renderDropDownStyle();
 		},
 		error: function (request, status, error) {
@@ -27,131 +21,159 @@ function renderForm(form) {
 	});
 };
 
-function renderMedcardFields(form){
-	
-	formData += '<fieldset class= "panel-fieldset">';
-	formData += '<div class = "col-sm-3 groupe-padding" style="text-align: right;">';
-	formData +=	'<div class = "com-sm-7 med_panel_div_left disable" >' + "Дата Створення" + '</div>';
-	formData +='</div><div class = "col-sm-9" style="height: 35px; margin-top: 2px;">';
-	
-	formData += '<div class="col-sm-5">';
-	formData += '<input type="text" value="'
-		+ form.creationDate + '" class="form-control" style="margin-top: 2px;"></div>';
-	formData += '<div class="col-sm-7"></div></div>';
-	
-	formData += '<div class = "col-sm-3 groupe-padding"  style="text-align: right;">';
-	formData +=	'<div class = "com-sm-7 med_panel_div_left disable" >' + "Додаткова інформація" + '</div>';
-	formData +='</div><div class = "col-sm-9">';
-	
-	formData += '<div class="col-sm-5">';
-	formData += '<input type="text" value="'
-		+ form.additionInfo + '" class="form-control"></div>';
-	formData += '</div>';
-	
-	formData +=	'</fieldset>';
+	// Create structure of medical form
+function renderMedicalForm(form){
+	formStructure += '<form class="form-horizontal">';
+		renderMedcardFields(form);
+		$(form.panels).each(function() {
+		renderPanel(this);
+		});
+	formStructure += '</form>';
 }
 
+	// Render Medical form fields( Date & Addition. Inf.)
+function renderMedcardFields(form){
+	
+	formStructure += '<fieldset class= "panel-fieldset">';
+	formStructure += 	'<div class = "col-sm-3 panel-title-block" >';
+	formStructure +=			'<div class = "com-sm-7 med_panel_title_div disable" >' + "Дата Створення" + '</div>';
+	formStructure +=		'</div>';
+	formStructure +=		'<div class = "col-sm-9">';
+	formStructure += 		'<div class="col-sm-5">';
+	formStructure += 			'<input type="text" value="'
+								+ form.creationDate + '" class="form-control med_panel_left_input">';
+	formStructure +=		'</div>';
+	formStructure += 		'<div class="col-sm-7"></div></div>';
+	
+	formStructure += 	'<div class = "col-sm-3 panel-title-block">';
+	formStructure +=			'<div class = "com-sm-7 med_panel_title_div disable" >' + "Додаткова інформація" + '</div>';
+	formStructure +=		'</div>';
+	formStructure +=		'<div class = "col-sm-9">';
+	formStructure += 			'<div class="col-sm-5">';
+	formStructure += 				'<textArea class="form-control med_panel_left_input">'
+									+ form.additionInfo + '</textArea>';
+	formStructure += 			'</div>';
+	formStructure += 	'</div>';
+	formStructure += '</fieldset>';
+}
+	//render panel(title & made place for fields)
 function renderPanel(panel) {
-	formData += '<fieldset class= "panel-fieldset" style= "background-color: #E8ECF0;">';
-	//formData += '<legend>' + panel.title + '</legend>';
-	formData += '<div class = "col-sm-3 groupe-padding" >';
-	formData +=	'<div class = "com-sm-7 med_panel_div_left disable" ><h4 class="med_panel_div_h">' + panel.name + '</h4></div>';
-	formData +='</div><div class = "col-sm-9 group-panel">';
-	$(panel.elements).each(function() {
-		renderElement(this);
-	});
-	formData += '</div></fieldset>';
+	formStructure += '<fieldset class= "panel-fieldset">';
+	formStructure += 	'<div class = "col-sm-3 groupe-padding" >';
+	formStructure +=		'<div class = "com-sm-7 med_panel_title_div disable" ><h4>' + panel.name + '</h4></div>';
+	formStructure +=	'</div>';
+	formStructure +=	'<div class = "col-sm-9 group-panel">';
+			$(panel.elements).each(function() {
+				renderElement(this);
+			});
+	formStructure += 	'</div>';
+	formStructure += '</fieldset>';
 };
 
 function renderElement(element) {
-	
-	
 	renderCheckBox(element);
 	
 	switch (element.objectType) {
 	case 'TextBox':
+		formStructure += '</div>';
 		renderTextBox(element);
-		
 		break;
 	case 'Panel':
 		renderSubPanel(element);
 		break;
 	case 'DropDown':
-		renderDropDown(element);
+		renderDropDown(element,false);
 		break;
 	}
 };
+
+	//finished field and made marging for subelements;
 function renderSubElement(element) {
 	
 	renderSubPanelCheckBox(element);
-	formData += '</div>';
-	formData +='<div class="col-sm-7"></div>'; 
-	switch (element.objectType) {
-	case 'TextBox':
-		renderTextBoxForPanel(element);
-		break;
-	case 'Panel':
-		renderSubPanel(element);
-		break;
-	case 'DropDown':
-		renderDropDown(element);
-		break;
-	}
+	formStructure += '</div>';
+	formStructure +='<div class="col-sm-7"></div>'; 
+		switch (element.objectType) {
+		case 'TextBox':
+			renderTextBox(element);
+			break;
+		case 'DropDown':
+			renderDropDown(element, true);
+			break;
+		}
 };
-function renderTextBoxForPanel(element) {
-	formData += '<div class="col-sm-7"><input type="text" value="'
-			+ element.text + '" class=\"form-control\"></div>';
-};
-
 function renderTextBox(element) {
-	formData += '</div>';
-	formData += '<div class="col-sm-7"><input type="text" value="'
-			+ element.text + '" class=\"form-control\"></div>';
+	formStructure += '<div class="col-sm-7">';
+	formStructure +=	'<input type="text" class="form-control" value="'
+						+ element.text + '" >';
+	formStructure +='</div>';
 };
 
 function renderCheckBox(element) {
-	formData += '<div class="col-sm-5"><div class="checkbox"><label><input type="checkbox" >';
-	//formData += element.checked ? 'checked="checked"' : '';
-	formData += element.name;
-	formData += '<i class="fa fa-square-o"></i></label></div>';
+	formStructure += '<div class="col-sm-5">';
+	formStructure +=	'<div class="checkbox"><label><input type="checkbox" ';
+	formStructure += 			element.checked ? 'checked="checked"' : '';
+	formStructure +=		'" >';
+	formStructure +=		 element.name;
+	formStructure += 		'<i class="fa fa-square-o"></i></label>';
+	formStructure += 	'</div>';
 };
 function renderCheckBoxForDropDown(element) {
-	formData += '<div class="col-sm-5"><div class="checkbox"><label><input type="checkbox" >';
-	//formData += element.checked ? 'checked="checked"' : '';
-	formData += element.name;
-	formData += '<i class="fa fa-square-o"></i></label>';
+	formStructure += '<div class="col-sm-5">';
+	formStructure +=	'<div class="checkbox"><label><input type="checkbox" ';
+	formStructure += 		element.checked ? 'checked="checked"' : '';
+	formStructure += 		'" >';
+	formStructure += 		element.name;
+	formStructure += '<i class="fa fa-square-o"></i></label>';
 };
 function renderSubPanelCheckBox(element) {
-	formData += '<div class="col-sm-5" style="padding-left: 38px;"><div class="checkbox"><label><input type="checkbox" >';
-	//formData += element.checked ? 'checked="checked"' : '';
-	formData += element.name;
-	formData += '<i class="fa fa-square-o"></i></label></div>';
+	formStructure += '<div class="col-sm-5" style="padding-left: 38px;">';
+	formStructure +=	'<div class="checkbox"><label><input type="checkbox" ';
+	formStructure += 	element.checked ? 'checked="checked"' : '';
+	formStructure +=	'" >';
+	formStructure += 	element.name;
+	formStructure += 	'<i class="fa fa-square-o"></i></label>';
+	formStructure += '</div>';
 };
-function renderDropDown(element) {
-	//renderCheckBoxForDropDown(element);
-	formData = formData.substring(0, formData.length - 6);
+//SubElement is boolean variable whitch inform is the dropdown under the sumpanel;
+function renderDropDown(element,subElement) {
+		//Cut "</div>";
+	if(subElement){
+		formStructure = formStructure.substring(0, formStructure.length - 34);
+		console.log("if true");
+	}else {
+		console.log("if false");
+		formStructure = formStructure.substring(0, formStructure.length - 6);
+	}
+	
+		//Collect all id's for render DropDown styles;
 	dropDownIdArr.push(element.name.split(' ').join('_'));
-	formData += '<div class="col-sm-12"><select class="populate placeholder dropdown_select"  id="'
-			+ element.name.split(' ').join('_') + '" >';
-	$(Object.keys(element.values)).each(function(key, element) {
-		formData += '<option value="' + element + '">' + element + '</option>';
-
-	});
-	formData += '</select></div></div></div>';
+	formStructure += '<div class="col-sm-12">';
+	formStructure +=	'<select class="populate placeholder dropdown_select"  id="'
+						+ element.name.split(' ').join('_') + '" >';
+					$(Object.keys(element.values)).each(function(key, element) {
+	formStructure += 		'<option value="' + element + '">' + element + '</option>';
+						});
+	formStructure += 	'</select>';
+	formStructure +='</div>';
+	formStructure +='</div></div>';
 	
-	
-	formData += '<div class="col-sm-7" style="margin-bottom: 5px;"><input type="text" value="'
-			+ element.text + '" class="form-control dropdown_text" ></div>';
-
-
-	console.log(dropDownIdArr);
+	if(subElement){
+		console.log("2 if true");
+		formStructure = formStructure.substring(0, formStructure.length - 6);
+	}
+		//render dropdown right textbox field;
+	formStructure += '<div class="col-sm-7" style="margin-bottom: 5px;">';
+	formStructure +=	'<input type="text" value="'
+						+ element.text + '" class="form-control dropdown_text" >';
+	formStructure +='</div>';
 }
 function renderSubPanel(subpanel){
-	formData += '</div>';
-	formData += '<div class="col-sm-9"></div>';
-	$(subpanel.elements).each(function() {
-		renderSubElement(this);
-	});
+	formStructure += '</div>';
+	formStructure += '<div class="col-sm-9"></div>';
+		$(subpanel.elements).each(function() {
+			renderSubElement(this);
+		});
 
 }
 function renderDropDownStyle(element) {

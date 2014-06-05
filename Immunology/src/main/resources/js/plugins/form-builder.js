@@ -112,29 +112,24 @@ function renderTextBox(element) {
 function renderCheckBox(element) {
 	formStructure += '<div class="col-sm-5">';
 	formStructure +=	'<div class="checkbox"><label><input type="checkbox" ';
-	formStructure += 			element.checked ? 'checked="checked"' : '';
-	formStructure +=		'" >';
+	formStructure += 			element.checked ? 'checked' : '';
+	formStructure +=		' >';
 	formStructure +=		 element.name;
 	formStructure += 		'<i class="fa fa-square-o"></i></label>';
 	formStructure += 	'</div>';
 };
-function renderCheckBoxForDropDown(element) {
-	formStructure += '<div class="col-sm-5">';
-	formStructure +=	'<div class="checkbox"><label><input type="checkbox" ';
-	formStructure += 		element.checked ? 'checked="checked"' : '';
-	formStructure += 		'" >';
-	formStructure += 		element.name;
-	formStructure += '<i class="fa fa-square-o"></i></label>';
-};
 function renderSubPanelCheckBox(element) {
 	formStructure += '<div class="col-sm-5" style="padding-left: 38px;">';
 	formStructure +=	'<div class="checkbox"><label><input type="checkbox" ';
-	formStructure += 	element.checked ? 'checked="checked"' : '';
-	formStructure +=	'" >';
+	formStructure += 	element.checked ? 'checked' : '';
+	console.log(element.checked);
+	formStructure +=	' >';
 	formStructure += 	element.name;
 	formStructure += 	'<i class="fa fa-square-o"></i></label>';
 	formStructure += '</div>';
 };
+
+
 //SubElement is boolean variable whitch inform is the dropdown under the sumpanel;
 function renderDropDown(element,subElement) {
 		//Cut "</div>";

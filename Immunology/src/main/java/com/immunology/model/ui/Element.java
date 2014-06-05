@@ -84,12 +84,12 @@ public abstract class Element {
 		this.place = place;
 	}
 
-	public boolean isCheked() {
+	public boolean isChecked() {
 		return checked;
 	}
 
-	public void setCheked(boolean cheked) {
-		this.checked = cheked;
+	public void setChecked(boolean checked) {
+		this.checked = checked;
 	}
 
 	@Override

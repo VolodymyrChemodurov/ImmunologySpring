@@ -15,6 +15,37 @@ fieldset  .border{
 .groupe-padding{
 	padding-left: 0 !important;
 }
+
+/*DROPDOWN*/
+.dropdown_select{
+	margin-left: 13px !important;
+}
+.dropdown_text{
+	margin-top: 23px;
+}
+/*PANEL*/
 .panel-fieldset{
 	 margin-bottom: 3px;
+	 background-color: #E8ECF0;
+}
+
+
+.med_panel_div_left{
+	padding: 5px;
+	
+}
+
+
+.med_panel_div_h{
+	text-align: right;
+}
+
+/*	JS	*/
+.disable{
+	background-color:  rgb(33, 145, 192) !important; 
+}
+
+
+.undisable{
+	background-color:  #8AA6D6; 
 }

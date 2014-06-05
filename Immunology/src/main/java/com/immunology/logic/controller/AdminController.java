@@ -23,13 +23,10 @@ public class AdminController {
 	
 	@RequestMapping(value = "/users", method = RequestMethod.GET)
 	public ModelAndView getUsersManagmentPage(ModelAndView model) {
-		
 		model.addObject("users", userService.getAllUsers());
 		model.setViewName("components/admin/user-management");
 		return model;
 	}
-	
-	
 	
 	@RequestMapping(value = "/user/create", method = RequestMethod.POST)
 	public void createUser(User user) {

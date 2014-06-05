@@ -16,7 +16,6 @@ import com.immunology.model.ui.MedicalCardForm;
 @Controller
 @RequestMapping(value = "/cabinet/patient/form")
 public class FormController {
-
 	private static final Logger LOG = LoggerFactory.getLogger(FormController.class);
 
 	@Autowired

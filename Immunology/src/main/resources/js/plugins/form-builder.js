@@ -122,7 +122,6 @@ function renderSubPanelCheckBox(element) {
 	formStructure += '<div class="col-sm-5" style="padding-left: 38px;">';
 	formStructure +=	'<div class="checkbox"><label><input type="checkbox" ';
 	formStructure += 	element.checked ? 'checked' : '';
-	console.log(element.checked);
 	formStructure +=	' >';
 	formStructure += 	element.name;
 	formStructure += 	'<i class="fa fa-square-o"></i></label>';

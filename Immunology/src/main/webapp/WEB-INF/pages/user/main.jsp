@@ -16,7 +16,7 @@
 		<c:set var="baseURL" value="${fn:replace(pageContext.request.requestURL,
 		pageContext.request.requestURI, pageContext.request.contextPath)}" />
 		
-		 <jsp:include page="/WEB-INF/pages/head-user.jsp">
+		 <jsp:include page="/WEB-INF/pages/head.jsp">
     		<jsp:param value="${baseURL}" name="baseURL"/>
     	</jsp:include>
 
@@ -76,7 +76,7 @@
 		<!--End Content-->
 	</div>
 </div>
-	<jsp:include page="/WEB-INF/pages/base-user-scripts.jsp">
+	<jsp:include page="/WEB-INF/pages/base-scripts.jsp">
 		<jsp:param value="${baseURL}" name="baseURL"/>
 	</jsp:include>
 	

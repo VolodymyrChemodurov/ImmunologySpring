@@ -7,12 +7,9 @@
 
 <html>
 <head>
-	<c:set var="baseURL" value="${fn:replace(pageContext.request.requestURL,
-		pageContext.request.requestURI, pageContext.request.contextPath)}" />
-
-     <jsp:include page="/WEB-INF/pages/head.jsp">
-     	<jsp:param value="${baseURL}" name="baseURL"/>
-     </jsp:include>
+    <link href="/Immunology/resources/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/Immunology/resources/font-awesome/css/font-awesome.css" rel="stylesheet">
+	<link href="/Immunology/resources/css/login-page.css" rel="stylesheet">
 </head>
 <body>
 
@@ -46,8 +43,5 @@
 		</div>
 	</div>
 	
-    <jsp:include page="/WEB-INF/pages/base-scripts.jsp">
-    	<jsp:param value="${baseURL}" name="baseURL"/>
-    </jsp:include>
 </body>
 </html>

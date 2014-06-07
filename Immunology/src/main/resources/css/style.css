@@ -509,17 +509,17 @@ table.no-border-bottom tr:last-child td {
   width: 40px;
 }
 .table-datatable .sorting {
-  background:url(../../img/sort.png) right center no-repeat;
+  background:url(../../resources/img/sort.png) right center no-repeat;
   padding-right:16px;
   cursor:pointer;
 }
 .table-datatable .sorting_asc {
-  background:url(../../img/sort-asc.png) right center no-repeat;
+  background:url(../../resources/img/sort-asc.png) right center no-repeat;
   padding-right: 16px;
   cursor:pointer;
 }
 .table-datatable .sorting_desc {
-  background:url(../../img/sort-desc.png) right center no-repeat;
+  background:url(../../resources/img/sort-desc.png) right center no-repeat;
   padding-right: 16px;
   cursor:pointer;
 }

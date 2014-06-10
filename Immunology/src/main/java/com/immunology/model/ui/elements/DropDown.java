@@ -19,6 +19,8 @@ public class DropDown extends Element{
 
 	@ElementCollection(fetch = FetchType.EAGER)
 	private Map<String, Double> values;
+	
+	private String text;
 
 	public Map<String, Double> getValues() {
 		return values;
@@ -26,6 +28,14 @@ public class DropDown extends Element{
 
 	public void setValues(Map<String, Double> values) {
 		this.values = values;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package com.immunology.logic.controller;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,8 +16,7 @@ import com.immunology.model.ui.MedicalCardForm;
 @Controller
 @RequestMapping(value = "/cabinet/patient/form")
 public class FormController {
-
-	private static final Logger LOG = Logger.getLogger(FormController.class);
+	private static final Logger LOG = LoggerFactory.getLogger(FormController.class);
 
 	@Autowired
 	private FormServive formServive;
@@ -27,7 +27,7 @@ public class FormController {
 	@RequestMapping(value = "/first", method = RequestMethod.GET)
 	public @ResponseBody MedicalCardForm getFirstForm(Model model) {
 		MedicalCardForm form = medicalCardService.getById(1);
-		LOG.info(form);
+		LOG.info(form.toString());
 		return form;
 	}
 

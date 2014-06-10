@@ -1,0 +1,64 @@
+.marg-top-10px{
+	margin-top: 10px;
+}
+.marg-top-8px{
+	margin-top: 8px;
+}
+fieldset  .border{
+	border: solid 1px;
+}
+
+.group-panel{
+	margin-bottom: 10px;
+	margin-top: 25px;
+}
+.groupe-padding{
+	padding-left: 0 !important;
+}
+
+/*DROPDOWN*/
+.dropdown_select{
+	margin-left: 13px !important;
+}
+.dropdown_text{
+	margin-top: 23px;
+}
+/*PANEL*/
+/*	JS	*/
+.disable{
+	background-color:  rgb(33, 145, 192); 
+}
+
+
+.undisable{
+	background-color:  #8AA6D6; 
+}
+/*====================STYLES FOR MEDICAL FORM  -START====================== */
+.panel-fieldset{
+	 margin-bottom: 3px;
+	 background-color: #E8ECF0;
+}
+
+.panel-title-block{
+	padding-left: 0 !important;
+	text-align: right;
+}
+.med_panel_title_div{
+	padding-left: 0 !important;
+	padding: 5px;	
+	text-align: right;
+}
+
+.med_panel_left_input{
+	margin-top: 2px;
+	margin-bottom: 4px;
+}
+	
+.med_panel_div_left{
+	padding: 5px;
+}
+.med_panel_div_right{
+	height: 35px; margin-top: 2px;
+}
+
+/*==================== STYLES FOR MEDICAL FORM  -FINISHED  ==================== */

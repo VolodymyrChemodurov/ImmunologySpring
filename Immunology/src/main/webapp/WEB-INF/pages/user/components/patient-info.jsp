@@ -9,7 +9,7 @@
 </div>
 
 <div class="row">
-	<div class="col-xs-9">
+	<div class="col-xs-12">
 		<div class="box">
 			<div class="box-header">
 				<div class="box-name">
@@ -34,8 +34,7 @@
 						<div id="container"></div>
 					</div>
 					<div id="tabs-3">
-						<p>Other page</p>
-						<p>I don't know what page now(</p>
+							</div>
 					</div>
 				</div>
 			</div>
@@ -75,6 +74,12 @@
 		BootstrapValidatorScript(DemoFormValidator);
 		formData ="";
 		renderForm($('#container'));
+
+		/////////////////////////////////
+		console.log("document ready");
+		$("#Мати_checkBox").click(function() {
+		    alert("click checkbox");
+		});
 		
 	});
 

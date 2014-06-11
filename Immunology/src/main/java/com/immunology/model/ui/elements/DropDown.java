@@ -22,12 +22,24 @@ public class DropDown extends Element{
 	
 	private String text;
 
+	private double choosed;
+	
 	public Map<String, Double> getValues() {
 		return values;
 	}
 
 	public void setValues(Map<String, Double> values) {
 		this.values = values;
+	}
+	
+	
+
+	public double getChoosed() {
+		return choosed;
+	}
+
+	public void setChoosed(double choosed) {
+		this.choosed = choosed;
 	}
 
 	public String getText() {

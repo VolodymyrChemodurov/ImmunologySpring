@@ -263,6 +263,7 @@
 						<url>${db.url}</url>
 						<username>${db.username}</username>
 						<password>${db.password}</password>
+						<encoding>UTF8</encoding>
 					</configuration>
 					<executions>
 						<execution>
@@ -273,7 +274,7 @@
 							<configuration>
 								<srcFiles>
 									<srcFile>src\main\changelog\roles.sql</srcFile>
-									<srcFile>src\main\changelog\test_data.sql</srcFile>
+									<srcFile>src\main\changelog\test_data_ua.sql</srcFile>
 								</srcFiles>
 							</configuration>
 						</execution>

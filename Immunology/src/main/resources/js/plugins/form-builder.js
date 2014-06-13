@@ -25,6 +25,27 @@ function renderForm(form) {
 	});
 };
 
+function sendForm(){
+	console.log(formObj);
+	$.ajax({
+	  type:"POST", 
+      url:"/Immunology/cabinet/patient/form/getForm",
+      data: JSON.stringify( formObj),
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+       //Stringified Json Object
+      //async: false,    //Cross-domain requests and dataType: "jsonp" requests do not support synchronous operation
+     // cache: false,    //This will force requested pages not to be cached by the browser  
+      //processData:false, //To avoid making query String instead of JSON
+      success: function(resposeJsonObject){
+    	  console.log(resposeJsonObject);
+      },
+	
+	error: function (request, status, error) {
+		alert(error);
+    }});
+}
+
 	// Create structure of medical form
 function renderMedicalForm(form){
 	formStructure += '<form class="form-horizontal">';
@@ -32,7 +53,7 @@ function renderMedicalForm(form){
 		$(form.panels).each(function(index, panel) {
 		renderPanel(panel, index);
 		});
-	formStructure +='<fieldset class= "panel-fieldset" style="text-align: center; "><button type="submit" class="btn btn-primary">Save</button></fieldset>';
+	formStructure +='<fieldset class= "panel-fieldset" style="text-align: center; "><button type="button" onClick="sendForm()" class="btn btn-primary">Save</button></fieldset>';
 	formStructure += '</form>';
 }
 
@@ -45,7 +66,7 @@ function renderMedcardFields(form){
 	formStructure +=		'</div>';
 	formStructure +=		'<div class = "col-sm-9">';
 	formStructure += 		'<div class="col-sm-5">';
-	formStructure += 			'<input type="text" value="'
+	formStructure += 			'<input type="text" disabled value="'
 								+ form.creationDate + '" class="form-control med_panel_left_input">';
 	formStructure +=		'</div>';
 	formStructure += 		'<div class="col-sm-7"></div></div>';
@@ -55,7 +76,7 @@ function renderMedcardFields(form){
 	formStructure +=		'</div>';
 	formStructure +=		'<div class = "col-sm-9">';
 	formStructure += 			'<div class="col-sm-5">';
-	formStructure += 				'<textArea class="form-control med_panel_left_input">'
+	formStructure += 				'<textArea id="additionInfo" onchange="storeMedCardDetailValue()" class="form-control med_panel_left_input">'
 									+ form.additionInfo + '</textArea>';
 	formStructure += 			'</div>';
 	formStructure += 	'</div>';

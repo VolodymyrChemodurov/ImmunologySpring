@@ -94,7 +94,8 @@ public abstract class Element {
 
 	@Override
 	public String toString() {
-		return "Element [id=" + id + ", name=" + name + ", place=" + place + "]";
+		return "Element [id=" + id + ", name=" + name + ", checked=" + checked
+				+ "]";
 	}
 
 }

@@ -16,5 +16,10 @@ public class MedicalCardServiceImpl implements MedicalCardFormService{
 	public MedicalCardForm getById(long id) {
 		return crudDao.find(MedicalCardForm.class, id);
 	}
+
+	public MedicalCardForm updateMedicalCardForm(MedicalCardForm medCardForm) {
+		return crudDao.saveOrUpdate(medCardForm);
+	}
+	
 	
 }

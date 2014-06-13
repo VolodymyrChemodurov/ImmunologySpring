@@ -45,6 +45,11 @@ function disableDropDown(panelIndex,elementIndex, subElementIndex, undisableBool
 	
 	
 }
+
+function storeMedCardDetailValue(){
+	formObj.additionInfo = $('#additionInfo').val();
+}
+
 function storeValue(panelIndex,elementIndex,subElemIndex){
 	var elementId = "#panel_"+panelIndex+"_element_"+elementIndex +"_"+ subElemIndex;
 	if(subElemIndex == null){

@@ -1,9 +1,10 @@
-<form id="defaultForm" method="POST" action="/Immunology/cabinet/patient/register"  class="form-horizontal">
+<form id="defaultForm" method="POST" action="/Immunology/cabinet/patient/update"  class="form-horizontal">
 					<fieldset>
 						<legend></legend>
 						<div class="form-group">
 							<label class="col-sm-3 control-label">First Name</label>
 							<div class="col-sm-5">
+								<input type="hidden" name="id" id="id" value="${patient.id}">
 								<input type="text" class="form-control" name="firstName" id="firstName" value="${patient.firstName}" />
 							</div>
 						</div>

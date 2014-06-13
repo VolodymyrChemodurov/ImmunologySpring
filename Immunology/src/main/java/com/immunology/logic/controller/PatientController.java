@@ -40,6 +40,14 @@ public class PatientController {
 		
 		return "redirect:/cabinet";
 	}
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public String updatePatient(Patient patient, Model model, HttpServletResponse response) {	
+		User user = UserUtils.getCurrentUser();
+		patient.setUser(userService.getUserByLogin(user.getUsername()));
+		patientService.updatePatient(patient);
+		
+		return "redirect:/cabinet";
+	}
 	
 	@RequestMapping(value = "/id={number}", method = RequestMethod.GET)
 	public String showPatient(ModelMap model, @PathVariable("number") int number){

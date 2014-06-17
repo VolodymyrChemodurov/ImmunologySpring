@@ -1,6 +1,7 @@
 package com.immunology.logic.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -42,7 +43,7 @@ public class CabinetController {
 	@RequestMapping(value="/patients/my",  method=RequestMethod.GET )
     public ModelAndView getTest( Model model ) {
 		User user = UserUtils.getCurrentUser();
-		List<Patient> myPatients = patientService.getMyPatients(userService.getUserByLogin(user.getUsername()));
+		Set<Patient> myPatients = userService.getUserByLogin(user.getUsername()).getPatients();
         
 		return new ModelAndView( "user/components/my-patients" ).addObject("myPatients",myPatients);
     }

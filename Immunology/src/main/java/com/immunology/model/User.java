@@ -41,7 +41,7 @@ public class User {
 				inverseJoinColumns = {@JoinColumn(name = "role_id")})
 	private Set<Role> roles;
 	
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Set<Patient> patients;
 	
 	public String getLastName() {

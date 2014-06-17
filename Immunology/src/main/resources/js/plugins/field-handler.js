@@ -52,17 +52,16 @@ function storeMedCardDetailValue(){
 
 function storeValue(panelIndex,elementIndex,subElemIndex){
 	var elementId = "#panel_"+panelIndex+"_element_"+elementIndex +"_"+ subElemIndex;
+	console.log($(elementId));
 	if(subElemIndex == null){
-		formObj.panels[panelIndex].elements[elementIndex].Text = $(elementId).val();
+		formObj.panels[panelIndex].elements[elementIndex].text = $(elementId).val();
 	}else{
-		formObj.panels[panelIndex].elements[elementIndex].elements[subElements].Text = $(elementId).val();
+		formObj.panels[panelIndex].elements[elementIndex].elements[subElemIndex].text = $(elementId).val();
 	}
 	
-	alert($(elementId).val());
 }
 function storeDropDownValue(panelIndex,elementIndex,subElemIndex){
 	var elementId = "#panel_"+panelIndex+"_dropDownElement_"+elementIndex +"_"+ subElemIndex;
-	
 	if(subElemIndex == null){
 		formObj.panels[panelIndex].elements[elementIndex].choosed = $(elementId).val();
 	}else{

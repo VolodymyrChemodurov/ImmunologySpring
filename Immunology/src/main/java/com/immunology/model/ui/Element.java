@@ -1,5 +1,6 @@
 package com.immunology.model.ui;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -40,7 +41,7 @@ public abstract class Element {
 	private boolean checked;
 	
 	@JsonIgnore
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "panel_id")
 	private Panel panel;
 

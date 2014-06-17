@@ -2,6 +2,7 @@ package com.immunology.model.ui.elements;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -21,11 +22,11 @@ import com.immunology.model.ui.Form;
 public class Panel extends Element {
 	
 	@JsonIgnore
-	@ManyToOne
+	@ManyToOne( cascade = CascadeType.ALL)
 	@JoinColumn(name = "form_id")
 	private Form form;
 	
-	@OneToMany(mappedBy = "panel", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "panel", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@OrderBy("place ASC")
 	private Set<Element> elements;
 	

@@ -156,9 +156,9 @@ function renderDropDown(element,subElement, panelIndex, elementIndex, subElement
 						+ 'panel_'+panelIndex+'_dropDownElement_'+elementIndex+'_'+ subElementIndex + '" onchange="storeDropDownValue('+panelIndex+','+elementIndex+','+subElementIndex+')" >';
 			$(Object.keys(element.values)).each(function(key, optionElement) {
 				if(key == element.choosed){
-					formStructure += 		'<option value="' + optionElement + '" selected = "selected">' + optionElement + '</option>';
+					formStructure += 		'<option value="' + key + '" selected = "selected">' + optionElement + '</option>';
 				}else {
-					formStructure += 		'<option value="' + optionElement + '">' + optionElement + '</option>';
+					formStructure += 		'<option value="' + key + '">' + optionElement + '</option>';
 				}
 						});
 	formStructure += 	'</select>';
@@ -171,7 +171,7 @@ function renderDropDown(element,subElement, panelIndex, elementIndex, subElement
 		//render dropdown right textbox field;
 	formStructure += '<div class="col-sm-7" style="margin-bottom: 5px;">';
 	formStructure +=	'<input type="text" class="form-control dropdown_text" id="panel_'+panelIndex+'_element_'+elementIndex+'_'+subElementIndex+'" value="'
-	+ element.text + '" onchange="storeValue('+panelIndex+','+elementIndex+')" >';
+	+ element.text + '" onchange="storeValue('+panelIndex+','+elementIndex+','+subElementIndex+')" >';
 	formStructure +='</div>';
 }
 function renderSubPanel(subpanel, panelIndex, elementIndex){

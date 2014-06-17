@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.immunology.logic.service.FormServive;
 import com.immunology.logic.service.MedicalCardFormService;
+import com.immunology.model.ui.Element;
 import com.immunology.model.ui.Form;
 import com.immunology.model.ui.MedicalCardForm;
+import com.immunology.model.ui.elements.Panel;
 
 @Controller
 @RequestMapping(value = "/cabinet/patient/form")
@@ -42,9 +44,20 @@ public class FormController {
 	Form addNewWorker(@RequestBody MedicalCardForm jsonForm) {
 
 		LOG.info(jsonForm.toString());
-		//LOG.info(((MedicalCardForm)jsonForm).getAdditionInfo() );
-		//formServive.updateForm(jsonForm);
-		LOG.info("update " + medicalCardFormService.updateMedicalCardForm(jsonForm));
+		for (Panel panel : jsonForm.getPanels()) {
+			panel.setForm(jsonForm);
+			for (Element element : panel.getElements()) {
+				element.setPanel(panel);
+				if(element.getClass() == Panel.class){
+					Panel subPanel = (Panel)element;
+					for (Element subElement :subPanel.getElements() ) {
+						subElement.setPanel(subPanel);
+					}
+				}
+			}
+			
+		}
+		LOG.info("Update  like Form "+ formServive.updateForm(jsonForm));
 		return jsonForm;
 
 	}

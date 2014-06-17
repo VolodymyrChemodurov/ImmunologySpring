@@ -2,6 +2,7 @@ package com.immunology.model.ui;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -43,7 +44,7 @@ public abstract class Form {
 	@JsonIgnore
 	private User user;
 	
-	@OneToMany(mappedBy = "form", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "form", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@OrderBy("place ASC")
 	private Set<Panel> panels;
 

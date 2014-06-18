@@ -35,15 +35,12 @@ public class PatientController {
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String getRegistrateNewPatient(Patient patient, Model model, HttpServletResponse response) {	
 		User user = UserUtils.getCurrentUser();
-		patient.setUser(userService.getUserByLogin(user.getUsername()));
-		patientService.createPatient(patient);
-		
+		patient.addUser(userService.getUserByLogin(user.getUsername()));
+		patientService.updatePatient(patient);
 		return "redirect:/cabinet";
 	}
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String updatePatient(Patient patient, Model model, HttpServletResponse response) {	
-		User user = UserUtils.getCurrentUser();
-		patient.setUser(userService.getUserByLogin(user.getUsername()));
 		patientService.updatePatient(patient);
 		
 		return "redirect:/cabinet";

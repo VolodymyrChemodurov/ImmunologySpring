@@ -1,14 +1,16 @@
 package com.immunology.model;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -21,9 +23,8 @@ public class Patient {
 	@GeneratedValue
 	private long id;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "user_id", nullable = false)
-	private User user;
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "patients", cascade = CascadeType.ALL)
+	private Set<User> users = new HashSet<User>();
 	
 	@Column(name = "first_name")
 	private String firstName;
@@ -58,6 +59,20 @@ public class Patient {
 	@OneToMany(fetch=FetchType.EAGER, mappedBy="user")
 	private List<Form> userForms;
 	
+	
+	
+	public boolean addUser(User user) {
+		return users.add(user);
+	}
+	
+	public Set<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
+	}
+
 	public List<Form> getUserForms() {
 		return userForms;
 	}
@@ -74,13 +89,7 @@ public class Patient {
 		this.id = id;
 	}
 
-	public User getUser() {
-		return user;
-	}
 
-	public void setUser(User user) {
-		this.user = user;
-	}
 
 	public String getFirstName() {
 		return firstName;
@@ -164,7 +173,7 @@ public class Patient {
 
 	@Override
 	public String toString() {
-		return "Patient [id=" + id + ", user=" + user + ", firstName="
+		return "Patient [id=" + id + ", firstName="
 				+ firstName + ", lastName=" + lastName + ", middleName="
 				+ middleName + ", sex=" + sex + ", dateOfBirth=" + dateOfBirth
 				+ ", country=" + country + ", region=" + region + ", city="

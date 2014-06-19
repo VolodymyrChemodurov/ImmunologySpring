@@ -15,24 +15,20 @@
 		<div class="box">
 			<div class="box-header">
 				<div class="box-name">
-					<i class="fa fa-users"></i>
-					<span>All patients list</span>
+					<i class="fa fa-users"></i> <span>All patients list</span>
 				</div>
 				<div class="box-icons">
-					<a class="collapse-link">
-						<i class="fa fa-chevron-up"></i>
-					</a>
-					<a class="expand-link">
-						<i class="fa fa-expand"></i>
-					</a>
-					<a class="close-link">
-						<i class="fa fa-times"></i>
+					<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+					</a> <a class="expand-link"> <i class="fa fa-expand"></i>
+					</a> <a class="close-link"> <i class="fa fa-times"></i>
 					</a>
 				</div>
 				<div class="no-move"></div>
 			</div>
 			<div class="box-content no-padding">
-				<table class="table table-bordered table-striped table-hover table-heading table-datatable" id="datatable-3">
+				<table
+					class="table table-bordered table-striped table-hover table-heading table-datatable"
+					id="datatable-3">
 					<thead>
 						<tr>
 							<th>First name</th>
@@ -41,21 +37,30 @@
 							<th>Country</th>
 							<th>City</th>
 							<th>Street, house</th>
+							<th>Add to my patients</th>
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${allPatients}" var="patient"> 
+						<c:forEach items="${allPatients}" var="patient">
 							<tr>
-								<td>${patient.firstName}</td>
-								<td>${patient.lastName}</td>
-								<td>${patient.dateOfBirth}</td>
-								<td>${patient.country}</td>
-								<td>${patient.city}</td>
-								<td><c:out value="${patient.street}, ${patient.house}"></c:out></td>
+								<td>${patient.key.firstName}</td>
+								<td>${patient.key.lastName}</td>
+								<td>${patient.key.dateOfBirth}</td>
+								<td>${patient.key.country}</td>
+								<td>${patient.key.city}</td>
+								<td><c:out value="${patient.key.street}, ${patient.key.house}"></c:out></td>
+								<td width="150px" align="center">
+									<c:if test="${!patient.value}">
+										<button id="button" class="btn btn-primary"
+										onclick="doAjaxPost('patient/id=${patient.key.id}')">Add</button>
+									</c:if>
+									
+
+								</td>
 							</tr>
 						</c:forEach>
-						
-		
+
+
 					</tbody>
 					<tfoot>
 						<tr>
@@ -65,6 +70,7 @@
 							<th>Country</th>
 							<th>City</th>
 							<th>Street, house</th>
+							<th>Add to my patients</th>
 						</tr>
 					</tfoot>
 				</table>
@@ -73,23 +79,24 @@
 	</div>
 </div>
 <script type="text/javascript">
-// Run Datables plugin and create 3 variants of settings
-function AllTables(){
-	TestTable3();
-	Select2Script(MakeSelect2);
-}
-function MakeSelect2(){
-	$('select').select2();
-	$('.dataTables_filter').each(function(){
-		$(this).find('label input[type=text]').attr('placeholder', 'Search');
+	// Run Datables plugin and create 3 variants of settings
+	function AllTables() {
+		TestTable3();
+		Select2Script(MakeSelect2);
+	}
+	function MakeSelect2() {
+		$('select').select2();
+		$('.dataTables_filter').each(
+				function() {
+					$(this).find('label input[type=text]').attr('placeholder',
+							'Search');
+				});
+	}
+	$(document).ready(function() {
+		// Load Datatables and run plugin on tables 
+		DataTablesScripts(AllTables);
+		// Add Drag-n-Drop feature
+		WinMove();
 	});
-}
-$(document).ready(function() {
-	// Load Datatables and run plugin on tables 
-	DataTablesScripts(AllTables);
-	// Add Drag-n-Drop feature
-	WinMove();
-});
-
 </script>
 </html>

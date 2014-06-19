@@ -16,6 +16,7 @@ import com.immunology.logic.service.UserService;
 import com.immunology.logic.utils.UserUtils;
 import com.immunology.model.Patient;
 
+
 @Controller
 @RequestMapping(value = "/cabinet/patient")
 public class PatientController {
@@ -26,6 +27,7 @@ public class PatientController {
 	@Autowired
 	PatientService patientService;
 	
+
 	@RequestMapping(value="/new",  method=RequestMethod.GET )
     public String getNewPatient(Model model ) {
 		model.addAttribute("patient",new Patient());
@@ -51,6 +53,19 @@ public class PatientController {
 		model.addAttribute("patient", patientService.getPatientById(number));
 		
 		return "user/components/patient-info";
+	}
+	
+	@RequestMapping(value = "/id={number}", method = RequestMethod.POST)
+	public String addPatientToUser( @PathVariable("number") int number, HttpServletResponse response){
+	
+		User currentUser = UserUtils.getCurrentUser();
+		Patient patient = patientService.getPatientById(number);
+		com.immunology.model.User user = userService.getUserByLogin(currentUser.getUsername());
+		
+			user.getPatients().add(patient);
+			userService.updateUser(user);
+		
+		return "redirect:/cabinet";
 	}
 	
 }

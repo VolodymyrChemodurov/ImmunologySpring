@@ -1,6 +1,7 @@
 package com.immunology.logic.controller;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
@@ -50,8 +51,20 @@ public class CabinetController {
 	
 	@RequestMapping(value="/patients/all",  method=RequestMethod.GET )
     public ModelAndView getAllPatients( Model model ) {
-		List<Patient> patients = patientService.getAllPatients();
+        User currentUser = UserUtils.getCurrentUser();
+        boolean isPresent;
         
+		Map<Patient, Boolean> patients = new HashMap<Patient, Boolean>();
+		for(Patient patient:patientService.getAllPatients()){
+			isPresent = false;
+			for(com.immunology.model.User user: patient.getUsers()){
+				if(user.getLogin().equals(currentUser.getUsername())){
+					isPresent = true;
+				}
+			}
+			patients.put(patient, isPresent);
+		}
+		
 		return new ModelAndView( "user/components/all-patients" ).addObject("allPatients",patients);
     }
 	

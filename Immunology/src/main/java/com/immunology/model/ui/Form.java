@@ -11,16 +11,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonSubTypes;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 
-import com.immunology.model.User;
 import com.immunology.model.ui.elements.Panel;
 
 @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.PROPERTY, property="objectType")
@@ -39,10 +35,10 @@ public abstract class Form {
 	@Column(name = "form_name")
 	private String name;
 	
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="user_id")
-	@JsonIgnore
-	private User user;
+//	@ManyToOne(fetch=FetchType.EAGER)
+//	@JoinColumn(name="patient_id")
+//	@JsonIgnore
+//	private Patient patient;
 	
 	@OneToMany(mappedBy = "form", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@OrderBy("place ASC")
@@ -54,14 +50,6 @@ public abstract class Form {
 	
 	public void setId(long id) {
 		this.id = id;
-	}
-	
-	public User getUser() {
-		return user;
-	}
-	
-	public void setUser(User user) {
-		this.user = user;
 	}
 	
 	public String getName() {
@@ -79,7 +67,7 @@ public abstract class Form {
 	public void setPanels(Set<Panel> panels) {
 		this.panels = panels;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Form [id=" + id + ", name=" + name + ", panels=" + panels + "]";

@@ -4,11 +4,15 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.immunology.model.Patient;
 
 @Entity
 @Table(name = "surveys")
@@ -24,6 +28,10 @@ public class Survey extends Form {
 	@Column(name = "insufficiency_level")
 	private double insufficiencyLevel;
 
+	@ManyToOne
+	@JoinColumn(name = "patient_id")
+	private Patient patient;
+	
 	@OneToOne
 	@PrimaryKeyJoinColumn
 	private ComplaintsForm complaintsForm;
@@ -34,6 +42,15 @@ public class Survey extends Form {
 	@PrimaryKeyJoinColumn
 	private LaboratoryDataForm laboratoryDataForm;
 	
+	
+	public Patient getPatient() {
+		return patient;
+	}
+
+	public void setPatient(Patient patient) {
+		this.patient = patient;
+	}
+
 	public Date getCreationDate() {
 		return creationDate;
 	}

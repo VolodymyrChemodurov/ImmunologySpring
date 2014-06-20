@@ -12,13 +12,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.immunology.model.ui.Form;
+import com.immunology.model.ui.MedicalCardForm;
+import com.immunology.model.ui.Survey;
 
 @Entity
 @Table(name = "patient")
 public class Patient {
+	
 	@Id
 	@GeneratedValue
 	private long id;
@@ -56,11 +59,20 @@ public class Patient {
 	@Column(name = "house")
 	private String house;
 
-	@OneToMany(fetch=FetchType.EAGER, mappedBy="user")
-	private List<Form> userForms;
+	@OneToOne(mappedBy = "patient")
+	private MedicalCardForm medicalCard;
 	
+	public MedicalCardForm getMedicalCard() {
+		return medicalCard;
+	}
+
+	@OneToMany(fetch=FetchType.EAGER, mappedBy="patient")
+	private List<Survey> surveys;
 	
-	
+	public void setMedicalCard(MedicalCardForm medicalCard) {
+		this.medicalCard = medicalCard;
+	}
+
 	public boolean addUser(User user) {
 		return users.add(user);
 	}
@@ -73,12 +85,12 @@ public class Patient {
 		this.users = users;
 	}
 
-	public List<Form> getUserForms() {
-		return userForms;
+	public List<Survey> getSurveys() {
+		return surveys;
 	}
 
-	public void setUserForms(List<Form> userForms) {
-		this.userForms = userForms;
+	public void setSurveys(List<Survey> surveys) {
+		this.surveys = surveys;
 	}
 
 	public long getId() {
@@ -88,8 +100,6 @@ public class Patient {
 	public void setId(long id) {
 		this.id = id;
 	}
-
-
 
 	public String getFirstName() {
 		return firstName;
@@ -180,7 +190,4 @@ public class Patient {
 				+ city + ", street=" + street + ", house=" + house + "]";
 	}
 	
-	
-	
-
 }

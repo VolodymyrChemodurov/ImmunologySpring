@@ -11,7 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.immunology.model.ui.Survey;
 
 @Entity
 @Table(name = "users")
@@ -45,6 +48,9 @@ public class User {
 				joinColumns = {@JoinColumn(name = "user_id")},
 				inverseJoinColumns = {@JoinColumn(name = "patient_id")})
 	private Set<Patient> patients;
+	
+	@OneToMany(fetch=FetchType.EAGER, mappedBy="user")
+	private Set<Survey> surveysTemplates;
 	
 	public String getLastName() {
 		return lastName;
@@ -116,5 +122,13 @@ public class User {
 	public void setPatients(Set<Patient> patients) {
 		this.patients = patients;
 	}
-	
+
+	public Set<Survey> getSurveysTemplates() {
+		return surveysTemplates;
+	}
+
+	public void setSurveysTemplates(Set<Survey> surveysTemplates) {
+		this.surveysTemplates = surveysTemplates;
+	}
+
 }

@@ -13,6 +13,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.immunology.model.Patient;
+import com.immunology.model.User;
 
 @Entity
 @Table(name = "surveys")
@@ -35,13 +36,18 @@ public class Survey extends Form {
 	@OneToOne
 	@PrimaryKeyJoinColumn
 	private ComplaintsForm complaintsForm;
+	
 	@OneToOne
 	@PrimaryKeyJoinColumn
 	private ClinicalManifestationsForm clinicalManifestationsForm;
+	
 	@OneToOne
 	@PrimaryKeyJoinColumn
 	private LaboratoryDataForm laboratoryDataForm;
 	
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
 	
 	public Patient getPatient() {
 		return patient;
@@ -99,5 +105,13 @@ public class Survey extends Form {
 	public void setLaboratoryDataForm(LaboratoryDataForm laboratoryDataForm) {
 		this.laboratoryDataForm = laboratoryDataForm;
 	}
-	
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 }

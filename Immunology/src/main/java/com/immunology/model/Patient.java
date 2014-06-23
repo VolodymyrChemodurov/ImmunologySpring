@@ -62,12 +62,12 @@ public class Patient {
 	@OneToOne(mappedBy = "patient")
 	private MedicalCardForm medicalCard;
 	
+	@OneToMany(fetch=FetchType.EAGER, mappedBy="patient")
+	private List<Survey> surveys;
+
 	public MedicalCardForm getMedicalCard() {
 		return medicalCard;
 	}
-
-	@OneToMany(fetch=FetchType.EAGER, mappedBy="patient")
-	private List<Survey> surveys;
 	
 	public void setMedicalCard(MedicalCardForm medicalCard) {
 		this.medicalCard = medicalCard;

@@ -23,6 +23,7 @@ import com.mongodb.DB;
 @Repository
 public class SurveyDaoImpl implements SurveyDao {
 
+	private static final String SURVEYS_TEMPLATES_COLLECTION = "surveys";
 	private static final Logger LOG = LoggerFactory.getLogger(SurveyDaoImpl.class);
 	
 	@Autowired
@@ -31,9 +32,9 @@ public class SurveyDaoImpl implements SurveyDao {
 	
 	@PostConstruct
 	public void init() throws Exception {
-		DB db = mongoFactory.getDb("immunology");
+		DB db = mongoFactory.getDb();
 		Jongo jongo = new Jongo(db);
-		surveys = jongo.getCollection("surveys");
+		surveys = jongo.getCollection(SURVEYS_TEMPLATES_COLLECTION);
 	}
 	
 	public boolean createSurveyTemplate(Survey formTemplate) {

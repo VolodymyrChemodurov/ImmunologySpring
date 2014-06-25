@@ -27,7 +27,7 @@ public class LoginController {
 //		survey.setCreationDate(new Date());
 //		survey.setLaboratoryDataForm(new LaboratoryDataForm());
 //		test.saveTemplate(survey);
-		LOG.info(test.getUserSurveyTemplates(1L).get(0).toString());
+		//LOG.info(test.getUserSurveyTemplates(1L).get(0).toString());
 		return "login";
 	}
 	

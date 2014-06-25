@@ -41,11 +41,7 @@ public class FormServiceImpl implements FormServive {
 	}
 	
 	public void saveTemplate(Survey survey) {
-		try {
-			surveyDao.createSurveyTemplate(survey);
-		} catch (Exception e) {
-			
-		}
+		surveyDao.createSurveyTemplate(survey);
 	}
 	
 	public List<Survey> getUserSurveyTemplates(long id) {

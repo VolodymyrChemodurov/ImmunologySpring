@@ -6,7 +6,7 @@ import com.immunology.model.ui.Survey;
 
 public interface SurveyDao {
 
-	void createSurveyTemplate(Survey template) throws Exception;
+	boolean createSurveyTemplate(Survey template);
 	
 	List<Survey> getSurveyTemplatesByUserId(long id);
 }

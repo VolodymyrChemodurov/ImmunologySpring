@@ -8,10 +8,13 @@ import javax.annotation.PostConstruct;
 
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.stereotype.Repository;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.immunology.logic.dao.SurveyDao;
 import com.immunology.model.ui.Survey;
@@ -20,6 +23,8 @@ import com.mongodb.DB;
 @Repository
 public class SurveyDaoImpl implements SurveyDao {
 
+	private static final Logger LOG = LoggerFactory.getLogger(SurveyDaoImpl.class);
+	
 	@Autowired
 	private MongoDbFactory mongoFactory;
 	private MongoCollection surveys;
@@ -31,10 +36,17 @@ public class SurveyDaoImpl implements SurveyDao {
 		surveys = jongo.getCollection("surveys");
 	}
 	
-	public void createSurveyTemplate(Survey formTemplate) throws Exception {
+	public boolean createSurveyTemplate(Survey formTemplate) {
+		boolean saveResult = false;
 		ObjectMapper mapper = new ObjectMapper();
-		String result = mapper.writeValueAsString(formTemplate);
-		surveys.insert(result);
+		try {
+			String result = mapper.writeValueAsString(formTemplate);
+			surveys.insert(result);
+			saveResult = true;
+		} catch (JsonProcessingException e) {
+			LOG.error(e.toString());
+		}
+		return saveResult;
 	}
 
 	public List<Survey> getSurveyTemplatesByUserId(long id) {

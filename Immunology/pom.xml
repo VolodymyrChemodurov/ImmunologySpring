@@ -11,13 +11,16 @@
 	<properties>
 		<spring.version>4.0.3.RELEASE</spring.version>
 		<spring-security.version>3.2.3.RELEASE</spring-security.version>
+		<spring-data-mongodb>1.2.0.RELEASE</spring-data-mongodb>
 		<commons-dbcp.version>1.4</commons-dbcp.version>
-		<mysql-connector.version>5.1.30</mysql-connector.version>
 		<postgresql-connector.version>9.1-901.jdbc3</postgresql-connector.version>
+		<mongodb-driver.version>2.12.2</mongodb-driver.version>
 		<hibernate-core.version>4.3.4.Final</hibernate-core.version>
 		<hibernate-annotations.version>3.5.6-Final</hibernate-annotations.version>
+		<jongo.version>1.0</jongo.version>
 		<jstl.version>1.2</jstl.version>
 		<servlet.version>3.1.0</servlet.version>
+		<jackson-version>1.9.13</jackson-version>
 		<jcloverslf4j.version>1.7.6</jcloverslf4j.version>
 		<logback.version>1.1.2</logback.version>
 		<junit.version>4.11</junit.version>
@@ -68,6 +71,11 @@
 			<artifactId>spring-context-support</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-mongodb</artifactId>
+			<version>${spring-data-mongodb}</version>
+		</dependency>
 		<!-- Spring security dependencies -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -106,16 +114,20 @@
 			<version>${commons-dbcp.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>${mysql-connector.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>${postgresql-connector.version}</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongo-java-driver</artifactId>
+			<version>${mongodb-driver.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jongo</groupId>
+			<artifactId>jongo</artifactId>
+			<version>${jongo.version}</version>
+		</dependency>
 		<!-- Hibernate dependencies -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -133,12 +145,12 @@
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-core-asl</artifactId>
-			<version>1.9.13</version>
+			<version>${jackson-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
-			<version>1.9.13</version>
+			<version>${jackson-version}</version>
 		</dependency>
 		<!-- JACKSON dependencies End -->
 

@@ -3,6 +3,7 @@ package com.immunology.logic.service;
 import java.util.List;
 
 import com.immunology.model.ui.Form;
+import com.immunology.model.ui.Survey;
 
 public interface FormServive {
 
@@ -13,4 +14,6 @@ public interface FormServive {
 	List<Form> getAllForms();
 	
 	Form getFormById(long formId);
+	
+	void saveTemplate(Survey survey);
 }

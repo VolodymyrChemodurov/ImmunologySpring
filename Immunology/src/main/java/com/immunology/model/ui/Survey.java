@@ -12,9 +12,12 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+
 import com.immunology.model.Patient;
 import com.immunology.model.User;
 
+@JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.PROPERTY, property="objectType")
 @Entity
 @Table(name = "surveys")
 public class Survey extends Form {

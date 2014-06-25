@@ -7,13 +7,17 @@ import org.springframework.stereotype.Service;
 
 import com.immunology.logic.dao.CrudDao;
 import com.immunology.logic.dao.FormDao;
+import com.immunology.logic.dao.TemplateDao;
 import com.immunology.logic.service.FormServive;
 import com.immunology.model.ui.Form;
+import com.immunology.model.ui.Survey;
 
 @Service
 public class FormServiceImpl implements FormServive {
 
-
+	@Autowired
+	private TemplateDao templateDao;
+	
 	@Autowired
 	private FormDao formDao;
 	
@@ -36,4 +40,11 @@ public class FormServiceImpl implements FormServive {
 		return crudDao.find(Form.class, formId);
 	}
 	
+	public void saveTemplate(Survey survey) {
+		try {
+			templateDao.createTemplate(survey);
+		} catch (Exception e) {
+			
+		}
+	}
 }

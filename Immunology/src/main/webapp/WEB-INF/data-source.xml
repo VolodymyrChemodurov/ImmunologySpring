@@ -49,4 +49,15 @@
 		</property>
 	</bean>
 
+	<bean id="mongoFactoryBean" class="org.springframework.data.mongodb.core.MongoFactoryBean">
+    	<property name="host" value="${mongo.host}" />
+    	<property name="port" value="${mongo.port}"/>   
+	</bean>
+
+	<bean id="mongoDbFactory"
+    	class="org.springframework.data.mongodb.core.SimpleMongoDbFactory">
+    	<constructor-arg name="mongo" ref="mongoFactoryBean" />
+    	<constructor-arg name="databaseName" value="${mongo.db}" />
+	</bean>
+	
 </beans>

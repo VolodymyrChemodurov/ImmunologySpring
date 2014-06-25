@@ -22,6 +22,10 @@ import com.immunology.model.ui.elements.Panel;
 @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.PROPERTY, property="objectType")
 @JsonSubTypes({
         @JsonSubTypes.Type(value=MedicalCardForm.class),
+        @JsonSubTypes.Type(value=LaboratoryDataForm.class),
+        @JsonSubTypes.Type(value=ClinicalManifestationsForm.class),
+        @JsonSubTypes.Type(value=ComplaintsForm.class),
+        @JsonSubTypes.Type(value=Survey.class)
 })
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -34,11 +38,6 @@ public abstract class Form {
 	
 	@Column(name = "form_name")
 	private String name;
-	
-//	@ManyToOne(fetch=FetchType.EAGER)
-//	@JoinColumn(name="patient_id")
-//	@JsonIgnore
-//	private Patient patient;
 	
 	@OneToMany(mappedBy = "form", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@OrderBy("place ASC")

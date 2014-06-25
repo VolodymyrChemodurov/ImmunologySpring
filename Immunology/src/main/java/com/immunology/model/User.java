@@ -11,8 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.immunology.model.ui.Survey;
 
@@ -49,7 +49,7 @@ public class User {
 				inverseJoinColumns = {@JoinColumn(name = "patient_id")})
 	private Set<Patient> patients;
 	
-	@OneToMany(fetch=FetchType.EAGER, mappedBy="user")
+	@Transient
 	private Set<Survey> surveysTemplates;
 	
 	public String getLastName() {

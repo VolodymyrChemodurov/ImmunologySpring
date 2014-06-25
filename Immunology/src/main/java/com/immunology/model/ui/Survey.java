@@ -11,6 +11,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 
@@ -48,8 +49,7 @@ public class Survey extends Form {
 	@PrimaryKeyJoinColumn
 	private LaboratoryDataForm laboratoryDataForm;
 	
-	@ManyToOne
-	@JoinColumn(name = "user_id")
+	@Transient
 	private User user;
 	
 	public Patient getPatient() {

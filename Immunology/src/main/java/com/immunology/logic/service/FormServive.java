@@ -16,4 +16,6 @@ public interface FormServive {
 	Form getFormById(long formId);
 	
 	void saveTemplate(Survey survey);
+	
+	List<Survey> getUserSurveyTemplates(long id);
 }

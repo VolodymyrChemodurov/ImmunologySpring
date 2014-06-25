@@ -117,4 +117,14 @@ public class Survey extends Form {
 		this.user = user;
 	}
 
+	@Override
+	public String toString() {
+		return "Survey [creationDate=" + creationDate + ", severityLevel="
+				+ severityLevel + ", insufficiencyLevel=" + insufficiencyLevel
+				+ ", patient=" + patient + ", complaintsForm=" + complaintsForm
+				+ ", clinicalManifestationsForm=" + clinicalManifestationsForm
+				+ ", laboratoryDataForm=" + laboratoryDataForm + ", user="
+				+ user + "]";
+	}
+
 }

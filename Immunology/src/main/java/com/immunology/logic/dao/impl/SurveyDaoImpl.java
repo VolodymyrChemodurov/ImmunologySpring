@@ -1,5 +1,9 @@
 package com.immunology.logic.dao.impl;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 
 import org.jongo.Jongo;
@@ -9,12 +13,12 @@ import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.stereotype.Repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.immunology.logic.dao.TemplateDao;
+import com.immunology.logic.dao.SurveyDao;
 import com.immunology.model.ui.Survey;
 import com.mongodb.DB;
 
 @Repository
-public class TemplateDaoImpl implements TemplateDao {
+public class SurveyDaoImpl implements SurveyDao {
 
 	@Autowired
 	private MongoDbFactory mongoFactory;
@@ -27,15 +31,23 @@ public class TemplateDaoImpl implements TemplateDao {
 		surveys = jongo.getCollection("surveys");
 	}
 	
-	public void createTemplate(Survey formTemplate) throws Exception {
+	public void createSurveyTemplate(Survey formTemplate) throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
 		String result = mapper.writeValueAsString(formTemplate);
 		surveys.insert(result);
 	}
 
-	public Survey getSurveyTemplateByUserId(long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Survey> getSurveyTemplatesByUserId(long id) {
+		Iterable<Survey> templates = surveys.find("{id: #}", id).as(Survey.class);
+		return convertToList(templates);
 	}
-
+	
+	private List<Survey> convertToList(Iterable<Survey> templates) {
+		 List<Survey> surveys = new ArrayList<Survey>();
+		 Iterator<Survey> iterator = templates.iterator();
+		 while(iterator.hasNext()) {
+			 surveys.add(iterator.next());
+		 }
+		 return surveys;
+	}
 }

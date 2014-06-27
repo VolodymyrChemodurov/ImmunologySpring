@@ -1,8 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <div class="row">
 	<div id="breadcrumb" class="col-md-12">
 		<ol class="breadcrumb">
-			<li><a href="/Immunology/cabinet">Main</a></li>
-			<li><a href="#">Profile</a></li>
+			<li><a href="/Immunology/cabinet">Головна</a></li>
+			<li><a href="#">Профіль</a></li>
 		</ol>
 	</div>
 </div>
@@ -12,7 +13,7 @@
 		<div class="box">
 			<div class="box-header">
 				<div class="box-name">
-					<i class="fa fa-user-md"></i> <span>Your profile</span>
+					<i class="fa fa-user-md"></i> <span>Ваш профіль</span>
 				</div>
 				<div class="box-icons">
 					<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
@@ -24,28 +25,27 @@
 			</div>
 			<div class="box-content">
 				<form id="defaultForm" method="POST"
-					action="/Immunology/cabinet/profile/edit"
-					class="form-horizontal">
+					action="/Immunology/cabinet/profile/edit" class="form-horizontal">
 
 
 					<fieldset>
 						<legend></legend>
 						<div class="form-group">
-							<label class="col-sm-3 control-label">First Name</label>
-							<div class="col-sm-5">
-								<input type="text" class="form-control" name="firstName"
-									value="${user.firstName}" id="firstName" />
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">Last Name</label>
+							<label class="col-sm-3 control-label">Прізвище</label>
 							<div class="col-sm-5">
 								<input type="text" class="form-control" name="lastName"
 									id="lastName" value="${user.lastName}" />
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-sm-3 control-label">Middle Name</label>
+							<label class="col-sm-3 control-label">Ім'я</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" name="firstName"
+									value="${user.firstName}" id="firstName" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">По-батькові</label>
 							<div class="col-sm-5">
 								<input type="text" class="form-control" name="middleName"
 									id="middleName" value="${user.middleName}" />
@@ -61,7 +61,7 @@
 						<legend></legend>
 
 						<div class="form-group">
-							<label class="col-sm-3 control-label">Login</label>
+							<label class="col-sm-3 control-label">Логін</label>
 							<div class="col-sm-5">
 								<input type="text" class="form-control" name="login" id="login"
 									value="${user.login}" />
@@ -72,7 +72,7 @@
 
 					<div class="form-group">
 						<div class="col-sm-11 col-sm-offset-3">
-							<button type="submit" class="btn btn-primary">Change</button>
+							<button type="submit" class="btn btn-primary">Редагувати</button>
 						</div>
 					</div>
 				</form>
@@ -83,7 +83,7 @@
 		<div class="box">
 			<div class="box-header">
 				<div class="box-name">
-					<i class="fa  fa-unlock-alt"></i> <span>Change your password</span>
+					<i class="fa  fa-unlock-alt"></i> <span>Змінити пароль</span>
 				</div>
 				<div class="box-icons">
 					<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
@@ -101,21 +101,21 @@
 						<legend></legend>
 
 						<div class="form-group">
-							<label class="col-sm-3 control-label">Your old password</label>
+							<label class="col-sm-3 control-label">Поточний пароль</label>
 							<div class="col-sm-5">
-								<input type="password" class="form-control" name="oldPassword" id="oldPassword"
-									value="" />
+								<input type="password" class="form-control" name="oldPassword"
+									id="oldPassword" value="" />
 							</div>
 						</div>
 
 						<div class="form-group">
-							<label class="col-sm-3 control-label">Password</label>
+							<label class="col-sm-3 control-label">Новий пароль</label>
 							<div class="col-sm-5">
 								<input type="password" class="form-control" />
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-sm-3 control-label">Retype password</label>
+							<label class="col-sm-3 control-label">Повторіть пароль</label>
 							<div class="col-sm-5">
 								<input type="password" class="form-control" />
 							</div>
@@ -125,7 +125,7 @@
 
 					<div class="form-group">
 						<div class="col-sm-11 col-sm-offset-3">
-							<button type="submit" class="btn btn-primary">Change password</button>
+							<button type="submit" class="btn btn-primary">Зберегти</button>
 						</div>
 					</div>
 				</form>

@@ -1,11 +1,12 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@	taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <html>
 <div class="row">
 	<div id="breadcrumb" class="col-md-12">
 		<ol class="breadcrumb">
-			<li><a href="#">Main</a></li>
-			<li><a href="#">All patients</a></li>
+			<li><a href="#">Головна</a></li>
+			<li><a href="#">Всі пацієнти</a></li>
 		</ol>
 	</div>
 </div>
@@ -15,7 +16,7 @@
 		<div class="box">
 			<div class="box-header">
 				<div class="box-name">
-					<i class="fa fa-users"></i> <span>All patients list</span>
+					<i class="fa fa-users"></i> <span>Список всіх пацієнтів</span>
 				</div>
 				<div class="box-icons">
 					<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
@@ -31,32 +32,30 @@
 					id="datatable-3">
 					<thead>
 						<tr>
-							<th>First name</th>
-							<th>Last name</th>
-							<th>date of birth</th>
-							<th>Country</th>
-							<th>City</th>
-							<th>Street, house</th>
-							<th>Add to my patients</th>
+							<th>Прізвище</th>
+							<th>Ім'я</th>
+							<th>Дата народження</th>
+							<th>Країна</th>
+							<th>Місто</th>
+							<th>Домашня адреса</th>
+							<th>Додати до моїх пацієнтів</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${allPatients}" var="patient">
 							<tr>
-								<td>${patient.key.firstName}</td>
 								<td>${patient.key.lastName}</td>
+								<td>${patient.key.firstName}</td>
 								<td>${patient.key.dateOfBirth}</td>
 								<td>${patient.key.country}</td>
 								<td>${patient.key.city}</td>
-								<td><c:out value="${patient.key.street}, ${patient.key.house}"></c:out></td>
-								<td width="150px" align="center">
-									<c:if test="${!patient.value}">
+								<td><c:out
+										value="${patient.key.street}, ${patient.key.house}"></c:out></td>
+								<td width="150px" align="center"><c:if
+										test="${!patient.value}">
 										<button id="button" class="btn btn-primary"
-										onclick="doAjaxPost('patient/id=${patient.key.id}')">Add</button>
-									</c:if>
-									
-
-								</td>
+											onclick="doAjaxPost('patient/id=${patient.key.id}')">Додати</button>
+									</c:if></td>
 							</tr>
 						</c:forEach>
 
@@ -64,13 +63,13 @@
 					</tbody>
 					<tfoot>
 						<tr>
-							<th>First name</th>
-							<th>Last name</th>
-							<th>date of birth</th>
-							<th>Country</th>
-							<th>City</th>
-							<th>Street, house</th>
-							<th>Add to my patients</th>
+							<th>Прізвище</th>
+							<th>Ім'я</th>
+							<th>Дата народження</th>
+							<th>Країна</th>
+							<th>Місто</th>
+							<th>Домашня адреса</th>
+							<th>Додати до моїх пацієнтів</th>
 						</tr>
 					</tfoot>
 				</table>
@@ -89,7 +88,7 @@
 		$('.dataTables_filter').each(
 				function() {
 					$(this).find('label input[type=text]').attr('placeholder',
-							'Search');
+							'Пошук');
 				});
 	}
 	$(document).ready(function() {

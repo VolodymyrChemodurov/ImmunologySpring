@@ -3,6 +3,7 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 	<head>
@@ -37,29 +38,29 @@
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle">
 						<i class="fa fa-user"></i>
-						 <span class="hidden-xs">My patiens</span>
+						 <span class="hidden-xs">Мої пацієнти</span>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a class="ajax-link" href="#" onclick="doAjaxGet('patient/new');">Add new patient</a></li>
-						<li><a class="ajax-link" href="#" onclick="doAjaxGet('patients/my');">List of my patiens</a></li>
+						<li><a class="ajax-link" href="#" onclick="doAjaxGet('patient/new');">Додати нового пацієнта</a></li>
+						<li><a class="ajax-link" href="#" onclick="doAjaxGet('patients/my');">Список моїх пацієнтів</a></li>
 					</ul>
 				</li>
 				
 				<li>
 					<a href="#" class="" onclick="doAjaxGet('patients/all');">
 						<i class="fa fa-users"></i>
-						<span class="hidden-xs">All Patients</span>
+						<span class="hidden-xs">Всі пацієнти</span>
 					</a>
 				</li>
 				
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle">
 						<i class="fa fa-align-left"></i>
-						 <span class="hidden-xs">Analitic</span>
+						 <span class="hidden-xs">Аналітика</span>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a class="ajax-link" href="#" onclick="doAjaxGet('analitic/block');">Analitics Block</a></li>
-						<li><a class="ajax-link" href="#" onclick="doAjaxGet('analitic/charts');">Charts</a></li>
+						<li><a class="ajax-link" href="#" onclick="doAjaxGet('analitic/block');">Аналітичний блок</a></li>
+						<li><a class="ajax-link" href="#" onclick="doAjaxGet('analitic/charts');">Діаграми</a></li>
 					</ul>
 				</li>
 

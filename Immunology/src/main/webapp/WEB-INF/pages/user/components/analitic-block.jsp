@@ -4,10 +4,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 </head>
 <body>
-<h1>Ta-dah!</h1>
+<div class="row">
+	<div id="breadcrumb" class="col-md-12">
+		<ol class="breadcrumb">
+			<li><a href="index.html">Головна</a></li>
+			<li><a href="#">Аналітика</a></li>
+			<li><a href="#">Аналітичний блок</a></li>
+			
+		</ol>
+	</div>
+</div>
   <table class="table table-bordered table-striped">
 					<thead>
 						<tr>
@@ -17,7 +25,7 @@
 							<th>Оцінка ефективності препарату</th>
 							<th>Опис</th>
 							<th>Ступінь вираженості ПЕ</th>
-							<th>Вимамає скасування препарату?</th>
+							<th>Вимагає скасування препарату?</th>
 						</tr>
 					</thead>
 					<tbody>

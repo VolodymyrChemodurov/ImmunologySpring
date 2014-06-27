@@ -1,17 +1,19 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@	taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <html>
 <div class="row">
 	<div id="breadcrumb" class="col-md-12">
 		<ol class="breadcrumb">
-			<li><a href="#">Main</a></li>
-			<li><a href="#">My patients</a></li>
+			<li><a href="#">Головна</a></li>
+			<li><a href="#">Мої пацієнти</a></li>
 		</ol>
 	</div>
 </div>
 <div>
 
-<!--  	<button type="button"
+	<!--  	<button type="button"
 			class="btn btn btn-primary" onclick="doAjaxGet('patient/new')">Add new Patient</button> -->
 </div>
 <div class="row">
@@ -19,7 +21,7 @@
 		<div class="box">
 			<div class="box-header">
 				<div class="box-name">
-					<i class="fa fa-users"></i> <span>Your patients list</span>
+					<i class="fa fa-users"></i> <span>Список ваших пацієнтів</span>
 				</div>
 				<div class="box-icons">
 					<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
@@ -35,40 +37,39 @@
 					id="datatable-3">
 					<thead>
 						<tr>
-							<th>First name</th>
-							<th>Last name</th>
-							<th>date of birth</th>
-							<th>Country</th>
-							<th>City</th>
-							<th>Street, house</th>
+							<th>Прізвище</th>
+							<th>Ім'я</th>
+							<th>Дата народження</th>
+							<th>Країна</th>
+							<th>Місто</th>
+							<th>Адреса проживання</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${myPatients}" var="patient">
 							<tr onclick="doAjaxGet('patient/id=${patient.id}')">
-								
-								<td>${patient.firstName}</td>
 								<td>${patient.lastName}</td>
+								<td>${patient.firstName}</td>
 								<td>${patient.dateOfBirth}</td>
 								<td>${patient.country}</td>
 								<td>${patient.city}</td>
 								<td><c:out value="${patient.street}, ${patient.house}"></c:out></td>
-								
-								
+
+
 							</tr>
-							
+
 						</c:forEach>
 
 
 					</tbody>
 					<tfoot>
 						<tr>
-							<th>First name</th>
-							<th>Last name</th>
-							<th>date of birth</th>
-							<th>Country</th>
-							<th>City</th>
-							<th>Street, house</th>
+							<th>Прізвище</th>
+							<th>Ім'я</th>
+							<th>Дата народження</th>
+							<th>Країна</th>
+							<th>Місто</th>
+							<th>Адреса проживання</th>
 						</tr>
 					</tfoot>
 				</table>
@@ -88,7 +89,7 @@
 		$('.dataTables_filter').each(
 				function() {
 					$(this).find('label input[type=text]').attr('placeholder',
-							'Search');
+							'Пошук');
 				});
 	}
 	$(document).ready(function() {

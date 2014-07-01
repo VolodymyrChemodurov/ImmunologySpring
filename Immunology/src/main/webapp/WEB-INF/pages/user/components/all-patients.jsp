@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@	taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <html>
@@ -51,11 +52,12 @@
 								<td>${patient.key.city}</td>
 								<td><c:out
 										value="${patient.key.street}, ${patient.key.house}"></c:out></td>
-								<td width="150px" align="center"><c:if
-										test="${!patient.value}">
-										<button id="button" class="btn btn-primary"
+								<td class="custom-size">
+									<c:if test="${!patient.value}">
+										<button class="btn btn-primary btn-table"
 											onclick="doAjaxPost('patient/id=${patient.key.id}')">Додати</button>
-									</c:if></td>
+									</c:if>
+								</td>
 							</tr>
 						</c:forEach>
 

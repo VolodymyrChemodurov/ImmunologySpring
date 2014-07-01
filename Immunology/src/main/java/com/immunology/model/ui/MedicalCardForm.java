@@ -5,7 +5,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,12 +21,12 @@ import com.immunology.model.Patient;
 @Table(name = "medical_forms")
 public class MedicalCardForm extends Form {
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "patient_id")
 	@JsonIgnore
 	private Patient patient;
 
-	@OneToOne(mappedBy = "medicalCard")
+	@ManyToOne
 	@JoinColumn(name = "disease_id")
 	@JsonIgnore
 	private Disease disease;
@@ -38,44 +38,6 @@ public class MedicalCardForm extends Form {
 	@Column(name="additional_info")
 	private String additionalInfo;
 	
-	public Date getCreationDate() {
-		return creationDate;
-	}
-	
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
-	
-	public String getAdditionInfo() {
-		return additionalInfo;
-	}
-	
-	public void setAdditionInfo(String additionInfo) {
-		this.additionalInfo = additionInfo;
-	}
 
-	public Patient getPatient() {
-		return patient;
-	}
-
-	public void setPatient(Patient patient) {
-		this.patient = patient;
-	}
-
-	public String getAdditionalInfo() {
-		return additionalInfo;
-	}
-
-	public void setAdditionalInfo(String additionalInfo) {
-		this.additionalInfo = additionalInfo;
-	}
-
-	public Disease getDisease() {
-		return disease;
-	}
-
-	public void setDisease(Disease disease) {
-		this.disease = disease;
-	}
 	
 }

@@ -9,10 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.stereotype.Controller;
 
 import com.immunology.logic.utils.RoleUtils;
 import com.immunology.logic.utils.UserUtils;
 
+@Controller
 public class AccessDeniedHandlerImpl implements AccessDeniedHandler{
 
 	public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException deniedException) throws IOException, ServletException {

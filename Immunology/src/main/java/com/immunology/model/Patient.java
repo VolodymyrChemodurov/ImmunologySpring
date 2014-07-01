@@ -14,6 +14,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.immunology.model.ui.AnamnesticDataForm;
+import com.immunology.model.ui.MedicalCardForm;
+import com.immunology.model.ui.Survey;
+
 @Entity
 @Table(name = "patient")
 public class Patient {
@@ -25,8 +29,17 @@ public class Patient {
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "patients", cascade = CascadeType.ALL)
 	private Set<User> users = new HashSet<User>();
 	
+//	@OneToMany(mappedBy = "patient")
+//	private List<Disease> diseases;
+	
 	@OneToMany(mappedBy = "patient")
-	private List<Disease> diseases;
+	private List<AnamnesticDataForm> anamnesticData;
+	
+	@OneToMany(mappedBy = "patient")
+	private List<MedicalCardForm> medicalCard;
+	
+	@OneToMany(mappedBy = "patient")
+	private List<Survey> surveys;
 	
 	@Column(name = "first_name")
 	private String firstName;

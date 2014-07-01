@@ -4,24 +4,27 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
-import org.codehaus.jackson.annotate.JsonTypeInfo;
-
 import com.immunology.model.Disease;
+import com.immunology.model.Patient;
 import com.immunology.model.User;
 
-@JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.PROPERTY, property="objectType")
 @Entity
 @Table(name = "surveys")
-public class Survey extends Form {
+public class Survey {
+
+	@Id
+	@GeneratedValue
+	private long id;
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name="creation_date")
@@ -37,16 +40,20 @@ public class Survey extends Form {
 	@JoinColumn(name = "disease_id")
 	private Disease disease;
 	
+	@ManyToOne
+	@JoinColumn(name = "patient_id")
+	private Patient patient;
+	
 	@OneToOne
-	@PrimaryKeyJoinColumn
+	@JoinColumn(name = "complaints_form_id")
 	private ComplaintsForm complaintsForm;
 	
 	@OneToOne
-	@PrimaryKeyJoinColumn
+	@JoinColumn(name = "clinical_manifestations_form_id")
 	private ClinicalManifestationsForm clinicalManifestationsForm;
 	
 	@OneToOne
-	@PrimaryKeyJoinColumn
+	@JoinColumn(name = "laboratory_data_form_id")
 	private LaboratoryDataForm laboratoryDataForm;
 	
 	@Transient

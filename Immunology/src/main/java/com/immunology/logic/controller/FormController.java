@@ -35,7 +35,7 @@ public class FormController {
 	public @ResponseBody
 	MedicalCardForm getFirstForm(Model model) {
 		MedicalCardForm form = medicalCardService.getById(1);
-		LOG.info(form.toString());
+		//LOG.info(form.toString());
 		return form;
 	}
 

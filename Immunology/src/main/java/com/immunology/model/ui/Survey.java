@@ -15,7 +15,7 @@ import javax.persistence.Transient;
 
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 
-import com.immunology.model.Patient;
+import com.immunology.model.Disease;
 import com.immunology.model.User;
 
 @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.PROPERTY, property="objectType")
@@ -34,8 +34,8 @@ public class Survey extends Form {
 	private double insufficiencyLevel;
 
 	@ManyToOne
-	@JoinColumn(name = "patient_id")
-	private Patient patient;
+	@JoinColumn(name = "disease_id")
+	private Disease disease;
 	
 	@OneToOne
 	@PrimaryKeyJoinColumn
@@ -52,14 +52,6 @@ public class Survey extends Form {
 	@Transient
 	private User user;
 	
-	public Patient getPatient() {
-		return patient;
-	}
-
-	public void setPatient(Patient patient) {
-		this.patient = patient;
-	}
-
 	public Date getCreationDate() {
 		return creationDate;
 	}
@@ -115,16 +107,6 @@ public class Survey extends Form {
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	@Override
-	public String toString() {
-		return "Survey [creationDate=" + creationDate + ", severityLevel="
-				+ severityLevel + ", insufficiencyLevel=" + insufficiencyLevel
-				+ ", patient=" + patient + ", complaintsForm=" + complaintsForm
-				+ ", clinicalManifestationsForm=" + clinicalManifestationsForm
-				+ ", laboratoryDataForm=" + laboratoryDataForm + ", user="
-				+ user + "]";
 	}
 
 }

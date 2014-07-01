@@ -13,6 +13,7 @@ import javax.persistence.TemporalType;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 
+import com.immunology.model.Disease;
 import com.immunology.model.Patient;
 
 @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.PROPERTY, property="objectType")
@@ -24,6 +25,11 @@ public class MedicalCardForm extends Form {
 	@JoinColumn(name = "patient_id")
 	@JsonIgnore
 	private Patient patient;
+
+	@OneToOne(mappedBy = "medicalCard")
+	@JoinColumn(name = "disease_id")
+	@JsonIgnore
+	private Disease disease;
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name="creation_date")
@@ -62,6 +68,14 @@ public class MedicalCardForm extends Form {
 
 	public void setAdditionalInfo(String additionalInfo) {
 		this.additionalInfo = additionalInfo;
+	}
+
+	public Disease getDisease() {
+		return disease;
+	}
+
+	public void setDisease(Disease disease) {
+		this.disease = disease;
 	}
 	
 }

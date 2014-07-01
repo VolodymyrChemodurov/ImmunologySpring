@@ -12,11 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import com.immunology.model.ui.MedicalCardForm;
-import com.immunology.model.ui.Survey;
 
 @Entity
 @Table(name = "patient")
@@ -28,6 +24,9 @@ public class Patient {
 	
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "patients", cascade = CascadeType.ALL)
 	private Set<User> users = new HashSet<User>();
+	
+	@OneToMany(mappedBy = "patient")
+	private List<Disease> diseases;
 	
 	@Column(name = "first_name")
 	private String firstName;
@@ -59,20 +58,6 @@ public class Patient {
 	@Column(name = "house")
 	private String house;
 
-	@OneToOne(mappedBy = "patient")
-	private MedicalCardForm medicalCard;
-	
-	@OneToMany(fetch=FetchType.EAGER, mappedBy="patient")
-	private List<Survey> surveys;
-
-	public MedicalCardForm getMedicalCard() {
-		return medicalCard;
-	}
-	
-	public void setMedicalCard(MedicalCardForm medicalCard) {
-		this.medicalCard = medicalCard;
-	}
-
 	public boolean addUser(User user) {
 		return users.add(user);
 	}
@@ -83,14 +68,6 @@ public class Patient {
 
 	public void setUsers(Set<User> users) {
 		this.users = users;
-	}
-
-	public List<Survey> getSurveys() {
-		return surveys;
-	}
-
-	public void setSurveys(List<Survey> surveys) {
-		this.surveys = surveys;
 	}
 
 	public long getId() {

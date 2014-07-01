@@ -31,6 +31,11 @@ public class AdminController {
 		model.setViewName("admin/components/users");
 		return model;
 	}
+	@RequestMapping(value = "/medcard", method = RequestMethod.GET)
+	public ModelAndView getMedicalCardPage(ModelAndView model) {
+		model.setViewName("admin/components/medcard");
+		return model;
+	}
 	
 	@RequestMapping(value = "/user/create", method = RequestMethod.POST)
 	public void createUser(com.immunology.model.User user) {

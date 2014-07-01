@@ -32,6 +32,12 @@
 							<li><a class="ajax-link" href="#"  onclick="doAjaxGet('/users');">All users</a></li>
 						</ul>
 					</li>
+					<li>
+					<a href="#" onclick="doAjaxGet('/medcard');" class="active ajax-link">
+						<i class="fa fa-dashboard"></i>
+						<span class="hidden-xs">Med.Card</span>
+					</a>
+				</li>
 				</ul>
 			</div>
 			
@@ -41,7 +47,10 @@
 				</div>
 				<div id="ajax-content"></div>
 			</div>
+			
 		</div>
+			<jsp:include page="/WEB-INF/pages/admin/components/new-panel-modal.jsp"></jsp:include>
+			<jsp:include page="/WEB-INF/pages/admin/components/new-textbox-modal.jsp"></jsp:include>
 	</div>
 	
 	<jsp:include page="/WEB-INF/pages/base-scripts.jsp">
@@ -61,4 +70,5 @@
 	</script>
 	
 </body>
+
 </html>

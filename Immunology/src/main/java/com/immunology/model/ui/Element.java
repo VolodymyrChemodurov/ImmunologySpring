@@ -11,10 +11,9 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import org.codehaus.jackson.annotate.JsonSubTypes;
-import org.codehaus.jackson.annotate.JsonTypeInfo;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.immunology.model.ui.elements.DropDown;
 import com.immunology.model.ui.elements.Panel;
 import com.immunology.model.ui.elements.TextBox;
@@ -23,7 +22,7 @@ import com.immunology.model.ui.elements.TextBox;
 @JsonSubTypes({
         @JsonSubTypes.Type(value=Panel.class),
         @JsonSubTypes.Type(value=DropDown.class),
-        @JsonSubTypes.Type(value=TextBox.class),
+        @JsonSubTypes.Type(value=TextBox.class)
 })
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)

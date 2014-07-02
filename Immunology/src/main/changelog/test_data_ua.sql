@@ -3,8 +3,9 @@ INSERT INTO user_roles VALUES(1, 1);
 
 INSERT INTO patient values(1, 'Lviv', 'Ukraine', '11/11/1992', 'Andrii', '231', 'Testovui', 'Volodymyrovych', 'Lvivska', 'male', 'Djerelna');
 INSERT INTO user_patient VALUES(1, 1);
-INSERT INTO form VALUES(1, 'test form', 1);
-INSERT INTO medical_forms VALUES('Додаткова інформація', '11/11/2001', 1);
+
+INSERT INTO form VALUES(1, 'test form');
+INSERT INTO medical_card_forms VALUES('Додаткова інформація', '11/11/2001', 1, 1);
 INSERT INTO element(element_id, checked, name, place) VALUES(1, false, 'Генетична (вроджена) схильність до алергії', 1);
 INSERT INTO panels VALUES(1,1);
 INSERT INTO element VALUES(2, false, 'Хворі на алергію родичі', 1, 1);

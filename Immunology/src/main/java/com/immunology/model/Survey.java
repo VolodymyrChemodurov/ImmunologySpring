@@ -1,4 +1,4 @@
-package com.immunology.model.ui;
+package com.immunology.model;
 
 import java.util.Date;
 
@@ -14,9 +14,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
-import com.immunology.model.Disease;
-import com.immunology.model.Patient;
-import com.immunology.model.User;
+import com.immunology.model.ui.ClinicalManifestationsForm;
+import com.immunology.model.ui.ComplaintsForm;
+import com.immunology.model.ui.LaboratoryDataForm;
 
 @Entity
 @Table(name = "surveys")
@@ -38,11 +38,7 @@ public class Survey {
 
 	@ManyToOne
 	@JoinColumn(name = "disease_id")
-	private Disease disease;
-	
-	@ManyToOne
-	@JoinColumn(name = "patient_id")
-	private Patient patient;
+	private Syndrome disease;
 	
 	@OneToOne
 	@JoinColumn(name = "complaints_form_id")
@@ -114,6 +110,22 @@ public class Survey {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public Syndrome getDisease() {
+		return disease;
+	}
+
+	public void setDisease(Syndrome disease) {
+		this.disease = disease;
 	}
 
 }

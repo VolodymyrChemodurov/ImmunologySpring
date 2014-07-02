@@ -11,10 +11,10 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonSubTypes;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.immunology.model.ui.elements.DropDown;
 import com.immunology.model.ui.elements.Panel;
 import com.immunology.model.ui.elements.TextBox;
@@ -40,9 +40,9 @@ public abstract class Element {
 	
 	private boolean checked;
 	
-	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "panel_id")
+	@JsonBackReference
 	private Panel panel;
 
 	public String getName() {

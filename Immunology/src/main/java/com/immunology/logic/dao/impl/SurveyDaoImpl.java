@@ -17,7 +17,7 @@ import org.springframework.stereotype.Repository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.immunology.logic.dao.SurveyDao;
-import com.immunology.model.ui.Survey;
+import com.immunology.model.Survey;
 import com.mongodb.DB;
 
 @Repository

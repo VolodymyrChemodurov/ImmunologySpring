@@ -2,8 +2,8 @@ package com.immunology.logic.service;
 
 import java.util.List;
 
+import com.immunology.model.Survey;
 import com.immunology.model.ui.Form;
-import com.immunology.model.ui.Survey;
 
 public interface FormServive {
 

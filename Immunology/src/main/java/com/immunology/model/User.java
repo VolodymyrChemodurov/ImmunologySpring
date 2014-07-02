@@ -14,8 +14,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import com.immunology.model.ui.Survey;
-
 @Entity
 @Table(name = "users")
 public class User {

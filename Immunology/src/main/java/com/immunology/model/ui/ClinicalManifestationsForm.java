@@ -10,6 +10,4 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 @Table(name = "clinical_manifistation_forms")
 public class ClinicalManifestationsForm extends Form {
 
-
-	
 }

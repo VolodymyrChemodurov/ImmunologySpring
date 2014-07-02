@@ -14,9 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.immunology.model.ui.AnamnesticDataForm;
-import com.immunology.model.ui.MedicalCardForm;
-import com.immunology.model.ui.Survey;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "patient")
@@ -29,17 +27,9 @@ public class Patient {
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "patients", cascade = CascadeType.ALL)
 	private Set<User> users = new HashSet<User>();
 	
-//	@OneToMany(mappedBy = "patient")
-//	private List<Disease> diseases;
-	
 	@OneToMany(mappedBy = "patient")
-	private List<AnamnesticDataForm> anamnesticData;
-	
-	@OneToMany(mappedBy = "patient")
-	private List<MedicalCardForm> medicalCard;
-	
-	@OneToMany(mappedBy = "patient")
-	private List<Survey> surveys;
+	@JsonManagedReference
+	private List<Syndrome> diseases;
 	
 	@Column(name = "first_name")
 	private String firstName;
@@ -169,6 +159,14 @@ public class Patient {
 
 	public void setHouse(String house) {
 		this.house = house;
+	}
+
+	public List<Syndrome> getDiseases() {
+		return diseases;
+	}
+
+	public void setDiseases(List<Syndrome> diseases) {
+		this.diseases = diseases;
 	}
 
 	@Override

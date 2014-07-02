@@ -17,6 +17,7 @@ import javax.persistence.OrderBy;
 import org.codehaus.jackson.annotate.JsonSubTypes;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.immunology.model.ui.elements.Panel;
 
 @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.PROPERTY, property="objectType")
@@ -25,7 +26,7 @@ import com.immunology.model.ui.elements.Panel;
         @JsonSubTypes.Type(value=LaboratoryDataForm.class),
         @JsonSubTypes.Type(value=ClinicalManifestationsForm.class),
         @JsonSubTypes.Type(value=ComplaintsForm.class),
-        @JsonSubTypes.Type(value=Survey.class)
+        @JsonSubTypes.Type(value=AnamnesticDataForm.class)
 })
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -41,6 +42,7 @@ public abstract class Form {
 	
 	@OneToMany(mappedBy = "form", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@OrderBy("place ASC")
+	@JsonManagedReference
 	private Set<Panel> panels;
 
 	public long getId() {

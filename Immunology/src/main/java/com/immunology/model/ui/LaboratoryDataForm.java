@@ -10,6 +10,4 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 @Table(name = "laboratory_data_forms")
 public class LaboratoryDataForm extends Form {
 
-
-	
 }

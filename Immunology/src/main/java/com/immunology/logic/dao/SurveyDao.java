@@ -2,7 +2,7 @@ package com.immunology.logic.dao;
 
 import java.util.List;
 
-import com.immunology.model.ui.Survey;
+import com.immunology.model.Survey;
 
 public interface SurveyDao {
 

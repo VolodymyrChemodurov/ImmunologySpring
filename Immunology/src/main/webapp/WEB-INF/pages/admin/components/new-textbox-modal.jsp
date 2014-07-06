@@ -8,7 +8,7 @@
       </div>
       <div class="modal-body">
        	
-			<select id ="panelNames"  class="form-control">
+			<select name="panelNames" id="panelNameForTextBox"  class="form-control">
 				<option>Android</option>
 				<option>Sailfish OS</option>
 				<option>CyanogenMod</option>
@@ -20,7 +20,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick='createTextBox($("#panelNames").val(),$("#textBoxName").val())'>Save changes</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick='createTextBox($("#panelNameForTextBox").val(),$("#textBoxName").val())'>Save changes</button>
       </div>
     </div>
   </div>

@@ -1,9 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <div class="row">
 	<div id="breadcrumb" class="col-md-12">
 		<ol class="breadcrumb">
-			<li><a href="index.html">Dashboard</a></li>
-			<li><a href="#">Charts</a></li>
-			<li><a href="#">xCharts</a></li>
+			<li><a href="index.html">Головна</a></li>
+			<li><a href="#">Аналітика</a></li>
+			<li><a href="#">Діаграми</a></li>
+			
 		</ol>
 	</div>
 </div>

@@ -18,23 +18,23 @@
 			<div class="col-md-4 col-md-offset-4">
 				<div class="login-panel panel panel-default">
 					<div class="panel-heading">
-						<h3 class="panel-title">Please Sign In</h3>
+						<h3 class="panel-title">Вхід в систему</h3>
 					</div>
 					<div class="panel-body">
 						<form role="form" action="<c:url value='j_spring_security_check' />" method="POST">
 							<fieldset>
 								<c:if test="${param.fail == true}">
 									<div id="error_block" class="form-group has-error">
-										<label class="control-label" for="inputError">Wrong login or password</label>
+										<label class="control-label" for="inputError">Неправильній логін або пароль</label>
 									</div>
 								</c:if>
 								<div class="form-group">
-									<input class="form-control" placeholder="login" autofocus id="inputLogin" name='j_username'>
+									<input class="form-control" placeholder="Логін" autofocus id="inputLogin" name='j_username'>
 								</div>
 								<div class="form-group">
-									<input class="form-control" placeholder="Password" type="password" id="inputPassword" name='j_password'>
+									<input class="form-control" placeholder="Пароль" type="password" id="inputPassword" name='j_password'>
 								</div>
-								<button type="submit" class="btn btn-lg btn-success btn-block">Login</button>
+								<button type="submit" class="btn btn-lg btn-success btn-block">Увійти</button>
 							</fieldset>
 						</form>
 					</div>

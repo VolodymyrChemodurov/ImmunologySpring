@@ -1,8 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <div class="row">
 	<div id="breadcrumb" class="col-md-12">
 		<ol class="breadcrumb">
-			<li><a href="index.html">Cabinet</a></li>
-			<li><a href="#">Patients</a></li>
+			<li><a href="index.html">Головна</a></li>
+			<li><a href="#">Мої пацієнти</a></li>
 			<li><a href="#">${patient.firstName} ${patient.lastName}</a></li>
 		</ol>
 	</div>
@@ -21,9 +22,9 @@
 			<div class="box-content">
 				<div id="tabs">
 					<ul>
-						<li><a href="#tabs-1">Profile</a></li>
-						<li><a href="#tabs-2">Medical Card </a></li>
-						<li><a href="#tabs-3">Other</a></li>
+						<li><a href="#tabs-1">Профіль</a></li>
+						<li><a href="#tabs-2">Медична картка</a></li>
+						<li><a href="#tabs-3">Інше</a></li>
 					</ul>
 					<div id="tabs-1">
 						<jsp:include

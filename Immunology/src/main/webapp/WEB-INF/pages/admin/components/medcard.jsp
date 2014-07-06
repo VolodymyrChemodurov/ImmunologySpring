@@ -9,7 +9,7 @@
 </div>
 
 <div class="row">
-	<div class="col-xs-2">
+	<div class="col-xs-3">
 		<div class="box">
 			<div class="box-header">
 				<div class="box-name">
@@ -18,29 +18,48 @@
 				<div class="no-move"></div>
 			</div>
 			<div class="box-content" style="height: 300px;">
-				<div class="col-sm-12">
-					<label class="col-sm-12 control-label">Set Med.Card Name:</label>
-					<input type="text" class="form-control" name="firstName" id="firstName" />
+					<input type="text" style="margin-bottom: 5px;" class="form-control" name="firstName" id="firstName"  placeholder="Med.Card Title"/>
+				
+				<ul class="nav nav-pills nav-stacked">
+				  <li class="active">
+				    <a href="#" data-toggle="modal" data-target="#create-panel">
+				      <span class="badge pull-right">0</span>
+				      Create Panel
+				    </a>
+				  </li>
+				  <li class="active">
+				    <a href="#" data-toggle="modal" data-target="#create-sub-panel">
+				      <span class="badge pull-right">0</span>
+				      Create Sub-Panel
+				    </a>
+				  </li>
+				  <li class="active">
+				    <a href="#" data-toggle="modal" data-target="#create-dropdown">
+				      <span class="badge pull-right">0</span>
+				      Create DropDown
+				    </a>
+				  </li>
+				   <li class="active">
+				    <a href="#" data-toggle="modal" data-target="#create-textbox" onclick="renderPanelNames();">
+				      <span class="badge pull-right">0</span>
+				      Create TextBox
+				    </a>
+				  </li>
+				</ul>
+				<div class="col-sm-5" style="margin-top: 5px;">
+					<button type="button"  class="btn btn-default btn-lg" onclick="renderPreviewMedForm();"> Save & Show</button>
 				</div>
-				<div class="col-sm-12" style="margin-top: 5px;">
-					<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#create-panel">Create Panel</button>
-				</div>
-				<div class="col-sm-12" style="margin-top: 5px;">
-					<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#create-textbox" onclick="renderPanelNames();">Create TextBox</button>
-				</div>
-				<button type="button" class="btn btn-default btn-lg" onclick="renderPreviewMedForm();"> Save & Show</button>
-
 
 			</div>
 		</div>
 	</div>
 	
 
-	<div class="col-xs-10">
+	<div class="col-xs-9">
 		<div class="box">
 			<div class="box-header">
 				<div class="box-name">
-					<span>Instruments</span>
+					<span>Quick view</span>
 				</div>
 				<div class="no-move"></div>
 			</div>
@@ -63,7 +82,9 @@
 var jsonObj = [];
 jsonObj["creationDate"] = "";
 jsonObj["additionInfo"] = "";
-jsonObj["panels"] = [];
+jsonObj["panels"] = new Array();
+
+var dropDownValues = new Array();
 
 $(document).ready(function() {
 	
@@ -74,7 +95,7 @@ function renderPreviewMedForm(){
 	renderMedicalForm(jsonObj);
 	$('#container').html(formStructure);
 	renderDropDownStyle();
-	prepareForm();
+	//prepareForm(jsonObj);
 	
 }
 function createPanel(title){
@@ -83,6 +104,7 @@ function createPanel(title){
 	panel["checked"] = false;
 	panel["elements"] = [];
 	jsonObj.panels.push(panel); 
+	renderPanelNames();
 	
 }
 function renderPanelNames(){
@@ -90,7 +112,13 @@ function renderPanelNames(){
 	$(jsonObj.panels).each(function(index, panel) {
 		panerNamesPreview += '<option>' + panel.name + '</option>';
 	});
-	$('#panelNames').html(panerNamesPreview);
+	$("select[name = 'panelNames']").each(function() {
+		 $( this).html(panerNamesPreview);
+		 console.log($( this));
+	});
+	
+	
+	
 }
 function createTextBox(panelName, textBoxTitle){
 	textBox = [];
@@ -98,11 +126,43 @@ function createTextBox(panelName, textBoxTitle){
 	textBox["checked"] = false;
 	textBox["objectType"] = "TextBox";
 	$(jsonObj.panels).each(function(index, panel) {
+		console.log(panel.name + " - " + panelName);
 		if(panel.name == panelName){
 			jsonObj.panels[index].elements.push(textBox);
 		}
 	});
 	
+}
+function createDropDown(panelNameInputId,dropDownTitleInputId){
+	var panelTitle = $("#"+panelNameInputId).val();
+	var dropDownTitle = $("#"+ panelNameInputId).val();
+	var dropDown = [];
+	
+	console.log(panelNameInputId+" - "+dropDownTitleInputId);
+	
+	dropDown["name"]=dropDownTitle;
+	dropDown["checked"] = false;
+	dropDown["objectType"] ="DropDown";
+	dropDown["values"] = dropDownValues;
+	dropDownValues = [];
+	
+	$(jsonObj.panels).each(function(index, panel) {
+		if(panel.name == panelTitle){
+			alert();
+			jsonObj.panels[index].elements.push(dropDown);
+		}
+	});
+	
+}
+
+function addToDropDownFromInput(dropDownId,inputId){
+	var dropDown = $("#"+dropDownId);
+	var input = $("#"+ inputId);
+	
+	dropDownValues.push(input.val());
+	
+	dropDown.html(dropDown.html() + '<option>' + input.val() + '</option>');
+	input.val("");
 }
 
 

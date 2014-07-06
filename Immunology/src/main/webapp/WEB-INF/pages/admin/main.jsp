@@ -50,7 +50,9 @@
 			
 		</div>
 			<jsp:include page="/WEB-INF/pages/admin/components/new-panel-modal.jsp"></jsp:include>
+			<jsp:include page="/WEB-INF/pages/admin/components/new-sub-panel-modal.jsp"></jsp:include>
 			<jsp:include page="/WEB-INF/pages/admin/components/new-textbox-modal.jsp"></jsp:include>
+			<jsp:include page="/WEB-INF/pages/admin/components/new-dropdown-modal.jsp"></jsp:include>
 	</div>
 	
 	<jsp:include page="/WEB-INF/pages/base-scripts.jsp">

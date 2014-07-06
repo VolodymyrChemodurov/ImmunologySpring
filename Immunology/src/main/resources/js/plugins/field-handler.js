@@ -101,7 +101,8 @@ function checkPanelForUnDisable(panelIndex){
 	  
 	}
 }
-function prepareForm(){
+function prepareForm(formObj){
+	console.log(formObj);
 	for(var panIndex = 0; panIndex < formObj.panels.length; panIndex++ ){
 		checkPanelForUnDisable(panIndex);
 		changeTitleColor(panIndex);

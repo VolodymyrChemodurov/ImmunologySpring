@@ -1,7 +1,7 @@
 var container;
 var formStructure = "";
 var dropDownIdArr = [];
-var formObj;
+var formObj = [];
 
 function renderForm(form) {
 	container = form;
@@ -16,7 +16,7 @@ function renderForm(form) {
 			renderMedicalForm(response);
 			$(form).html(formStructure);
 			renderDropDownStyle();
-			prepareForm();
+			prepareForm(formObj);
 		},
 		error: function (request, status, error) {
 			alert(error);
@@ -48,7 +48,7 @@ function sendForm(){
 
 	// Create structure of medical form
 function renderMedicalForm(form){
-	formStructure += '<form class="form-horizontal">';
+	formStructure = '<form class="form-horizontal">';
 		renderMedcardFields(form);
 		$(form.panels).each(function(index, panel) {
 		renderPanel(panel, index);

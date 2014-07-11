@@ -7,4 +7,8 @@ public interface MedicalCardFormService {
 	MedicalCardForm getById(long id);
 	
 	MedicalCardForm updateMedicalCardForm(MedicalCardForm medCardForm);
+	
+	MedicalCardForm getMedicalCardTemplate();
+	
+	boolean updateMedicalCardTemplate(MedicalCardForm template);
 }

@@ -3,11 +3,11 @@ var formStructure = "";
 var dropDownIdArr = [];
 var formObj = [];
 
-function renderForm(form) {
+function renderForm(patientId, form) {
 	container = form;
 	$.ajax({
 		type : "get",
-		url : "/Immunology/cabinet/patient/form/first",
+		url : "/Immunology/cabinet/patient/form/medical_card/" + patientId,
 		dataType : "json",
 		success : function(response) {
 			console.log(response);

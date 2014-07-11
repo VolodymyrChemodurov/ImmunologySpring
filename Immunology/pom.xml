@@ -142,7 +142,7 @@
 		<!-- Hibernate dependencies end -->
 		<!-- DB dependencies -->
 		<!-- JACKSON dependencies -->
-		<dependency>
+<!-- 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-core-asl</artifactId>
 			<version>${jackson-version}</version>
@@ -151,7 +151,7 @@
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>${jackson-version}</version>
-		</dependency>
+		</dependency> -->
 		<!-- JACKSON dependencies End -->
 
 		<!-- loggining -->

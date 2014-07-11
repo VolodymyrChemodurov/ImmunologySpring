@@ -4,12 +4,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.immunology.logic.service.FormServive;
 import com.immunology.logic.service.MedicalCardFormService;
 import com.immunology.model.ui.Element;
@@ -20,8 +22,7 @@ import com.immunology.model.ui.elements.Panel;
 @Controller
 @RequestMapping(value = "/cabinet/patient/form")
 public class FormController {
-	private static final Logger LOG = LoggerFactory
-			.getLogger(FormController.class);
+	private static final Logger LOG = LoggerFactory.getLogger(FormController.class);
 
 	@Autowired
 	private FormServive formServive;
@@ -31,11 +32,13 @@ public class FormController {
 	@Autowired
 	private MedicalCardFormService medicalCardService;
 
-	@RequestMapping(value = "/first", method = RequestMethod.GET)
-	public @ResponseBody
-	MedicalCardForm getFirstForm(Model model) {
-		MedicalCardForm form = medicalCardService.getById(1);
-		LOG.info(form.toString());
+	@RequestMapping(value = "/medical_card/{id}", method = RequestMethod.GET)
+	public @ResponseBody MedicalCardForm getMedicalForm(@PathVariable("id") long id) throws JsonProcessingException {
+		MedicalCardForm form = medicalCardService.getById(id);
+		ObjectMapper mapper = new ObjectMapper();
+		String result = mapper.writeValueAsString(form);
+		LOG.info(result);
+		medicalCardFormService.updateMedicalCardTemplate(form);
 		return form;
 	}
 

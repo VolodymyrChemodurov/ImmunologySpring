@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.immunology.logic.service.MedicalCardFormService;
 import com.immunology.logic.service.PatientService;
 import com.immunology.logic.service.UserService;
 import com.immunology.logic.utils.UserUtils;
@@ -27,6 +28,8 @@ public class PatientController {
 	@Autowired
 	PatientService patientService;
 	
+	@Autowired
+	private MedicalCardFormService medicalCardService;
 
 	@RequestMapping(value="/new",  method=RequestMethod.GET )
     public String getNewPatient(Model model ) {
@@ -38,6 +41,7 @@ public class PatientController {
 	public String getRegistrateNewPatient(Patient patient, Model model, HttpServletResponse response) {	
 		User user = UserUtils.getCurrentUser();
 		patient.addUser(userService.getUserByLogin(user.getUsername()));
+		patient.setMedicalCard(medicalCardService.getMedicalCardTemplate());
 		patientService.updatePatient(patient);
 		return "redirect:/cabinet";
 	}

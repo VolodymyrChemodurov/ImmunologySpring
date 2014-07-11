@@ -10,11 +10,14 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.immunology.model.ui.MedicalCardForm;
 
 @Entity
 @Table(name = "patient")
@@ -30,6 +33,10 @@ public class Patient {
 	@OneToMany(mappedBy = "patient")
 	@JsonManagedReference
 	private List<Syndrome> diseases;
+	
+	@OneToOne
+	@JoinColumn(name = "medical_card_id")
+	private MedicalCardForm medicalCard;
 	
 	@Column(name = "first_name")
 	private String firstName;
@@ -167,6 +174,14 @@ public class Patient {
 
 	public void setDiseases(List<Syndrome> diseases) {
 		this.diseases = diseases;
+	}
+
+	public MedicalCardForm getMedicalCard() {
+		return medicalCard;
+	}
+
+	public void setMedicalCard(MedicalCardForm medicalCard) {
+		this.medicalCard = medicalCard;
 	}
 
 	@Override

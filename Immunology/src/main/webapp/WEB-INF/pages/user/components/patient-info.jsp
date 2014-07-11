@@ -42,7 +42,7 @@
 		</div>
 	</div>
 
-
+	<input type="hidden" id="patient_id" value="${patient.id}"/>
 
 </div>
 
@@ -74,7 +74,7 @@
 		// Load example of form validation
 		BootstrapValidatorScript(DemoFormValidator);
 		formData ="";
-		renderForm($('#container'));
+		renderForm($('#patient_id').val(), $('#container'));
 
 		/////////////////////////////////
 		console.log("document ready");

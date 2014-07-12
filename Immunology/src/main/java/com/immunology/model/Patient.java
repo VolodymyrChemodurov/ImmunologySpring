@@ -34,7 +34,7 @@ public class Patient {
 	@JsonManagedReference
 	private List<Syndrome> diseases;
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "medical_card_id")
 	private MedicalCardForm medicalCard;
 	

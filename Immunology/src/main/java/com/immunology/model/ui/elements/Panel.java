@@ -12,7 +12,6 @@ import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.immunology.model.ui.Element;
 import com.immunology.model.ui.Form;
@@ -23,12 +22,12 @@ public class Panel extends Element {
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "form_id")
-	@JsonBackReference
+	@JsonBackReference("panels_reference")
 	private Form form;
 	
 	@OneToMany(mappedBy = "panel", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@OrderBy("place ASC")
-	@JsonManagedReference
+	@JsonBackReference("elements_reference")
 	private Set<Element> elements;
 	
 	public Set<Element> getElements() {

@@ -11,7 +11,6 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.immunology.model.ui.elements.DropDown;
@@ -41,7 +40,7 @@ public abstract class Element {
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "panel_id")
-	@JsonBackReference
+	//@JsonManagedReference("elements_reference")
 	private Panel panel;
 
 	public String getName() {

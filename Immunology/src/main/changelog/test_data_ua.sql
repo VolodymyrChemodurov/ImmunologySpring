@@ -1,5 +1,5 @@
 INSERT INTO form VALUES(1, 'test form');
-INSERT INTO medical_card_forms VALUES('Додаткова інформація', '11/11/2001', 1);
+INSERT INTO medical_card_forms VALUES('Додаткова інформація', 1);
 INSERT INTO element(element_id, checked, name, place) VALUES(1, false, 'Генетична (вроджена) схильність до алергії', 1);
 INSERT INTO panels VALUES(1,1);
 INSERT INTO element VALUES(2, false, 'Хворі на алергію родичі', 1, 1);

@@ -41,7 +41,7 @@ public abstract class Form {
 	
 	@OneToMany(mappedBy = "form", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@OrderBy("place ASC")
-	@JsonManagedReference
+	@JsonManagedReference("panels_reference")
 	private Set<Panel> panels;
 
 	public long getId() {

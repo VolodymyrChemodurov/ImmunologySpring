@@ -16,6 +16,7 @@ import com.immunology.logic.service.PatientService;
 import com.immunology.logic.service.UserService;
 import com.immunology.logic.utils.UserUtils;
 import com.immunology.model.Patient;
+import com.immunology.model.ui.MedicalCardForm;
 
 
 @Controller
@@ -41,7 +42,9 @@ public class PatientController {
 	public String getRegistrateNewPatient(Patient patient, Model model, HttpServletResponse response) {	
 		User user = UserUtils.getCurrentUser();
 		patient.addUser(userService.getUserByLogin(user.getUsername()));
-		patient.setMedicalCard(medicalCardService.getMedicalCardTemplate());
+		MedicalCardForm medicalCard = medicalCardService.getMedicalCardTemplate();
+		medicalCard.setId(0);
+		patient.setMedicalCard(medicalCard);
 		patientService.updatePatient(patient);
 		return "redirect:/cabinet";
 	}

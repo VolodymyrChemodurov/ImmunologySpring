@@ -43,7 +43,6 @@ public class PatientController {
 		User user = UserUtils.getCurrentUser();
 		patient.addUser(userService.getUserByLogin(user.getUsername()));
 		MedicalCardForm medicalCard = medicalCardService.getMedicalCardTemplate();
-		medicalCard.setId(0);
 		patient.setMedicalCard(medicalCard);
 		patientService.updatePatient(patient);
 		return "redirect:/cabinet";

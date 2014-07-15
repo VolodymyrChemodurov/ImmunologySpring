@@ -11,19 +11,22 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.immunology.logic.utils.ElementDeserializer;
 import com.immunology.model.ui.elements.DropDown;
 import com.immunology.model.ui.elements.Panel;
 import com.immunology.model.ui.elements.TextBox;
 
 @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.PROPERTY, property="objectType")
 @JsonSubTypes({
-        @JsonSubTypes.Type(value=Panel.class),
         @JsonSubTypes.Type(value=DropDown.class),
         @JsonSubTypes.Type(value=TextBox.class)
 })
+
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Element {
@@ -42,6 +45,7 @@ public abstract class Element {
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "panel_id")
+	//@JsonBackReference("elements_reference")
 	private Panel panel;
 
 	public String getName() {
@@ -66,14 +70,6 @@ public abstract class Element {
 
 	public void setPanel(Panel panel) {
 		this.panel = panel;
-	}
-
-	public int getOrder() {
-		return place;
-	}
-
-	public void setOrder(int order) {
-		this.place = order;
 	}
 
 	public int getPlace() {

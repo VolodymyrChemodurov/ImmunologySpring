@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.immunology.logic.service.FormServive;
 import com.immunology.logic.service.MedicalCardFormService;
 import com.immunology.model.ui.Element;
@@ -35,10 +34,10 @@ public class FormController {
 	@RequestMapping(value = "/medical_card/{id}", method = RequestMethod.GET)
 	public @ResponseBody MedicalCardForm getMedicalForm(@PathVariable("id") long id) throws JsonProcessingException {
 		MedicalCardForm form = medicalCardService.getById(id);
-		ObjectMapper mapper = new ObjectMapper();
-		String result = mapper.writeValueAsString(form);
-		LOG.info(result);
-		medicalCardFormService.updateMedicalCardTemplate(form);
+//		ObjectMapper mapper = new ObjectMapper();
+//		String result = mapper.writeValueAsString(form);
+//		LOG.info(result);
+//		medicalCardFormService.updateMedicalCardTemplate(form);
 		return form;
 	}
 

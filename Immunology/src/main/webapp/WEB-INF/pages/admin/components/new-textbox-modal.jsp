@@ -8,19 +8,14 @@
       </div>
       <div class="modal-body">
        	
-			<select name="panelNames" id="panelNameForTextBox"  class="form-control">
-				<option>Android</option>
-				<option>Sailfish OS</option>
-				<option>CyanogenMod</option>
-				<option>FirefoxOS</option>
-				<option>MeeGo</option>
+			<select name="panel-names" class="form-control">
 			</select>
 				<label class="col-sm-12 control-label">Set TextBox Name:</label>
 			<input type="text" class="form-control"  id="textBoxName" />
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick='createTextBox($("#panelNameForTextBox").val(),$("#textBoxName").val())'>Save changes</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
       </div>
     </div>
   </div>

@@ -15,7 +15,7 @@ function renderForm(patientId, form) {
 			formObj = response;
 			renderMedicalForm(response);
 			$(form).html(formStructure);
-			renderDropDownStyle();
+//			renderDropDownStyle();
 			prepareForm(formObj);
 		},
 		error: function (request, status, error) {
@@ -62,7 +62,7 @@ function renderMedcardFields(form){
 	
 	formStructure += '<fieldset class= "panel-fieldset">';
 	formStructure += 	'<div class = "col-sm-3 panel-title-block" >';
-	formStructure +=			'<div class = "com-sm-7 med_panel_title_div disable" >' + "Дата Створення" + '</div>';
+	formStructure +=			'<div class = "com-sm-7 med_panel_title_div disable" >' + "Ð”Ð°Ñ‚Ð° Ð¡Ñ‚Ð²Ð¾Ñ€ÐµÐ½Ð½Ñ�" + '</div>';
 	formStructure +=		'</div>';
 	formStructure +=		'<div class = "col-sm-9">';
 	formStructure += 		'<div class="col-sm-5">';
@@ -72,7 +72,7 @@ function renderMedcardFields(form){
 	formStructure += 		'<div class="col-sm-7"></div></div>';
 	
 	formStructure += 	'<div class = "col-sm-3 panel-title-block">';
-	formStructure +=			'<div class = "com-sm-7 med_panel_title_div disable" >' + "Додаткова інформація" + '</div>';
+	formStructure +=			'<div class = "com-sm-7 med_panel_title_div disable" >' + "Ð”Ð¾Ð´Ð°Ñ‚ÐºÐ¾Ð²Ð° Ñ–Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ñ–Ñ�" + '</div>';
 	formStructure +=		'</div>';
 	formStructure +=		'<div class = "col-sm-9">';
 	formStructure += 			'<div class="col-sm-5">';
@@ -152,7 +152,7 @@ function renderDropDown(element,subElement, panelIndex, elementIndex, subElement
 		//Collect all id's for render DropDown styles;
 	dropDownIdArr.push("panel_"+panelIndex+"_dropDownElement_"+elementIndex+"_"+ subElementIndex);
 	formStructure += '<div class="col-sm-12">';
-	formStructure +=	'<select class="populate placeholder dropdown_select"  id="'
+	formStructure +=	'<select class="form-control"  id="'
 						+ 'panel_'+panelIndex+'_dropDownElement_'+elementIndex+'_'+ subElementIndex + '" onchange="storeDropDownValue('+panelIndex+','+elementIndex+','+subElementIndex+')" >';
 			$(Object.keys(element.values)).each(function(key, optionElement) {
 				if(key == element.choosed){

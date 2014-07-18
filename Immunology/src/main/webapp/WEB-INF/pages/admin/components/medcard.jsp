@@ -86,10 +86,7 @@ jsonObj["panels"] = new Array();
 
 var dropDownValues = new Array();
 
-$(document).ready(function() {
-	
-	
-});
+
 function renderPreviewMedForm(){
 	
 	renderMedicalForm(jsonObj);

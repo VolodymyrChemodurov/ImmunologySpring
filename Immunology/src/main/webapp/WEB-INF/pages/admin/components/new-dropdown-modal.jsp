@@ -7,15 +7,10 @@
         <h4 class="modal-title" id="myModalLabel">Modal title</h4>
       </div>
       <div class="modal-body">
-			<select name="panelNames" id="panelNameForDropDown"  class="form-control" style="margin: 5px;">
-				<option>Android</option>
-				<option>Sailfish OS</option>
-				<option>CyanogenMod</option>
-				<option>FirefoxOS</option>
-				<option>MeeGo</option>
+			<select name="panel-names" class="form-control" style="margin: 5px;">
+			
 			</select>
 			<input type="text" class="form-control"  id="dropdownName"  placeholder="Dropdown title"  style="margin: 5px;"/>
-			
 				<select multiple="" class="form-control" id="dropdownValues"  style="margin: 5px;">
 				</select>
 			

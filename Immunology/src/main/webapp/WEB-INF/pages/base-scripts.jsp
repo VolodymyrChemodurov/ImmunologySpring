@@ -21,3 +21,5 @@
 <script src="${param.baseURL}/resources/js/user-page/js/devoops.js"></script>
 <script src="${param.baseURL}/resources/js/plugins/form-builder.js"></script>
 <script src="${param.baseURL}/resources/js/plugins/field-handler.js"></script>
+<!-- ADMIN page -->
+<script src="${param.baseURL}/resources/js/admin-page/medCardConstructor.js"></script>

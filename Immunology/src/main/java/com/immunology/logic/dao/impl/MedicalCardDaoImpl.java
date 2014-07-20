@@ -5,6 +5,9 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
@@ -25,6 +28,9 @@ public class MedicalCardDaoImpl implements MedicalCardFormDao{
 
 	private static final String MEDICAL_FORM_TEMPLATE_COLLECTION = "medicalForm";
 	private static final Logger LOG = LoggerFactory.getLogger(MedicalCardDaoImpl.class);
+	
+	@PersistenceContext
+	EntityManager entityManager;
 	
 	@Autowired
 	private MongoDbFactory mongoFactory;
@@ -62,5 +68,12 @@ public class MedicalCardDaoImpl implements MedicalCardFormDao{
 			 medicalForms.add(iterator.next());
 		 }
 		 return medicalForms;
+	}
+
+	public MedicalCardForm getMedicalCardByPatientId(long id) {
+		TypedQuery<MedicalCardForm> query = entityManager.createQuery("SELECT patient.medicalCard FROM Patient patient WHERE patient.id = :patient_id", MedicalCardForm.class);
+		query.setParameter("patient_id", id);
+		List<MedicalCardForm> medicalCards = query.getResultList();
+		return medicalCards.size() > 0 ? medicalCards.get(0) : null;
 	}
 }

@@ -11,4 +11,6 @@ public interface MedicalCardFormService {
 	MedicalCardForm getMedicalCardTemplate();
 	
 	boolean updateMedicalCardTemplate(MedicalCardForm template);
+	
+	MedicalCardForm getMedicalCardByPatientId(long id);
 }

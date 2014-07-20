@@ -1,9 +1,9 @@
 package com.immunology.logic.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,8 +14,6 @@ import com.immunology.logic.service.MedicalCardFormService;
 import com.immunology.logic.service.UserService;
 import com.immunology.logic.utils.UserUtils;
 import com.immunology.model.ui.MedicalCardForm;
-
-import org.springframework.security.core.userdetails.User;
 
 @Controller
 @RequestMapping(value = "/admin")

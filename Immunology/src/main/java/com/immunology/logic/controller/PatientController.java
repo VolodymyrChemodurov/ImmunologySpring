@@ -1,5 +1,7 @@
 package com.immunology.logic.controller;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +19,6 @@ import com.immunology.logic.service.UserService;
 import com.immunology.logic.utils.UserUtils;
 import com.immunology.model.Patient;
 import com.immunology.model.ui.MedicalCardForm;
-
 
 @Controller
 @RequestMapping(value = "/cabinet/patient")
@@ -43,6 +44,7 @@ public class PatientController {
 		User user = UserUtils.getCurrentUser();
 		patient.addUser(userService.getUserByLogin(user.getUsername()));
 		MedicalCardForm medicalCard = medicalCardService.getMedicalCardTemplate();
+		medicalCard.setCreationDate(new Date());
 		patient.setMedicalCard(medicalCard);
 		patientService.updatePatient(patient);
 		return "redirect:/cabinet";
@@ -57,7 +59,6 @@ public class PatientController {
 	@RequestMapping(value = "/id={number}", method = RequestMethod.GET)
 	public String showPatient(ModelMap model, @PathVariable("number") int number){
 		model.addAttribute("patient", patientService.getPatientById(number));
-		
 		return "user/components/patient-info";
 	}
 	

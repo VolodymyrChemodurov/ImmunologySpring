@@ -27,17 +27,12 @@ public class FormController {
 	private FormServive formServive;
 	@Autowired
 	private MedicalCardFormService medicalCardFormService;
-
 	@Autowired
 	private MedicalCardFormService medicalCardService;
 
 	@RequestMapping(value = "/medical_card/{id}", method = RequestMethod.GET)
 	public @ResponseBody MedicalCardForm getMedicalForm(@PathVariable("id") long id) throws JsonProcessingException {
-		MedicalCardForm form = medicalCardService.getById(id);
-//		ObjectMapper mapper = new ObjectMapper();
-//		String result = mapper.writeValueAsString(form);
-//		LOG.info(result);
-//		medicalCardFormService.updateMedicalCardTemplate(form);
+		MedicalCardForm form = medicalCardService.getMedicalCardByPatientId(id);
 		return form;
 	}
 

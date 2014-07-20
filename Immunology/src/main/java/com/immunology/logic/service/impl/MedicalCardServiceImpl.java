@@ -32,6 +32,10 @@ public class MedicalCardServiceImpl implements MedicalCardFormService{
 	public boolean updateMedicalCardTemplate(MedicalCardForm template) {
 		return medicalCardDao.updateMedicalCardFormTemplate(template);
 	}
+
+	public MedicalCardForm getMedicalCardByPatientId(long id) {
+		return medicalCardDao.getMedicalCardByPatientId(id);
+	}
 	
 	
 }

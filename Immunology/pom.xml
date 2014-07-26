@@ -273,8 +273,8 @@
 							</goals>
 							<configuration>
 								<srcFiles>
-									<srcFile>src\main\changelog\roles.sql</srcFile>
-									<srcFile>src\main\changelog\test_data_ua.sql</srcFile>
+									<srcFile>src\main\data_backups\roles.sql</srcFile>
+									<srcFile>src\main\data_backups\test_data_ua.sql</srcFile>
 								</srcFiles>
 							</configuration>
 						</execution>

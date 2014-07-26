@@ -1,7 +1,16 @@
-var container;
+﻿var container;
 var formStructure = "";
 var dropDownIdArr = [];
 var formObj = [];
+
+constants = {
+		date: "Дата створення",	
+		addition: "Додаткова інформація"
+};
+
+	
+
+
 
 function renderForm(patientId, form) {
 	container = form;
@@ -62,7 +71,7 @@ function renderMedcardFields(form){
 	
 	formStructure += '<fieldset class= "panel-fieldset">';
 	formStructure += 	'<div class = "col-sm-3 panel-title-block" >';
-	formStructure +=			'<div class = "com-sm-7 med_panel_title_div disable" >' + "Ð”Ð°Ñ‚Ð° Ð¡Ñ‚Ð²Ð¾Ñ€ÐµÐ½Ð½Ñ�" + '</div>';
+	formStructure +=			'<div class = "com-sm-7 med_panel_title_div disable" >' + constants.date + '</div>';
 	formStructure +=		'</div>';
 	formStructure +=		'<div class = "col-sm-9">';
 	formStructure += 		'<div class="col-sm-5">';
@@ -72,7 +81,7 @@ function renderMedcardFields(form){
 	formStructure += 		'<div class="col-sm-7"></div></div>';
 	
 	formStructure += 	'<div class = "col-sm-3 panel-title-block">';
-	formStructure +=			'<div class = "com-sm-7 med_panel_title_div disable" >' + "Ð”Ð¾Ð´Ð°Ñ‚ÐºÐ¾Ð²Ð° Ñ–Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ñ–Ñ�" + '</div>';
+	formStructure +=			'<div class = "com-sm-7 med_panel_title_div disable" >' + constants.addition + '</div>';
 	formStructure +=		'</div>';
 	formStructure +=		'<div class = "col-sm-9">';
 	formStructure += 			'<div class="col-sm-5">';

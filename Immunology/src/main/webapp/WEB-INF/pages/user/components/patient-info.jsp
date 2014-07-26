@@ -10,6 +10,29 @@
 </div>
 
 <div class="row">
+<div class="col-xs-12">
+		<div class="box">
+			<div class="box-header">
+				<div class="box-name">
+					 <span>Виберіть симптом:</span>
+				</div>
+				<div class="no-move"></div>
+			</div>
+				<div class="box-content" style="display: list-item;">
+						<div class="col-sm-9">
+							<select id="syndrom" class="form-control">
+							</select>
+						</div>
+						<div class="col-sm-3">
+							<button type="button" class="btn btn-default"><i class="fa fa-arrow-circle-down"></i> Вибрати</button>
+						
+						</div>
+				</div>
+			</div>
+		</div>
+</div>
+
+<div class="row">
 	<div class="col-xs-12">
 		<div class="box">
 			<div class="box-header">
@@ -24,7 +47,7 @@
 					<ul>
 						<li><a href="#tabs-1">Профіль</a></li>
 						<li><a href="#tabs-2">Медична картка</a></li>
-						<li><a href="#tabs-3">Інше</a></li>
+						<li><a href="#tabs-3">Анамнестичні дані</a></li>
 					</ul>
 					<div id="tabs-1">
 						<jsp:include

@@ -40,14 +40,14 @@
 				    </a>
 				  </li>
 				   <li class="active">
-				    <a href="#" data-toggle="modal" data-target="#create-textbox" onclick="renderPanelNames();">
+				    <a href="#" data-toggle="modal" data-target="#create-textbox">
 				      <span class="badge pull-right">0</span>
 				      Create TextBox
 				    </a>
 				  </li>
 				</ul>
 				<div class="col-sm-5" style="margin-top: 5px;">
-					<button type="button"  class="btn btn-default btn-lg" onclick="renderPreviewMedForm();"> Save & Show</button>
+					<button type="button" name="save-button"  class="btn btn-default btn-lg" onclick="renderPreviewMedForm()"> Save & Show</button>
 				</div>
 
 			</div>
@@ -79,88 +79,57 @@
 </div>
 	
 <script type="text/javascript">
-var jsonObj = [];
-jsonObj["creationDate"] = "";
-jsonObj["additionInfo"] = "";
-jsonObj["panels"] = new Array();
+// var jsonObj = [];
+// jsonObj["creationDate"] = "";
+// jsonObj["additionInfo"] = "";
+// jsonObj["panels"] = new Array();
 
-var dropDownValues = new Array();
+// var dropDownValues = new Array();
 
 
-function renderPreviewMedForm(){
+// function renderPreviewMedForm(){
 	
-	renderMedicalForm(jsonObj);
-	$('#container').html(formStructure);
-	renderDropDownStyle();
-	//prepareForm(jsonObj);
+// 	renderMedicalForm(jsonObj);
+// 	$('#container').html(formStructure);
+// 	renderDropDownStyle();
+// 	//prepareForm(jsonObj);
 	
-}
-function createPanel(title){
-	panel = [];
-	panel["name"] = title;
-	panel["checked"] = false;
-	panel["elements"] = [];
-	jsonObj.panels.push(panel); 
-	renderPanelNames();
+// }		
 	
-}
-function renderPanelNames(){
-	panerNamesPreview ="";
-	$(jsonObj.panels).each(function(index, panel) {
-		panerNamesPreview += '<option>' + panel.name + '</option>';
-	});
-	$("select[name = 'panelNames']").each(function() {
-		 $( this).html(panerNamesPreview);
-		 console.log($( this));
-	});
-	
-	
-	
-}
-function createTextBox(panelName, textBoxTitle){
-	textBox = [];
-	textBox["name"] = textBoxTitle;
-	textBox["checked"] = false;
-	textBox["objectType"] = "TextBox";
-	$(jsonObj.panels).each(function(index, panel) {
-		console.log(panel.name + " - " + panelName);
-		if(panel.name == panelName){
-			jsonObj.panels[index].elements.push(textBox);
-		}
-	});
-	
-}
-function createDropDown(panelNameInputId,dropDownTitleInputId){
-	var panelTitle = $("#"+panelNameInputId).val();
-	var dropDownTitle = $("#"+ panelNameInputId).val();
-	var dropDown = [];
-	
-	console.log(panelNameInputId+" - "+dropDownTitleInputId);
-	
-	dropDown["name"]=dropDownTitle;
-	dropDown["checked"] = false;
-	dropDown["objectType"] ="DropDown";
-	dropDown["values"] = dropDownValues;
-	dropDownValues = [];
-	
-	$(jsonObj.panels).each(function(index, panel) {
-		if(panel.name == panelTitle){
-			alert();
-			jsonObj.panels[index].elements.push(dropDown);
-		}
-	});
-	
-}
 
-function addToDropDownFromInput(dropDownId,inputId){
-	var dropDown = $("#"+dropDownId);
-	var input = $("#"+ inputId);
 	
-	dropDownValues.push(input.val());
+// }
+// function createDropDown(panelNameInputId,dropDownTitleInputId){
+// 	var panelTitle = $("#"+panelNameInputId).val();
+// 	var dropDownTitle = $("#"+ panelNameInputId).val();
+// 	var dropDown = [];
 	
-	dropDown.html(dropDown.html() + '<option>' + input.val() + '</option>');
-	input.val("");
-}
+// 	console.log(panelNameInputId+" - "+dropDownTitleInputId);
+	
+// 	dropDown["name"]=dropDownTitle;
+// 	dropDown["checked"] = false;
+// 	dropDown["objectType"] ="DropDown";
+// 	dropDown["values"] = dropDownValues;
+// 	dropDownValues = [];
+	
+// 	$(jsonObj.panels).each(function(index, panel) {
+// 		if(panel.name == panelTitle){
+// 			alert();
+// 			jsonObj.panels[index].elements.push(dropDown);
+// 		}
+// 	});
+	
+// }
+
+// function addToDropDownFromInput(dropDownId,inputId){
+// 	var dropDown = $("#"+dropDownId);
+// 	var input = $("#"+ inputId);
+	
+// 	dropDownValues.push(input.val());
+	
+// 	dropDown.html(dropDown.html() + '<option>' + input.val() + '</option>');
+// 	input.val("");
+// }
 
 
 

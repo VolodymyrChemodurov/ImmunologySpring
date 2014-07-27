@@ -8,14 +8,17 @@
       </div>
       <div class="modal-body">
        	
-			<select name="panel-names" class="form-control">
+			<select name="panel-names">
 			</select>
+			<select name="sub-panel-names">
+			</select>
+			
 				<label class="col-sm-12 control-label">Set TextBox Name:</label>
-			<input type="text" class="form-control"  id="textBoxName" />
+			<input type="text" class="form-control"  id="text-box-name" />
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+        <button type="button" class="btn btn-primary" id="save-textBox-button" data-dismiss="modal">Save changes</button>
       </div>
     </div>
   </div>

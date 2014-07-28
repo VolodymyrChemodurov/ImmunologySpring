@@ -13,17 +13,17 @@
 			<select name="sub-panel-names" style="margin: 5px;">
 			</select>
 			<input type="text" class="form-control"  id="dropdownName"  placeholder="Dropdown title"  style="margin: 5px;"/>
-			<select id="dropdownValues"  style="margin: 5px;">
+			<select multiple id="dropdownValues"  style="margin: 5px;">
 			</select>
 			
 			<input type="text" class="form-control"  id="dropdownElementValue" placeholder="Add new Value"  style="margin: 5px;"/>
 			<div class="col-sm-12" style="margin-top: 5px;">
-					<button class="btn btn-primary btn-lg" onclick="addToDropDownFromInput('dropdownValues','dropdownElementValue')">Add value</button>
+					<button id="add-value-button" class="btn btn-primary btn-lg">Add value</button>
 			</div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick='createDropDown("panelNameForDropDown","dropdownName")'>Save changes</button>
+        <button type="button" id="save-dropdown-button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
       </div>
     </div>
   </div>

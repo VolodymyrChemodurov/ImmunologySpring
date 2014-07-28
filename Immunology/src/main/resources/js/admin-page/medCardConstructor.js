@@ -90,6 +90,29 @@ function initEvents(){
 		
 	});
 	
+	$("#add-value-button").click(function(){
+		var value = $("#dropdownElementValue").val();
+		$("#dropdownElementValue").val("");
+		var valueSelect = $("#dropdownValues");
+		$(valueSelect).append("<option>"+value+"</option>");
+	});
+	
+	$("#save-dropdown-button").click(function(){
+		var divsWithValue =	$(".select2-search-choice").children("div");
+		var dropDownName = $("#dropdownName").val();
+		var root = $("#create-dropdown");
+		var selects = $(root).find("select");
+		var panelIndex = $(selects[0]).val();
+		var subPanelIndex =$(selects[1]).val();
+		var values = [];
+		
+		$(divsWithValue).each(function(index, element){
+			values[$(element).text()] = index;
+		});
+		
+		createDropDown(panelIndex,subPanelIndex,dropDownName,values);
+	});
+	
 	
 	
 	
@@ -125,6 +148,19 @@ function createTextBox(panelIndex,subPanelIndex,title){
  	}else{
  		medCardObject.panels[panelIndex].elements[subPanelIndex].elements.push(textBox);
  	}
+}
+function createDropDown(panelIndex,subPanelIndex,title,values){
+	var dropDown = [];
+ 	dropDown["name"]=title;
+ 	dropDown["checked"] = false;
+ 	dropDown["objectType"] ="DropDown";
+ 	dropDown["values"] = values;
+ 	if(parseInt(subPanelIndex) == -1){
+ 		medCardObject.panels[panelIndex].elements.push(dropDown);
+ 	}else{
+ 		medCardObject.panels[panelIndex].elements[subPanelIndex].elements.push(dropDown);
+ 	}
+ 	
 }
 
 

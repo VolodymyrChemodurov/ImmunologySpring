@@ -13,10 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.immunology.logic.service.FormServive;
 import com.immunology.logic.service.MedicalCardFormService;
-import com.immunology.model.ui.Element;
 import com.immunology.model.ui.Form;
 import com.immunology.model.ui.MedicalCardForm;
-import com.immunology.model.ui.elements.Panel;
 
 @Controller
 @RequestMapping(value = "/cabinet/patient/form")
@@ -36,27 +34,10 @@ public class FormController {
 		return form;
 	}
 
-	@RequestMapping(value = "/getForm", method = RequestMethod.POST)
-	public @ResponseBody
-	Form addNewWorker(@RequestBody MedicalCardForm jsonForm) {
-
-		LOG.info(jsonForm.toString());
-		for (Panel panel : jsonForm.getPanels()) {
-			panel.setForm(jsonForm);
-			for (Element element : panel.getElements()) {
-				element.setPanel(panel);
-				if(element.getClass() == Panel.class){
-					Panel subPanel = (Panel)element;
-					for (Element subElement :subPanel.getElements() ) {
-						subElement.setPanel(subPanel);
-					}
-				}
-			}
-			
-		}
-		LOG.info("Update  like Form "+ formServive.updateForm(jsonForm));
-		return jsonForm;
-
+	@RequestMapping(value = "/updateMedicalCard", method = RequestMethod.POST)
+	public @ResponseBody Form updateMedicalCard(@RequestBody MedicalCardForm medicalCard) {
+		LOG.info("Updating form:\n" + medicalCard);
+		return formServive.updateForm(medicalCard);
 	}
 
 }

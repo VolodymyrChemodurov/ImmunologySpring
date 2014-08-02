@@ -38,7 +38,7 @@ function sendForm(){
 	console.log(formObj);
 	$.ajax({
 	  type:"POST", 
-      url:"/Immunology/cabinet/patient/form/getForm",
+      url:"/Immunology/cabinet/patient/form/updateMedicalCard",
       data: JSON.stringify( formObj),
       contentType: "application/json; charset=utf-8",
       dataType: "json",

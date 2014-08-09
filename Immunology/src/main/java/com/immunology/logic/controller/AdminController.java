@@ -47,6 +47,11 @@ public class AdminController {
 	public void createUser(com.immunology.model.User user) {
 		userService.createUser(user);
 	}
+	@RequestMapping(value = "/anamnestic", method = RequestMethod.GET)
+	public ModelAndView getAnamnestic(ModelAndView model) {
+		model.setViewName("admin/components/anamnestic");
+		return model;
+	}
 	///ToDo:  Shoulde be change to get Templates
 	@RequestMapping(value = "/medical_card", method = RequestMethod.GET)
 	public @ResponseBody MedicalCardForm getMedicalForm() throws JsonProcessingException {

@@ -7,9 +7,10 @@
         <h4 class="modal-title" id="myModalLabel">Modal title</h4>
       </div>
       <div class="modal-body">
+      	<label class="col-sm-12 control-label">Set Panel Name:</label>
        	<select name="panel-names">
 		</select>
-		<label class="col-sm-12 control-label">Set Panel Name:</label>
+		<label class="col-sm-12 control-label">Set sub-Panel Name:</label>
 		<input type="text" class="form-control"  id="sub-panel-name" />
       </div>
       <div class="modal-footer">

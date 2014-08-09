@@ -7,11 +7,13 @@
         <h4 class="modal-title" id="myModalLabel">Modal title</h4>
       </div>
       <div class="modal-body">
+      		<label class="col-sm-12 control-label">Set Panel Name:</label>
 			<select name="panel-names" style="margin: 5px;">
-			
 			</select>
+			<label class="col-sm-12 control-label">Set sub-panel Name:</label>
 			<select name="sub-panel-names" style="margin: 5px;">
 			</select>
+			<label class="col-sm-12 control-label">Set DropDown Title:</label>
 			<input type="text" class="form-control"  id="dropdownName"  placeholder="Dropdown title"  style="margin: 5px;"/>
 			<select multiple id="dropdownValues"  style="margin: 5px;">
 			</select>

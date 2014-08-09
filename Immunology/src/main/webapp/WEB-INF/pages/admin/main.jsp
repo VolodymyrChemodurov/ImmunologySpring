@@ -24,7 +24,7 @@
 			<div id="sidebar-left" class="col-xs-2 col-sm-2">
 				<ul class="nav main-menu">
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle">
+						<a href="#" class="active dropdown-toggle">
 							<i class="fa fa-user"></i>
 						 	<span class="hidden-xs">Users</span>
 						</a>
@@ -33,11 +33,17 @@
 						</ul>
 					</li>
 					<li>
-					<a href="#" onclick="doAjaxGet('/medcard');" class="active ajax-link">
-						<i class="fa fa-dashboard"></i>
-						<span class="hidden-xs">Med.Card</span>
-					</a>
-				</li>
+						<a href="#" onclick="doAjaxGet('/medcard');" class="ajax-link">
+							<i class="fa fa-dashboard"></i>
+							<span class="hidden-xs">Medical Card</span>
+						</a>
+					</li>
+					<li>
+						<a href="#" data-toggle="modal" data-target="#select-syndrom-modal" class="ajax-link">
+							<i class="fa fa-dashboard"></i>
+							<span class="hidden-xs">Anamnestic data</span>
+						</a>
+					</li>
 				</ul>
 			</div>
 			
@@ -53,6 +59,10 @@
 			<jsp:include page="/WEB-INF/pages/admin/components/new-sub-panel-modal.jsp"></jsp:include>
 			<jsp:include page="/WEB-INF/pages/admin/components/new-textbox-modal.jsp"></jsp:include>
 			<jsp:include page="/WEB-INF/pages/admin/components/new-dropdown-modal.jsp"></jsp:include>
+			<jsp:include page="/WEB-INF/pages/admin/components/remove-element-modal.jsp"></jsp:include>
+			<!-- Anamnestic DATA -->
+			<jsp:include page="/WEB-INF/pages/admin/components/select-syndrom-modal.jsp"></jsp:include>
+			
 	</div>
 	
 	<jsp:include page="/WEB-INF/pages/base-scripts.jsp">

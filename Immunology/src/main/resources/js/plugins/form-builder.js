@@ -58,7 +58,9 @@ function sendForm(){
 	// Create structure of medical form
 function renderMedicalForm(form){
 	formStructure = '<form class="form-horizontal">';
-		renderMedcardFields(form);
+		if(form.objectType == "MedicalCardForm"){
+			renderMedcardFields(form);
+		}
 		$(form.panels).each(function(index, panel) {
 		renderPanel(panel, index);
 		});

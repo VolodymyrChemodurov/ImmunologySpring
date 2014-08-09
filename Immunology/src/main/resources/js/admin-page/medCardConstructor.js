@@ -1,17 +1,18 @@
 var getMedCardUrl = "/Immunology/admin/medical_card";
 var medCardObject = null;
 
-$(document).ready(function() {
-	init();
-	initEvents();
-});
-
 
 function init(){
 	getResouces();
 	console.log("->MED.CARD AFTER getResources");
 	console.log(medCardObject);
 	
+}
+function initAnamnestic(){
+	medCardObject = [];
+	medCardObject["objectType"] = "AnamnesticDataForm";
+	medCardObject["panels"] = [];
+	console.log(medCardObject);
 }
 
 function getResouces(){
@@ -52,7 +53,37 @@ function renderPreviewMedForm(){
 
 ///EVENTS
 
+function spClick(){
+	var parent = $("#remove-element");
+	
+	var panelSelect = $(parent).find("select[name=panel-names]");
+	var subPanelSelect = $(parent).find("select[name=sub-panel-names]");
+	
+	var panelIndex = parseInt($(panelSelect).val());
+	var subPanelIndex = parseInt($(subPanelSelect).val());
+	
+	var formElementSelect = $(parent).find("select[name=element-title]");
+
+		$(formElementSelect).html("<option value='-1'>- EMPTY -</option>");
+		if(subPanelIndex == -1){
+			$(medCardObject.panels[panelIndex].elements).each(function(index, element){
+				optionElement = $("<option>"+element.name+"</option>");
+				optionElement.val(index);
+				$(formElementSelect).append(optionElement); 
+		});
+		}else{
+			$(medCardObject.panels[panelIndex].elements[subPanelIndex].elements).each(function(index, element){
+				optionElement = $("<option>"+element.name+"</option>");
+				optionElement.val(index);
+				$(formElementSelect).append(optionElement); 
+			});
+		}
+		
+	
+};
+
 function initEvents(){
+
 	$("select[name=panel-names]").click(function(){
 		panelIndex = this.value;
 		var parent = $(this).parent("div");
@@ -69,6 +100,7 @@ function initEvents(){
 		$(subPanelSelect).append("<option value='-1'>- EMPTY -</option>");
 		
 	});
+	
 	$("#save-panel-button").click(function(){
 		panelName =  $("#panelName").val();
 		createPanel(panelName);
@@ -111,6 +143,29 @@ function initEvents(){
 		});
 		
 		createDropDown(panelIndex,subPanelIndex,dropDownName,values);
+	});
+	$("#remove-element-button").click(function(){
+		var parent = $("#remove-element");
+		
+		var panelSelect = $(parent).find("select[name=panel-names]");
+		var subPanelSelect = $(parent).find("select[name=sub-panel-names]");
+		var elementSelect = $(parent).find("select[name=sp-remove]");
+		
+		var panelIndex = parseInt($(panelSelect).val());
+		var subPanelIndex = parseInt($(subPanelSelect).val());
+		var elementIndex = parseInt($(elementSelect).val());
+		
+		if(subPanelIndex == -1){
+			medCardObject.panels.splice(panelIndex,1);
+		}else{
+			if(elementIndex == -1){
+				medCardObject.panels[panelIndex].elements.splice(subPanelIndex,1);
+			}else{
+				medCardObject.panels[panelIndex].elements[subPanelIndex].elements.splice(elementIndex,1);
+			}
+		}
+			
+		
 	});
 	
 	

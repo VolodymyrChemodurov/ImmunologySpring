@@ -45,6 +45,11 @@
 				      Create TextBox
 				    </a>
 				  </li>
+				  <li class="active">
+				    <a href="#" data-toggle="modal" style="background-color: #cc181e" data-target="#remove-element">
+				     	Remove Element
+				    </a>
+				  </li>
 				</ul>
 				<div class="col-sm-5" style="margin-top: 5px;">
 					<button type="button" name="save-button"  class="btn btn-default btn-lg" onclick="renderPreviewMedForm()"> Save & Show</button>
@@ -68,70 +73,11 @@
 			</div>
 		</div>
 	</div>
-	
-	
-	
-	
-
-	
-	
-	
 </div>
-	
 <script type="text/javascript">
-// var jsonObj = [];
-// jsonObj["creationDate"] = "";
-// jsonObj["additionInfo"] = "";
-// jsonObj["panels"] = new Array();
-
-// var dropDownValues = new Array();
-
-
-// function renderPreviewMedForm(){
-	
-// 	renderMedicalForm(jsonObj);
-// 	$('#container').html(formStructure);
-// 	renderDropDownStyle();
-// 	//prepareForm(jsonObj);
-	
-// }		
-	
-
-	
-// }
-// function createDropDown(panelNameInputId,dropDownTitleInputId){
-// 	var panelTitle = $("#"+panelNameInputId).val();
-// 	var dropDownTitle = $("#"+ panelNameInputId).val();
-// 	var dropDown = [];
-	
-// 	console.log(panelNameInputId+" - "+dropDownTitleInputId);
-	
-// 	dropDown["name"]=dropDownTitle;
-// 	dropDown["checked"] = false;
-// 	dropDown["objectType"] ="DropDown";
-// 	dropDown["values"] = dropDownValues;
-// 	dropDownValues = [];
-	
-// 	$(jsonObj.panels).each(function(index, panel) {
-// 		if(panel.name == panelTitle){
-// 			alert();
-// 			jsonObj.panels[index].elements.push(dropDown);
-// 		}
-// 	});
-	
-// }
-
-// function addToDropDownFromInput(dropDownId,inputId){
-// 	var dropDown = $("#"+dropDownId);
-// 	var input = $("#"+ inputId);
-	
-// 	dropDownValues.push(input.val());
-	
-// 	dropDown.html(dropDown.html() + '<option>' + input.val() + '</option>');
-// 	input.val("");
-// }
-
-
-
-
+$(document).ready(function() {
+	init();
+	initEvents();
+});
 </script>
+	

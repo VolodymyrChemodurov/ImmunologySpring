@@ -53,6 +53,7 @@ public class MedicalCardDaoImpl implements MedicalCardFormDao{
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			String result = mapper.writeValueAsString(form);
+			medicalForm.remove("{}");
 			medicalForm.insert(result);
 			saveResult = true;
 		} catch (JsonProcessingException e) {

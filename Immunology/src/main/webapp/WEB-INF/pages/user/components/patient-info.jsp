@@ -100,10 +100,7 @@
 		renderForm($('#patient_id').val(), $('#container'));
 
 		/////////////////////////////////
-		console.log("document ready");
-		$("#Мати_checkBox").click(function() {
-		    alert("click checkbox");
-		});
+		//console.log("document ready");
 		
 	});
 

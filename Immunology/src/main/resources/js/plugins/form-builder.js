@@ -19,6 +19,7 @@ function renderForm(patientId, form) {
 		url : "/Immunology/cabinet/patient/form/medical_card/" + patientId,
 		dataType : "json",
 		success : function(response) {
+			console.log("Start");
 			console.log(response);
 			
 			formObj = response;

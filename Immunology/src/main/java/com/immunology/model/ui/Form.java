@@ -14,6 +14,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -34,6 +35,7 @@ public abstract class Form {
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	@Column(name = "form_id")
+	@JsonIgnore
 	private long id;
 	
 	@Column(name = "form_name")

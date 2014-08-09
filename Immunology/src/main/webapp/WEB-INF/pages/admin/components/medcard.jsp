@@ -52,7 +52,7 @@
 				  </li>
 				</ul>
 				<div class="col-sm-5" style="margin-top: 5px;">
-					<button type="button" name="save-button"  class="btn btn-default btn-lg" onclick="renderPreviewMedForm()"> Save & Show</button>
+					<button type="button" name="save-button"  class="btn btn-default btn-lg"> Save & Show</button>
 				</div>
 
 			</div>

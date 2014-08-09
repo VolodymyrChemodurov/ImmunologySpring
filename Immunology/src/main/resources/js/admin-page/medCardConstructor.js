@@ -51,7 +51,24 @@ function renderPreviewMedForm(){
  	$('#container').html(formStructure);
  }
 
-///EVENTS
+function saveMedicalCard() {
+	$.ajax({
+		  type:"POST", 
+	      url:"/Immunology/cabinet/patient/form/save",
+	      data: JSON.stringify(medCardObject),
+	      contentType: "application/json; charset=utf-8",
+	      dataType: "json",
+	      success: function(response){
+	    	  console.log("Success Save");
+	      },
+		
+		error: function (request, status, error) {
+			alert(error);
+	    }});
+	
+}
+
+///START EVENTS
 
 function spClick(){
 	var parent = $("#remove-element");
@@ -136,7 +153,7 @@ function initEvents(){
 		var selects = $(root).find("select");
 		var panelIndex = $(selects[0]).val();
 		var subPanelIndex =$(selects[1]).val();
-		var values = [];
+		var values = {};
 		
 		$(divsWithValue).each(function(index, element){
 			values[$(element).text()] = index;
@@ -168,32 +185,46 @@ function initEvents(){
 		
 	});
 	
+	$("button[name=save-button]").click(function(){
+		console.log(medCardObject);
+		saveMedicalCard();
+	});
 	
 	
 	
 }
-
+///END EVENTS
 
 //////////MED.CARD ELEMENTS//////
 
 function createPanel(title){
- 	 panel = [];
+ 	panel = {};
+ 	//panel["@id"] = 99;
+ 	//panel["place"] = 99;
+ 	//panel["panel"] = null;
+ 	//panel["order"] = 99;
+ 	
+ 	
  	panel["name"] = title;
  	panel["checked"] = false;
+ 	panel["objectType"] = "Panel";
  	panel["elements"] = [];
+ 	
  	medCardObject.panels.push(panel); 
  	initPanelNames();
+ 	renderPreviewMedForm();
 }
 function createSubPanel(index,title){
-	subPanel = [];
+	subPanel = {};
 	subPanel["name"] =title;
 	subPanel["checked"] = false;
 	subPanel["objectType"] = "Panel";
 	subPanel["elements"] = [];
 	medCardObject.panels[index].elements.push(subPanel); 
+	renderPreviewMedForm();
 }
 function createTextBox(panelIndex,subPanelIndex,title){
- 	textBox = [];
+ 	textBox = {};
  	textBox["name"] = title;
  	textBox["checked"] = false;
  	textBox["objectType"] = "TextBox";
@@ -203,9 +234,10 @@ function createTextBox(panelIndex,subPanelIndex,title){
  	}else{
  		medCardObject.panels[panelIndex].elements[subPanelIndex].elements.push(textBox);
  	}
+ 	renderPreviewMedForm();
 }
 function createDropDown(panelIndex,subPanelIndex,title,values){
-	var dropDown = [];
+	var dropDown = {};
  	dropDown["name"]=title;
  	dropDown["checked"] = false;
  	dropDown["objectType"] ="DropDown";
@@ -215,6 +247,7 @@ function createDropDown(panelIndex,subPanelIndex,title,values){
  	}else{
  		medCardObject.panels[panelIndex].elements[subPanelIndex].elements.push(dropDown);
  	}
+ 	renderPreviewMedForm();
  	
 }
 

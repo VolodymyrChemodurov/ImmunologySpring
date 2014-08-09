@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -33,10 +34,11 @@ public abstract class Element {
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	@Column(name = "element_id")
+	@JsonIgnore
 	private long id;
-
+	
 	private String name;
-
+	
 	private int place;
 
 	private boolean checked;

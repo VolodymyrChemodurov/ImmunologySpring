@@ -55,7 +55,7 @@ public class AdminController {
 	///ToDo:  Shoulde be change to get Templates
 	@RequestMapping(value = "/medical_card", method = RequestMethod.GET)
 	public @ResponseBody MedicalCardForm getMedicalForm() throws JsonProcessingException {
-		MedicalCardForm form = medicalCardFormService.getById(1L);
+		MedicalCardForm form = medicalCardFormService.getMedicalCardTemplate();
 		return form;
 	}
 	

@@ -18,13 +18,11 @@ import com.immunology.model.ui.MedicalCardForm;
 
 @Controller
 @RequestMapping(value = "/cabinet/patient/form")
-public class FormController {
-	private static final Logger LOG = LoggerFactory.getLogger(FormController.class);
+public class MedicalCardController {
+	private static final Logger LOG = LoggerFactory.getLogger(MedicalCardController.class);
 
 	@Autowired
 	private FormServive formServive;
-	@Autowired
-	private MedicalCardFormService medicalCardFormService;
 	@Autowired
 	private MedicalCardFormService medicalCardService;
 
@@ -38,6 +36,11 @@ public class FormController {
 	public @ResponseBody Form updateMedicalCard(@RequestBody MedicalCardForm medicalCard) {
 		LOG.info("Updating form:\n" + medicalCard);
 		return formServive.updateForm(medicalCard);
+	}
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	public @ResponseBody boolean saveMedicaldCard(@RequestBody MedicalCardForm medicalCardForm){
+		LOG.info("SAVE  "+ medicalCardForm.toString());
+		return medicalCardService.updateMedicalCardTemplate(medicalCardForm);
 	}
 
 }

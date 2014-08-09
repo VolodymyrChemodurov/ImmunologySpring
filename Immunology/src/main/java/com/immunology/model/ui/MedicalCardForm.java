@@ -8,8 +8,11 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.immunology.logic.utils.CustomJsonDateDeserializer;
+import com.immunology.logic.utils.CustomJsonDateSerializer;
 
 @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.PROPERTY, property="objectType")
 @Entity
@@ -18,7 +21,8 @@ public class MedicalCardForm extends Form {
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="creation_date")
-	@JsonFormat(pattern="yyyy-MM-dd")
+	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
+	@JsonSerialize(using = CustomJsonDateSerializer.class)
 	private Date creationDate;
 	
 	@Column(name="additional_info")

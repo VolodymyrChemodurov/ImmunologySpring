@@ -49,6 +49,10 @@ public class Panel extends Element {
 		this.form = form;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "Panel [id=" + id + ", name=" + name + ", checked=" + checked + ", place=" + place
+				+ ", elements=" + elements + "]";
+	}
 
 }

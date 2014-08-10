@@ -40,7 +40,7 @@ public class PatientController {
     }
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String getRegistrateNewPatient(Patient patient, Model model, HttpServletResponse response) {	
+	public String createNewPatinet(Patient patient, Model model, HttpServletResponse response) {	
 		User user = UserUtils.getCurrentUser();
 		patient.addUser(userService.getUserByLogin(user.getUsername()));
 		MedicalCardForm medicalCard = medicalCardService.getMedicalCardTemplate();
@@ -52,7 +52,6 @@ public class PatientController {
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String updatePatient(Patient patient, Model model, HttpServletResponse response) {	
 		patientService.updatePatient(patient);
-		
 		return "redirect:/cabinet";
 	}
 	
@@ -69,8 +68,8 @@ public class PatientController {
 		Patient patient = patientService.getPatientById(number);
 		com.immunology.model.User user = userService.getUserByLogin(currentUser.getUsername());
 		
-			user.getPatients().add(patient);
-			userService.updateUser(user);
+		user.getPatients().add(patient);
+		userService.updateUser(user);
 		
 		return "redirect:/cabinet";
 	}

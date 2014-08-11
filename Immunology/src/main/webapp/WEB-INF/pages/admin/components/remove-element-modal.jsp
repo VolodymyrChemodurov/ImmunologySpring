@@ -12,9 +12,11 @@
 		</select>
 		<label class="col-sm-12 control-label">Set sub-Panel Name:</label>
 		<select id="sp-remove" name="sub-panel-names" onclick="spClick();">
+			<option value="-1">-EMPTY-</option>
 		</select>
 		<label class="col-sm-12 control-label">Set element Name:</label>
 		<select name="element-title">
+			<option value="-1">-EMPTY-</option>
 		</select>
       </div>
       <div class="modal-footer">

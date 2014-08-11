@@ -3,7 +3,7 @@
 		<ol class="breadcrumb">
 			<li><a href="index.html">Dashboard</a></li>
 			<li><a href="#">Forms</a></li>
-			<li><a href="#">Forms layouts</a></li>
+			<li><a href="#">Mediical Card</a></li>
 		</ol>
 	</div>
 </div>
@@ -18,30 +18,25 @@
 				<div class="no-move"></div>
 			</div>
 			<div class="box-content" style="height: 300px;">
-					<input type="text" style="margin-bottom: 5px;" class="form-control" name="firstName" id="firstName"  placeholder="Med.Card Title"/>
 				
 				<ul class="nav nav-pills nav-stacked">
 				  <li class="active">
 				    <a href="#" data-toggle="modal" data-target="#create-panel">
-				      <span class="badge pull-right">0</span>
 				      Create Panel
 				    </a>
 				  </li>
 				  <li class="active">
 				    <a href="#" data-toggle="modal" data-target="#create-sub-panel">
-				      <span class="badge pull-right">0</span>
 				      Create Sub-Panel
 				    </a>
 				  </li>
 				  <li class="active">
 				    <a href="#" data-toggle="modal" data-target="#create-dropdown">
-				      <span class="badge pull-right">0</span>
 				      Create DropDown
 				    </a>
 				  </li>
 				   <li class="active">
 				    <a href="#" data-toggle="modal" data-target="#create-textbox">
-				      <span class="badge pull-right">0</span>
 				      Create TextBox
 				    </a>
 				  </li>

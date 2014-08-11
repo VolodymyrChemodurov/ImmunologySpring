@@ -4,7 +4,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        <h4 class="modal-title" id="myModalLabel">Create new DropDpown</h4>
       </div>
       <div class="modal-body">
       		<label class="col-sm-12 control-label">Set Panel Name:</label>
@@ -15,6 +15,8 @@
 			</select>
 			<label class="col-sm-12 control-label">Set DropDown Title:</label>
 			<input type="text" class="form-control"  id="dropdownName"  placeholder="Dropdown title"  style="margin: 5px;"/>
+			
+			<label class="col-sm-12 control-label">DropDown Values:</label>
 			<select multiple id="dropdownValues"  style="margin: 5px;">
 			</select>
 			

@@ -100,7 +100,7 @@ function spClick(){
 };
 
 function initEvents(){
-
+	$("select[name=panel-names]").unbind("click");
 	$("select[name=panel-names]").click(function(){
 		panelIndex = this.value;
 		var parent = $(this).parent("div");
@@ -117,18 +117,24 @@ function initEvents(){
 		$(subPanelSelect).append("<option value='-1'>- EMPTY -</option>");
 		
 	});
-	
+	$("#save-panel-button").unbind("click");
 	$("#save-panel-button").click(function(){
 		panelName =  $("#panelName").val();
 		createPanel(panelName);
+		return false;
 	});
+	
+	$("#save-sub-panel-button").unbind("click");
 	$("#save-sub-panel-button").click(function(){
 		var subPanelName = $("#sub-panel-name").val();
 		var root = $("#create-sub-panel");
 		var panelSelect = $(root).find("select");
 		var panelIndex = panelSelect.val();
 		createSubPanel(panelIndex,subPanelName);
+		return false;
 	});
+	
+	$("#save-textBox-button").unbind("click");
 	$("#save-textBox-button").click(function(){
 		var textboxName = $("#text-box-name").val();
 		var root = $("#create-textbox");
@@ -136,16 +142,19 @@ function initEvents(){
 		var panelIndex = $(selects[0]).val();
 		var subPanelIndex =$(selects[1]).val();
 		createTextBox(panelIndex,subPanelIndex,textboxName);
-		
+		return false;
 	});
 	
+	$("#add-value-button").unbind("click");
 	$("#add-value-button").click(function(){
 		var value = $("#dropdownElementValue").val();
 		$("#dropdownElementValue").val("");
 		var valueSelect = $("#dropdownValues");
 		$(valueSelect).append("<option>"+value+"</option>");
+		return false;
 	});
 	
+	$("#save-dropdown-button").unbind("click");
 	$("#save-dropdown-button").click(function(){
 		var divsWithValue =	$(".select2-search-choice").children("div");
 		var dropDownName = $("#dropdownName").val();
@@ -160,7 +169,9 @@ function initEvents(){
 		});
 		
 		createDropDown(panelIndex,subPanelIndex,dropDownName,values);
+		return false;
 	});
+	$("#remove-element-button").unbind("click");
 	$("#remove-element-button").click(function(){
 		var parent = $("#remove-element");
 		
@@ -181,13 +192,15 @@ function initEvents(){
 				medCardObject.panels[panelIndex].elements[subPanelIndex].elements.splice(elementIndex,1);
 			}
 		}
-			
-		
+		renderPreviewMedForm();
+		return false;
 	});
 	
+	$("button[name=save-button]").unbind("click");
 	$("button[name=save-button]").click(function(){
 		console.log(medCardObject);
 		saveMedicalCard();
+		return false;
 	});
 	
 	

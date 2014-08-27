@@ -41,7 +41,7 @@
 						 <span class="hidden-xs">Мої пацієнти</span>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a class="ajax-link" href="#" onclick="doAjaxGet('patient/new');">Додати нового пацієнта</a></li>
+						<li><a class="ajax-link" href="#" onclick="doAjaxGet('patients/new');">Додати нового пацієнта</a></li>
 						<li><a class="ajax-link" href="#" onclick="doAjaxGet('patients/my');">Список моїх пацієнтів</a></li>
 					</ul>
 				</li>
@@ -59,8 +59,8 @@
 						 <span class="hidden-xs">Аналітика</span>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a class="ajax-link" href="#" onclick="doAjaxGet('analitic/block');">Аналітичний блок</a></li>
-						<li><a class="ajax-link" href="#" onclick="doAjaxGet('analitic/charts');">Діаграми</a></li>
+						<li><a class="ajax-link" href="#" onclick="doAjaxGet('cabinet/analitic/block');">Аналітичний блок</a></li>
+						<li><a class="ajax-link" href="#" onclick="doAjaxGet('cabinet/analitic/charts');">Діаграми</a></li>
 					</ul>
 				</li>
 
@@ -88,7 +88,7 @@
 function doAjaxGet(pageName) {
     $.ajax({
         type: "GET",
-        url: "/Immunology/cabinet/"+pageName,
+        url: "/Immunology/" + pageName,
         success: function(response) {
             $("#content").html(response);
         }
@@ -98,7 +98,7 @@ function doAjaxPost(pageName) {
 	console.info('doAjaxPost()');
     $.ajax({
         type: "POST",
-        url: "/Immunology/cabinet/"+pageName,
+        url: "/Immunology/" + pageName,
         success: function(response) {
             $("#content").html(response);
         }

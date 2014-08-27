@@ -16,7 +16,7 @@ function renderForm(patientId, form) {
 	container = form;
 	$.ajax({
 		type : "get",
-		url : "/Immunology/cabinet/patient/form/medical_card/" + patientId,
+		url : "/Immunology/patients/" + patientId + "/medical_card",
 		dataType : "json",
 		success : function(response) {
 			console.log("Start");
@@ -39,7 +39,7 @@ function sendForm(){
 	console.log(formObj);
 	$.ajax({
 	  type:"POST", 
-      url:"/Immunology/cabinet/patient/form/updateMedicalCard",
+      url:"/Immunology/patients/medical_card/update",
       data: JSON.stringify( formObj),
       contentType: "application/json; charset=utf-8",
       dataType: "json",

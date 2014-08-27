@@ -17,7 +17,7 @@ import com.immunology.model.ui.Form;
 import com.immunology.model.ui.MedicalCardForm;
 
 @Controller
-@RequestMapping(value = "/cabinet/patient/form")
+@RequestMapping(value = "/patients")
 public class MedicalCardController {
 	private static final Logger LOG = LoggerFactory.getLogger(MedicalCardController.class);
 
@@ -26,20 +26,21 @@ public class MedicalCardController {
 	@Autowired
 	private MedicalCardFormService medicalCardService;
 
-	@RequestMapping(value = "/medical_card/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{id}/medical_card", method = RequestMethod.GET)
 	public @ResponseBody MedicalCardForm getMedicalForm(@PathVariable("id") long id) throws JsonProcessingException {
 		MedicalCardForm form = medicalCardService.getMedicalCardByPatientId(id);
 		return form;
 	}
 
-	@RequestMapping(value = "/updateMedicalCard", method = RequestMethod.POST)
+	@RequestMapping(value = "/medical_card/update", method = RequestMethod.POST)
 	public @ResponseBody Form updateMedicalCard(@RequestBody MedicalCardForm medicalCard) {
-		LOG.info("Updating form:\n" + medicalCard);
+		LOG.info("Updating\n" + medicalCard);
 		return formServive.updateForm(medicalCard);
 	}
-	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	
+	@RequestMapping(value = "/medical_card", method = RequestMethod.POST)
 	public @ResponseBody boolean saveMedicaldCard(@RequestBody MedicalCardForm medicalCardForm){
-		LOG.info("SAVE  "+ medicalCardForm.toString());
+		LOG.info("Saving\n" + medicalCardForm.toString());
 		return medicalCardService.updateMedicalCardTemplate(medicalCardForm);
 	}
 

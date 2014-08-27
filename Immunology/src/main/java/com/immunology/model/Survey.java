@@ -14,6 +14,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.immunology.model.ui.ClinicalManifestationsForm;
 import com.immunology.model.ui.ComplaintsForm;
 import com.immunology.model.ui.LaboratoryDataForm;
@@ -38,6 +39,7 @@ public class Survey {
 
 	@ManyToOne
 	@JoinColumn(name = "disease_id")
+	@JsonBackReference("surveys_reference")
 	private Syndrome disease;
 	
 	@OneToOne

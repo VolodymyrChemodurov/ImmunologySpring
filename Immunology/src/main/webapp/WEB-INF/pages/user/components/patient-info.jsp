@@ -15,7 +15,7 @@
 		<div class="box">
 			<div class="box-header">
 				<div class="box-name">
-					 <span>Виберіть симптом:</span>
+					 <span>Виберіть синдром:</span>
 				</div>
 				<div class="no-move"></div>
 			</div>

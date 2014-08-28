@@ -8,6 +8,8 @@ public interface SyndromeDao {
 
 	Syndrome getPatientSyndrome(Long patientId, String syndromeName);
 	
+	Syndrome getUserSyndromeTemplate(Long userId, String syndromeName);
+	
 	Syndrome saveSyndrome(Syndrome syndrome);
 	
 	List<String> getPatientSyndromeNames(Long patinetId);

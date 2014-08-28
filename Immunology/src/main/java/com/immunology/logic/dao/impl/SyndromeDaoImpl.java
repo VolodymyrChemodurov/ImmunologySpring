@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
@@ -23,6 +24,9 @@ public class SyndromeDaoImpl implements SyndromeDao {
 
 	private static final String SYNDROME_TEMPLATE_COLLECTION = "syndromeTemplates";
 	private static final String GET_USER_TEMPLATES = "{'users.id':%s}";
+	private static final String GET_USER_TEMPLATE_BY_NAME = "{'users.id':%s, 'name':'%s'}";
+	private static final String GET_PATIENT_SYNDROME = "SELECT syndrome FROM Syndrome syndrome WHERE syndrome.name = :name AND syndrome.patient.id = :id";
+	
 	@PersistenceContext
 	EntityManager entityManager;
 	
@@ -38,10 +42,19 @@ public class SyndromeDaoImpl implements SyndromeDao {
 	}
 	
 	public Syndrome getPatientSyndrome(Long patientId, String syndromeName) {
-		// TODO Auto-generated method stub
-		return null;
+		TypedQuery<Syndrome> query = entityManager.createQuery(GET_PATIENT_SYNDROME, Syndrome.class)
+				.setParameter("name", syndromeName).setParameter("id", patientId);
+		List<Syndrome> syndromes = query.getResultList();
+		return syndromes.size() > 0 ? syndromes.get(0) : null;
 	}
 
+	public Syndrome getUserSyndromeTemplate(Long userId, String syndromeName) {
+		Iterable<Syndrome> templates = syndromeCollection.find(String.format(GET_USER_TEMPLATE_BY_NAME, userId, syndromeName))
+				.projection("{_id: 0}").as(Syndrome.class);
+		List<Syndrome> syndromes = convertToList(templates);
+		return syndromes.size() > 0 ? syndromes.get(0) : null;
+	}
+	
 	public Syndrome saveSyndrome(Syndrome syndrome) {
 		// TODO Auto-generated method stub
 		return null;

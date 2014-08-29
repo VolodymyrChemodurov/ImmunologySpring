@@ -105,7 +105,9 @@
 
 		/////////////////////////////////
 		//console.log("document ready");
-		
+		// New Form Builder //
+		//1) ID Container div 2) Patient Id 3) Form Type;
+		//Builder.init('#container',$('#patient_id').val(), Builder.TYPE.MED_CARD);
 	});
 
 

@@ -1,6 +1,9 @@
 var getMedCardUrl = "/Immunology/admin/medical_card";
 var medCardObject = null;
-
+var order = {
+	panel: 0,
+	element: 0
+};
 
 function init(){
 	getResouces();
@@ -27,6 +30,7 @@ function getResouces(){
 			if(medCardObject != null){
 				initPanelNames();
 				renderPreviewMedForm();
+				initOrderValues(medCardObject);
 			}
 		},
 		error: function (request, status, error) {
@@ -67,6 +71,14 @@ function saveMedicalCard() {
 	    }});
 	
 }
+function initOrderValues(form){
+	$(medCardObject.panels).each(function(index, panel){
+		if(panel.order > order.panel){
+			order.panel = panel.order;
+		}
+	});
+	
+}
 
 ///START EVENTS
 
@@ -105,13 +117,24 @@ function initEvents(){
 		panelIndex = this.value;
 		var parent = $(this).parent("div");
 		var subPanelSelect = $(parent).find("select[name=sub-panel-names]");
+		var elementPanelSelect = $(parent).find("select[name=element-title]");
 		$(subPanelSelect).html("");
+		if(elementPanelSelect != null){
+			elementPanelSelect.html("");
+		}
 		$(medCardObject.panels[parseInt(panelIndex)].elements).each(function(index, element){
 			if(element.objectType == "Panel"){
 				optionElement = $("<option>"+element.name+"</option>");
 				optionElement.val(index);
 				$(subPanelSelect).append(optionElement); 
+			}else{
+				if(elementPanelSelect != null){
+					optionElement = $("<option>"+element.name+"</option>");
+					optionElement.val(index);
+					$(elementPanelSelect).append(optionElement); 
+				}
 			}
+			
 		});
 		
 		$(subPanelSelect).append("<option value='-1'>- EMPTY -</option>");
@@ -188,6 +211,7 @@ function initEvents(){
 			}
 		}
 		renderPreviewMedForm();
+		initPanelNames();
 	});
 	
 	$("button[name=save-button]").unbind("click");
@@ -205,16 +229,14 @@ function initEvents(){
 
 function createPanel(title){
  	panel = {};
- 	//panel["@id"] = 99;
- 	//panel["place"] = 99;
- 	//panel["panel"] = null;
- 	//panel["order"] = 99;
- 	
  	
  	panel["name"] = title;
  	panel["checked"] = false;
  	panel["objectType"] = "Panel";
+ 	order.panel = order.panel + 1;
+ 	panel["order"] = order.panel;
  	panel["elements"] = [];
+ 	
  	
  	medCardObject.panels.push(panel); 
  	initPanelNames();

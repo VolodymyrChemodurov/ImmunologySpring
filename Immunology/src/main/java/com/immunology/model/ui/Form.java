@@ -1,5 +1,7 @@
 package com.immunology.model.ui;
 
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -42,7 +44,7 @@ public abstract class Form {
 	@OneToMany(mappedBy = "form", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@OrderBy("place ASC")
 	@JsonManagedReference("panels_reference")
-	private Set<Panel> panels;
+	private List<Panel> panels;
 
 	public long getId() {
 		return id;
@@ -60,11 +62,11 @@ public abstract class Form {
 		this.name = name;
 	}
 	
-	public Set<Panel> getPanels() {
+	public List<Panel> getPanels() {
 		return panels;
 	}
 	
-	public void setPanels(Set<Panel> panels) {
+	public void setPanels(List<Panel> panels) {
 		this.panels = panels;
 	}
 

@@ -1,5 +1,6 @@
 package com.immunology.logic.service.impl;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,7 @@ public class MedicalCardServiceImpl implements MedicalCardFormService{
 	}
 	
 	private void setTemplatesReferences(MedicalCardForm template) {
-		Set<Panel> panels = template.getPanels();
+		List<Panel> panels = template.getPanels();
 		for(Panel panel: panels) {
 			setPanelReferences(panel);
 		}

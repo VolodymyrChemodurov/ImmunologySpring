@@ -55,7 +55,7 @@
 								<td class="custom-size">
 									<c:if test="${!patient.value}">
 										<button class="btn btn-primary btn-table"
-											onclick="doAjaxPost('patient/id=${patient.key.id}')">Додати</button>
+											onclick="doAjaxPost('patients/${patient.key.id}')">Додати</button>
 									</c:if>
 								</td>
 							</tr>

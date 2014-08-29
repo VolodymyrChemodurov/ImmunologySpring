@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<form id="defaultForm" method="POST" action="/Immunology/cabinet/patient/update"  class="form-horizontal">
+<form id="defaultForm" method="POST" action="/Immunology/patients/update"  class="form-horizontal">
 					<fieldset>
 						<legend></legend>
 						<div class="form-group">

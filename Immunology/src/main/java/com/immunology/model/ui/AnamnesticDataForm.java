@@ -2,10 +2,10 @@ package com.immunology.model.ui;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.immunology.model.Syndrome;
 
@@ -14,9 +14,9 @@ import com.immunology.model.Syndrome;
 @Table(name = "anamnestic_data_forms")
 public class AnamnesticDataForm extends Form {
 
-	@ManyToOne
-	@JoinColumn(name = "disease_id")
-	@JsonIgnore
+	@OneToOne
+	@JoinColumn(name="syndrome_id", referencedColumnName = "id")
+	@JsonBackReference("anamnestic_reference")
 	private Syndrome disease;
 
 	public Syndrome getDisease() {

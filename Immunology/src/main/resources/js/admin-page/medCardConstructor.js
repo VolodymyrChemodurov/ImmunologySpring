@@ -54,7 +54,7 @@ function renderPreviewMedForm(){
 function saveMedicalCard() {
 	$.ajax({
 		  type:"POST", 
-	      url:"/Immunology/cabinet/patient/form/save",
+	      url:"/Immunology/patients/medical_card",
 	      data: JSON.stringify(medCardObject),
 	      contentType: "application/json; charset=utf-8",
 	      dataType: "json",

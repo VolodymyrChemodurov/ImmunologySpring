@@ -14,6 +14,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.immunology.model.ui.ClinicalManifestationsForm;
 import com.immunology.model.ui.ComplaintsForm;
 import com.immunology.model.ui.LaboratoryDataForm;
@@ -26,18 +28,22 @@ public class Survey {
 	@GeneratedValue
 	private long id;
 	
+	@JsonIgnore
 	@Temporal(TemporalType.DATE)
 	@Column(name="creation_date")
 	private Date creationDate;
 	
+	@JsonIgnore
 	@Column(name = "severity_level")
 	private double severityLevel;
 	
+	@JsonIgnore
 	@Column(name = "insufficiency_level")
 	private double insufficiencyLevel;
 
 	@ManyToOne
 	@JoinColumn(name = "disease_id")
+	@JsonBackReference("surveys_reference")
 	private Syndrome disease;
 	
 	@OneToOne

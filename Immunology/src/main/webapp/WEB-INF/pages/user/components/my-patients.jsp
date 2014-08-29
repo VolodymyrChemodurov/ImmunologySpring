@@ -14,7 +14,7 @@
 <div>
 
 	<!--  	<button type="button"
-			class="btn btn btn-primary" onclick="doAjaxGet('patient/new')">Add new Patient</button> -->
+			class="btn btn btn-primary" onclick="doAjaxGet('patients/new')">Add new Patient</button> -->
 </div>
 <div class="row">
 	<div class="col-xs-12">
@@ -47,7 +47,7 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${myPatients}" var="patient">
-							<tr onclick="doAjaxGet('patient/id=${patient.id}')">
+							<tr onclick="doAjaxGet('patients/${patient.id}')">
 								<td>${patient.lastName}</td>
 								<td>${patient.firstName}</td>
 								<td>${patient.dateOfBirth}</td>

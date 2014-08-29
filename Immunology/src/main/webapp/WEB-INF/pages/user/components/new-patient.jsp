@@ -26,7 +26,7 @@
 			</div>
 			<div class="box-content">
 				<form id="defaultForm" method="POST"
-					action="/Immunology/cabinet/patient/register"
+					action="/Immunology/patients"
 					class="form-horizontal">
 					<fieldset>
 						<legend></legend>

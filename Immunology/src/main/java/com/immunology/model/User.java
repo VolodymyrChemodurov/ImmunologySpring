@@ -1,5 +1,6 @@
 package com.immunology.model;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -12,7 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "users")
@@ -35,20 +37,25 @@ public class User {
 
 	private String password;
 	
+	@JsonIgnore
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "user_roles", 
 				joinColumns = {@JoinColumn(name = "user_id")},
 				inverseJoinColumns = {@JoinColumn(name = "role_id")})
 	private Set<Role> roles;
 	
+	@JsonIgnore
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "user_patient", 
 				joinColumns = {@JoinColumn(name = "user_id")},
 				inverseJoinColumns = {@JoinColumn(name = "patient_id")})
 	private Set<Patient> patients;
 	
-	@Transient
-	private Set<Survey> surveysTemplates;
+	@ManyToMany
+	@JoinTable(name="users_syndromes", 
+		joinColumns={@JoinColumn(name="user_id")}, 
+		inverseJoinColumns={@JoinColumn(name="syndrome_id")})
+	private List<Syndrome> syndromeTemplates;
 	
 	public String getLastName() {
 		return lastName;
@@ -121,12 +128,12 @@ public class User {
 		this.patients = patients;
 	}
 
-	public Set<Survey> getSurveysTemplates() {
-		return surveysTemplates;
+	public List<Syndrome> getSyndromeTemplates() {
+		return syndromeTemplates;
 	}
 
-	public void setSurveysTemplates(Set<Survey> surveysTemplates) {
-		this.surveysTemplates = surveysTemplates;
+	public void setSyndromeTemplates(List<Syndrome> syndromeTemplates) {
+		this.syndromeTemplates = syndromeTemplates;
 	}
 
 }

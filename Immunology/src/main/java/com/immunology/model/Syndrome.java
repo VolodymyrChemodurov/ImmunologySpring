@@ -7,10 +7,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.immunology.model.ui.AnamnesticDataForm;
 
 @Entity
@@ -24,16 +28,22 @@ public class Syndrome {
 	@Column(name = "disease_name")
 	private String name;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "patient_id")
 	private Patient patient;
 	
-	@OneToMany(mappedBy = "disease")
-	private List<AnamnesticDataForm> anamnesticData;
+	@OneToOne(mappedBy="disease")
+	@JsonManagedReference("anamnestic_reference")
+	private AnamnesticDataForm anamnesticData;
 	
 	@OneToMany(mappedBy = "disease")
+	@JsonManagedReference("surveys_reference")
 	private List<Survey> surveys;
 
+	@ManyToMany(mappedBy = "syndromeTemplates")
+	private List<User> users;
+	
 	public long getId() {
 		return id;
 	}
@@ -58,11 +68,11 @@ public class Syndrome {
 		this.patient = patient;
 	}
 
-	public List<AnamnesticDataForm> getAnamnesticData() {
+	public AnamnesticDataForm getAnamnesticData() {
 		return anamnesticData;
 	}
 
-	public void setAnamnesticData(List<AnamnesticDataForm> anamnesticData) {
+	public void setAnamnesticData(AnamnesticDataForm anamnesticData) {
 		this.anamnesticData = anamnesticData;
 	}
 
@@ -72,6 +82,14 @@ public class Syndrome {
 
 	public void setSurveys(List<Survey> surveys) {
 		this.surveys = surveys;
+	}
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 
 }

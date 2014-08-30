@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
+import com.immunology.logic.dao.CrudDao;
 import com.immunology.logic.dao.SyndromeDao;
 import com.immunology.logic.dao.UserDao;
 import com.immunology.logic.service.SyndromeService;
@@ -21,6 +22,9 @@ public class SyndromeServiceImpl implements SyndromeService {
 	@Autowired
 	private UserDao userDao;
 	
+	@Autowired
+	private CrudDao crudDao;
+	
 	public Syndrome getPatientSyndrome(Long patientId, String syndromeName) {
 		Syndrome syndrome = syndromeDao.getPatientSyndrome(patientId, syndromeName);
 		if(syndrome == null) {
@@ -31,8 +35,7 @@ public class SyndromeServiceImpl implements SyndromeService {
 	}
 
 	public Syndrome saveSyndrome(Syndrome syndrome) {
-		// TODO Auto-generated method stub
-		return null;
+		return crudDao.saveOrUpdate(syndrome);
 	}
 
 	public List<String> getPatientSyndromeNames(Long userId) {

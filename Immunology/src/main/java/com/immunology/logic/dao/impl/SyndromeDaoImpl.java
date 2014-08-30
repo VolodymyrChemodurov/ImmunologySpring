@@ -55,11 +55,6 @@ public class SyndromeDaoImpl implements SyndromeDao {
 		return syndromes.size() > 0 ? syndromes.get(0) : null;
 	}
 	
-	public Syndrome saveSyndrome(Syndrome syndrome) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public List<String> getPatientSyndromeNames(Long userId) {
 		// TODO Auto-generated method stub
 		return null;

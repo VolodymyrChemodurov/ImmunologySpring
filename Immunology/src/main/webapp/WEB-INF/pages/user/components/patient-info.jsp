@@ -28,7 +28,7 @@
 							</select>
 						</div>
 						<div class="col-sm-3">
-							<button type="button" class="btn btn-default"><i class="fa fa-arrow-circle-down"></i> Вибрати</button>
+							<button type="button" id="select_syndrome_button" class="btn btn-default"><i class="fa fa-arrow-circle-down"></i> Вибрати</button>
 						
 						</div>
 				</div>
@@ -62,7 +62,8 @@
 						<div id="container"></div>
 					</div>
 					<div id="tabs-3">
-							</div>
+						<div id="AnamnesticDataContainer"></div>
+					</div>
 					</div>
 				</div>
 			</div>
@@ -94,21 +95,42 @@
 		$('#input_date').datepicker({
 			setDate : new Date()
 		});
+		
+		initSyndromeEvent();
+		
 		// Load Timepicker plugin
 		// Add tooltip to form-controls
 		$('.form-control').tooltip();
 		Select2Script(DemoSelect2);
 		// Load example of form validation
 		BootstrapValidatorScript(DemoFormValidator);
-		formData ="";
-		renderForm($('#patient_id').val(), $('#container'));
+//  		formData ="";
+//  		renderForm($('#patient_id').val(), $('#container'));
 
 		/////////////////////////////////
 		//console.log("document ready");
 		// New Form Builder //
 		//1) ID Container div 2) Patient Id 3) Form Type;
-		//Builder.init('#container',$('#patient_id').val(), Builder.TYPE.MED_CARD);
+		Builder.init('#container',$('#patient_id').val(), Builder.TYPE.MED_CARD);
 	});
+	function initSyndromeEvent(){
+		$("#select_syndrome_button").click(function(){
+			$.ajax({
+				type : "get",
+				url : "/Immunology/syndromes/patient/{id}/{name}".replace("{id}", $('#patient_id').val()).replace("{name}",$("#syndrom").val()),
+				dataType : "json",
+				success : function(response) {
+					console.log(response.anamnesticData);
+					formData ="";
+					renderAnamnesticData(response.anamnesticData, $('#AnamnesticDataContainer'));
+				},
+				error: function (request, status, error) {
+					alert(error);
+			    }
+	
+			});
+		})
+	}
 
 
 </script>

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -49,8 +50,9 @@ public class SyndromeController {
 	}
 	
 	@RequestMapping(value = "/patient/{id}", method = RequestMethod.POST)
-	public @ResponseBody Boolean savePatientSyndrome(@PathVariable("id") Long id) {
+	public @ResponseBody Boolean savePatientSyndrome(@PathVariable("id") Long id, @RequestBody Syndrome syndrome) {
 		LOG.info("savePatientSyndrome");
-		return true;
+		syndrome = syndromeService.saveSyndrome(syndrome);
+		return syndrome != null ? true : false;
 	}
 }

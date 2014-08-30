@@ -10,8 +10,6 @@ public interface SyndromeDao {
 	
 	Syndrome getUserSyndromeTemplate(Long userId, String syndromeName);
 	
-	Syndrome saveSyndrome(Syndrome syndrome);
-	
 	List<String> getPatientSyndromeNames(Long patinetId);
 	
 	List<Syndrome> getUserSyndromeTemplates(Long userId);

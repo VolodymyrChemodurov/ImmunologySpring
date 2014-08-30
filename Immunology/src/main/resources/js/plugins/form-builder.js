@@ -34,6 +34,22 @@ function renderForm(patientId, form) {
 
 	});
 };
+function renderAnamnesticData(response,container){
+	formStructure="";
+	
+	$(form.panels).each(function(index, panel) {
+		renderPanel(panel, index);
+		});
+	formStructure +='<fieldset class= "panel-fieldset" style="text-align: center; "><button type="button" id="save_anamnestic_data_button"  class="btn btn-primary">Save Anamnestic Data</button></fieldset>';
+	formStructure += '</form>';
+	$(container).html(formStructure);
+	prepareForm(formObj);
+	
+	$("#save_anamnestic_data_button").click(function(){
+		
+	});
+	
+}
 
 function sendForm(){
 	console.log(formObj);

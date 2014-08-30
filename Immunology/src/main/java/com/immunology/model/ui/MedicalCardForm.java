@@ -11,8 +11,8 @@ import javax.persistence.TemporalType;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.immunology.logic.utils.CustomJsonDateDeserializer;
-import com.immunology.logic.utils.CustomJsonDateSerializer;
+import com.immunology.logic.utils.json.CustomJsonDateDeserializer;
+import com.immunology.logic.utils.json.CustomJsonDateSerializer;
 
 @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.PROPERTY, property="objectType")
 @Entity

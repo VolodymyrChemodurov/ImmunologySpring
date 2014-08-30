@@ -30,7 +30,7 @@
 								</a>
 								<ul class="dropdown-menu">
 									<li>
-										<a href="#" onclick="doAjaxGet('profile')">
+										<a href="#" onclick="doAjaxGet('cabinet/profile')">
 											<i class="fa fa-user"></i>
 											<span class="hidden-sm text">Профіль</span>
 										</a>

@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import com.immunology.logic.utils.enums.USER_ROLES;
+import com.immunology.logic.utils.enums.UserRoles;
 
 @Entity
 @Table(name = "roles")
@@ -23,7 +23,7 @@ public class Role {
 
 	@Column(name = "role_name")
 	@Enumerated(EnumType.STRING)
-	private USER_ROLES roleName;
+	private UserRoles roleName;
 
 	@ManyToMany(mappedBy = "roles")
 	private List<User> users;
@@ -37,11 +37,11 @@ public class Role {
 		return this;
 	}
 	
-	public USER_ROLES getRoleName() {
+	public UserRoles getRoleName() {
 		return roleName;
 	}
 
-	public void setRoleName(USER_ROLES roleName) {
+	public void setRoleName(UserRoles roleName) {
 		this.roleName = roleName;
 	}
 	

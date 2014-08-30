@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.immunology.logic.dao.CrudDao;
-import com.immunology.logic.dao.FormDao;
 import com.immunology.logic.dao.SurveyDao;
 import com.immunology.logic.service.FormServive;
 import com.immunology.model.Survey;
@@ -17,9 +16,6 @@ public class FormServiceImpl implements FormServive {
 
 	@Autowired
 	private SurveyDao surveyDao;
-	
-	@Autowired
-	private FormDao formDao;
 	
 	@Autowired
 	private CrudDao crudDao;

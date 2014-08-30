@@ -89,7 +89,7 @@ function renderMedcardFields(form){
 	formStructure +=		'<div class = "col-sm-9">';
 	formStructure += 			'<div class="col-sm-5">';
 	formStructure += 				'<textArea id="additionInfo" onchange="storeMedCardDetailValue()" class="form-control med_panel_left_input">'
-									+ form.additionInfo + '</textArea>';
+									+ form.additionalInfo + '</textArea>';
 	formStructure += 			'</div>';
 	formStructure += 	'</div>';
 	formStructure += '</fieldset>';

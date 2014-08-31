@@ -27,6 +27,7 @@ var Builder = {
 			console.log(Builder.formObject);
 			Builder.renderMedCard();
 		}
+		this.event.init();
 	},
 	
 	renderMedCard : function() {
@@ -39,13 +40,13 @@ var Builder = {
 		panelDateRow = $('<div class="com-sm-7"></div>');
 		panelAdditionRow = $('<div class="com-sm-7"></div>');
 		
-		panelDateRowTitle = Builder.utils.generatePanelTitle(Builder.MED_CARD_CONSTANTS.date);
+		panelDateRowTitle = this.utils.generatePanelTitle(Builder.MED_CARD_CONSTANTS.date);
 		panelDateRowField = $('<div class = "col-sm-9"><div class="col-sm-5"><input type="text" disabled value="'
 							+ Builder.formObject.creationDate + '" class="form-control med_panel_left_input"/>');
 		
 		panelAdditionRowTitle = Builder.utils.generatePanelTitle(Builder.MED_CARD_CONSTANTS.addition);
 		panelAdditionRowField = $('<div class = "col-sm-9"><div class="col-sm-5"><textarea type="text" value="'
-				+ Builder.formObject.addionalInfo + '" class="form-control med_panel_left_input"/>');
+				+ this.formObject.addionalInfo + '" class="form-control med_panel_left_input"/>');
 		
 		panelDateRow.append(panelDateRowTitle).append(panelDateRowField);
 		panelAdditionRow.append(panelAdditionRowTitle).append(panelAdditionRowField);
@@ -55,7 +56,7 @@ var Builder = {
 	},
 	renderFormBody : function(){
 		$(Builder.formObject.panels).each(function(panelIndex, panelObj) {
-			Builder.container.append(Builder.utils.generatePanel(panelObj));
+			Builder.container.append(Builder.utils.generatePanel(panelObj,panelIndex));
 		});
 	},
 
@@ -83,13 +84,14 @@ var Builder = {
 	
 	// BUILDER UTILES
 	utils : {
-		generatePanelTitle : function(title){
-			return $('<div class = "col-sm-3 panel-title-block" ><div class = "com-sm-7 med_panel_title_div disable" >' + title + '</div></div>');
+		generatePanelTitle : function(title, panelIndex){
+			var name = panelIndex;
+			return $('<div class = "col-sm-3 panel-title-block" name= "' + name + '" ><div class = "com-sm-7 med_panel_title_div disable" >' + title + '</div></div>');
 		},
-		generatePanel : function(panelObj){
+		generatePanel : function(panelObj, panelIndex){
 			
 			panel = $('<fieldset class= "panel-fieldset"/>');
-			panelTitle = Builder.utils.generatePanelTitle(panelObj.name);
+			panelTitle = Builder.utils.generatePanelTitle(panelObj.name, panelIndex);
 			panelRowSet = $('<div class = "col-sm-9"/>');
 				$(panelObj.elements).each(function(elementIndex, elementObj) {
 					panelRowSet.append(Builder.utils.generateElement(elementObj));
@@ -116,8 +118,9 @@ var Builder = {
 			row = $('<div class = "col-sm-12"/>');
 			rowTitle = $('<div class="col-sm-5"/>');
 			rowTitle.append(Builder.utils.generateCheckBox(textBoxObj.name, textBoxObj.checked));
-			rowRightSide = $('<div class="col-sm-7"><input type="text" style="margin: 2px 0px 2px 0px; " class="form-control"/></div>');
-			
+			rowRightSide = $('<div class="col-sm-7" />');
+			input = Builder.utils.generateTextField(textBoxObj.text, textBoxObj.checked);
+			rowRightSide.append(input);
 			row.append(rowTitle);
 			row.append(rowRightSide);
 			return row;
@@ -154,6 +157,10 @@ var Builder = {
 				select.append(option);
 				
 			});
+			
+			select.change(function(){
+			});
+			
 			rowRightSide = $('<div class="col-sm-7"><input type="text" class="form-control"/></div>');
 			selectRow.append(selectDiv.append(select));
 			selectRow.append(rowRightSide);
@@ -178,8 +185,32 @@ var Builder = {
 		},
 		
 		generateTextField: function(value, checked){
-			
+			input = $('<input type="text" class="form-control"/>');
+			input.val(value);
+			if(!checked){
+				input.attr("disable","disable");
+			}
+			return input;
 		}
+		
+	},
+	event : {
+		init : function(){
+			$("input[type=checkbox]").click(function(){
+				var fieldset = $(this).parents(".panel-fieldset");
+				var panelTitleBlock = $(fieldset).find(".med_panel_title_div");
+				var input = $(fieldset).find("input[type=text]");
+				if(this.checked){
+					$(panelTitleBlock).css("background-color","rgb(255, 135, 50)");	
+					$(input).attr("disable","disable");
+				}else{
+					$(panelTitleBlock).css("background-color","rgb(33, 145, 192)");	
+					$(input).removeAttr("disable");
+				}
+				
+				
+			});
+		},
 		
 	}
 	

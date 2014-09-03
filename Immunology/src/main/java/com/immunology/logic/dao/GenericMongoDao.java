@@ -7,7 +7,6 @@ import java.util.List;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.stereotype.Repository;
 
 import com.mongodb.DB;
@@ -16,12 +15,12 @@ import com.mongodb.DB;
 public abstract class GenericMongoDao<T> {
 
 	@Autowired
-	private MongoDbFactory mongoFactory;
+	private DB db;
 	
 	protected MongoCollection collection;
 
 	protected void init(String collectionName) {
-		DB db = mongoFactory.getDb();
+		//DB db = mongoFactory.getDb();
 		Jongo jongo = new Jongo(db);
 		collection = jongo.getCollection(collectionName);
 	}

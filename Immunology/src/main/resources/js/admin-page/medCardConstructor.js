@@ -1,4 +1,4 @@
-var getMedCardUrl = "/Immunology/admin/medical_card";
+var getMedCardUrl = "/admin/medical_card";
 var medCardObject = null;
 var order = {
 	panel: 0,
@@ -58,7 +58,7 @@ function renderPreviewMedForm(){
 function saveMedicalCard() {
 	$.ajax({
 		  type:"POST", 
-	      url:"/Immunology/patients/medical_card",
+	      url:"/patients/medical_card",
 	      data: JSON.stringify(medCardObject),
 	      contentType: "application/json; charset=utf-8",
 	      dataType: "json",

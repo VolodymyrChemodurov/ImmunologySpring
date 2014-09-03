@@ -2,7 +2,7 @@
 <div class="row">
 	<div id="breadcrumb" class="col-md-12">
 		<ol class="breadcrumb">
-			<li><a href="/Immunology/cabinet">Головна</a></li>
+			<li><a href="/cabinet">Головна</a></li>
 			<li><a href="#">Профіль</a></li>
 		</ol>
 	</div>
@@ -25,7 +25,7 @@
 			</div>
 			<div class="box-content">
 				<form id="defaultForm" method="POST"
-					action="/Immunology/cabinet/profile/edit" class="form-horizontal">
+					action="/cabinet/profile/edit" class="form-horizontal">
 
 
 					<fieldset>
@@ -95,7 +95,7 @@
 			</div>
 			<div class="box-content">
 				<form id="defaultForm" method="POST"
-					action="/Immunology/cabinet/profile/edit/password"
+					action="/cabinet/profile/edit/password"
 					class="form-horizontal">
 					<fieldset>
 						<legend></legend>

@@ -91,7 +91,7 @@
 		// Load TimePicker plugin and callback all time and date pickers
 		//LoadTimePickerScript(AllTimePickers);
 		// Create jQuery-UI tabs
-		$("#tabs").tabs();
+		$("#tabs").tabs();s
 		$('#input_date').datepicker({
 			setDate : new Date()
 		});
@@ -117,7 +117,7 @@
 		$("#select_syndrome_button").click(function(){
 			$.ajax({
 				type : "get",
-				url : "/Immunology/syndromes/patient/{id}/{name}".replace("{id}", $('#patient_id').val()).replace("{name}",$("#syndrom").val()),
+				url : "/syndromes/patient/{id}/{name}".replace("{id}", $('#patient_id').val()).replace("{name}",$("#syndrom").val()),
 				dataType : "json",
 				success : function(response) {
 					console.log(response.anamnesticData);

@@ -13,7 +13,7 @@ var Builder = {
 		ANAMNESTIC_DATA : "AnamnesticDataForm"
 	},
 	URL : {
-		MED_CARD_URL : "/Immunology/patients/${id}/medical_card/"
+		MED_CARD_URL : "/patients/${id}/medical_card/"
 	},
 	//Values
 	container : [],

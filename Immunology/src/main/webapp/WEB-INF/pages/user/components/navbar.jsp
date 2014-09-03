@@ -5,7 +5,7 @@
 		
 		<div class="row">
 			<div id="logo" class="col-xs-12 col-sm-2">
-				<a href="/Immunology/cabinet">Immunology</a>
+				<a href="/cabinet">Immunology</a>
 			</div>
 			<div id="top-panel" class="col-xs-12 col-sm-10">
 				<div class="row">
@@ -42,7 +42,7 @@
 										</a>
 									</li>
 									<li>
-										<a href="/Immunology">
+										<a href="/">
 											<i class="fa fa-power-off"></i>
 											<span class="hidden-sm text">Вихід</span>
 										</a>

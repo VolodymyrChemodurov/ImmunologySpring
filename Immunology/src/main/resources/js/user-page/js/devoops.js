@@ -76,7 +76,7 @@ function BootstrapValidatorScript(callback){
 //
 function Select2Script(callback){
 	if (!$.fn.select2){
-		$.getScript('/Immunology/resources/js/user-page/plugins/select2/select2.min.js', callback);
+		$.getScript('/resources/js/user-page/plugins/select2/select2.min.js', callback);
 	}
 	else {
 		if (callback && typeof(callback) === "function") {
@@ -90,10 +90,10 @@ function Select2Script(callback){
 //
 function DataTablesScripts(callback){
 	function Datatables(){
-		$.getScript('/Immunology/resources/js/user-page/plugins/datatables/jquery.dataTables.js', function(){
-			$.getScript('/Immunology/resources/js/user-page/plugins/datatables/ZeroClipboard.js', function(){
-				$.getScript('/Immunology/resources/js/user-page/plugins/datatables/TableTools.js', function(){
-					$.getScript('/Immunology/resources/js/user-page/plugins/datatables/dataTables.bootstrap.js', callback);
+		$.getScript('/resources/js/user-page/plugins/datatables/jquery.dataTables.js', function(){
+			$.getScript('/resources/js/user-page/plugins/datatables/ZeroClipboard.js', function(){
+				$.getScript('/resources/js/user-page/plugins/datatables/TableTools.js', function(){
+					$.getScript('/resources/js/user-page/plugins/datatables/dataTables.bootstrap.js', callback);
 				});
 			});
 		});
@@ -128,11 +128,11 @@ function FineUper(callback){
 //
 function XChartScript(callback){
 	function XChart(){
-		$.getScript('/Immunology/resources/js/user-page/plugins/xcharts/xcharts.min.js', callback);
+		$.getScript('/resources/js/user-page/plugins/xcharts/xcharts.min.js', callback);
 	}
 	function D3Script(){
 		if (!$.fn.d3){
-			$.getScript('/Immunology/resources/js/user-page/plugins/d3/d3.v3.min.js', XChart)
+			$.getScript('/resources/js/user-page/plugins/d3/d3.v3.min.js', XChart)
 		}
 		else {
 			XChart();

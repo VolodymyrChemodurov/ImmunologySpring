@@ -12,10 +12,11 @@
 				<h4 class="modal-title" id="myModalLabel">Syndroms</h4>
 			</div>
 			<div class="modal-body">
-				<label class="col-sm-12 control-label">Select Syndrom:</label> <select
-					name="syndrrom-names">
-					<option>Test Syndrom 1</option>
-					<option>Test Syndrom 2</option>
+				<label class="col-sm-12 control-label">Select Syndrom:</label> 
+				<select name="syndrrom-names">
+					<c:forEach items="${syndromes}" var="syndrome">
+    					<option>${syndrome}</option>
+					</c:forEach>
 				</select>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

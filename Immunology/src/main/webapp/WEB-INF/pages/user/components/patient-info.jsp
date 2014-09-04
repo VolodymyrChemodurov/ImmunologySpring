@@ -52,6 +52,7 @@
 						<li><a href="#tabs-1">Профіль</a></li>
 						<li><a href="#tabs-2">Медична картка</a></li>
 						<li><a href="#tabs-3">Анамнестичні дані</a></li>
+						<li><a href="#tabs-4">Обстеження</a></li>
 					</ul>
 					<div id="tabs-1">
 						<jsp:include
@@ -62,7 +63,13 @@
 						<div id="container"></div>
 					</div>
 					<div id="tabs-3">
-						<div id="AnamnesticDataContainer"></div>
+						<div id="AnamnesticDataContainer">
+							<h3>Виберіть синдром</h3>
+						</div>
+					</div>
+					<div id="tabs-4">
+						<div id="SyrveyDataContainer">
+						</div>
 					</div>
 					</div>
 				</div>
@@ -76,6 +83,10 @@
 
 
 <script>
+var medCard = Builder;
+var anamnesticData = Builder;
+
+
 	function DemoSelect2() {
 		//$('#s2_with_tag').select2({placeholder: "Select OS"});
 		$('#country').select2();
@@ -111,24 +122,11 @@
 		//console.log("document ready");
 		// New Form Builder //
 		//1) ID Container div 2) Patient Id 3) Form Type;
-		Builder.init('#container',$('#patient_id').val(), Builder.TYPE.MED_CARD);
+		medCard.init('#container', Builder.TYPE.MED_CARD, $('#patient_id').val());
 	});
 	function initSyndromeEvent(){
 		$("#select_syndrome_button").click(function(){
-			$.ajax({
-				type : "get",
-				url : "/Immunology/syndromes/patient/{id}/{name}".replace("{id}", $('#patient_id').val()).replace("{name}",$("#syndrom").val()),
-				dataType : "json",
-				success : function(response) {
-					console.log(response.anamnesticData);
-					formData ="";
-					renderAnamnesticData(response.anamnesticData, $('#AnamnesticDataContainer'));
-				},
-				error: function (request, status, error) {
-					alert(error);
-			    }
-	
-			});
+			anamnesticData.init('#AnamnesticDataContainer',Builder.TYPE.ANAMNESTIC_DATA, $('#patient_id').val(), $('#syndrom').val() );
 		})
 	}
 

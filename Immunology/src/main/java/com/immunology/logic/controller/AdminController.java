@@ -1,9 +1,12 @@
 package com.immunology.logic.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -11,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.immunology.logic.service.MedicalCardFormService;
+import com.immunology.logic.service.SyndromeService;
 import com.immunology.logic.service.UserService;
 import com.immunology.logic.utils.UserUtils;
 import com.immunology.model.ui.MedicalCardForm;
@@ -23,11 +27,15 @@ public class AdminController {
 	private UserService userService;
 	@Autowired
 	private MedicalCardFormService medicalCardFormService;
+	@Autowired
+	private SyndromeService syndromeService;
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public String admin(Model model) {
+	public String admin(ModelMap model) {
 		User user = UserUtils.getCurrentUser();
 		model.addAttribute("user", userService.getUserByLogin(user.getUsername()));
+		List<String> syndromes = syndromeService.getUserSyndromeTemplateNames(1L);
+		model.addAttribute("syndromes", syndromes);
 		return "admin/main";
 	}
 	

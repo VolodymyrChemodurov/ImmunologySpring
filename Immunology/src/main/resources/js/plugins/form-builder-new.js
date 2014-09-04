@@ -9,25 +9,33 @@ var Builder = {
 		addition: "Додаткова інформація"
 	},
 	TYPE : {
-		MED_CARD : "medicalCard",
+		MED_CARD : "MedicalCardForm",
 		ANAMNESTIC_DATA : "AnamnesticDataForm"
 	},
 	URL : {
-		MED_CARD_URL : "/Immunology/patients/${id}/medical_card/"
+		MED_CARD_URL : "/Immunology/patients/${id}/medical_card/",
+		ANAMNESTIC_DATA_URL : "/Immunology/syndromes/patient/${id}/${name}"
 	},
 	//Values
 	container : [],
 	formObject : {},
 		
 		
-	init: function(blockID,patientId,type) {
-		Builder.container = $(blockID);
-		if(type =db= Builder.TYPE.MED_CARD){
-			Builder.gettingFormObject("get",Builder.URL.MED_CARD_URL, patientId);
+	init: function(blockID,type ,patientId, formName) {
+		this.container = $(blockID);
+		this.container.html("");
+		if(type == Builder.TYPE.MED_CARD){
+			Builder.gettingFormObject("get",Builder.URL.MED_CARD_URL, patientId, formName);
 			console.log(Builder.formObject);
 			Builder.renderMedCard();
 		}
+		if(type == Builder.TYPE.ANAMNESTIC_DATA){
+			Builder.gettingFormObject("get",Builder.URL.ANAMNESTIC_DATA_URL, patientId, formName);
+			console.log(Builder.formObject);
+			Builder.renderFormBody();
+		}
 		this.event.init();
+		this.prepareForm();
 	},
 	
 	renderMedCard : function() {
@@ -58,19 +66,25 @@ var Builder = {
 		$(Builder.formObject.panels).each(function(panelIndex, panelObj) {
 			Builder.container.append(Builder.utils.generatePanel(panelObj,panelIndex));
 		});
+		Builder.container.append(Builder.utils.generateSaveButton());
 	},
 
 	
 	
 	
-	gettingFormObject : function(type, url, patientID){
+	gettingFormObject : function(type, url, patientID, formName){
 		$.ajax({
 			type : type,
-			url :  url.replace("${id}", patientID),
+			url :  url.replace("${id}", patientID).replace("${name}", formName),
 			dataType : "json",
 			async:   false,
 			success : function(response) {
-				Builder.formObject = response;
+				if(response.objectType == Builder.TYPE.MED_CARD){
+					Builder.formObject = response;
+				}else{
+					Builder.formObject = response.anamnesticData;
+				}
+				
 			},
 			error: function (request, status, error) {
 				alert(error);
@@ -94,38 +108,38 @@ var Builder = {
 			panelTitle = Builder.utils.generatePanelTitle(panelObj.name, panelIndex);
 			panelRowSet = $('<div class = "col-sm-9"/>');
 				$(panelObj.elements).each(function(elementIndex, elementObj) {
-					panelRowSet.append(Builder.utils.generateElement(elementObj));
+					panelRowSet.append(Builder.utils.generateElement(elementObj,elementIndex));
 				});
 			
 			panel.append(panelTitle).append(panelRowSet);
 			console.log(panel);
 			return panel;
 		},
-		generateElement: function(elementObj){
+		generateElement: function(elementObj, elementIndex){
 			switch (elementObj.objectType) {
 			case 'TextBox':
-				return Builder.utils.generateTextBox(elementObj);
+				return Builder.utils.generateTextBox(elementObj, elementIndex);
 				break;
 			case 'DropDown' :
-				return Builder.utils.generateDropDown(elementObj);
+				return Builder.utils.generateDropDown(elementObj, elementIndex);
 				break;
 			case 'Panel' :
 				return Builder.utils.generateSubPanel(elementObj);
 				break;
 		}
 		},
-		generateTextBox: function(textBoxObj){
-			row = $('<div class = "col-sm-12"/>');
+		generateTextBox: function(textBoxObj, elementIndex){
+			row = $('<div class = "col-sm-12 element_row"/>');
 			rowTitle = $('<div class="col-sm-5"/>');
-			rowTitle.append(Builder.utils.generateCheckBox(textBoxObj.name, textBoxObj.checked));
+			rowTitle.append(Builder.utils.generateCheckBox(textBoxObj.name, textBoxObj.checked, elementIndex));
 			rowRightSide = $('<div class="col-sm-7" />');
-			input = Builder.utils.generateTextField(textBoxObj.text, textBoxObj.checked);
+			input = Builder.utils.generateTextField(textBoxObj.text, textBoxObj.checked, elementIndex);
 			rowRightSide.append(input);
 			row.append(rowTitle);
 			row.append(rowRightSide);
 			return row;
 		},
-		generateCheckBox: function(title,checked){
+		generateCheckBox: function(title, checked, elementIndex){
 			var div = $('<div class="checkbox" style="margin: 2px 0px 2px 0px;"/>');
 			var label = $('<label/>');
 			var input = $('<input type="checkbox"/>');
@@ -140,10 +154,10 @@ var Builder = {
 			div.append(label);
 			return div;
 		},
-		generateDropDown: function(dropDown){
-			row = $('<div class = "col-sm-12"/>');
-			rowTitle = $('<div class="col-sm-12"/>');
-			rowTitle.append(Builder.utils.generateCheckBox(dropDown.name, dropDown.checked));
+		generateDropDown: function(dropDown, elementIndex){
+			row = $('<div class = "col-sm-12 element_row"/>');
+			rowTitle = $('<div class="col-sm-12 "/>');
+			rowTitle.append(Builder.utils.generateCheckBox(dropDown.name, dropDown.checked, elementIndex));
 			
 			selectRow = $('<div class = "col-sm-12" style = "padding: 0px"/>');
 			selectDiv = $('<div class = "col-sm-5"/>');
@@ -161,7 +175,8 @@ var Builder = {
 			select.change(function(){
 			});
 			
-			rowRightSide = $('<div class="col-sm-7"><input type="text" class="form-control"/></div>');
+			rowRightSide = $('<div class="col-sm-7"></div>');
+			rowRightSide.append(Builder.utils.generateTextField(dropDown.text, dropDown.checked, elementIndex));
 			selectRow.append(selectDiv.append(select));
 			selectRow.append(rowRightSide);
 			
@@ -169,28 +184,39 @@ var Builder = {
 			row.append(selectRow);
 			return row;
 		},
-		generateSubPanel: function(subPanel){
+		generateSubPanel: function(subPanel, subElementEndex){
 			subPanelBlock = $('<div class = "col-sm-12" style="padding-right: 0px;"/>');
 			subPanelBody = $('<div class = "col-sm-12" style="padding-right: 0px; padding-left: 0px;"/>');
 			div = $('<div class="col-sm-12" style="padding-right: 0px;" />');
 			
 			$(subPanel.elements).each(function(elementIndex, elementObj) {
-				subPanelBody.append(Builder.utils.generateElement(elementObj));
+				subPanelBody.append(Builder.utils.generateElement(elementObj,elementIndex));
 			});
 			
-			subPanelBlock.append(div.append(Builder.utils.generateCheckBox(subPanel.name, subPanel.checked)));
+			subPanelBlock.append(div.append(Builder.utils.generateCheckBox(subPanel.name, subPanel.checked, subElementEndex)));
 			subPanelBlock.append(subPanelBody);
 			
 			return subPanelBlock;
 		},
 		
-		generateTextField: function(value, checked){
+		generateTextField: function(value, checked, elementIndex ){
 			input = $('<input type="text" class="form-control"/>');
+			input.attr("name","t"+elementIndex);
 			input.val(value);
 			if(!checked){
-				input.attr("disable","disable");
+				input.attr("disabled","disabled");
 			}
 			return input;
+		},
+		
+		generateSaveButton: function(){
+			var fieldset = $('<fieldset class= "panel-fieldset" style="text-align: center; "/>');
+			var button = $('<button type="button" class="btn btn-primary">Save</button>');
+			$(button).click(function(){
+				alert("You are on the rigth way");
+			});
+			fieldset.append(button);
+			return fieldset;
 		}
 		
 	},
@@ -198,21 +224,64 @@ var Builder = {
 		init : function(){
 			$("input[type=checkbox]").click(function(){
 				var fieldset = $(this).parents(".panel-fieldset");
+				var row = $(this).parents(".element_row");
 				var panelTitleBlock = $(fieldset).find(".med_panel_title_div");
-				var input = $(fieldset).find("input[type=text]");
-				if(this.checked){
+				var input = $(row).find("input[type=text]");
+				var checkBoxes = $(fieldset).find("input[type=checkbox]");
+				var indicator = false;
+				$(checkBoxes).each(function(index,element){
+					if(element.checked){
+						$(panelTitleBlock).css("background-color","rgb(255, 135, 50)");	
+						indicator = true;
+					}
+				});
+				if(indicator){
 					$(panelTitleBlock).css("background-color","rgb(255, 135, 50)");	
-					$(input).attr("disable","disable");
 				}else{
 					$(panelTitleBlock).css("background-color","rgb(33, 145, 192)");	
-					$(input).removeAttr("disable");
+				}
+				
+				if(this.checked){
+					$(input).removeAttr("disabled");
+				}else{
+					$(input).attr("disabled","disabled");
 				}
 				
 				
 			});
 		},
 		
+	},
+	prepareForm : function(){
+		$("input[type=checkbox]").each(function(){
+			var fieldset = $(this).parents(".panel-fieldset");
+			var row = $(this).parents(".element_row");
+			var panelTitleBlock = $(fieldset).find(".med_panel_title_div");
+			var input = $(row).find("input[type=text]");
+			var checkBoxes = $(fieldset).find("input[type=checkbox]");
+			var indicator = false;
+			$(checkBoxes).each(function(index,element){
+				if(element.checked){
+					$(panelTitleBlock).css("background-color","rgb(255, 135, 50)");	
+					indicator = true;
+				}
+			});
+			if(indicator){
+				$(panelTitleBlock).css("background-color","rgb(255, 135, 50)");	
+			}else{
+				$(panelTitleBlock).css("background-color","rgb(33, 145, 192)");	
+			}
+			
+			if(this.checked){
+				$(input).removeAttr("disabled");
+			}else{
+				$(input).attr("disabled","disabled");
+			}	
+		});
+		
+		
 	}
+		
 	
 
 };

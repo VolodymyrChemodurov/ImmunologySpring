@@ -49,7 +49,7 @@
 			
 			<div id="content" class="col-xs-12 col-sm-10">
 				<div class="preloader">
-					<img src="${param.baseURL}/Immunology/resources/img/devoops_getdata.gif" class="devoops-getdata" alt="preloader"/>
+					<img src="${param.baseURL}/resources/img/devoops_getdata.gif" class="devoops-getdata" alt="preloader"/>
 				</div>
 				<div id="ajax-content"></div>
 			</div>
@@ -73,7 +73,7 @@
 	function doAjaxGet(pageName) {
     	$.ajax({
         	type: "GET",
-        	url: "/Immunology/admin/"+pageName,
+        	url: "/admin/"+pageName,
         	success: function(response) {
             	$("#content").html(response);
         	}

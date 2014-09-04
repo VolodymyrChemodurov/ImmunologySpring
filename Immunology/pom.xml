@@ -29,7 +29,6 @@
 	</properties>
 
 	<dependencies>
-
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
@@ -260,9 +259,9 @@
 					</dependencies>
 					<configuration>
 						<driver>${db.driverClassName}</driver>
-						<url>${db.url}</url>
-						<username>${db.username}</username>
-						<password>${db.password}</password>
+						<url>${env.immunology.db.url}</url>
+						<username>${env.immunology.db.username}</username>
+						<password>${env.immunology.db.password}</password>
 						<encoding>UTF8</encoding>
 					</configuration>
 					<executions>

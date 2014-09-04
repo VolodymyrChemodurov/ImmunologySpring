@@ -102,7 +102,7 @@ var anamnesticData = Builder;
 		// Load TimePicker plugin and callback all time and date pickers
 		//LoadTimePickerScript(AllTimePickers);
 		// Create jQuery-UI tabs
-		$("#tabs").tabs();
+		$("#tabs").tabs();s
 		$('#input_date').datepicker({
 			setDate : new Date()
 		});
@@ -127,6 +127,7 @@ var anamnesticData = Builder;
 	function initSyndromeEvent(){
 		$("#select_syndrome_button").click(function(){
 			anamnesticData.init('#AnamnesticDataContainer',Builder.TYPE.ANAMNESTIC_DATA, $('#patient_id').val(), $('#syndrom').val() );
+
 		})
 	}
 

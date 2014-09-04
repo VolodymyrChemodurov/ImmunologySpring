@@ -1,4 +1,3 @@
-
 <!-- Modal  Panel-->
 <meta charset="utf-8">
 <div class="modal fade" id="select-syndrom-modal" tabindex="-1"

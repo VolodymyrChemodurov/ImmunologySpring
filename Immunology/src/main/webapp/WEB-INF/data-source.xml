@@ -13,16 +13,17 @@
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
-	<bean
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_FALLBACK"/>
+  		<property name="searchSystemEnvironment" value="true"/>
 		<property name="locations" value="/WEB-INF/db.properties" />
 	</bean>
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="${db.driverClassName}" />
-		<property name="url" value="${db.url}" />
-		<property name="username" value="${db.username}" />
-		<property name="password" value="${db.password}" />
+		<property name="url" value="${immunology.db.url}" />
+		<property name="username" value="${immunology.db.username}" />
+		<property name="password" value="${immunology.db.password}" />
 		<property name="initialSize" value="5" />
 		<property name="maxActive" value="10" />
 	</bean>
@@ -47,17 +48,6 @@
 				<prop key="database">${db.dataBase}</prop>
 			</props>
 		</property>
-	</bean>
-
-	<bean id="mongoFactoryBean" class="org.springframework.data.mongodb.core.MongoFactoryBean">
-    	<property name="host" value="${mongo.host}" />
-    	<property name="port" value="${mongo.port}"/>   
-	</bean>
-
-	<bean id="mongoDbFactory"
-    	class="org.springframework.data.mongodb.core.SimpleMongoDbFactory">
-    	<constructor-arg name="mongo" ref="mongoFactoryBean" />
-    	<constructor-arg name="databaseName" value="${mongo.db}" />
 	</bean>
 	
 </beans>

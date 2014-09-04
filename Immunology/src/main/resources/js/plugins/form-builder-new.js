@@ -1,12 +1,12 @@
-п»ї/**
+/**
  * NEW FORM BUILDER ANY TYPE;
  */
 
 var Builder = {
 	//Constants
 	MED_CARD_CONSTANTS : {
-		date: "Р”Р°С‚Р° СЃС‚РІРѕСЂРµРЅРЅСЏ",	
-		addition: "Р”РѕРґР°С‚РєРѕРІР° С–РЅС„РѕСЂРјР°С†С–СЏ"
+		date: "Дата створення",	
+		addition: "Додаткова інформація"
 	},
 	TYPE : {
 		MED_CARD : "MedicalCardForm",
@@ -285,7 +285,4 @@ var Builder = {
 	
 
 };
-
-
-
 

@@ -7,9 +7,9 @@
 
 <html>
 <head>
-    <link href="/Immunology/resources/css/bootstrap.min.css" rel="stylesheet">
-	<link href="/Immunology/resources/font-awesome/css/font-awesome.css" rel="stylesheet">
-	<link href="/Immunology/resources/css/login-page.css" rel="stylesheet">
+    <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/resources/font-awesome/css/font-awesome.css" rel="stylesheet">
+	<link href="/resources/css/login-page.css" rel="stylesheet">
 </head>
 <body>
 

@@ -2,7 +2,7 @@
 	<div class="container-fluid expanded-panel">
 		<div class="row">
 			<div id="logo" class="col-xs-12 col-sm-2">
-				<a href="/Immunology/admin">Immunology</a>
+				<a href="/admin">Immunology</a>
 			</div>
 			<div id="top-panel" class="col-xs-12 col-sm-10">
 				<div class="row">
@@ -33,7 +33,7 @@
 										</a>
 									</li>
 									<li>
-										<a href="/Immunology/j_spring_security_logout">
+										<a href="/j_spring_security_logout">
 											<i class="fa fa-power-off"></i>
 											<span class="hidden-sm text">Logout</span>
 										</a>

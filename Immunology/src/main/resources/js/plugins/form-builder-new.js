@@ -16,7 +16,7 @@ var Builder = {
 		MED_CARD_URL : "/patients/${id}/medical_card/",
 		ANAMNESTIC_DATA_URL : "/syndromes/patient/${id}/${name}"
 	},
-	//Values
+	//Values used for saving elements and other functions
 	container : [],
 	formObject : {},
 		
@@ -96,7 +96,7 @@ var Builder = {
 	
 	
 	
-	// BUILDER UTILES
+// -------------	BUILDER UTILES-------------
 	utils : {
 		generatePanelTitle : function(title, panelIndex){
 			var name = panelIndex;
@@ -104,7 +104,7 @@ var Builder = {
 		},
 		generatePanel : function(panelObj, panelIndex){
 			
-			panel = $('<fieldset class= "panel-fieldset"/>');
+			panel = $('<fieldset class= "panel-fieldset"/>').attr("index", panelIndex);
 			panelTitle = Builder.utils.generatePanelTitle(panelObj.name, panelIndex);
 			panelRowSet = $('<div class = "col-sm-9"/>');
 				$(panelObj.elements).each(function(elementIndex, elementObj) {
@@ -155,7 +155,8 @@ var Builder = {
 			return div;
 		},
 		generateDropDown: function(dropDown, elementIndex){
-			row = $('<div class = "col-sm-12 element_row"/>');
+			row = $('<div class = "col-sm-12 element_row"/>').attr("index", elementIndex);
+			
 			rowTitle = $('<div class="col-sm-12 "/>');
 			rowTitle.append(Builder.utils.generateCheckBox(dropDown.name, dropDown.checked, elementIndex));
 			
@@ -172,8 +173,9 @@ var Builder = {
 				
 			});
 			
-			select.change(function(){
-			});
+			if(!dropDown.checked){
+				$(select).attr("disabled","true");
+			}
 			
 			rowRightSide = $('<div class="col-sm-7"></div>');
 			rowRightSide.append(Builder.utils.generateTextField(dropDown.text, dropDown.checked, elementIndex));
@@ -185,7 +187,7 @@ var Builder = {
 			return row;
 		},
 		generateSubPanel: function(subPanel, subElementEndex){
-			subPanelBlock = $('<div class = "col-sm-12" style="padding-right: 0px;"/>');
+			subPanelBlock = $('<div class = "col-sm-12 sub-panel" style="padding-right: 0px;"/>');
 			subPanelBody = $('<div class = "col-sm-12" style="padding-right: 0px; padding-left: 0px;"/>');
 			div = $('<div class="col-sm-12" style="padding-right: 0px;" />');
 			
@@ -213,13 +215,18 @@ var Builder = {
 			var fieldset = $('<fieldset class= "panel-fieldset" style="text-align: center; "/>');
 			var button = $('<button type="button" class="btn btn-primary">Save</button>');
 			$(button).click(function(){
-				alert("You are on the rigth way");
+				Builder.handler.sendForm();
 			});
 			fieldset.append(button);
 			return fieldset;
 		}
 		
 	},
+	
+	
+	
+	
+// ---------	EVENTS ----------
 	event : {
 		init : function(){
 			$("input[type=checkbox]").click(function(){
@@ -227,6 +234,7 @@ var Builder = {
 				var row = $(this).parents(".element_row");
 				var panelTitleBlock = $(fieldset).find(".med_panel_title_div");
 				var input = $(row).find("input[type=text]");
+				var select = $(row).find("select");
 				var checkBoxes = $(fieldset).find("input[type=checkbox]");
 				var indicator = false;
 				$(checkBoxes).each(function(index,element){
@@ -243,11 +251,16 @@ var Builder = {
 				
 				if(this.checked){
 					$(input).removeAttr("disabled");
+					$(select).removeAttr("disabled");
 				}else{
 					$(input).attr("disabled","disabled");
+					$(select).attr("disabled","true");
 				}
-				
-				
+				// Setting values
+				var panel_index = $(fieldset).attr("index");
+				var element_index = $(row).attr("index");
+				var sab_panel_index = "";
+				Builder.handler.setCheckBoxValue(panel_index, element_index, this.checked);
 			});
 		},
 		
@@ -274,12 +287,37 @@ var Builder = {
 			
 			if(this.checked){
 				$(input).removeAttr("disabled");
+				$(select).removeAttr("disabled");
 			}else{
 				$(input).attr("disabled","disabled");
+				$(select).attr("disabled","true");
 			}	
+			
 		});
 		
 		
+	},
+	handler: {
+		setCheckBoxValue: function(panel_index, element_index, checked){
+			Builder.formObject.panels[panel_index].elements[element_index].checked = checked;
+		},
+	sendForm:  function(){
+		console.log(formObj);
+		$.ajax({
+		  type:"POST", 
+	      url:"/patients/medical_card/update",
+	      data: JSON.stringify(Builder.formObject),
+	      contentType: "application/json; charset=utf-8",
+	      dataType: "json",
+	      success: function(resposeJsonObject){
+	    	  console.log(resposeJsonObject);
+	      },
+		
+		error: function (request, status, error) {
+			alert(error);
+	    }});
+	}
+	
 	}
 		
 	

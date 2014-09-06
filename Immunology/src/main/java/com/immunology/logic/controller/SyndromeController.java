@@ -55,4 +55,11 @@ public class SyndromeController {
 		syndrome = syndromeService.saveSyndrome(syndrome);
 		return syndrome != null ? true : false;
 	}
+	
+	@RequestMapping(value = "/names", method = RequestMethod.GET)
+	public @ResponseBody List<String> getSyndromesNames() {
+		LOG.info("get syndromes names");
+		List<String> names = syndromeService.getSyndromeNames(); 
+		return names;
+	}
 }

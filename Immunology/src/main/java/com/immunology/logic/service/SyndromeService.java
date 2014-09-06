@@ -15,4 +15,6 @@ public interface SyndromeService {
 	List<Syndrome> getUserSyndromeTemplates(Long userId);
 	
 	List<String> getUserSyndromeTemplateNames(Long userId);
+	
+	List<String> getSyndromeNames();
 }

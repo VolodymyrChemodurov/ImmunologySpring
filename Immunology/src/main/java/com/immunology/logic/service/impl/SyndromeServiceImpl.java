@@ -51,4 +51,8 @@ public class SyndromeServiceImpl implements SyndromeService {
 		return syndromeDao.getUserSyndromeTemplatesNames(userId);
 	}
 
+	public List<String> getSyndromeNames() {
+		return syndromeDao.getSyndromeNames();
+	}
+
 }

@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,7 +33,7 @@ public class AdminController {
 	public String admin(ModelMap model) {
 		User user = UserUtils.getCurrentUser();
 		model.addAttribute("user", userService.getUserByLogin(user.getUsername()));
-		List<String> syndromes = syndromeService.getUserSyndromeTemplateNames(1L);
+		List<String> syndromes = syndromeService.getSyndromeNames();
 		model.addAttribute("syndromes", syndromes);
 		return "admin/main";
 	}

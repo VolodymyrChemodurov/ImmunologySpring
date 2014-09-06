@@ -15,4 +15,6 @@ public interface SyndromeDao {
 	List<Syndrome> getUserSyndromeTemplates(Long userId);
 	
 	List<String> getUserSyndromeTemplatesNames(Long userId);
+	
+	List<String> getSyndromeNames();
 }

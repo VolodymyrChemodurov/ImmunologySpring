@@ -21,6 +21,7 @@ public class SyndromeDaoImpl extends GenericMongoDao<Syndrome> implements Syndro
 	private static final String SYNDROME_TEMPLATE_COLLECTION = "syndromeTemplates";
 	private static final String GET_USER_TEMPLATES = "{'users.id':#}";
 	private static final String GET_USER_TEMPLATE_BY_NAME = "{'users.id':#, 'name':'#'}";
+	private static final String GET_SYNDROME_NAMES = "{}";
 	private static final String GET_PATIENT_SYNDROME = "SELECT syndrome FROM Syndrome syndrome WHERE syndrome.name = :name AND syndrome.patient.id = :id";
 	
 	@PersistenceContext
@@ -58,6 +59,12 @@ public class SyndromeDaoImpl extends GenericMongoDao<Syndrome> implements Syndro
 
 	public List<String> getUserSyndromeTemplatesNames(Long userId) {
 		Iterable<Syndrome> templates = collection.find(GET_USER_TEMPLATES, userId)
+				.projection("{_id: 0, anamnesticData: 0, surveys: 0, users: 0}").as(Syndrome.class);
+		return retrieveSyndromeNames(templates);
+	}
+
+	public List<String> getSyndromeNames() {
+		Iterable<Syndrome> templates = collection.find(GET_SYNDROME_NAMES)
 				.projection("{_id: 0, anamnesticData: 0, surveys: 0, users: 0}").as(Syndrome.class);
 		return retrieveSyndromeNames(templates);
 	}

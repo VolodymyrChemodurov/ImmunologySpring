@@ -102,7 +102,7 @@ var anamnesticData = Builder;
 		// Load TimePicker plugin and callback all time and date pickers
 		//LoadTimePickerScript(AllTimePickers);
 		// Create jQuery-UI tabs
-		$("#tabs").tabs();s
+		$("#tabs").tabs();
 		$('#input_date').datepicker({
 			setDate : new Date()
 		});

@@ -5,8 +5,8 @@
 var Builder = {
 	//Constants
 	MED_CARD_CONSTANTS : {
-		date: "Дата створення",	
-		addition: "Додаткова інформація"
+		date: "Creation Date",	
+		addition: "Addition info"
 	},
 	TYPE : {
 		MED_CARD : "MedicalCardForm",
@@ -50,17 +50,16 @@ var Builder = {
 		
 		panelDateRowTitle = this.utils.generatePanelTitle(Builder.MED_CARD_CONSTANTS.date);
 		panelDateRowField = $('<div class = "col-sm-9"><div class="col-sm-5"><input type="text" disabled value="'
-							+ Builder.formObject.creationDate + '" class="form-control med_panel_left_input"/>');
+							+ this.formObject.creationDate + '" class="form-control med_panel_left_input"/>');
 		
-		panelAdditionRowTitle = Builder.utils.generatePanelTitle(Builder.MED_CARD_CONSTANTS.addition);
-		panelAdditionRowField = $('<div class = "col-sm-9"><div class="col-sm-5"><textarea type="text" value="'
-				+ this.formObject.addionalInfo + '" class="form-control med_panel_left_input"/>');
-		
+		panelAdditionRowTitle = this.utils.generatePanelTitle(Builder.MED_CARD_CONSTANTS.addition);
+		panelAdditionRowField = $('<div class = "col-sm-9"><div class="col-sm-5"><textarea type="text" class="form-control med_panel_left_input">'
+				+ this.formObject.additionalInfo + '</textArea>');
 		panelDateRow.append(panelDateRowTitle).append(panelDateRowField);
 		panelAdditionRow.append(panelAdditionRowTitle).append(panelAdditionRowField);
 		panel.append(panelDateRow).append(panelAdditionRow);
 		
-		Builder.container.append(panel);
+		this.container.append(panel);
 	},
 	renderFormBody : function(){
 		$(Builder.formObject.panels).each(function(panelIndex, panelObj) {
@@ -124,12 +123,12 @@ var Builder = {
 				return Builder.utils.generateDropDown(elementObj, elementIndex);
 				break;
 			case 'Panel' :
-				return Builder.utils.generateSubPanel(elementObj);
+				return Builder.utils.generateSubPanel(elementObj, elementIndex);
 				break;
 		}
 		},
 		generateTextBox: function(textBoxObj, elementIndex){
-			row = $('<div class = "col-sm-12 element_row"/>');
+			row = $('<div class = "col-sm-12 element_row"/>').attr("index", elementIndex);
 			rowTitle = $('<div class="col-sm-5"/>');
 			rowTitle.append(Builder.utils.generateCheckBox(textBoxObj.name, textBoxObj.checked, elementIndex));
 			rowRightSide = $('<div class="col-sm-7" />');
@@ -162,7 +161,7 @@ var Builder = {
 			
 			selectRow = $('<div class = "col-sm-12" style = "padding: 0px"/>');
 			selectDiv = $('<div class = "col-sm-5"/>');
-			select = $('<select class = "form-control">');
+			select = $('<select class = "form-control dropdown">');
 			$(Object.keys(dropDown.values)).each(function(key, optionElement) {
 				if(key == dropDown.choosed){
 					option = $('<option value="' + key + '" selected = "selected">' + optionElement + '</option>');
@@ -186,8 +185,9 @@ var Builder = {
 			row.append(selectRow);
 			return row;
 		},
-		generateSubPanel: function(subPanel, subElementEndex){
+		generateSubPanel: function(subPanel, subElementIndex){
 			subPanelBlock = $('<div class = "col-sm-12 sub-panel" style="padding-right: 0px;"/>');
+			subPanelBlock.attr("index",subElementIndex);
 			subPanelBody = $('<div class = "col-sm-12" style="padding-right: 0px; padding-left: 0px;"/>');
 			div = $('<div class="col-sm-12" style="padding-right: 0px;" />');
 			
@@ -195,15 +195,14 @@ var Builder = {
 				subPanelBody.append(Builder.utils.generateElement(elementObj,elementIndex));
 			});
 			
-			subPanelBlock.append(div.append(Builder.utils.generateCheckBox(subPanel.name, subPanel.checked, subElementEndex)));
+			subPanelBlock.append(div.append(Builder.utils.generateCheckBox(subPanel.name, subPanel.checked, subElementIndex)));
 			subPanelBlock.append(subPanelBody);
 			
 			return subPanelBlock;
 		},
 		
 		generateTextField: function(value, checked, elementIndex ){
-			input = $('<input type="text" class="form-control"/>');
-			input.attr("name","t"+elementIndex);
+			input = $('<input type="text" class="form-control textbox"/>');
 			input.val(value);
 			if(!checked){
 				input.attr("disabled","disabled");
@@ -232,6 +231,7 @@ var Builder = {
 			$("input[type=checkbox]").click(function(){
 				var fieldset = $(this).parents(".panel-fieldset");
 				var row = $(this).parents(".element_row");
+				var subPanelBlock = $(this).parents(".sub-panel");
 				var panelTitleBlock = $(fieldset).find(".med_panel_title_div");
 				var input = $(row).find("input[type=text]");
 				var select = $(row).find("select");
@@ -259,9 +259,25 @@ var Builder = {
 				// Setting values
 				var panel_index = $(fieldset).attr("index");
 				var element_index = $(row).attr("index");
-				var sab_panel_index = "";
-				Builder.handler.setCheckBoxValue(panel_index, element_index, this.checked);
+				var sub_panel_index = $(subPanelBlock).attr("index");
+				
+				Builder.handler.setCheckBoxValue(panel_index, element_index, sub_panel_index, this.checked);
 			});
+			$("select.dropdown").change(function(){
+				var fieldset = $(this).parents(".panel-fieldset");
+				var row = $(this).parents(".element_row");
+				var subPanelBlock = $(this).parents(".sub-panel");
+				Builder.handler.setDropDownValue($(fieldset).attr("index"), $(row).attr("index"),subPanelBlock.attr("index"), $(this).val());
+				
+				
+			});
+			$("input.textbox").change(function(){
+				var fieldset = $(this).parents(".panel-fieldset");
+				var row = $(this).parents(".element_row");
+				var subPanelBlock = $(this).parents(".sub-panel");
+				Builder.handler.setTextBoxValue($(fieldset).attr("index"), $(row).attr("index"),subPanelBlock.attr("index"), $(this).val());
+			});
+			
 		},
 		
 	},
@@ -298,8 +314,30 @@ var Builder = {
 		
 	},
 	handler: {
-		setCheckBoxValue: function(panel_index, element_index, checked){
-			Builder.formObject.panels[panel_index].elements[element_index].checked = checked;
+		setCheckBoxValue: function(panel_index, element_index, sub_panel_index, checked){
+			if(sub_panel_index == undefined){
+				Builder.formObject.panels[panel_index].elements[element_index].checked = checked;
+			}else{
+				Builder.formObject.panels[panel_index].elements[sub_panel_index].elements[element_index].checked = checked;
+			}
+			
+		},
+		setDropDownValue: function(panel_index, element_index,sub_panel_index, value){
+			if(sub_panel_index == undefined){
+				Builder.formObject.panels[panel_index].elements[element_index].choosed = value;
+			}else{
+				Builder.formObject.panels[panel_index].elements[sub_panel_index].elements[element_index].choosed = value;
+			}
+			
+			
+		},
+		setTextBoxValue: function(panel_index, element_index,sub_panel_index, text){
+			if(sub_panel_index == undefined){
+				Builder.formObject.panels[panel_index].elements[element_index].text = text;
+			}else{
+				Builder.formObject.panels[panel_index].elements[sub_panel_index].elements[element_index].text = text;
+			}
+			
 		},
 	sendForm:  function(){
 		console.log(formObj);

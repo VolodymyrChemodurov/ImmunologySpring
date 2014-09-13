@@ -10,7 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -34,8 +33,7 @@ public class Patient {
 	@JsonManagedReference
 	private List<Syndrome> diseases;
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name = "medical_card_id")
+	@OneToOne(mappedBy="patient", cascade=CascadeType.ALL)
 	private MedicalCardForm medicalCard;
 	
 	@Column(name = "first_name")

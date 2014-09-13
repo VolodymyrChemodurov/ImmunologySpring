@@ -17,16 +17,20 @@ function Builder(object_Name) {
 	},
 	this.SAVE_BUTTON_URL = {
 		MED_CARD_URL : "/patients/medical_card/update",
-		ANAMNESTIC_DATA_URL : "#"
+		ANAMNESTIC_DATA_URL : "/syndromes/patient/${id}"
 	};
 	
 	//Values used for saving elements and other functions
 	this.objectName = object_Name;
 	this.container = [];
+	this.syndromObject = {};
 	this.formObject = {};
 	this.patientId;
 	this.formName;
 	
+	this.setSyndrom = function(syndrom){
+		this.syndromObject = syndrom;
+	}
 	this.setForm = function(form){
 		this.formObject = form;
 	};
@@ -93,6 +97,7 @@ function Builder(object_Name) {
 	
 	this.gettingFormObject = function(type, url, patientID, formName){
 		var form;
+		var syndrom;
 		$.ajax({
 			type : type,
 			url :  url.replace("${id}", patientID).replace("${name}", formName),
@@ -102,8 +107,8 @@ function Builder(object_Name) {
 				if(response.objectType == "MedicalCardForm"){
 					form = response;
 				}else{
-					this.formObject = response.anamnesticData;
-					return response;
+					syndrom = response;
+					form = response.anamnesticData;
 				}
 				
 			},
@@ -112,6 +117,7 @@ function Builder(object_Name) {
 		    }
 		});
 		this.setForm(form);
+		this.setSyndrom(syndrom);
 	},	
 	
 	
@@ -236,7 +242,7 @@ function Builder(object_Name) {
 			var fieldset = $('<fieldset class= "panel-fieldset" style="text-align: center; "/>');
 			var button = $('<button type="button" class="btn btn-primary">Save</button>');
 			$(button).click(function(){
-				var container = $(this).parents(".container");
+				var container = $(this).parents(".form-container");
 				var obj =window[container.attr("object")];
 				obj.sendForm();
 				
@@ -258,7 +264,7 @@ function Builder(object_Name) {
 				var row = $(this).parents(".element_row");
 				var subPanelBlock = $(this).parents(".sub-panel");
 				var panelTitleBlock = $(fieldset).find(".med_panel_title_div");
-				var container = $(fieldset).parents(".container");
+				var container = $(fieldset).parents(".form-container");
 				var input = $(row).find("input[type=text]");
 				var select = $(row).find("select");
 				var checkBoxes = $(fieldset).find("input[type=checkbox]");
@@ -294,7 +300,7 @@ function Builder(object_Name) {
 				var fieldset = $(this).parents(".panel-fieldset");
 				var row = $(this).parents(".element_row");
 				var subPanelBlock = $(this).parents(".sub-panel");
-				var container = $(this).parents(".container");
+				var container = $(this).parents(".form-container");
 				var obj =window[container.attr("object")];
 				obj.setDropDownValue($(fieldset).attr("index"), $(row).attr("index"),subPanelBlock.attr("index"), $(this).val());
 				
@@ -304,7 +310,7 @@ function Builder(object_Name) {
 				var fieldset = $(this).parents(".panel-fieldset");
 				var row = $(this).parents(".element_row");
 				var subPanelBlock = $(this).parents(".sub-panel");
-				var container = $(this).parents(".container");
+				var container = $(this).parents(".form-container");
 				var obj =window[container.attr("object")];
 				obj.setTextBoxValue($(fieldset).attr("index"), $(row).attr("index"),subPanelBlock.attr("index"), $(this).val());
 			});
@@ -375,16 +381,23 @@ function Builder(object_Name) {
 	};
 	this.sendForm =  function(){
 		var saveURL;
+		var saveObject;
 		if(this.formObject.objectType == this.TYPE.MED_CARD){
 			saveURL = this.SAVE_BUTTON_URL.MED_CARD_URL;
+			saveObject = this.formObject;
 		}
 		if(this.formObject.objectType == this.TYPE.ANAMNESTIC_DATA){
-			saveURL = this.SAVE_BUTTON_URL.ANAMNESTIC_DATA_URL
+			saveURL = this.SAVE_BUTTON_URL.ANAMNESTIC_DATA_URL;
+			saveObject = this.syndromObject;
+			saveObject.anamnesticData = this.formObject;
+			
 		}
+		console.log("Try to save this object:");
+		console.log(saveObject);
 		$.ajax({
 		  type:"POST", 
-	      url:saveURL,
-	      data: JSON.stringify(this.formObject),
+	      url:saveURL.replace("${id}", this.patientId),
+	      data: JSON.stringify(saveObject),
 	      contentType: "application/json; charset=utf-8",
 	      dataType: "json",
 	      success: function(resposeJsonObject){
@@ -398,4 +411,3 @@ function Builder(object_Name) {
 	}
 	
 };
-

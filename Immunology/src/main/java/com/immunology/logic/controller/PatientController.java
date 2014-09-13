@@ -55,6 +55,7 @@ public class PatientController {
 		MedicalCardForm medicalCard = medicalCardService.getMedicalCardTemplate();
 		medicalCard.setCreationDate(new Date());
 		patient.setMedicalCard(medicalCard);
+		medicalCard.setPatient(patient);
 		patientService.updatePatient(patient);
 		return "redirect:/cabinet";
 	}

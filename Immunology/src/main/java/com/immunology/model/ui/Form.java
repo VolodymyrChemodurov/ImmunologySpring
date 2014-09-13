@@ -1,8 +1,6 @@
 package com.immunology.model.ui;
 
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -36,7 +34,7 @@ public abstract class Form {
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	@Column(name = "form_id")
-	private long id;
+	private Long id;
 	
 	@Column(name = "form_name")
 	private String name;
@@ -46,14 +44,14 @@ public abstract class Form {
 	@JsonManagedReference("panels_reference")
 	private List<Panel> panels;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
-	
-	public void setId(long id) {
+
+	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	public String getName() {
 		return name;
 	}

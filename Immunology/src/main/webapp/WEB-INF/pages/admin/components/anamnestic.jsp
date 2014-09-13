@@ -1,7 +1,7 @@
 <div class="row">
 	<div id="breadcrumb" class="col-md-12">
 		<ol class="breadcrumb">
-			<li><a href="index.html">Dashboard</a></li>
+			<li><a href="#">Dashboard</a></li>
 			<li><a href="#">Forms</a></li>
 			<li><a href="#">Anamnestic Data</a></li>
 		</ol>
@@ -21,31 +21,26 @@
 				<ul class="nav nav-pills nav-stacked">
 				  <li class="active">
 				    <a href="#" data-toggle="modal" data-target="#create-panel">
-				      <span class="badge pull-right">0</span>
 				      Create Panel
 				    </a>
 				  </li>
 				  <li class="active">
 				    <a href="#" data-toggle="modal" data-target="#create-sub-panel">
-				      <span class="badge pull-right">0</span>
 				      Create Sub-Panel
 				    </a>
 				  </li>
 				  <li class="active">
 				    <a href="#" data-toggle="modal" data-target="#create-dropdown">
-				      <span class="badge pull-right">0</span>
 				      Create DropDown
 				    </a>
 				  </li>
 				   <li class="active">
 				    <a href="#" data-toggle="modal" data-target="#create-textbox">
-				      <span class="badge pull-right">0</span>
 				      Create TextBox
 				    </a>
 				  </li>
 				  <li class="active">
 				    <a href="#" data-toggle="modal" style="background-color: #cc181e" data-target="#remove-element">
-				      <span class="badge pull-right">0</span>
 				     	Remove Element
 				    </a>
 				  </li>

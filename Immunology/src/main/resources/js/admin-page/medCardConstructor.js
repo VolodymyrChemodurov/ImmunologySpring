@@ -1,5 +1,6 @@
 var getMedCardUrl = "/admin/medical_card";
-var medCardObject = null;
+var getAnamnesticDataUrl = 
+var formObject = null;
 var order = {
 	panel: 0,
 	element: 0
@@ -8,14 +9,14 @@ var order = {
 function init(){
 	getResouces();
 	console.log("->MED.CARD AFTER getResources");
-	console.log(medCardObject);
+	console.log(formObject);
 	
 }
 function initAnamnestic(){
-	medCardObject = [];
-	medCardObject["objectType"] = "AnamnesticDataForm";
-	medCardObject["panels"] = [];
-	console.log(medCardObject);
+	formObject = [];
+	formObject["objectType"] = "AnamnesticDataForm";
+	formObject["panels"] = [];
+	console.log(formObject);
 }
 
 function getResouces(){
@@ -24,13 +25,34 @@ function getResouces(){
 		url : getMedCardUrl,
 		dataType : "json",
 		success : function(response) {
-			medCardObject = response;
+			formObject = response;
 			console.log("->GET RESOURCES");
 			console.log(response);
-			if(medCardObject != null){
+			if(formObject != null){
 				initPanelNames();
 				renderPreviewMedForm();
-				initOrderValues(medCardObject);
+				initOrderValues(formObject);
+			}
+		},
+		error: function (request, status, error) {
+			alert(error);
+	    }
+
+	});
+}
+function getResouces(){
+	$.ajax({
+		type : "get",
+		url : getMedCardUrl,
+		dataType : "json",
+		success : function(response) {
+			formObject = response;
+			console.log("->GET RESOURCES");
+			console.log(response);
+			if(formObject != null){
+				initPanelNames();
+				renderPreviewMedForm();
+				initOrderValues(formObject);
 			}
 		},
 		error: function (request, status, error) {
@@ -43,7 +65,7 @@ function initPanelNames(){
 	var optionElement;
 	var panelNameSelects = $("select[name=panel-names]");
 	$(panelNameSelects).html("");
-	$(medCardObject.panels).each(function(index, panel){
+	$(formObject.panels).each(function(index, panel){
 		optionElement = $("<option>"+panel.name+"</option>");
 		optionElement.val(index);
 		$(panelNameSelects).append(optionElement); 
@@ -51,15 +73,15 @@ function initPanelNames(){
 	
 };
 function renderPreviewMedForm(){
- 	renderMedicalForm(medCardObject);
- 	$('#container').html(formStructure);
+	var constructor = new Builder("constructor");
+	constructor.constructorInit('#container', formObject);
  }
 
 function saveMedicalCard() {
 	$.ajax({
 		  type:"POST", 
 	      url:"/patients/medical_card",
-	      data: JSON.stringify(medCardObject),
+	      data: JSON.stringify(formObject),
 	      contentType: "application/json; charset=utf-8",
 	      dataType: "json",
 	      success: function(response){
@@ -72,7 +94,7 @@ function saveMedicalCard() {
 	
 }
 function initOrderValues(form){
-	$(medCardObject.panels).each(function(index, panel){
+	$(formObject.panels).each(function(index, panel){
 		if(panel.order > order.panel){
 			order.panel = panel.order;
 		}
@@ -95,13 +117,13 @@ function spClick(){
 
 		$(formElementSelect).html("<option value='-1'>- EMPTY -</option>");
 		if(subPanelIndex == -1){
-			$(medCardObject.panels[panelIndex].elements).each(function(index, element){
+			$(formObject.panels[panelIndex].elements).each(function(index, element){
 				optionElement = $("<option>"+element.name+"</option>");
 				optionElement.val(index);
 				$(formElementSelect).append(optionElement); 
 		});
 		}else{
-			$(medCardObject.panels[panelIndex].elements[subPanelIndex].elements).each(function(index, element){
+			$(formObject.panels[panelIndex].elements[subPanelIndex].elements).each(function(index, element){
 				optionElement = $("<option>"+element.name+"</option>");
 				optionElement.val(index);
 				$(formElementSelect).append(optionElement); 
@@ -122,7 +144,7 @@ function initEvents(){
 		if(elementPanelSelect != null){
 			elementPanelSelect.html("");
 		}
-		$(medCardObject.panels[parseInt(panelIndex)].elements).each(function(index, element){
+		$(formObject.panels[parseInt(panelIndex)].elements).each(function(index, element){
 			if(element.objectType == "Panel"){
 				optionElement = $("<option>"+element.name+"</option>");
 				optionElement.val(index);
@@ -202,12 +224,12 @@ function initEvents(){
 		var elementIndex = parseInt($(elementSelect).val());
 		
 		if(subPanelIndex == -1){
-			medCardObject.panels.splice(panelIndex,1);
+			formObject.panels.splice(panelIndex,1);
 		}else{
 			if(elementIndex == -1){
-				medCardObject.panels[panelIndex].elements.splice(subPanelIndex,1);
+				formObject.panels[panelIndex].elements.splice(subPanelIndex,1);
 			}else{
-				medCardObject.panels[panelIndex].elements[subPanelIndex].elements.splice(elementIndex,1);
+				formObject.panels[panelIndex].elements[subPanelIndex].elements.splice(elementIndex,1);
 			}
 		}
 		renderPreviewMedForm();
@@ -216,7 +238,7 @@ function initEvents(){
 	
 	$("button[name=save-button]").unbind("click");
 	$("button[name=save-button]").click(function(){
-		console.log(medCardObject);
+		console.log(formObject);
 		saveMedicalCard();
 	});
 	
@@ -238,7 +260,7 @@ function createPanel(title){
  	panel["elements"] = [];
  	
  	
- 	medCardObject.panels.push(panel); 
+ 	formObject.panels.push(panel); 
  	initPanelNames();
  	renderPreviewMedForm();
 }
@@ -248,7 +270,7 @@ function createSubPanel(index,title){
 	subPanel["checked"] = false;
 	subPanel["objectType"] = "Panel";
 	subPanel["elements"] = [];
-	medCardObject.panels[index].elements.push(subPanel); 
+	formObject.panels[index].elements.push(subPanel); 
 	renderPreviewMedForm();
 }
 function createTextBox(panelIndex,subPanelIndex,title){
@@ -258,9 +280,9 @@ function createTextBox(panelIndex,subPanelIndex,title){
  	textBox["objectType"] = "TextBox";
  	textBox["text"] = "";
  	if(parseInt(subPanelIndex) == -1){
- 		medCardObject.panels[panelIndex].elements.push(textBox);
+ 		formObject.panels[panelIndex].elements.push(textBox);
  	}else{
- 		medCardObject.panels[panelIndex].elements[subPanelIndex].elements.push(textBox);
+ 		formObject.panels[panelIndex].elements[subPanelIndex].elements.push(textBox);
  	}
  	renderPreviewMedForm();
 }
@@ -271,9 +293,9 @@ function createDropDown(panelIndex,subPanelIndex,title,values){
  	dropDown["objectType"] ="DropDown";
  	dropDown["values"] = values;
  	if(parseInt(subPanelIndex) == -1){
- 		medCardObject.panels[panelIndex].elements.push(dropDown);
+ 		formObject.panels[panelIndex].elements.push(dropDown);
  	}else{
- 		medCardObject.panels[panelIndex].elements[subPanelIndex].elements.push(dropDown);
+ 		formObject.panels[panelIndex].elements[subPanelIndex].elements.push(dropDown);
  	}
  	renderPreviewMedForm();
  	

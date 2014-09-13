@@ -39,6 +39,18 @@ function Builder(object_Name) {
 		this.container = object;
 	};
 	
+	this.constructorInit = function(blockID,formObject){
+		this.setContainer($(blockID));
+		if(formObject.objectType == this.TYPE.MED_CARD){
+			this.setForm(formObject);
+			this.renderMedCardFields();
+			this.renderFormBody(true);
+		}
+		if(formObject.objectType == this.TYPE.ANAMNESTIC_DATA){
+			this.setSyndrom(formObject);
+		}
+	}
+	
 	this.init = function(blockID,type ,patientId, formName) {
 		
 		this.formName = formName;
@@ -63,7 +75,7 @@ function Builder(object_Name) {
 	
 	this.renderMedCard = function() {
 		this.renderMedCardFields();
-		this.renderFormBody();
+		this.renderFormBody(true);
 		
 	}; 
 	this.renderMedCardFields = function(){
@@ -84,12 +96,14 @@ function Builder(object_Name) {
 		
 		this.container.append(panel);
 	};
-	this.renderFormBody = function(){
+	this.renderFormBody = function(renderSaveButton){
 		for ( var i = 0; i < this.formObject.panels.length; i++ ) {
 			this.container.append(this.utils.generatePanel(this.formObject.panels[i],i));
 		}
+		if(renderSaveButton){
+			this.container.append(this.utils.generateSaveButton());
+		}
 		
-		this.container.append(this.utils.generateSaveButton());
 	};
 
 	

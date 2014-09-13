@@ -1,3 +1,8 @@
+<style>
+.sub-panel .col-sm-7{
+	padding-left: 4px;
+}
+</style>
 <div class="row">
 	<div id="breadcrumb" class="col-md-12">
 		<ol class="breadcrumb">

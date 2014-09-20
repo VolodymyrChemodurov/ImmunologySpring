@@ -17,4 +17,10 @@ public interface SyndromeDao {
 	List<String> getUserSyndromeTemplatesNames(Long userId);
 	
 	List<String> getSyndromeNames();
+	
+	Boolean saveSyndromeTemplate(Syndrome syndrome);
+	
+	Boolean updateSyndromeTemplate(String templateName, Syndrome syndrome);
+	
+	Syndrome findSyndrome(String templateName);
 }

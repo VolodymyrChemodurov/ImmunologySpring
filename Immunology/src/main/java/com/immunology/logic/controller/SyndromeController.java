@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.immunology.logic.service.PatientService;
 import com.immunology.logic.service.SyndromeService;
 import com.immunology.logic.service.UserService;
 import com.immunology.logic.utils.UserUtils;
+import com.immunology.model.Patient;
 import com.immunology.model.Syndrome;
 
 @Controller
@@ -28,6 +30,8 @@ public class SyndromeController {
 	private SyndromeService syndromeService;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private PatientService patientService;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public @ResponseBody List<Syndrome> getUserSyndromes() {
@@ -52,6 +56,18 @@ public class SyndromeController {
 	@RequestMapping(value = "/patient/{id}", method = RequestMethod.POST)
 	public @ResponseBody Boolean savePatientSyndrome(@PathVariable("id") Long id, @RequestBody Syndrome syndrome) {
 		LOG.info("savePatientSyndrome");
+		Patient patient = patientService.getPatientById(id);
+		syndrome.setPatient(patient);
+		syndrome = syndromeService.saveSyndrome(syndrome);
+		return syndrome != null ? true : false;
+	}
+	
+	@RequestMapping(value = "/patient/{patientId}/syndrome/{syndromeId}", method = RequestMethod.POST)
+	public @ResponseBody Boolean updatePatientSyndrome(@PathVariable("patientId") Long patientId, 
+			@PathVariable("syndromeId") Long syndromeId, @RequestBody Syndrome syndrome) {
+		LOG.info("updatePatientSyndrome");
+		Patient patient = patientService.getPatientById(patientId);
+		syndrome.setPatient(patient);
 		syndrome = syndromeService.saveSyndrome(syndrome);
 		return syndrome != null ? true : false;
 	}
@@ -61,5 +77,20 @@ public class SyndromeController {
 		LOG.info("get syndromes names");
 		List<String> names = syndromeService.getSyndromeNames(); 
 		return names;
+	}
+	
+	@RequestMapping(value = "/template", method = RequestMethod.POST)
+	public @ResponseBody Boolean saveSyndromeTemplate(@RequestBody Syndrome syndrome) {
+		return syndromeService.saveSyndromeTemplate(syndrome);
+	}
+	
+	@RequestMapping(value = "/template/{name}", method = RequestMethod.POST)
+	public @ResponseBody Boolean updateSyndromeTemplate(@PathVariable("name") String name, @RequestBody Syndrome syndrome) {
+		return syndromeService.updateSyndromeTemplate(name, syndrome);
+	}
+	
+	@RequestMapping(value = "/template/{name}/user/{id}", method = RequestMethod.POST)
+	public @ResponseBody Boolean wireUserToSyndromeTemplate(@PathVariable("name") String syndromeName, @PathVariable("id") Long userId) {
+		return syndromeService.wireUserToSyndromeTemplate(syndromeName, userId);
 	}
 }

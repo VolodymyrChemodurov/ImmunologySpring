@@ -17,4 +17,11 @@ public interface SyndromeService {
 	List<String> getUserSyndromeTemplateNames(Long userId);
 	
 	List<String> getSyndromeNames();
+
+	Boolean saveSyndromeTemplate(Syndrome syndrome);
+	
+	Boolean updateSyndromeTemplate(String templateName, Syndrome syndrome);
+	
+	Boolean wireUserToSyndromeTemplate(String syndromeName, Long userId);
+	
 }

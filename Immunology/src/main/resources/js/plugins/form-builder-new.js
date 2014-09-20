@@ -67,7 +67,7 @@ function Builder(object_Name) {
 		if(type == this.TYPE.ANAMNESTIC_DATA){
 			this.gettingFormObject("get",this.URL.ANAMNESTIC_DATA_URL, patientId, formName);
 			console.log(this.formObject);
-			this.renderFormBody();
+			this.renderFormBody(true);
 		}
 		this.event.init();
 		this.prepareForm();
@@ -112,6 +112,7 @@ function Builder(object_Name) {
 	this.gettingFormObject = function(type, url, patientID, formName){
 		var form;
 		var syndrom;
+		console.log(url.replace("${id}", patientID).replace("${name}", formName));
 		$.ajax({
 			type : type,
 			url :  url.replace("${id}", patientID).replace("${name}", formName),

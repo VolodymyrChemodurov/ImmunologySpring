@@ -1,5 +1,6 @@
 var getMedCardUrl = "/admin/medical_card";
-var getAnamnesticDataUrl = 
+var getSyndromUrl = "/syndromes/patient/1/Test syndrome";
+var syndrom = null;
 var formObject = null;
 var order = {
 	panel: 0,
@@ -7,26 +8,24 @@ var order = {
 };
 
 function init(){
-	getResouces();
+	getResouces(getMedCardUrl);
 	console.log("->MED.CARD AFTER getResources");
 	console.log(formObject);
 	
 }
 function initAnamnestic(){
-	formObject = [];
-	formObject["objectType"] = "AnamnesticDataForm";
-	formObject["panels"] = [];
-	console.log(formObject);
+	//getAnamnesticResouces(getSyndromUrl);
 }
 
-function getResouces(){
+function getAnamnesticResouces(url){
 	$.ajax({
 		type : "get",
-		url : getMedCardUrl,
+		url : url,
 		dataType : "json",
+		async:   false,
 		success : function(response) {
-			formObject = response;
-			console.log("->GET RESOURCES");
+			syndrom = response;
+			formObject = response.anamnesticData;
 			console.log(response);
 			if(formObject != null){
 				initPanelNames();
@@ -35,6 +34,7 @@ function getResouces(){
 			}
 		},
 		error: function (request, status, error) {
+			alert("Error in anamnestic data");
 			alert(error);
 	    }
 

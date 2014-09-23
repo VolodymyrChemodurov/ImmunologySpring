@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.immunology.model.ui.MedicalCardForm;
 
@@ -26,7 +27,8 @@ public class Patient {
 	@Id
 	@GeneratedValue
 	private long id;
-	
+
+	@JsonIgnore
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "patients", cascade = CascadeType.ALL)
 	private Set<User> users = new HashSet<User>();
 	

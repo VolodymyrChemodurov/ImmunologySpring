@@ -8,6 +8,7 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.immunology.logic.service.MedicalCardFormService;
@@ -112,5 +114,11 @@ public class PatientController {
 		}
 		
 		return new ModelAndView("user/components/all-patients").addObject("allPatients",patients);
+    }
+	@RequestMapping(value="/getAll",  method=RequestMethod.GET)
+    public @ResponseBody List<Patient> getAllPatientsInJSON() {
+		List<Patient> patients =  patientService.getAllPatients();
+		System.out.println(patients);
+		return patients;
     }
 }

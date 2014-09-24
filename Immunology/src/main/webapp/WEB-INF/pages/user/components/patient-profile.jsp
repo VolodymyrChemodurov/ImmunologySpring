@@ -30,7 +30,7 @@
 					<div class="form-group">
 							<label class="col-sm-3 control-label">Стать</label>
 							<div class="col-sm-5">
-								<select class="populate placeholder" name="sex" id="sex" >
+								<select class="form-control dropdown" name="sex" id="sex" >
 									<option value="${patient.sex}">${patient.sex}</option>
 									<option value="чоловік">Чоловіча</option>
 									<option value="жінка">Жіноча</option>
@@ -56,7 +56,7 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Країна</label>
 							<div class="col-sm-5">
-								<select class="populate placeholder" name="country" id="country">
+								<select class="form-control dropdown" name="country" id="country">
 									<option value="${patient.country}">${patient.country}</option>
 									<option value="Україна">Україна</option>
 									<option value="Франція">Франція</option>

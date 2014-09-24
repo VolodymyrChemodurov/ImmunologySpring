@@ -1,58 +1,93 @@
 /**
- * NEW FORM BUILDER ANY TYPE;
+ * NEW FORM this ANY TYPE;
  */
-
-var Builder = {
+function Builder(object_Name) {
 	//Constants
-	MED_CARD_CONSTANTS : {
+	this.MED_CARD_CONSTANTS = {
 		date: "Creation Date",	
 		addition: "Addition info"
 	},
-	TYPE : {
+	this.TYPE = {
 		MED_CARD : "MedicalCardForm",
 		ANAMNESTIC_DATA : "AnamnesticDataForm"
 	},
-	URL : {
+	this.URL = {
 		MED_CARD_URL : "/patients/${id}/medical_card/",
 		ANAMNESTIC_DATA_URL : "/syndromes/patient/${id}/${name}"
 	},
+	this.SAVE_BUTTON_URL = {
+		MED_CARD_URL : "/patients/medical_card/update",
+		ANAMNESTIC_DATA_URL : "/syndromes/patient/${id}"
+	};
+	
 	//Values used for saving elements and other functions
-	container : [],
-	formObject : {},
-		
-		
-	init: function(blockID,type ,patientId, formName) {
-		this.container = $(blockID);
-		this.container.html("");
-		if(type == Builder.TYPE.MED_CARD){
-			Builder.gettingFormObject("get",Builder.URL.MED_CARD_URL, patientId, formName);
-			console.log(Builder.formObject);
-			Builder.renderMedCard();
+	this.objectName = object_Name;
+	this.container = [];
+	this.syndromObject = {};
+	this.formObject = {};
+	this.patientId;
+	this.formName;
+	
+	this.setSyndrom = function(syndrom){
+		this.syndromObject = syndrom;
+	}
+	this.setForm = function(form){
+		this.formObject = form;
+	};
+	
+	this.setContainer = function(object){
+		this.container = object;
+	};
+	
+	this.constructorInit = function(blockID,formObject){
+		this.setContainer($(blockID));
+		if(formObject.objectType == this.TYPE.MED_CARD){
+			this.setForm(formObject);
+			this.renderMedCardFields();
+			this.renderFormBody(true);
 		}
-		if(type == Builder.TYPE.ANAMNESTIC_DATA){
-			Builder.gettingFormObject("get",Builder.URL.ANAMNESTIC_DATA_URL, patientId, formName);
-			console.log(Builder.formObject);
-			Builder.renderFormBody();
+		if(formObject.objectType == this.TYPE.ANAMNESTIC_DATA){
+			this.setSyndrom(formObject);
+		}
+	}
+	
+	this.init = function(blockID,type ,patientId, formName) {
+		
+		this.formName = formName;
+		this.patientId = patientId;
+		this.setContainer($(blockID));
+		this.container.html("");
+		this.container.attr("object",this.objectName);
+		
+		if(type == this.TYPE.MED_CARD){
+			this.gettingFormObject("get",this.URL.MED_CARD_URL, patientId, formName);
+			console.log(this.formObject);
+			this.renderMedCard();
+		}
+		if(type == this.TYPE.ANAMNESTIC_DATA){
+			this.gettingFormObject("get",this.URL.ANAMNESTIC_DATA_URL, patientId, formName);
+			console.log(this.formObject);
+			this.renderFormBody(true);
 		}
 		this.event.init();
 		this.prepareForm();
-	},
+	};
 	
-	renderMedCard : function() {
-		Builder.renderMedCardFields();
-		Builder.renderFormBody();
+	this.renderMedCard = function() {
+		this.renderMedCardFields();
+		this.renderFormBody(true);
 		
-	}, 
-	renderMedCardFields : function(){
+	}; 
+	this.renderMedCardFields = function(){
 		panel = $('<fieldset class= "panel-fieldset"></fieldset>');
 		panelDateRow = $('<div class="com-sm-7"></div>');
 		panelAdditionRow = $('<div class="com-sm-7"></div>');
 		
-		panelDateRowTitle = this.utils.generatePanelTitle(Builder.MED_CARD_CONSTANTS.date);
+		panelDateRowTitle = this.utils.generatePanelTitle(this.MED_CARD_CONSTANTS.date);
 		panelDateRowField = $('<div class = "col-sm-9"><div class="col-sm-5"><input type="text" disabled value="'
 							+ this.formObject.creationDate + '" class="form-control med_panel_left_input"/>');
 		
-		panelAdditionRowTitle = this.utils.generatePanelTitle(Builder.MED_CARD_CONSTANTS.addition);
+		panelAdditionRowTitle = this.utils.generatePanelTitle(this.MED_CARD_CONSTANTS.addition);
 		panelAdditionRowField = $('<div class = "col-sm-9"><div class="col-sm-5"><textarea type="text" class="form-control med_panel_left_input">'
 				+ this.formObject.additionalInfo + '</textArea>');
 		panelDateRow.append(panelDateRowTitle).append(panelDateRowField);
@@ -60,28 +95,35 @@ var Builder = {
 		panel.append(panelDateRow).append(panelAdditionRow);
 		
 		this.container.append(panel);
-	},
-	renderFormBody : function(){
-		$(Builder.formObject.panels).each(function(panelIndex, panelObj) {
-			Builder.container.append(Builder.utils.generatePanel(panelObj,panelIndex));
-		});
-		Builder.container.append(Builder.utils.generateSaveButton());
-	},
+	};
+	this.renderFormBody = function(renderSaveButton){
+		for ( var i = 0; i < this.formObject.panels.length; i++ ) {
+			this.container.append(this.utils.generatePanel(this.formObject.panels[i],i));
+		}
+		if(renderSaveButton){
+			this.container.append(this.utils.generateSaveButton());
+		}
+		
+	};
 
 	
 	
 	
-	gettingFormObject : function(type, url, patientID, formName){
+	this.gettingFormObject = function(type, url, patientID, formName){
+		var form;
+		var syndrom;
+		console.log(url.replace("${id}", patientID).replace("${name}", formName));
 		$.ajax({
 			type : type,
 			url :  url.replace("${id}", patientID).replace("${name}", formName),
 			dataType : "json",
 			async:   false,
 			success : function(response) {
-				if(response.objectType == Builder.TYPE.MED_CARD){
-					Builder.formObject = response;
+				if(response.objectType == "MedicalCardForm"){
+					form = response;
 				}else{
-					Builder.formObject = response.anamnesticData;
+					syndrom = response;
+					form = response.anamnesticData;
 				}
 				
 			},
@@ -89,14 +131,16 @@ var Builder = {
 				alert(error);
 		    }
 		});
+		this.setForm(form);
+		this.setSyndrom(syndrom);
 	},	
 	
 	
 	
 	
 	
-// -------------	BUILDER UTILES-------------
-	utils : {
+// -------------	this UTILES-------------
+	this.utils = {
 		generatePanelTitle : function(title, panelIndex){
 			var name = panelIndex;
 			return $('<div class = "col-sm-3 panel-title-block" name= "' + name + '" ><div class = "com-sm-7 med_panel_title_div disable" >' + title + '</div></div>');
@@ -104,12 +148,12 @@ var Builder = {
 		generatePanel : function(panelObj, panelIndex){
 			
 			panel = $('<fieldset class= "panel-fieldset"/>').attr("index", panelIndex);
-			panelTitle = Builder.utils.generatePanelTitle(panelObj.name, panelIndex);
+			panelTitle = this.generatePanelTitle(panelObj.name, panelIndex);
 			panelRowSet = $('<div class = "col-sm-9"/>');
-				$(panelObj.elements).each(function(elementIndex, elementObj) {
-					panelRowSet.append(Builder.utils.generateElement(elementObj,elementIndex));
-				});
 			
+			for ( var i = 0; i < panelObj.elements.length; i++ ) {
+				panelRowSet.append(this.generateElement(panelObj.elements[i],i));
+			}
 			panel.append(panelTitle).append(panelRowSet);
 			console.log(panel);
 			return panel;
@@ -117,22 +161,22 @@ var Builder = {
 		generateElement: function(elementObj, elementIndex){
 			switch (elementObj.objectType) {
 			case 'TextBox':
-				return Builder.utils.generateTextBox(elementObj, elementIndex);
+				return this.generateTextBox(elementObj, elementIndex);
 				break;
 			case 'DropDown' :
-				return Builder.utils.generateDropDown(elementObj, elementIndex);
+				return this.generateDropDown(elementObj, elementIndex);
 				break;
 			case 'Panel' :
-				return Builder.utils.generateSubPanel(elementObj, elementIndex);
+				return this.generateSubPanel(elementObj, elementIndex);
 				break;
 		}
 		},
 		generateTextBox: function(textBoxObj, elementIndex){
 			row = $('<div class = "col-sm-12 element_row"/>').attr("index", elementIndex);
 			rowTitle = $('<div class="col-sm-5"/>');
-			rowTitle.append(Builder.utils.generateCheckBox(textBoxObj.name, textBoxObj.checked, elementIndex));
+			rowTitle.append(this.generateCheckBox(textBoxObj.name, textBoxObj.checked, elementIndex));
 			rowRightSide = $('<div class="col-sm-7" />');
-			input = Builder.utils.generateTextField(textBoxObj.text, textBoxObj.checked, elementIndex);
+			input = this.generateTextField(textBoxObj.text, textBoxObj.checked, elementIndex);
 			rowRightSide.append(input);
 			row.append(rowTitle);
 			row.append(rowRightSide);
@@ -157,7 +201,7 @@ var Builder = {
 			row = $('<div class = "col-sm-12 element_row"/>').attr("index", elementIndex);
 			
 			rowTitle = $('<div class="col-sm-12 "/>');
-			rowTitle.append(Builder.utils.generateCheckBox(dropDown.name, dropDown.checked, elementIndex));
+			rowTitle.append(this.generateCheckBox(dropDown.name, dropDown.checked, elementIndex));
 			
 			selectRow = $('<div class = "col-sm-12" style = "padding: 0px"/>');
 			selectDiv = $('<div class = "col-sm-5"/>');
@@ -177,7 +221,7 @@ var Builder = {
 			}
 			
 			rowRightSide = $('<div class="col-sm-7"></div>');
-			rowRightSide.append(Builder.utils.generateTextField(dropDown.text, dropDown.checked, elementIndex));
+			rowRightSide.append(this.generateTextField(dropDown.text, dropDown.checked, elementIndex));
 			selectRow.append(selectDiv.append(select));
 			selectRow.append(rowRightSide);
 			
@@ -191,11 +235,10 @@ var Builder = {
 			subPanelBody = $('<div class = "col-sm-12" style="padding-right: 0px; padding-left: 0px;"/>');
 			div = $('<div class="col-sm-12" style="padding-right: 0px;" />');
 			
-			$(subPanel.elements).each(function(elementIndex, elementObj) {
-				subPanelBody.append(Builder.utils.generateElement(elementObj,elementIndex));
-			});
-			
-			subPanelBlock.append(div.append(Builder.utils.generateCheckBox(subPanel.name, subPanel.checked, subElementIndex)));
+			for ( var i = 0; i < subPanel.elements.length; i++ ) {
+				subPanelBody.append(this.generateElement(subPanel.elements[i],i));
+			}
+			subPanelBlock.append(div.append(this.generateCheckBox(subPanel.name, subPanel.checked, subElementIndex)));
 			subPanelBlock.append(subPanelBody);
 			
 			return subPanelBlock;
@@ -214,7 +257,10 @@ var Builder = {
 			var fieldset = $('<fieldset class= "panel-fieldset" style="text-align: center; "/>');
 			var button = $('<button type="button" class="btn btn-primary">Save</button>');
 			$(button).click(function(){
-				Builder.handler.sendForm();
+				var container = $(this).parents(".form-container");
+				var obj =window[container.attr("object")];
+				obj.sendForm();
+				
 			});
 			fieldset.append(button);
 			return fieldset;
@@ -226,13 +272,14 @@ var Builder = {
 	
 	
 // ---------	EVENTS ----------
-	event : {
+	this.event = {
 		init : function(){
 			$("input[type=checkbox]").click(function(){
 				var fieldset = $(this).parents(".panel-fieldset");
 				var row = $(this).parents(".element_row");
 				var subPanelBlock = $(this).parents(".sub-panel");
 				var panelTitleBlock = $(fieldset).find(".med_panel_title_div");
+				var container = $(fieldset).parents(".form-container");
 				var input = $(row).find("input[type=text]");
 				var select = $(row).find("select");
 				var checkBoxes = $(fieldset).find("input[type=checkbox]");
@@ -260,14 +307,17 @@ var Builder = {
 				var panel_index = $(fieldset).attr("index");
 				var element_index = $(row).attr("index");
 				var sub_panel_index = $(subPanelBlock).attr("index");
-				
-				Builder.handler.setCheckBoxValue(panel_index, element_index, sub_panel_index, this.checked);
+				console.log("Set new value to:" + container.attr("object"));
+				var obj =window[container.attr("object")];
+				obj.setCheckBoxValue(panel_index, element_index, sub_panel_index, this.checked);
 			});
 			$("select.dropdown").change(function(){
 				var fieldset = $(this).parents(".panel-fieldset");
 				var row = $(this).parents(".element_row");
 				var subPanelBlock = $(this).parents(".sub-panel");
-				Builder.handler.setDropDownValue($(fieldset).attr("index"), $(row).attr("index"),subPanelBlock.attr("index"), $(this).val());
+				var container = $(this).parents(".form-container");
+				var obj =window[container.attr("object")];
+				obj.setDropDownValue($(fieldset).attr("index"), $(row).attr("index"),subPanelBlock.attr("index"), $(this).val());
 				
 				
 			});
@@ -275,13 +325,14 @@ var Builder = {
 				var fieldset = $(this).parents(".panel-fieldset");
 				var row = $(this).parents(".element_row");
 				var subPanelBlock = $(this).parents(".sub-panel");
-				Builder.handler.setTextBoxValue($(fieldset).attr("index"), $(row).attr("index"),subPanelBlock.attr("index"), $(this).val());
+				var container = $(this).parents(".form-container");
+				var obj =window[container.attr("object")];
+				obj.setTextBoxValue($(fieldset).attr("index"), $(row).attr("index"),subPanelBlock.attr("index"), $(this).val());
 			});
 			
 		},
-		
-	},
-	prepareForm : function(){
+		},
+	this.prepareForm = function(){
 		$("input[type=checkbox]").each(function(){
 			var fieldset = $(this).parents(".panel-fieldset");
 			var row = $(this).parents(".element_row");
@@ -313,41 +364,59 @@ var Builder = {
 		
 		
 	},
-	handler: {
-		setCheckBoxValue: function(panel_index, element_index, sub_panel_index, checked){
-			if(sub_panel_index == undefined){
-				Builder.formObject.panels[panel_index].elements[element_index].checked = checked;
-			}else{
-				Builder.formObject.panels[panel_index].elements[sub_panel_index].elements[element_index].checked = checked;
-			}
+	
+	this.setCheckBoxValue = function(panel_index, element_index, sub_panel_index, checked){
+		if(sub_panel_index == undefined){
+			this.formObject.panels[panel_index].elements[element_index].checked = checked;
+		}else{
+			this.formObject.panels[panel_index].elements[sub_panel_index].elements[element_index].checked = checked;
+		}
+		
+	},
+	this.setDropDownValue = function(panel_index, element_index,sub_panel_index, value){
+		if(sub_panel_index == undefined){
+			this.formObject.panels[panel_index].elements[element_index].choosed = value;
+		}else{
+			this.formObject.panels[panel_index].elements[sub_panel_index].elements[element_index].choosed = value;
+		}
+		
+		
+	},
+	this.setTextBoxValue =  function(panel_index, element_index,sub_panel_index, text){
+		if(sub_panel_index == undefined){
+			this.formObject.panels[panel_index].elements[element_index].text = text;
+		}else{
+			this.formObject.panels[panel_index].elements[sub_panel_index].elements[element_index].text = text;
+		}
+		
+	};
+	
+	this.test = function(){
+		alert("ok");
+	};
+	this.sendForm =  function(){
+		var saveURL;
+		var saveObject;
+		if(this.formObject.objectType == this.TYPE.MED_CARD){
+			saveURL = this.SAVE_BUTTON_URL.MED_CARD_URL;
+			saveObject = this.formObject;
+		}
+		if(this.formObject.objectType == this.TYPE.ANAMNESTIC_DATA){
+			saveURL = this.SAVE_BUTTON_URL.ANAMNESTIC_DATA_URL;
+			saveObject = this.syndromObject;
+			saveObject.anamnesticData = this.formObject;
 			
-		},
-		setDropDownValue: function(panel_index, element_index,sub_panel_index, value){
-			if(sub_panel_index == undefined){
-				Builder.formObject.panels[panel_index].elements[element_index].choosed = value;
-			}else{
-				Builder.formObject.panels[panel_index].elements[sub_panel_index].elements[element_index].choosed = value;
-			}
-			
-			
-		},
-		setTextBoxValue: function(panel_index, element_index,sub_panel_index, text){
-			if(sub_panel_index == undefined){
-				Builder.formObject.panels[panel_index].elements[element_index].text = text;
-			}else{
-				Builder.formObject.panels[panel_index].elements[sub_panel_index].elements[element_index].text = text;
-			}
-			
-		},
-	sendForm:  function(){
-		console.log(formObj);
+		}
+		console.log("Try to save this object:");
+		console.log(saveObject);
 		$.ajax({
 		  type:"POST", 
-	      url:"/patients/medical_card/update",
-	      data: JSON.stringify(Builder.formObject),
+	      url:saveURL.replace("${id}", this.patientId),
+	      data: JSON.stringify(saveObject),
 	      contentType: "application/json; charset=utf-8",
 	      dataType: "json",
 	      success: function(resposeJsonObject){
+	    	  alert("Successfully saved.");
 	    	  console.log(resposeJsonObject);
 	      },
 		
@@ -356,9 +425,4 @@ var Builder = {
 	    }});
 	}
 	
-	}
-		
-	
-
 };
-

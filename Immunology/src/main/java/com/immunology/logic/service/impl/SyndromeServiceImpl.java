@@ -1,5 +1,6 @@
 package com.immunology.logic.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +54,23 @@ public class SyndromeServiceImpl implements SyndromeService {
 
 	public List<String> getSyndromeNames() {
 		return syndromeDao.getSyndromeNames();
+	}
+
+	public Boolean saveSyndromeTemplate(Syndrome syndrome) {
+		return syndromeDao.saveSyndromeTemplate(syndrome);
+	}
+
+	public Boolean updateSyndromeTemplate(String templateName, Syndrome syndrome) {
+		return syndromeDao.updateSyndromeTemplate(templateName, syndrome);
+	}
+
+	public Boolean wireUserToSyndromeTemplate(String syndromeName, Long userId) {
+		Syndrome syndrome = syndromeDao.findSyndrome(syndromeName);
+		com.immunology.model.User user = new com.immunology.model.User();
+		List<com.immunology.model.User> users = new ArrayList<com.immunology.model.User>();
+		users.add(user);
+		syndrome.setUsers(users);
+		return syndromeDao.updateSyndromeTemplate(syndromeName, syndrome);
 	}
 
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.immunology.logic.service.FormServive;
 import com.immunology.logic.service.MedicalCardFormService;
+import com.immunology.model.Patient;
 import com.immunology.model.ui.Form;
 import com.immunology.model.ui.MedicalCardForm;
 
@@ -25,7 +26,7 @@ public class MedicalCardController {
 	private FormServive formServive;
 	@Autowired
 	private MedicalCardFormService medicalCardService;
-
+	
 	@RequestMapping(value = "/{id}/medical_card", method = RequestMethod.GET)
 	public @ResponseBody MedicalCardForm getMedicalForm(@PathVariable("id") long id) throws JsonProcessingException {
 		MedicalCardForm form = medicalCardService.getMedicalCardByPatientId(id);
@@ -35,6 +36,8 @@ public class MedicalCardController {
 	@RequestMapping(value = "/medical_card/update", method = RequestMethod.POST)
 	public @ResponseBody Form updateMedicalCard(@RequestBody MedicalCardForm medicalCard) {
 		LOG.info("Updating\n" + medicalCard);
+		Patient patient = medicalCardService.getById(medicalCard.getId()).getPatient();
+		medicalCard.setPatient(patient);
 		return formServive.updateForm(medicalCard);
 	}
 	

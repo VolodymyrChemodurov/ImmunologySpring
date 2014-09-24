@@ -40,4 +40,8 @@ public class UserServiceImpl implements UserService{
 	public User getUserByLogin(String login) {
 		return userDao.findByLogin(login);
 	}
+
+	public User findUserById(Long id) {
+		return crudDao.find(User.class, id);
+	}
 }

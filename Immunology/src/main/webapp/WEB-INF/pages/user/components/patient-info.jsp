@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<style>
+.sub-panel .col-sm-7{
+padding-left: 4px;
+}
+
+</style>
 <div class="row">
 	<div id="breadcrumb" class="col-md-12">
 		<ol class="breadcrumb">
@@ -60,10 +66,10 @@
 
 					</div>
 					<div id="tabs-2">
-						<div id="container"></div>
+						<div id="container" class="form-container" ></div>
 					</div>
 					<div id="tabs-3">
-						<div id="AnamnesticDataContainer">
+						<div id="AnamnesticDataContainer" class="form-container">
 							<h3>Виберіть синдром</h3>
 						</div>
 					</div>
@@ -83,14 +89,13 @@
 
 
 <script>
-var medCard = Builder;
-var anamnesticData = Builder;
-
+var medCard = new Builder("medCard");
+var anamnesticData  = new Builder("anamnesticData");
 
 	function DemoSelect2() {
 		//$('#s2_with_tag').select2({placeholder: "Select OS"});
-		$('#country').select2();
-		$('#sex').select2();
+	//	$('#country').select2();
+	//	$('#sex').select2();
 	}
 	// Run timepicker
 	function DemoTimePicker() {
@@ -122,14 +127,19 @@ var anamnesticData = Builder;
 		//console.log("document ready");
 		// New Form Builder //
 		//1) ID Container div 2) Patient Id 3) Form Type;
-		medCard.init('#container', Builder.TYPE.MED_CARD, $('#patient_id').val());
+		medCard.init('#container', "MedicalCardForm", $('#patient_id').val());
+		
+		
 	});
 	function initSyndromeEvent(){
 		$("#select_syndrome_button").click(function(){
-			anamnesticData.init('#AnamnesticDataContainer',Builder.TYPE.ANAMNESTIC_DATA, $('#patient_id').val(), $('#syndrom').val() );
+			anamnesticData.init('#AnamnesticDataContainer',"AnamnesticDataForm", $('#patient_id').val(), $('#syndrom').val() );
 
 		})
 	}
+	
+
+	
 
 
 </script>

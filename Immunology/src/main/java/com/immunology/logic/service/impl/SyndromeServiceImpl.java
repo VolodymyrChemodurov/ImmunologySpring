@@ -73,4 +73,8 @@ public class SyndromeServiceImpl implements SyndromeService {
 		return syndromeDao.updateSyndromeTemplate(syndromeName, syndrome);
 	}
 
+	public Syndrome getSyndromeByName(String syndromeName) {
+		return syndromeDao.findSyndrome(syndromeName);
+	}
+
 }

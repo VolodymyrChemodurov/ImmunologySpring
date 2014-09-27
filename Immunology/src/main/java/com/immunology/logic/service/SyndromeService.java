@@ -24,4 +24,5 @@ public interface SyndromeService {
 	
 	Boolean wireUserToSyndromeTemplate(String syndromeName, Long userId);
 	
+	Syndrome getSyndromeByName(String syndromeName);
 }

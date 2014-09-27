@@ -93,4 +93,9 @@ public class SyndromeController {
 	public @ResponseBody Boolean wireUserToSyndromeTemplate(@PathVariable("name") String syndromeName, @PathVariable("id") Long userId) {
 		return syndromeService.wireUserToSyndromeTemplate(syndromeName, userId);
 	}
+	
+	@RequestMapping(value = "template/{name}", method = RequestMethod.GET)
+	public @ResponseBody Syndrome getSyndromeByName(@PathVariable("name") String templateName) {
+		return syndromeService.getSyndromeByName(templateName);
+	}
 }

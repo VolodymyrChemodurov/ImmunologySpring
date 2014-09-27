@@ -70,7 +70,7 @@
 </div>
 <script type="text/javascript">
 $(document).ready(function() {
-	initAnamnestic();
+	//initAnamnestic();
 	initEvents();
 });
 </script>

@@ -1,5 +1,5 @@
 var getMedCardUrl = "/admin/medical_card";
-var getSyndromUrl = "/syndromes/patient/1/Test syndrome";
+var getSyndromUrl = "/syndromes/template/{name}";
 var syndrom = null;
 var formObject = null;
 var order = {
@@ -13,8 +13,10 @@ function init(){
 	console.log(formObject);
 	
 }
-function initAnamnestic(){
-	//getAnamnesticResouces(getSyndromUrl);
+function initAnamnestic(syndromName){
+	console.log("choosed: " + syndromName);
+	getAnamnesticResouces(getSyndromUrl.replace('{name}',syndromName));
+	console.log(formObject);
 }
 
 function getAnamnesticResouces(url){
@@ -26,11 +28,11 @@ function getAnamnesticResouces(url){
 		success : function(response) {
 			syndrom = response;
 			formObject = response.anamnesticData;
-			console.log(response);
+			console.log(formObject);
 			if(formObject != null){
-				initPanelNames();
+				//initPanelNames();
 				renderPreviewMedForm();
-				initOrderValues(formObject);
+				//initOrderValues(formObject);
 			}
 		},
 		error: function (request, status, error) {
@@ -76,6 +78,7 @@ function renderPreviewMedForm(){
 	var constructor = new Builder("constructor");
 	constructor.constructorInit('#container', formObject);
  }
+
 
 function saveMedicalCard() {
 	$.ajax({
@@ -239,10 +242,52 @@ function initEvents(){
 	$("button[name=save-button]").unbind("click");
 	$("button[name=save-button]").click(function(){
 		console.log(formObject);
-		saveMedicalCard();
+		
+		
+		if(formObject.objectType ==  "MedicalCardForm"){
+			saveMedicalCard();
+		}
+		if(formObject.objectType == "AnamnesticDataForm"){
+			saveAnamnesticData();
+		}
+		
 	});
 	
 	
+	
+}
+
+function saveMedicalCard() {
+	$.ajax({
+		  type:"POST", 
+	      url:"/patients/medical_card",
+	      data: JSON.stringify(formObject),
+	      contentType: "application/json; charset=utf-8",
+	      dataType: "json",
+	      success: function(response){
+	    	  console.log("Success Save");
+	      },
+		
+		error: function (request, status, error) {
+			alert(error);
+	    }});
+	
+}
+function saveAnamnesticData() {
+	syndrom.anamnesticData = formObject; 
+	$.ajax({
+		  type:"POST", 
+	      url:"/syndromes/template/{name}".replace("{name}", syndrom.name),
+	      data: JSON.stringify(syndrom),
+	      contentType: "application/json; charset=utf-8",
+	      dataType: "json",
+	      success: function(response){
+	    	  console.log("Success Save");
+	      },
+		
+		error: function (request, status, error) {
+			alert(error);
+	    }});
 	
 }
 ///END EVENTS

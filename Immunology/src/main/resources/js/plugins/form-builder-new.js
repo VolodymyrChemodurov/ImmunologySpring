@@ -30,7 +30,7 @@ function Builder(object_Name) {
 	
 	this.setSyndrom = function(syndrom){
 		this.syndromObject = syndrom;
-	}
+	};
 	this.setForm = function(form){
 		this.formObject = form;
 	};
@@ -41,15 +41,18 @@ function Builder(object_Name) {
 	
 	this.constructorInit = function(blockID,formObject){
 		this.setContainer($(blockID));
+		this.container.html("");
 		if(formObject.objectType == this.TYPE.MED_CARD){
 			this.setForm(formObject);
 			this.renderMedCardFields();
-			this.renderFormBody(true);
+			this.renderFormBody(false);
 		}
 		if(formObject.objectType == this.TYPE.ANAMNESTIC_DATA){
-			this.setSyndrom(formObject);
+			//this.setSyndrom(formObject);
+			this.setForm(formObject);
+			this.renderFormBody(false);
 		}
-	}
+	};
 	
 	this.init = function(blockID,type ,patientId, formName) {
 		

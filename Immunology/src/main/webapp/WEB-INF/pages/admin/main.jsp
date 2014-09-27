@@ -79,7 +79,7 @@
 							</select>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-								<button type="button" class="btn btn-primary" onclick="doAjaxGet('anamnestic');" data-dismiss="modal">Choose</button>
+								<button type="button" class="btn btn-primary" onclick="doAjaxGet('anamnestic'); initAnamnestic($('select[name=syndrrom-names]')[0].value)" data-dismiss="modal">Choose</button>
 							</div>
 						</div>
 					</div>
@@ -94,6 +94,7 @@
 	function doAjaxGet(pageName) {
     	$.ajax({
         	type: "GET",
+        	async:   false,
         	url: "/admin/"+pageName,
         	success: function(response) {
             	$("#content").html(response);

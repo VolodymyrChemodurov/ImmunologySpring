@@ -19,9 +19,10 @@ import com.immunology.model.ui.MedicalCardForm;
 
 @Repository
 public class MedicalCardDaoImpl extends GenericMongoDao<MedicalCardForm> implements MedicalCardFormDao{
-
-	private static final String MEDICAL_FORM_TEMPLATE_COLLECTION = "medicalForm";
 	private static final Logger LOG = LoggerFactory.getLogger(MedicalCardDaoImpl.class);
+	
+	private static final String MEDICAL_FORM_TEMPLATE_COLLECTION = "medicalForm";
+	private static final String MEDICAL_CARD_STATISTIC = "SELECT cast (date_part('year', creation_date) as bigint), COUNT(patient_id) FROM medical_card_forms GROUP BY date_part('year', creation_date)";
 	
 	@PersistenceContext
 	EntityManager entityManager;
@@ -55,6 +56,10 @@ public class MedicalCardDaoImpl extends GenericMongoDao<MedicalCardForm> impleme
 		query.setParameter("patient_id", id);
 		List<MedicalCardForm> medicalCards = query.getResultList();
 		return medicalCards.size() > 0 ? medicalCards.get(0) : null;
+	}
+
+	public List retrieveMedicalCardCreationStatistic() {
+		return entityManager.createNativeQuery(MEDICAL_CARD_STATISTIC).getResultList();
 	}
 
 }

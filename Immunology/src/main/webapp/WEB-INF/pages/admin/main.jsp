@@ -30,6 +30,7 @@
 						</a>
 						<ul class="dropdown-menu">
 							<li><a class="ajax-link" href="#"  onclick="doAjaxGet('/users');">All users</a></li>
+							<li><a class="ajax-link" href="#" onclick="doAjaxGet('/user/create');">Додати нового користувача</a></li>
 						</ul>
 					</li>
 					<li>

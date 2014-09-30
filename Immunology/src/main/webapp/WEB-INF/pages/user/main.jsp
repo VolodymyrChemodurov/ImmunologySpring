@@ -59,8 +59,8 @@
 						 <span class="hidden-xs">Аналітика</span>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a class="ajax-link" href="#" onclick="doAjaxGet('cabinet/analitic/block');">Аналітичний блок</a></li>
-						<li><a class="ajax-link" href="#" onclick="doAjaxGet('cabinet/analitic/charts');">Діаграми</a></li>
+						<li><a class="ajax-link" href="#" onclick="doAjaxGet('cabinet/analytic/block');">Аналітичний блок</a></li>
+						<li><a class="ajax-link" href="#" onclick="doAjaxGet('cabinet/analytic/charts');">Діаграми</a></li>
 					</ul>
 				</li>
 

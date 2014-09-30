@@ -1,5 +1,7 @@
 package com.immunology.logic.controller;
 
+import java.util.Set;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.immunology.logic.service.PatientService;
 import com.immunology.logic.service.UserService;
 import com.immunology.logic.utils.UserUtils;
+import com.immunology.model.Patient;
 
 @Controller
 @RequestMapping(value = "/cabinet")
@@ -31,14 +34,17 @@ public class CabinetController {
 		return "user/main";
 	}
 	
-	@RequestMapping(value="/analitic/charts",  method=RequestMethod.GET)
-    public ModelAndView getAnaliticCharts( Model model ) {
-		return new ModelAndView( "user/components/analitic-charts");
+	@RequestMapping(value="/analytic/charts",  method=RequestMethod.GET)
+    public ModelAndView getAnalyticCharts( Model model ) {
+		User user = UserUtils.getCurrentUser();
+		Set<Patient> myPatients = userService.getUserByLogin(user.getUsername()).getPatients();
+        
+		return new ModelAndView( "user/components/analytic-charts").addObject("myPatients",myPatients);
     }
 	
-	@RequestMapping(value="/analitic/block",  method=RequestMethod.GET)
-    public ModelAndView getAnaliticBlock( Model model ) {
-		return new ModelAndView("user/components/analitic-block");
+	@RequestMapping(value="/analytic/block",  method=RequestMethod.GET)
+    public ModelAndView getAnalyticBlock( Model model ) {
+		return new ModelAndView("user/components/analytic-block");
     }
 	
 	@RequestMapping(value="/profile",  method=RequestMethod.GET)

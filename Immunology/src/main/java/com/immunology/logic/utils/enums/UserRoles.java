@@ -1,5 +1,6 @@
 package com.immunology.logic.utils.enums;
 
+
 public enum UserRoles {
 
 	ROLE_ADMIN("ROLE_ADMIN"), ROLE_USER("ROLE_USER"), ROLE_DOCTOR("ROLE_DOCTOR");
@@ -13,4 +14,5 @@ public enum UserRoles {
 	public String getValue() {
 		return value;
 	}
+
 }

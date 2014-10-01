@@ -106,7 +106,7 @@ padding-left: 4px;
 
 	<input type="hidden" id="patient_id" value="${patient.id}"/>
 
-</div>
+
 
 
 <script>

@@ -1,21 +1,30 @@
 package com.immunology.logic.controller;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.immunology.logic.service.MedicalCardFormService;
 import com.immunology.logic.service.SyndromeService;
+import com.immunology.logic.service.UserRoleService;
 import com.immunology.logic.service.UserService;
 import com.immunology.logic.utils.UserUtils;
+import com.immunology.logic.utils.enums.UserRoles;
+import com.immunology.model.Role;
 import com.immunology.model.ui.MedicalCardForm;
 
 @Controller
@@ -24,6 +33,8 @@ public class AdminController {
 
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private UserRoleService userRoleService;
 	@Autowired
 	private MedicalCardFormService medicalCardFormService;
 	@Autowired
@@ -50,10 +61,23 @@ public class AdminController {
 		return model;
 	}
 	
-	@RequestMapping(value = "/user/create", method = RequestMethod.POST)
-	public void createUser(com.immunology.model.User user) {
-		userService.createUser(user);
+	@RequestMapping(value = "/user/create", method = RequestMethod.GET)
+	public String getNewUser(Model model) {
+		model.addAttribute("user", new com.immunology.model.User());
+        return "admin/components/new-user";
 	}
+	
+	
+	@RequestMapping(method = RequestMethod.POST)
+	public String createNewPatinet(@RequestParam("user_role") String role, com.immunology.model.User user, Model model, HttpServletResponse response) {	
+		Set<Role> roles = new HashSet<Role>();
+		roles.add(userRoleService.getRoleByName(UserRoles.valueOf(role)));
+		user.setRoles(roles);
+		userService.createUser(user);
+		return "redirect:/admin";
+	}
+	
+	
 	@RequestMapping(value = "/anamnestic", method = RequestMethod.GET)
 	public ModelAndView getAnamnestic(ModelAndView model) {
 		model.setViewName("admin/components/anamnestic");

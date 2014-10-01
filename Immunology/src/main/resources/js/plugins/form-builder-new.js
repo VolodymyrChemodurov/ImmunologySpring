@@ -31,6 +31,10 @@ function Builder(object_Name) {
 	this.setSyndrom = function(syndrom){
 		this.syndromObject = syndrom;
 	};
+	this.getSyndrom = function(){
+		return this.syndromObject;
+	};
+	
 	this.setForm = function(form){
 		this.formObject = form;
 	};

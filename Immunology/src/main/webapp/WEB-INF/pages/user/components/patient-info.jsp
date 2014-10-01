@@ -75,6 +75,27 @@ padding-left: 4px;
 					</div>
 					<div id="tabs-4">
 						<div id="SyrveyDataContainer">
+						<table
+					class="table table-bordered table-striped table-hover table-heading table-datatable"
+					id="datatable-3">
+					<thead>
+						<tr>
+							<th>Дата створення</th>
+							<th>Ступінь важкості</th>
+							<th>Лікар</th>
+						</tr>
+					</thead>
+					<tbody>
+					<td>Немає жодних обстежень...<td>
+					</tbody>
+					<tfoot>
+						<tr>
+							<th>Дата створення</th>
+							<th>Ступінь важкості</th>
+							<th>Лікар</th>
+						</tr>
+					</tfoot>
+				</table>
 						</div>
 					</div>
 					</div>
@@ -105,7 +126,6 @@ var anamnesticData  = new Builder("anamnesticData");
 	}
 	$(document).ready(function() {
 		// Load TimePicker plugin and callback all time and date pickers
-		//LoadTimePickerScript(AllTimePickers);
 		// Create jQuery-UI tabs
 		$("#tabs").tabs();
 		$('#input_date').datepicker({
@@ -120,11 +140,6 @@ var anamnesticData  = new Builder("anamnesticData");
 		Select2Script(DemoSelect2);
 		// Load example of form validation
 		BootstrapValidatorScript(DemoFormValidator);
-//  		formData ="";
-//  		renderForm($('#patient_id').val(), $('#container'));
-
-		/////////////////////////////////
-		//console.log("document ready");
 		// New Form Builder //
 		//1) ID Container div 2) Patient Id 3) Form Type;
 		medCard.init('#container', "MedicalCardForm", $('#patient_id').val());
@@ -134,7 +149,8 @@ var anamnesticData  = new Builder("anamnesticData");
 	function initSyndromeEvent(){
 		$("#select_syndrome_button").click(function(){
 			anamnesticData.init('#AnamnesticDataContainer',"AnamnesticDataForm", $('#patient_id').val(), $('#syndrom').val() );
-
+			console.log("Syndrome object");
+			console.log(anamnesticData.getSyndrom());
 		})
 	}
 	

@@ -298,10 +298,13 @@ this.initNewSurveyForm = function(blockID,type ,patientId, formName) {
 			case 'Panel' :
 				return this.generateSubPanel(elementObj, elementIndex);
 				break;
+			case 'ButtonGroup' :
+				return this.generateButtonGroup(elementObj, elementIndex);
+				break;
 		}
 		},
 		generateTextBox: function(textBoxObj, elementIndex){
-			row = $('<div class = "col-sm-12 element_row"/>').attr("index", elementIndex);
+			row = $('<div class = "col-sm-12 element_row" style="margin-top: 2px;"/>').attr("index", elementIndex);
 			rowTitle = $('<div class="col-sm-5"/>');
 			rowTitle.append(this.generateCheckBox(textBoxObj.name, textBoxObj.checked, elementIndex));
 			rowRightSide = $('<div class="col-sm-7" />');
@@ -327,7 +330,7 @@ this.initNewSurveyForm = function(blockID,type ,patientId, formName) {
 			return div;
 		},
 		generateDropDown: function(dropDown, elementIndex){
-			row = $('<div class = "col-sm-12 element_row"/>').attr("index", elementIndex);
+			row = $('<div class = "col-sm-12 element_row" style="margin-top: 2px;"/>').attr("index", elementIndex);
 			
 			rowTitle = $('<div class="col-sm-12 "/>');
 			rowTitle.append(this.generateCheckBox(dropDown.name, dropDown.checked, elementIndex));
@@ -359,7 +362,7 @@ this.initNewSurveyForm = function(blockID,type ,patientId, formName) {
 			return row;
 		},
 		generateSubPanel: function(subPanel, subElementIndex){
-			subPanelBlock = $('<div class = "col-sm-12 sub-panel" style="padding-right: 0px;"/>');
+			subPanelBlock = $('<div class = "col-sm-12 sub-panel" style="padding-right: 0px; "/>');
 			subPanelBlock.attr("index",subElementIndex);
 			subPanelBody = $('<div class = "col-sm-12" style="padding-right: 0px; padding-left: 0px;"/>');
 			div = $('<div class="col-sm-12" style="padding-right: 0px;" />');
@@ -371,6 +374,26 @@ this.initNewSurveyForm = function(blockID,type ,patientId, formName) {
 			subPanelBlock.append(subPanelBody);
 			
 			return subPanelBlock;
+		},
+		generateButtonGroup: function(buttonGroup, elementIndex){
+			row = $('<div class = "col-sm-12 element_row" style="margin-top: 2px;"/>').attr("index", elementIndex);
+			rowTitle = $('<div class="col-sm-5"/>');
+			rowTitle.append('<label>' + buttonGroup.name + '<label>');
+			rowRightSide = $('<div class="col-sm-7" />');
+			buttonsDiv = $('<div class="btn-group col-sm-12" data-toggle="buttons" style="padding: 0px"/>');
+			for (var int = 0; int < 4; int++) {
+				if(buttonGroup.choosed == int){
+					buttonsDiv.append('<label class="btn btn-primary active" style=" width: 25%; margin-bottom: 0px;"><input type="radio" name="options">'+ int +' </label>');
+				}else{
+					buttonsDiv.append('<label class="btn btn-primary" style=" width: 25%; margin-bottom: 0px;"><input type="radio" name="options">'+ int +' </label>');
+				}
+				
+				
+			}
+			rowRightSide.append(buttonsDiv);
+			row.append(rowTitle);
+			row.append(rowRightSide);
+			return row;
 		},
 		
 		generateTextField: function(value, checked, elementIndex ){

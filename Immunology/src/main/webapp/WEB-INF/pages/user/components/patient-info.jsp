@@ -90,6 +90,13 @@ display: none;
 								</tr>
 							</thead>
 							<tbody>
+								<c:forEach items="${syndrom.surveys}" var="survey">
+									<tr>
+										<td>${survey.creationDate}</td>
+										<td>${survey.severityLevel}</td>
+										<td>${survey.user.firstName}</td>
+									</tr>
+								</c:forEach>
 							</tbody>
 							<tfoot>
 								<tr>

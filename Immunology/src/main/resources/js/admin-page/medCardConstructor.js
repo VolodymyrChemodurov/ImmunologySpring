@@ -293,6 +293,17 @@ function initEvents(){
 		createTextBox(panelIndex,subPanelIndex,textboxName);
 	});
 	
+	$("#save-groupButton-button").unbind("click");
+	$("#save-groupButton-button").click(function(){
+		var textboxName = $("#group-button-name").val();
+		var root = $("#create-groupButton");
+		var selects = $(root).find("select");
+		var panelIndex = $(selects[0]).val();
+		var subPanelIndex =$(selects[1]).val();
+		createButtonGroup(panelIndex,subPanelIndex,textboxName);
+	});
+	
+	
 	$("#add-value-button").unbind("click");
 	$("#add-value-button").click(function(){
 		var value = $("#dropdownElementValue").val();
@@ -474,6 +485,20 @@ function createDropDown(panelIndex,subPanelIndex,title,values){
  		formObject.panels[panelIndex].elements.push(dropDown);
  	}else{
  		formObject.panels[panelIndex].elements[subPanelIndex].elements.push(dropDown);
+ 	}
+ 	renderPreviewMedForm();
+ 	
+}
+function createButtonGroup(panelIndex,subPanelIndex,title,values){
+	var groupButton = {};
+	groupButton["name"]=title;
+	groupButton["checked"] = false;
+	groupButton["objectType"] ="ButtonGroup";
+	groupButton["choosed"] = 0;
+ 	if(parseInt(subPanelIndex) == -1 || subPanelIndex == null){
+ 		formObject.panels[panelIndex].elements.push(groupButton);
+ 	}else{
+ 		formObject.panels[panelIndex].elements[subPanelIndex].elements.push(groupButton);
  	}
  	renderPreviewMedForm();
  	

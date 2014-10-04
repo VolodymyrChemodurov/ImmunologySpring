@@ -46,6 +46,7 @@
 				<prop key="hibernate.dialect">${db.dialect}</prop>
 				<prop key="showSql">true</prop>
 				<prop key="database">${db.dataBase}</prop>
+				<prop key="hibernate.id.new_generator_mappings">true</prop>
 			</props>
 		</property>
 	</bean>

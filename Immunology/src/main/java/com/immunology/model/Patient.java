@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -20,11 +21,12 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.immunology.model.ui.MedicalCardForm;
 
 @Entity
+@SequenceGenerator(name="patient_sequence", initialValue=40)
 @Table(name = "patient")
 public class Patient {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(generator="patient_sequence")
 	private long id;
 
 	@JsonIgnore

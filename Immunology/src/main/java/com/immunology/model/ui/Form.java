@@ -13,6 +13,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
+import javax.persistence.SequenceGenerator;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
@@ -28,11 +29,12 @@ import com.immunology.model.ui.elements.Panel;
         @JsonSubTypes.Type(value=AnamnesticDataForm.class)
 })
 @Entity
+@SequenceGenerator(name="from_sequence", initialValue=40)
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Form {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
+	@GeneratedValue(generator = "from_sequence", strategy = GenerationType.TABLE)
 	@Column(name = "form_id")
 	private Long id;
 	

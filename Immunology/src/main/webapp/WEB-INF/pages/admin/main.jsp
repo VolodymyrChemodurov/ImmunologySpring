@@ -39,11 +39,19 @@
 							<span class="hidden-xs">Medical Card</span>
 						</a>
 					</li>
-					<li>
-						<a href="#" data-toggle="modal" data-target="#select-syndrom-modal" class="ajax-link">
-							<i class="fa fa-dashboard"></i>
-							<span class="hidden-xs">Anamnestic data</span>
+					
+					
+					<li id="survey-parent" class="dropdown">
+						<a  href="#"  class="dropdown-toggle">
+							<i class="fa fa-user"></i>
+						 	<span class="hidden-xs">Survey Forms</span>
 						</a>
+						<ul class="dropdown-menu">
+							<li><a class="ajax-link" href="#"  data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'anamnestic'">Anamnestic Form</a></li>
+							<li><a class="ajax-link" href="#"  data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'comlaints'">Comlaints Form</a></li>
+							<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'clinicalManifestation'" >Clinical Manifestation Form</a></li>
+							<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'laboratoryData'" >Laboratory Data Form</a></li>
+						</ul>
 					</li>
 				</ul>
 			</div>
@@ -80,7 +88,7 @@
 							</select>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-								<button type="button" class="btn btn-primary" onclick="doAjaxGet('anamnestic'); initAnamnestic($('select[name=syndrrom-names]')[0].value)" data-dismiss="modal">Choose</button>
+								<button type="button" class="btn btn-primary" onclick="doAjaxGet('anamnestic'); initSurveyForm($('select[name=syndrrom-names]')[0].value)" data-dismiss="modal">Choose</button>
 							</div>
 						</div>
 					</div>
@@ -92,6 +100,10 @@
 	</jsp:include>
 	
 	<script type="text/javascript">
+	//neads for recognize who form you try to show;
+	var formType = "None"; 
+	
+	
 	function doAjaxGet(pageName) {
     	$.ajax({
         	type: "GET",

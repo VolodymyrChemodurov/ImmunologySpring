@@ -75,27 +75,28 @@ padding-left: 4px;
 					</div>
 					<div id="tabs-4">
 						<div id="SyrveyDataContainer">
+						<button id="newSurveyButton" type="button" style="width: 20%;" class="btn btn-default btn-sm btn-block">Add new Survey</button>
 						<table
-					class="table table-bordered table-striped table-hover table-heading table-datatable"
-					id="datatable-3">
-					<thead>
-						<tr>
-							<th>Дата створення</th>
-							<th>Ступінь важкості</th>
-							<th>Лікар</th>
-						</tr>
-					</thead>
-					<tbody>
-					<td>Немає жодних обстежень...<td>
-					</tbody>
-					<tfoot>
-						<tr>
-							<th>Дата створення</th>
-							<th>Ступінь важкості</th>
-							<th>Лікар</th>
-						</tr>
-					</tfoot>
-				</table>
+						class="table table-bordered table-striped table-hover table-heading table-datatable"
+						id="datatable-3">
+							<thead>
+								<tr>
+									<th>Дата створення</th>
+									<th>Ступінь важкості</th>
+									<th>Лікар</th>
+								</tr>
+							</thead>
+							<tbody>
+							<td>Немає жодних обстежень...<td>
+							</tbody>
+							<tfoot>
+								<tr>
+									<th>Дата створення</th>
+									<th>Ступінь важкості</th>
+									<th>Лікар</th>
+								</tr>
+							</tfoot>
+						</table>
 						</div>
 					</div>
 					</div>
@@ -139,7 +140,9 @@ var anamnesticData  = new Builder("anamnesticData");
 		$('.form-control').tooltip();
 		Select2Script(DemoSelect2);
 		// Load example of form validation
-		BootstrapValidatorScript(DemoFormValidator);
+		//BootstrapValidatorScript(DemoFormValidator);
+		
+		
 		// New Form Builder //
 		//1) ID Container div 2) Patient Id 3) Form Type;
 		medCard.init('#container', "MedicalCardForm", $('#patient_id').val());
@@ -149,9 +152,12 @@ var anamnesticData  = new Builder("anamnesticData");
 	function initSyndromeEvent(){
 		$("#select_syndrome_button").click(function(){
 			anamnesticData.init('#AnamnesticDataContainer',"AnamnesticDataForm", $('#patient_id').val(), $('#syndrom').val() );
-			console.log("Syndrome object");
-			console.log(anamnesticData.getSyndrom());
 		})
+		$("#newSurveyButton").click(function(){
+			window.location.href='/survey/patientId=' + $("#patient_id").val()+'syndrome=' + $('#syndrom').val();
+			}	
+		);
+		
 	}
 	
 

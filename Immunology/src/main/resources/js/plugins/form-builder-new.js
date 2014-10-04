@@ -9,11 +9,14 @@ function Builder(object_Name) {
 	},
 	this.TYPE = {
 		MED_CARD : "MedicalCardForm",
-		ANAMNESTIC_DATA : "AnamnesticDataForm"
+		ANAMNESTIC_DATA : "AnamnesticDataForm",
+		COMPLAINTS_DATA : "ComplaintsForm",
+		CLINICAL_MANIFESTATIONS_DATA : "ClinicalManifestationsForm",
+		LABORATORY_DATA	: "LaboratoryDataForm"
 	},
 	this.URL = {
 		MED_CARD_URL : "/patients/${id}/medical_card/",
-		ANAMNESTIC_DATA_URL : "/syndromes/patient/${id}/${name}"
+		SYNDROME_DATA_URL : "/syndromes/patient/${id}/${name}"
 	},
 	this.SAVE_BUTTON_URL = {
 		MED_CARD_URL : "/patients/medical_card/update",
@@ -56,6 +59,23 @@ function Builder(object_Name) {
 			this.setForm(formObject);
 			this.renderFormBody(false);
 		}
+		if(formObject.objectType == this.TYPE.COMPLAINTS_DATA){
+			//this.setSyndrom(formObject);
+			this.setForm(formObject);
+			this.renderFormBody(false);
+		}
+		if(formObject.objectType == this.TYPE.CLINICAL_MANIFESTATIONS_DATA){
+			//this.setSyndrom(formObject);
+			this.setForm(formObject);
+			this.renderFormBody(false);
+		}
+		if(formObject.objectType == this.TYPE.LABORATORY_DATA){
+			//this.setSyndrom(formObject);
+			this.setForm(formObject);
+			this.renderFormBody(false);
+		}
+		
+		
 	};
 	
 	this.init = function(blockID,type ,patientId, formName) {
@@ -72,10 +92,16 @@ function Builder(object_Name) {
 			this.renderMedCard();
 		}
 		if(type == this.TYPE.ANAMNESTIC_DATA){
-			this.gettingFormObject("get",this.URL.ANAMNESTIC_DATA_URL, patientId, formName);
+			this.gettingFormObject("get",this.URL.SYNDROME_DATA_URL, patientId, formName);
 			console.log(this.formObject);
 			this.renderFormBody(true);
 		}
+		if(type == this.TYPE.COMPLAINTS_DATA){
+			this.gettingFormObject("get",this.URL.SYNDROME_DATA_URL, patientId, formName);
+			console.log(this.formObject);
+			this.renderFormBody(true);
+		}
+		
 		this.event.init();
 		this.prepareForm();
 	};
@@ -412,6 +438,12 @@ function Builder(object_Name) {
 			saveURL = this.SAVE_BUTTON_URL.ANAMNESTIC_DATA_URL;
 			saveObject = this.syndromObject;
 			saveObject.anamnesticData = this.formObject;
+			
+		}
+		if(this.formObject.objectType == this.TYPE.COMPLAINTS_DATA){
+			saveURL = this.SAVE_BUTTON_URL.ANAMNESTIC_DATA_URL;
+			saveObject = this.syndromObject;
+			saveObject.surveys[0].complaintsForm = this.formObject;
 			
 		}
 		console.log("Try to save this object:");

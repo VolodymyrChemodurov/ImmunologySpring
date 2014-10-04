@@ -13,10 +13,25 @@ function init(){
 	console.log(formObject);
 	
 }
-function initAnamnestic(syndromName){
-	console.log("choosed: " + syndromName);
-	getAnamnesticResouces(getSyndromUrl.replace('{name}',syndromName));
-	console.log(formObject);
+function initSurveyForm(syndromName){
+	if(formType == "anamnestic"){
+		console.log("Show Anamnestic Data Form");
+		getAnamnesticResouces(getSyndromUrl.replace('{name}',syndromName));
+		console.log(formObject);
+	}
+	if(formType == "comlaints"){
+		console.log("Show Comlaints Data Form");
+		getComlaintsResouces(getSyndromUrl.replace('{name}',syndromName));
+	}
+	if(formType == "clinicalManifestation"){
+		console.log("Show Clinical Manifestation Data Form");
+		getClinicalManifestationsResouces(getSyndromUrl.replace('{name}',syndromName));
+	}
+	if(formType == "laboratoryData"){
+		console.log("Show Laboratory Data Form");
+		getLaboratoryResouces(getSyndromUrl.replace('{name}',syndromName));
+	}
+	
 }
 
 function getAnamnesticResouces(url){
@@ -30,9 +45,9 @@ function getAnamnesticResouces(url){
 			formObject = response.anamnesticData;
 			console.log(formObject);
 			if(formObject != null){
-				//initPanelNames();
+				initPanelNames();
 				renderPreviewMedForm();
-				//initOrderValues(formObject);
+				initOrderValues(formObject);
 			}
 		},
 		error: function (request, status, error) {
@@ -42,6 +57,94 @@ function getAnamnesticResouces(url){
 
 	});
 }
+function getComlaintsResouces(url){
+	$.ajax({
+		type : "get",
+		url : url,
+		dataType : "json",
+		async:   false,
+		success : function(response) {
+			syndrom = response;
+			console.log(syndrom);
+			if(response.surveys[0].complaintsForm == null){
+				formObject = {};
+				formObject["panels"] = [];
+				formObject["objectType"] = "ComplaintsForm";
+			}else{
+				formObject = response.surveys[0].complaintsForm;
+			}
+			if(formObject != null){
+				initPanelNames();
+				renderPreviewMedForm();
+				initOrderValues(formObject);
+			}
+		},
+		error: function (request, status, error) {
+			alert("Error in anamnestic data");
+			alert(error);
+	    }
+
+	});
+}
+function getClinicalManifestationsResouces(url){
+	$.ajax({
+		type : "get",
+		url : url,
+		dataType : "json",
+		async:   false,
+		success : function(response) {
+			syndrom = response;
+			console.log(syndrom);
+			if(response.surveys[0].clinicalManifestationsForm == null){
+				formObject = {};
+				formObject["panels"] = [];
+				formObject["objectType"] = "ClinicalManifestationsForm";
+			}else{
+				formObject = response.surveys[0].clinicalManifestationsForm;
+			}
+			if(formObject != null){
+				initPanelNames();
+				renderPreviewMedForm();
+				initOrderValues(formObject);
+			}
+		},
+		error: function (request, status, error) {
+			alert("Error in anamnestic data");
+			alert(error);
+	    }
+
+	});
+}
+function getLaboratoryResouces(url){
+	$.ajax({
+		type : "get",
+		url : url,
+		dataType : "json",
+		async:   false,
+		success : function(response) {
+			syndrom = response;
+			console.log(syndrom);
+			if(response.surveys[0].laboratoryDataForm == null){
+				formObject = {};
+				formObject["panels"] = [];
+				formObject["objectType"] = "LaboratoryDataForm";
+			}else{
+				formObject = response.surveys[0].laboratoryDataForm;
+			}
+			if(formObject != null){
+				initPanelNames();
+				renderPreviewMedForm();
+				initOrderValues(formObject);
+			}
+		},
+		error: function (request, status, error) {
+			alert("Error in anamnestic data");
+			alert(error);
+	    }
+
+	});
+}
+
 function getResouces(){
 	$.ajax({
 		type : "get",
@@ -250,6 +353,19 @@ function initEvents(){
 		if(formObject.objectType == "AnamnesticDataForm"){
 			saveAnamnesticData();
 		}
+		if(formObject.objectType == "ComplaintsForm"){
+			syndrom.surveys[0].complaintsForm = formObject;
+			saveSyndromData(syndrom);
+		}
+		if(formObject.objectType == "ClinicalManifestationsForm"){
+			syndrom.surveys[0].clinicalManifestationsForm = formObject;
+			saveSyndromData(syndrom);
+		}
+		if(formObject.objectType == "LaboratoryDataForm"){
+			syndrom.surveys[0].laboratoryDataForm = formObject;
+			saveSyndromData(syndrom);
+		}
+		
 		
 	});
 	
@@ -290,6 +406,22 @@ function saveAnamnesticData() {
 	    }});
 	
 }
+function saveSyndromData(syndrom){
+	$.ajax({
+		  type:"POST", 
+	      url:"/syndromes/template/{name}".replace("{name}", syndrom.name),
+	      data: JSON.stringify(syndrom),
+	      contentType: "application/json; charset=utf-8",
+	      dataType: "json",
+	      success: function(response){
+	    	  console.log("Success Save");
+	      },
+		
+		error: function (request, status, error) {
+			alert(error);
+	    }});
+}
+
 ///END EVENTS
 
 //////////MED.CARD ELEMENTS//////
@@ -324,10 +456,11 @@ function createTextBox(panelIndex,subPanelIndex,title){
  	textBox["checked"] = false;
  	textBox["objectType"] = "TextBox";
  	textBox["text"] = "";
- 	if(parseInt(subPanelIndex) == -1){
+ 	if(parseInt(subPanelIndex) == -1 || subPanelIndex == null){
  		formObject.panels[panelIndex].elements.push(textBox);
  	}else{
  		formObject.panels[panelIndex].elements[subPanelIndex].elements.push(textBox);
+ 		
  	}
  	renderPreviewMedForm();
 }

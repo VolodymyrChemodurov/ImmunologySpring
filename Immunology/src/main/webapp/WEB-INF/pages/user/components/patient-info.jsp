@@ -4,6 +4,9 @@
 .sub-panel .col-sm-7{
 padding-left: 4px;
 }
+.DTTT{
+display: none;
+}
 
 </style>
 <div class="row">
@@ -75,7 +78,7 @@ padding-left: 4px;
 					</div>
 					<div id="tabs-4">
 						<div id="SyrveyDataContainer">
-						<button id="newSurveyButton" type="button" style="width: 20%;" class="btn btn-default btn-sm btn-block">Add new Survey</button>
+						<div class="box-content no-padding">
 						<table
 						class="table table-bordered table-striped table-hover table-heading table-datatable"
 						id="datatable-3">
@@ -87,7 +90,6 @@ padding-left: 4px;
 								</tr>
 							</thead>
 							<tbody>
-							<td>Немає жодних обстежень...<td>
 							</tbody>
 							<tfoot>
 								<tr>
@@ -97,6 +99,8 @@ padding-left: 4px;
 								</tr>
 							</tfoot>
 						</table>
+						</div>
+						<button id="newSurveyButton" type="button" style="width: 20%;" class="btn btn-primary btn-sm btn-block">Add new Survey</button>
 						</div>
 					</div>
 					</div>
@@ -132,7 +136,7 @@ var anamnesticData  = new Builder("anamnesticData");
 		$('#input_date').datepicker({
 			setDate : new Date()
 		});
-		
+		TestTable3();
 		initSyndromeEvent();
 		
 		// Load Timepicker plugin

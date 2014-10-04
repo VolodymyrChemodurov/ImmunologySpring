@@ -16,7 +16,8 @@ function Builder(object_Name) {
 	},
 	this.URL = {
 		MED_CARD_URL : "/patients/${id}/medical_card/",
-		SYNDROME_DATA_URL : "/syndromes/patient/${id}/${name}"
+		SYNDROME_DATA_URL : "/syndromes/patient/${id}/${name}",
+		SYNDRONE_TEMPLATR_URL :  "/syndromes/template/${name}"
 	},
 	this.SAVE_BUTTON_URL = {
 		MED_CARD_URL : "/patients/medical_card/update",
@@ -106,6 +107,38 @@ function Builder(object_Name) {
 		this.prepareForm();
 	};
 	
+this.initNewSurveyForm = function(blockID,type ,patientId, formName) {
+		
+		this.formName = formName;
+		this.patientId = patientId;
+		this.setContainer($(blockID));
+		this.container.html("");
+		this.container.attr("object",this.objectName);
+		
+		if(type == this.TYPE.LABORATORY_DATA){
+			this.gettingLaboratoryDataObject("get",this.URL.SYNDRONE_TEMPLATR_URL, patientId, formName);
+			console.log(this.formObject);
+			this.renderFormBody(true);
+		}
+		if(type == this.TYPE.COMPLAINTS_DATA){
+			this.gettingComplaintsDataObject("get",this.URL.SYNDRONE_TEMPLATR_URL, patientId, formName);
+			console.log(this.formObject);
+			this.renderFormBody(true);
+		}
+		if(type == this.TYPE.CLINICAL_MANIFESTATIONS_DATA){
+			this.gettingClinicalManifestationDataObject("get",this.URL.SYNDRONE_TEMPLATR_URL, patientId, formName);
+			console.log(this.formObject);
+			this.renderFormBody(true);
+		}
+		
+		
+		this.event.init();
+		this.prepareForm();
+	};
+	
+	
+	
+	
 	this.renderMedCard = function() {
 		this.renderMedCardFields();
 		this.renderFormBody(true);
@@ -169,6 +202,69 @@ function Builder(object_Name) {
 	},	
 	
 	
+	
+	//////////////////////////////////////////////////TO DO: NEED REFACTORING
+	this.gettingLaboratoryDataObject = function(type, url, patientID, formName){
+		var form;
+		var syndrom;
+		console.log(url.replace("${id}", patientID).replace("${name}", formName));
+		$.ajax({
+			type : type,
+			url :  url.replace("${id}", patientID).replace("${name}", formName),
+			dataType : "json",
+			async:   false,
+			success : function(response) {
+					syndrom = response;
+					form = response.surveys[0].laboratoryDataForm;
+			},
+			error: function (request, status, error) {
+				alert(error);
+		    }
+		});
+		this.setForm(form);
+		this.setSyndrom(syndrom);
+	},	
+	this.gettingComplaintsDataObject = function(type, url, patientID, formName){
+		var form;
+		var syndrom;
+		console.log(url.replace("${id}", patientID).replace("${name}", formName));
+		$.ajax({
+			type : type,
+			url :  url.replace("${id}", patientID).replace("${name}", formName),
+			dataType : "json",
+			async:   false,
+			success : function(response) {
+					syndrom = response;
+					form = response.surveys[0].complaintsForm;
+			},
+			error: function (request, status, error) {
+				alert(error);
+		    }
+		});
+		this.setForm(form);
+		this.setSyndrom(syndrom);
+	},	
+	this.gettingClinicalManifestationDataObject = function(type, url, patientID, formName){
+		var form;
+		var syndrom;
+		console.log(url.replace("${id}", patientID).replace("${name}", formName));
+		$.ajax({
+			type : type,
+			url :  url.replace("${id}", patientID).replace("${name}", formName),
+			dataType : "json",
+			async:   false,
+			success : function(response) {
+					syndrom = response;
+					form = response.surveys[0].clinicalManifestationsForm;
+			},
+			error: function (request, status, error) {
+				alert(error);
+		    }
+		});
+		this.setForm(form);
+		this.setSyndrom(syndrom);
+	},	
+	//////////////////////////////////////////////TO DO: REFACTOR THIS FUCKING CODE
 	
 	
 	
@@ -390,7 +486,7 @@ function Builder(object_Name) {
 				$(select).removeAttr("disabled");
 			}else{
 				$(input).attr("disabled","disabled");
-				$(select).attr("disabled","true");
+			//	$(select).attr("disabled","true");
 			}	
 			
 		});

@@ -7,7 +7,7 @@ import com.immunology.model.User;
 
 public interface UserService {
 
-	User createUser(User user);
+	User createUser(User user, String role);
 	
 	User updateUser(User user);
 	

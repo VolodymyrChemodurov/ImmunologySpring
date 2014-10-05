@@ -29,12 +29,12 @@ import com.immunology.model.ui.elements.TextBox;
         @JsonSubTypes.Type(value=TextBox.class)
 })
 @Entity
-@SequenceGenerator(name="elements_sequence", initialValue=40)
+@SequenceGenerator(name="element_sequence", initialValue=40)
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Element {
 
 	@Id
-	@GeneratedValue(generator = "elements_sequence", strategy = GenerationType.TABLE)
+	@GeneratedValue(generator = "element_sequence", strategy = GenerationType.TABLE)
 	@Column(name = "element_id")
 	protected Long id;
 	

@@ -1,5 +1,6 @@
 package com.immunology.model;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -12,16 +13,18 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "users")
+@SequenceGenerator(name="user_sequence", initialValue=10)
 public class User {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(generator = "user_sequence")
 	private long id;
 	
 	@Column(name = "first_name")
@@ -42,7 +45,7 @@ public class User {
 	@JoinTable(name = "user_roles", 
 				joinColumns = {@JoinColumn(name = "user_id")},
 				inverseJoinColumns = {@JoinColumn(name = "role_id")})
-	private Set<Role> roles;
+	private Set<Role> roles = new HashSet<Role>();
 	
 	@JsonIgnore
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

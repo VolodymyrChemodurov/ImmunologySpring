@@ -1,8 +1,6 @@
 package com.immunology.logic.controller;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,8 +21,6 @@ import com.immunology.logic.service.SyndromeService;
 import com.immunology.logic.service.UserRoleService;
 import com.immunology.logic.service.UserService;
 import com.immunology.logic.utils.UserUtils;
-import com.immunology.logic.utils.enums.UserRoles;
-import com.immunology.model.Role;
 import com.immunology.model.ui.MedicalCardForm;
 
 @Controller
@@ -70,13 +66,9 @@ public class AdminController {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public String createNewPatinet(@RequestParam("user_role") String role, com.immunology.model.User user, Model model, HttpServletResponse response) {	
-		Set<Role> roles = new HashSet<Role>();
-		roles.add(userRoleService.getRoleByName(UserRoles.valueOf(role)));
-		user.setRoles(roles);
-		userService.createUser(user);
+		userService.createUser(user, role);
 		return "redirect:/admin";
 	}
-	
 	
 	@RequestMapping(value = "/anamnestic", method = RequestMethod.GET)
 	public ModelAndView getAnamnestic(ModelAndView model) {

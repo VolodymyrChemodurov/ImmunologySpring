@@ -16,7 +16,8 @@ function Builder(object_Name) {
 	},
 	this.URL = {
 		MED_CARD_URL : "/patients/${id}/medical_card/",
-		SYNDROME_DATA_URL : "/syndromes/patient/${id}/${name}"
+		SYNDROME_DATA_URL : "/syndromes/patient/${id}/${name}",
+		SYNDRONE_TEMPLATR_URL :  "/syndromes/template/${name}"
 	},
 	this.SAVE_BUTTON_URL = {
 		MED_CARD_URL : "/patients/medical_card/update",
@@ -106,6 +107,38 @@ function Builder(object_Name) {
 		this.prepareForm();
 	};
 	
+this.initNewSurveyForm = function(blockID,type ,patientId, formName) {
+		
+		this.formName = formName;
+		this.patientId = patientId;
+		this.setContainer($(blockID));
+		this.container.html("");
+		this.container.attr("object",this.objectName);
+		
+		if(type == this.TYPE.LABORATORY_DATA){
+			this.gettingLaboratoryDataObject("get",this.URL.SYNDRONE_TEMPLATR_URL, patientId, formName);
+			console.log(this.formObject);
+			this.renderFormBody(true);
+		}
+		if(type == this.TYPE.COMPLAINTS_DATA){
+			this.gettingComplaintsDataObject("get",this.URL.SYNDRONE_TEMPLATR_URL, patientId, formName);
+			console.log(this.formObject);
+			this.renderFormBody(true);
+		}
+		if(type == this.TYPE.CLINICAL_MANIFESTATIONS_DATA){
+			this.gettingClinicalManifestationDataObject("get",this.URL.SYNDRONE_TEMPLATR_URL, patientId, formName);
+			console.log(this.formObject);
+			this.renderFormBody(true);
+		}
+		
+		
+		this.event.init();
+		this.prepareForm();
+	};
+	
+	
+	
+	
 	this.renderMedCard = function() {
 		this.renderMedCardFields();
 		this.renderFormBody(true);
@@ -170,6 +203,69 @@ function Builder(object_Name) {
 	
 	
 	
+	//////////////////////////////////////////////////TO DO: NEED REFACTORING
+	this.gettingLaboratoryDataObject = function(type, url, patientID, formName){
+		var form;
+		var syndrom;
+		console.log(url.replace("${id}", patientID).replace("${name}", formName));
+		$.ajax({
+			type : type,
+			url :  url.replace("${id}", patientID).replace("${name}", formName),
+			dataType : "json",
+			async:   false,
+			success : function(response) {
+					syndrom = response;
+					form = response.surveys[0].laboratoryDataForm;
+			},
+			error: function (request, status, error) {
+				alert(error);
+		    }
+		});
+		this.setForm(form);
+		this.setSyndrom(syndrom);
+	},	
+	this.gettingComplaintsDataObject = function(type, url, patientID, formName){
+		var form;
+		var syndrom;
+		console.log(url.replace("${id}", patientID).replace("${name}", formName));
+		$.ajax({
+			type : type,
+			url :  url.replace("${id}", patientID).replace("${name}", formName),
+			dataType : "json",
+			async:   false,
+			success : function(response) {
+					syndrom = response;
+					form = response.surveys[0].complaintsForm;
+			},
+			error: function (request, status, error) {
+				alert(error);
+		    }
+		});
+		this.setForm(form);
+		this.setSyndrom(syndrom);
+	},	
+	this.gettingClinicalManifestationDataObject = function(type, url, patientID, formName){
+		var form;
+		var syndrom;
+		console.log(url.replace("${id}", patientID).replace("${name}", formName));
+		$.ajax({
+			type : type,
+			url :  url.replace("${id}", patientID).replace("${name}", formName),
+			dataType : "json",
+			async:   false,
+			success : function(response) {
+					syndrom = response;
+					form = response.surveys[0].clinicalManifestationsForm;
+			},
+			error: function (request, status, error) {
+				alert(error);
+		    }
+		});
+		this.setForm(form);
+		this.setSyndrom(syndrom);
+	},	
+	//////////////////////////////////////////////TO DO: REFACTOR THIS FUCKING CODE
+	
 	
 	
 // -------------	this UTILES-------------
@@ -202,10 +298,13 @@ function Builder(object_Name) {
 			case 'Panel' :
 				return this.generateSubPanel(elementObj, elementIndex);
 				break;
+			case 'ButtonGroup' :
+				return this.generateButtonGroup(elementObj, elementIndex);
+				break;
 		}
 		},
 		generateTextBox: function(textBoxObj, elementIndex){
-			row = $('<div class = "col-sm-12 element_row"/>').attr("index", elementIndex);
+			row = $('<div class = "col-sm-12 element_row" style="margin-top: 2px;"/>').attr("index", elementIndex);
 			rowTitle = $('<div class="col-sm-5"/>');
 			rowTitle.append(this.generateCheckBox(textBoxObj.name, textBoxObj.checked, elementIndex));
 			rowRightSide = $('<div class="col-sm-7" />');
@@ -231,7 +330,7 @@ function Builder(object_Name) {
 			return div;
 		},
 		generateDropDown: function(dropDown, elementIndex){
-			row = $('<div class = "col-sm-12 element_row"/>').attr("index", elementIndex);
+			row = $('<div class = "col-sm-12 element_row" style="margin-top: 2px;"/>').attr("index", elementIndex);
 			
 			rowTitle = $('<div class="col-sm-12 "/>');
 			rowTitle.append(this.generateCheckBox(dropDown.name, dropDown.checked, elementIndex));
@@ -263,7 +362,7 @@ function Builder(object_Name) {
 			return row;
 		},
 		generateSubPanel: function(subPanel, subElementIndex){
-			subPanelBlock = $('<div class = "col-sm-12 sub-panel" style="padding-right: 0px;"/>');
+			subPanelBlock = $('<div class = "col-sm-12 sub-panel" style="padding-right: 0px; "/>');
 			subPanelBlock.attr("index",subElementIndex);
 			subPanelBody = $('<div class = "col-sm-12" style="padding-right: 0px; padding-left: 0px;"/>');
 			div = $('<div class="col-sm-12" style="padding-right: 0px;" />');
@@ -275,6 +374,26 @@ function Builder(object_Name) {
 			subPanelBlock.append(subPanelBody);
 			
 			return subPanelBlock;
+		},
+		generateButtonGroup: function(buttonGroup, elementIndex){
+			row = $('<div class = "col-sm-12 element_row" style="margin-top: 2px;"/>').attr("index", elementIndex);
+			rowTitle = $('<div class="col-sm-5"/>');
+			rowTitle.append('<label>' + buttonGroup.name + '<label>');
+			rowRightSide = $('<div class="col-sm-7" />');
+			buttonsDiv = $('<div class="btn-group col-sm-12" data-toggle="buttons" style="padding: 0px"/>');
+			for (var int = 0; int < 4; int++) {
+				if(buttonGroup.choosed == int){
+					buttonsDiv.append('<label class="btn btn-primary active" style=" width: 25%; margin-bottom: 0px;"><input type="radio" name="options">'+ int +' </label>');
+				}else{
+					buttonsDiv.append('<label class="btn btn-primary" style=" width: 25%; margin-bottom: 0px;"><input type="radio" name="options">'+ int +' </label>');
+				}
+				
+				
+			}
+			rowRightSide.append(buttonsDiv);
+			row.append(rowTitle);
+			row.append(rowRightSide);
+			return row;
 		},
 		
 		generateTextField: function(value, checked, elementIndex ){
@@ -390,7 +509,7 @@ function Builder(object_Name) {
 				$(select).removeAttr("disabled");
 			}else{
 				$(input).attr("disabled","disabled");
-				$(select).attr("disabled","true");
+			//	$(select).attr("disabled","true");
 			}	
 			
 		});

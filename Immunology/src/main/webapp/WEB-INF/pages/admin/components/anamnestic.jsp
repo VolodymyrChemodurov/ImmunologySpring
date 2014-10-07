@@ -34,9 +34,14 @@
 				      Create DropDown
 				    </a>
 				  </li>
-				   <li class="active">
+				  <li class="active">
 				    <a href="#" data-toggle="modal" data-target="#create-textbox">
 				      Create TextBox
+				    </a>
+				  </li>
+				  <li class="active">
+				    <a href="#" data-toggle="modal" data-target="#create-groupButton">
+				      Create GroupButton
 				    </a>
 				  </li>
 				  <li class="active">

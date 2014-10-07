@@ -135,9 +135,9 @@ var laboratoryData  = new Builder("laboratoryData");
 $(document).ready(function() {
 	$("#tabs").tabs();
 	$("#tabs").css("display", "inline");
-	
-	laboratoryData.init('#laboratoryData', "LaboratoryDataForm", $('#patient_id').val());
-	
+	complaintsData.initNewSurveyForm("#complaints", "ComplaintsForm", $('#patient_id').val(), "Test syndrome") ;
+	laboratoryData.initNewSurveyForm('#laboratoryData', "LaboratoryDataForm", $('#patient_id').val(), "Test syndrome");
+	clinicalManifestationData.initNewSurveyForm('#clinicalManifestations', "ClinicalManifestationsForm", $('#patient_id').val(), "Test syndrome");
 });
 
 function doAjaxGet(pageName) {

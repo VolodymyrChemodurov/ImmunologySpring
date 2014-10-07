@@ -39,6 +39,12 @@
 							<span class="hidden-xs">Medical Card</span>
 						</a>
 					</li>
+					<li>
+						<a href="#"  data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'anamnestic'" class="ajax-link">
+							<i class="fa fa-dashboard"></i>
+							<span class="hidden-xs">Anamnestic Data</span>
+						</a>
+					</li>
 					
 					
 					<li id="survey-parent" class="dropdown">
@@ -47,7 +53,6 @@
 						 	<span class="hidden-xs">Survey Forms</span>
 						</a>
 						<ul class="dropdown-menu">
-							<li><a class="ajax-link" href="#"  data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'anamnestic'">Anamnestic Form</a></li>
 							<li><a class="ajax-link" href="#"  data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'comlaints'">Comlaints Form</a></li>
 							<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'clinicalManifestation'" >Clinical Manifestation Form</a></li>
 							<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'laboratoryData'" >Laboratory Data Form</a></li>
@@ -68,6 +73,7 @@
 			<jsp:include page="/WEB-INF/pages/admin/components/new-sub-panel-modal.jsp"></jsp:include>
 			<jsp:include page="/WEB-INF/pages/admin/components/new-textbox-modal.jsp"></jsp:include>
 			<jsp:include page="/WEB-INF/pages/admin/components/new-dropdown-modal.jsp"></jsp:include>
+			<jsp:include page="/WEB-INF/pages/admin/components/new-group-button.jsp"></jsp:include>
 			<jsp:include page="/WEB-INF/pages/admin/components/remove-element-modal.jsp"></jsp:include>
 			<!-- Anamnestic DATA -->
 			<div class="modal fade" id="select-syndrom-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

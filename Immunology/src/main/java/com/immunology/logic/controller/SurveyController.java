@@ -33,9 +33,12 @@ public class SurveyController {
 	private PatientService patientService;
 	
 	@RequestMapping(value = "/patientId={id}syndrome={syndromeName}", method = RequestMethod.GET)
-	public String  getUserSyndromes(Model model, @PathVariable("id") int patientId, @PathVariable("syndromeName") String syndromeName) {
+	public String  getUserSyndromes(Model model, @PathVariable("id") long patientId, @PathVariable("syndromeName") String syndromeName) {
 		User user = UserUtils.getCurrentUser();
 		model.addAttribute("user", userService.getUserByLogin(user.getUsername()));
+		
+		
+		model.addAttribute("syndrom", syndromeService.getPatientSyndrome(patientId, syndromeName));
 		model.addAttribute("patient", patientService.getPatientById(patientId));
 		return "user/survey";
 	}

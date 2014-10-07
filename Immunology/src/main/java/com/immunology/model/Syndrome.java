@@ -2,6 +2,7 @@ package com.immunology.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,7 +34,7 @@ public class Syndrome {
 	@JoinColumn(name = "patient_id")
 	private Patient patient;
 	
-	@OneToOne(mappedBy="disease")
+	@OneToOne(mappedBy="disease", cascade=CascadeType.ALL)
 	@JsonManagedReference("anamnestic_reference")
 	private AnamnesticDataForm anamnesticData;
 	

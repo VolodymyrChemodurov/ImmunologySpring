@@ -115,10 +115,4 @@ public class PatientController {
 		
 		return new ModelAndView("user/components/all-patients").addObject("allPatients",patients);
     }
-	@RequestMapping(value="/getAll",  method=RequestMethod.GET)
-    public @ResponseBody List<Patient> getAllPatientsInJSON() {
-		List<Patient> patients =  patientService.getAllPatients();
-		System.out.println(patients);
-		return patients;
-    }
 }

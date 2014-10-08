@@ -37,8 +37,7 @@ public class CabinetController {
 	@RequestMapping(value="/analytic/charts",  method=RequestMethod.GET)
     public ModelAndView getAnalyticCharts( Model model ) {
 		User user = UserUtils.getCurrentUser();
-		Set<Patient> myPatients = userService.getUserByLogin(user.getUsername()).getPatients();
-        
+		Set<Patient> myPatients = userService.getUserByLogin(user.getUsername()).getPatients();        
 		return new ModelAndView( "user/components/analytic-charts").addObject("myPatients",myPatients);
     }
 	

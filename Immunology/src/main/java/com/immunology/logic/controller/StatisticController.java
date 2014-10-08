@@ -25,4 +25,5 @@ public class StatisticController {
 	public @ResponseBody List retrieveMedicalCardCreationStatistic() {
 		return statisticService.retrieveMedicalCardCreationStatistic();
 	}
+	
 }

@@ -1,4 +1,3 @@
-
 <!--End Container-->
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <!--<script src="http://code.jquery.com/jquery.js"></script>-->
@@ -24,3 +23,6 @@
 <script src="${param.baseURL}/resources/js/plugins/field-handler.js"></script>
 <!-- ADMIN page -->
 <script src="${param.baseURL}/resources/js/admin-page/medCardConstructor.js"></script>
+
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>

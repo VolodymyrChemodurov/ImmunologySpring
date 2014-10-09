@@ -30,32 +30,50 @@
 						</a>
 						<ul class="dropdown-menu">
 							<li><a class="ajax-link" href="#"  onclick="doAjaxGet('/users');">All users</a></li>
-							<li><a class="ajax-link" href="#" onclick="doAjaxGet('/user/create');">Додати нового користувача</a></li>
+							<li><a class="ajax-link" href="#" onclick="doAjaxGet('/user/create');">Add New User</a></li>
 						</ul>
 					</li>
 					<li>
 						<a href="#" onclick="doAjaxGet('/medcard');" class="ajax-link">
-							<i class="fa fa-dashboard"></i>
+							<i class="fa fa-file-o"></i>
 							<span class="hidden-xs">Medical Card</span>
 						</a>
 					</li>
-					<li>
-						<a href="#"  data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'anamnestic'" class="ajax-link">
-							<i class="fa fa-dashboard"></i>
-							<span class="hidden-xs">Anamnestic Data</span>
-						</a>
-					</li>
+					
 					
 					
 					<li id="survey-parent" class="dropdown">
 						<a  href="#"  class="dropdown-toggle">
-							<i class="fa fa-user"></i>
+							<i class="fa fa-pencil-square-o"></i>
 						 	<span class="hidden-xs">Survey Forms</span>
 						</a>
 						<ul class="dropdown-menu">
-							<li><a class="ajax-link" href="#"  data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'comlaints'">Comlaints Form</a></li>
-							<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'clinicalManifestation'" >Clinical Manifestation Form</a></li>
-							<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'laboratoryData'" >Laboratory Data Form</a></li>
+						<li class="dropdown">
+							<li>
+								<a href="#"  data-toggle="modal" data-target="#new-syndrom-modal" class="ajax-link">
+									<span class="hidden-xs">New Syndrom</span>
+								</a>
+							</li>
+							
+							<li>
+								<a href="#"  data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'anamnestic'" class="ajax-link">
+									<span class="hidden-xs">Anamnestic Data</span>
+								</a>
+							</li>
+						
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle active-parent active">
+									<i class="fa fa-plus-square"></i>
+									<span class="hidden-xs">Survey Forms</span>
+								</a>
+								<ul class="dropdown-menu" style="display: block;">
+									<li><a class="ajax-link" href="#"  data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'comlaints'">Comlaints Form</a></li>
+									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'clinicalManifestation'" >Clinical Manifestation Form</a></li>
+									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'laboratoryData'" >Laboratory Data Form</a></li>
+	
+								</ul>
+							</li>
+						</li>
 						</ul>
 					</li>
 				</ul>
@@ -100,13 +118,44 @@
 					</div>
 				</div>
 			</div>
+			<!-- NEW SYNDROM DATA -->
+			<div class="modal fade" id="new-syndrom-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">
+								<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+							</button>
+							<h4 class="modal-title" id="myModalLabel">Syndroms</h4>
+						</div>
+						<div class="modal-body">
+						
+							<label class="col-sm-12 control-label">Set syndrom name:</label>
+							<input type="text" class="form-control" id="new-syndrom-name">
+							
+							<label class="col-sm-12 control-label">Select syndrom as a parent syndrom</label> 
+							<select name="parent-syndrom-name">
+							<option>None</option>
+							<c:forEach items="${syndromes}" var="syndrome">
+    							<option>${syndrome}</option>
+							</c:forEach>
+							</select>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								<button type="button" id="save-syndrom-button" class="btn btn-primary" data-dismiss="modal">Save</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
 	
 	<jsp:include page="/WEB-INF/pages/base-scripts.jsp">
 		<jsp:param value="${baseURL}" name="baseURL"/>
 	</jsp:include>
 	
 	<script type="text/javascript">
-	//neads for recognize who form you try to show;
+	//neads for recognize what form you try to show;
 	var formType = "None"; 
 	
 	
@@ -120,9 +169,72 @@
         	}
     	});
 	}
+	function reloadPageUSingUrl(url){
+		$.ajax({
+        	type: "GET",
+        	async:   false,
+        	url: url,
+        	success: function(response) {
+            	$("#content").html(response);
+        	}
+    	});
+	}
 	$(document).ready(function(){
 		doAjaxGet('/users');
+		
+		$("#save-syndrom-button").click(function(){
+			createNewSyndrom();	
 		});
+		
+	});
+	
+	function createNewSyndrom(){
+		var syndromName = $("#new-syndrom-modal").find("input").val();
+		var parentSyndromName = $("#new-syndrom-modal").find("select").val(); 
+		var newSyndromObject = {};
+		
+		if(parentSyndromName == "None"){
+			newSyndromObject = {};
+			newSyndromObject["name"] = syndromName;
+			newSyndromObject["surveys"] = [];
+		}else{
+		// Get Parent Template;
+		$.ajax({
+			type : "get",
+			url : "/syndromes/template/{name}".replace("{name}", parentSyndromName),
+			dataType : "json",
+			async:   false,
+			success : function(response) {
+				newSyndromObject = response;
+				newSyndromObject.name = syndromName
+			},
+			error: function (request, status, error) {
+				alert(error);
+		    }
+
+		});
+			
+		}
+		
+		//Save new Syndrom;
+		$.ajax({
+			  type:"POST", 
+		      url:"/syndromes/template",
+		      data: JSON.stringify(newSyndromObject),
+		      contentType: "application/json; charset=utf-8",
+		      dataType: "json",
+		      async:   false,
+		      success: function(response){
+		    	  console.log("Success Save");
+		      },
+			
+			error: function (request, status, error) {
+				alert(error);
+		}});
+		
+	}
+	
+	
 	</script>
 	
 </body>

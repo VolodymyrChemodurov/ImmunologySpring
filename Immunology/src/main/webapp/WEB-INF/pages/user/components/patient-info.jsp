@@ -78,7 +78,7 @@ display: none;
 					</div>
 					<div id="tabs-4">
 						<div id="SyrveyDataContainer">
-						<div class="box-content no-padding">
+						<div class="box-content no-padding" style="border: 2px solid; border-color: beige; border-radius: 5px;">
 						<table
 						class="table table-bordered table-striped table-hover table-heading table-datatable"
 						id="datatable-3">
@@ -107,7 +107,7 @@ display: none;
 							</tfoot>
 						</table>
 						</div>
-						<button id="newSurveyButton" type="button" style="width: 20%;" class="btn btn-primary btn-sm btn-block">Add new Survey</button>
+						<button id="newSurveyButton" type="button" style="width: 20%; height: 35px; margin-top: 10px;" class="btn btn-primary btn-sm btn-block">Add new Survey</button>
 						</div>
 					</div>
 					</div>

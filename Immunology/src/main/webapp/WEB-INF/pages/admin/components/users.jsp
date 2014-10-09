@@ -43,7 +43,7 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${users}" var="user"> 
-							<tr>
+							<tr  onclick="reloadPageUSingUrl('users/${user.id}')">
 								<td>${user.firstName}</td>
 								<td>${user.lastName}</td>
 								<td>${user.middleName}</td>

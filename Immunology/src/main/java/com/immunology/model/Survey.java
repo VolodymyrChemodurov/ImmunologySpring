@@ -2,6 +2,7 @@ package com.immunology.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -46,15 +47,15 @@ public class Survey {
 	@JsonBackReference("surveys_reference")
 	private Syndrome disease;
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.MERGE)
 	@JoinColumn(name = "complaints_form_id")
 	private ComplaintsForm complaintsForm;
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.MERGE)
 	@JoinColumn(name = "clinical_manifestations_form_id")
 	private ClinicalManifestationsForm clinicalManifestationsForm;
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.MERGE)
 	@JoinColumn(name = "laboratory_data_form_id")
 	private LaboratoryDataForm laboratoryDataForm;
 	

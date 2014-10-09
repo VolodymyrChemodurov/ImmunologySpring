@@ -98,4 +98,5 @@ public class SyndromeController {
 	public @ResponseBody Syndrome getSyndromeByName(@PathVariable("name") String templateName) {
 		return syndromeService.getSyndromeByName(templateName);
 	}
+	
 }

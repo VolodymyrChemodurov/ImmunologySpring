@@ -78,7 +78,7 @@ display: none;
 					</div>
 					<div id="tabs-4">
 						<div id="SyrveyDataContainer">
-						<div class="box-content no-padding">
+						<div class="box-content no-padding" style="border: 2px solid; border-radius: 25px;">
 						<table
 						class="table table-bordered table-striped table-hover table-heading table-datatable"
 						id="datatable-3">
@@ -107,7 +107,7 @@ display: none;
 							</tfoot>
 						</table>
 						</div>
-						<button id="newSurveyButton" type="button" style="width: 20%;" class="btn btn-primary btn-sm btn-block">Add new Survey</button>
+						<button id="newSurveyButton" type="button" style="width: 20%; margin-top: 10px; height: 30px;" class="btn btn-primary btn-sm btn-block">Add new Survey</button>
 						</div>
 					</div>
 					</div>
@@ -122,6 +122,8 @@ display: none;
 
 
 <script>
+SYNDROME_DATA_URL : "/syndromes/patient/${id}/${name}";
+
 var medCard = new Builder("medCard");
 var anamnesticData  = new Builder("anamnesticData");
 
@@ -162,7 +164,22 @@ var anamnesticData  = new Builder("anamnesticData");
 	});
 	function initSyndromeEvent(){
 		$("#select_syndrome_button").click(function(){
-			anamnesticData.init('#AnamnesticDataContainer',"AnamnesticDataForm", $('#patient_id').val(), $('#syndrom').val() );
+			var id = $('#patient_id').val();
+			var syndrom_name = $('#syndrom').val();
+			anamnesticData.init('#AnamnesticDataContainer',"AnamnesticDataForm", id , syndrom_name );
+			$.ajax({
+				type : type,
+				url :  SYNDROME_DATA_URL.replace("${id}", id).replace("${name}", syndrom_name),
+				dataType : "json",
+				async:   false,
+				success : function(response) {
+					
+				},
+				error: function (request, status, error) {
+					alert(error);
+			    }
+			});
+		
 		})
 		$("#newSurveyButton").click(function(){
 			window.location.href='/survey/patientId=' + $("#patient_id").val()+'syndrome=' + $('#syndrom').val();

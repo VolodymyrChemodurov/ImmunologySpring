@@ -21,6 +21,10 @@ public class ButtonGroup extends Element{
 	public void setChoosed(int choosed) {
 		this.choosed = choosed;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "ButtonGroup [choosed=" + choosed + "]";
+	}
 	
 }

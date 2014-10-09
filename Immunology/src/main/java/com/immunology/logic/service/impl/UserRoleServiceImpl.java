@@ -17,7 +17,6 @@ public class UserRoleServiceImpl implements UserRoleService{
 	
 	@Autowired
 	CrudDao crudDao;
-	
 
 	public Role getRoleByName(UserRoles role) {
 		return userRoleDao.findByUserRole(role);

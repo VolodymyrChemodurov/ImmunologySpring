@@ -73,8 +73,8 @@
 								<div class="col-sm-5">
 									<select class="populate placeholder" name="user_role" id="user_role">
 										<option value="">-- Оберіть роль --</option>
-										<option value="ROLE_ADMIN">Звичайний користувач</option>
-										<option value="ROLE_USER">Адміністратор</option>
+										<option value="ROLE_USER">Звичайний користувач</option>
+										<option value="ROLE_ADMIN">Адміністратор</option>
 										<option value="ROLE_DOCTOR">Лікар</option>
 									</select>
 								</div>

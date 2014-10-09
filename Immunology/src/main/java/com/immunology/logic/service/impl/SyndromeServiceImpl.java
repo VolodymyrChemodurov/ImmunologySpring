@@ -11,6 +11,7 @@ import com.immunology.logic.dao.CrudDao;
 import com.immunology.logic.dao.SyndromeDao;
 import com.immunology.logic.dao.UserDao;
 import com.immunology.logic.service.SyndromeService;
+import com.immunology.logic.utils.ReferenceHelper;
 import com.immunology.logic.utils.UserUtils;
 import com.immunology.model.Syndrome;
 
@@ -36,6 +37,7 @@ public class SyndromeServiceImpl implements SyndromeService {
 	}
 
 	public Syndrome saveSyndrome(Syndrome syndrome) {
+		ReferenceHelper.setTemplatesReferences(syndrome);
 		return crudDao.saveOrUpdate(syndrome);
 	}
 

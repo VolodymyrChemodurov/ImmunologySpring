@@ -29,12 +29,13 @@ import com.immunology.model.ui.elements.Panel;
         @JsonSubTypes.Type(value=AnamnesticDataForm.class)
 })
 @Entity
-@SequenceGenerator(name="from_sequence", initialValue=20)
+//@SequenceGenerator(name="from_sequence", initialValue=20)
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Form {
 
 	@Id
-	@GeneratedValue(generator = "from_sequence", strategy = GenerationType.TABLE)
+	//@GeneratedValue(generator = "from_sequence", strategy = GenerationType.TABLE)
+	@GeneratedValue(strategy = GenerationType.TABLE)
 	@Column(name = "form_id")
 	private Long id;
 	

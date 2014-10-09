@@ -2,6 +2,7 @@ package com.immunology.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +13,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -33,15 +37,17 @@ public class Syndrome {
 	@JoinColumn(name = "patient_id")
 	private Patient patient;
 	
-	@OneToOne(mappedBy="disease")
+	@OneToOne(mappedBy="disease", cascade=CascadeType.MERGE)
 	@JsonManagedReference("anamnestic_reference")
 	private AnamnesticDataForm anamnesticData;
 	
 	@OneToMany(mappedBy = "disease")
 	@JsonManagedReference("surveys_reference")
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Survey> surveys;
 
 	@ManyToMany(mappedBy = "syndromeTemplates")
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<User> users;
 	
 	public long getId() {

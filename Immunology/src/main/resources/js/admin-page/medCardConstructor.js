@@ -481,7 +481,7 @@ function createDropDown(panelIndex,subPanelIndex,title,values){
  	dropDown["checked"] = false;
  	dropDown["objectType"] ="DropDown";
  	dropDown["values"] = values;
- 	if(parseInt(subPanelIndex) == -1  || subPanelIndex == null){
+ 	if(parseInt(subPanelIndex) == -1){
  		formObject.panels[panelIndex].elements.push(dropDown);
  	}else{
  		formObject.panels[panelIndex].elements[subPanelIndex].elements.push(dropDown);
@@ -495,7 +495,6 @@ function createButtonGroup(panelIndex,subPanelIndex,title,values){
 	groupButton["checked"] = false;
 	groupButton["objectType"] ="ButtonGroup";
 	groupButton["choosed"] = 0;
-	
  	if(parseInt(subPanelIndex) == -1 || subPanelIndex == null){
  		formObject.panels[panelIndex].elements.push(groupButton);
  	}else{

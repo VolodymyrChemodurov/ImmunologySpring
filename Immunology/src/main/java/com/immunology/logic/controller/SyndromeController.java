@@ -89,7 +89,7 @@ public class SyndromeController {
 		return syndromeService.updateSyndromeTemplate(name, syndrome);
 	}
 	
-	@RequestMapping(value = "/template/{name}/user/{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "/template/{name}/user/{id}", method = RequestMethod.GET)
 	public @ResponseBody Boolean wireUserToSyndromeTemplate(@PathVariable("name") String syndromeName, @PathVariable("id") Long userId) {
 		return syndromeService.wireUserToSyndromeTemplate(syndromeName, userId);
 	}

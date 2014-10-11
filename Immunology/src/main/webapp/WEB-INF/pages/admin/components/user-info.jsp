@@ -33,20 +33,20 @@ display: none;
 				
 				<div class="col-xs-6">
 				<label class="control-label">Current user syndroms:</label>
-					<select multiple="" class="form-control">
+					<select id="user-syndroms" multiple="" class="form-control">
 						<c:forEach items="${syndromes}" var="syndrom">
-								<option>${syndrom}</option>
+							<option>${syndrom}</option>
 						</c:forEach>
 					</select>
 				
 				<label class="control-label">Add new syndrom:</label>
 				
-				<select class="form-control">
+				<select id="not-used-syndroms" class="form-control" id="not-subscribed-syndroms">
 					<c:forEach items="${allSyndroms}" var="syndrom">
-								<option>${syndrom}</option>
-						</c:forEach>
+						<option>${syndrom}</option>
+					</c:forEach>
 				</select>
-				<button class="btn btn-primary" style="margin-top: 10px; width: 30%;">Add</button>
+				<button id="add-syndrom-button" class="btn btn-primary" style="margin-top: 10px; width: 30%;">Add</button>
 				</div>
 				
 			</fieldset>
@@ -60,6 +60,28 @@ display: none;
 
 
 <script type="text/javascript">
+$("#add-syndrom-button").click(function(){
+	var syndromName = $("#not-used-syndroms").val();
+	var userId = $("#user_id").val();
+	console.log("You choose :" + syndromName);
+	
+	$.ajax({
+		type : "get",
+		url :  "syndromes/template/{name}/user/{id}".replace("{id}", userId).replace("{name}", syndromName),
+		async:   false,
+		success : function(response) {
+				console.log("successfull ajax request" + response);
+				reloadPageUSingUrl('users/'+userId);
+		},
+		error: function (request, status, error) {
+			alert(error);
+	    }
+	});
+	
+	
+});
+
+
 
 
 </script>

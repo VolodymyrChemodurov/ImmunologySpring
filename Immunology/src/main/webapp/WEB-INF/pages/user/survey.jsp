@@ -132,12 +132,21 @@ var complaintsData  = new Builder("complaintsData");
 var clinicalManifestationData  = new Builder("clinicalManifestationData");
 var laboratoryData  = new Builder("laboratoryData");
 
+var currentSurvey = {};
+
 $(document).ready(function() {
 	$("#tabs").tabs();
 	$("#tabs").css("display", "inline");
-	complaintsData.initNewSurveyForm("#complaints", "ComplaintsForm", $('#patient_id').val(), "Test syndrome") ;
-	laboratoryData.initNewSurveyForm('#laboratoryData', "LaboratoryDataForm", $('#patient_id').val(), "Test syndrome");
-	clinicalManifestationData.initNewSurveyForm('#clinicalManifestations', "ClinicalManifestationsForm", $('#patient_id').val(), "Test syndrome");
+	complaintsData.initNewSurveyForm("#complaints", "ComplaintsForm", $('#patient_id').val(), "${syndrom.name}");
+	laboratoryData.initNewSurveyForm('#laboratoryData', "LaboratoryDataForm", $('#patient_id').val(),  "${syndrom.name}");
+	clinicalManifestationData.initNewSurveyForm('#clinicalManifestations', "ClinicalManifestationsForm", $('#patient_id').val(), "${syndrom.name}");
+	getSurveyTemplate();
+	$("#complaints").append('<button type="button" style="margin-left: 48%;" onClick="saveSyrvey();" class="btn btn-primary">Save</button>');
+	$("#clinicalManifestations").append('<button type="button" style="margin-left: 48%;" onClick="saveSyrvey();" class="btn btn-primary">Save</button>');
+	$("#laboratoryData").append('<button type="button" style="margin-left: 48%;" onClick="saveSyrvey();" class="btn btn-primary">Save</button>');
+	
+	
+
 });
 
 function doAjaxGet(pageName) {
@@ -158,10 +167,58 @@ function doAjaxPost(pageName) {
             $("#content").html(response);
         }
     });
-    
-    
-    
 }
+function doAjaxPost(pageName) {
+    console.info('doAjaxPost()');
+    $.ajax({
+       type: "POST",
+       url: "/" + pageName,
+       success: function(response) {
+       $("#content").html(response);
+    }
+ });
+}
+function getSurveyTemplate(){
+	$.ajax({
+		type : "get",
+		url :  "/syndromes/template/{name}".replace("{name}", "${syndrom.name}"),
+		dataType : "json",
+		async:   false,
+		success : function(response) {
+			currentSyrvey = response.surveys[0];
+		},
+		error: function (request, status, error) {
+			alert(error);
+	    }
+	});
+}
+    
+function saveSyrvey(){
+	patientId = "${patient.id}";
+	syndromName = "${syndrom.name}";
+	
+	currentSyrvey.complaintsForm = complaintsData;
+	currentSyrvey.laboratoryDataForm = laboratoryData;
+	currentSyrvey.clinicalManifestationsForm = clinicalManifestationData;
+	
+	 $.ajax({
+			type : "post",
+			url :   "/survey/patient/{patientId}/syndrome/{syndromeName}".replace("{patientId}", patientId).replace("{syndromeName}", syndromName),
+			data: JSON.stringify(currentSurvey),
+		    contentType: "application/json; charset=utf-8",
+		    dataType: "json",
+		    async: false,
+			success : function(response) {
+				currentSyrvey = response;
+			},
+			error: function (request, status, error) {
+				alert(error);
+		    }
+		});
+}
+   
+    
+    
 
 </script>
 	

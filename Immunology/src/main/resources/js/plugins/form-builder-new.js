@@ -118,17 +118,17 @@ this.initNewSurveyForm = function(blockID,type ,patientId, formName) {
 		if(type == this.TYPE.LABORATORY_DATA){
 			this.gettingLaboratoryDataObject("get",this.URL.SYNDRONE_TEMPLATR_URL, patientId, formName);
 			console.log(this.formObject);
-			this.renderFormBody(true);
+			this.renderFormBody(false);
 		}
 		if(type == this.TYPE.COMPLAINTS_DATA){
 			this.gettingComplaintsDataObject("get",this.URL.SYNDRONE_TEMPLATR_URL, patientId, formName);
 			console.log(this.formObject);
-			this.renderFormBody(true);
+			this.renderFormBody(false);
 		}
 		if(type == this.TYPE.CLINICAL_MANIFESTATIONS_DATA){
 			this.gettingClinicalManifestationDataObject("get",this.URL.SYNDRONE_TEMPLATR_URL, patientId, formName);
 			console.log(this.formObject);
-			this.renderFormBody(true);
+			this.renderFormBody(false);
 		}
 		
 		

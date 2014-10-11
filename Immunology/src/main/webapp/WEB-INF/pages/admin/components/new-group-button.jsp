@@ -7,9 +7,10 @@
         <h4 class="modal-title" id="myModalLabel">Create new Group Buttons</h4>
       </div>
       <div class="modal-body">
-       	
+       		<label class="col-sm-12 control-label">Select Panel:</label>
 			<select name="panel-names">
 			</select>
+			<label class="col-sm-12 control-label">Select subPanele:</label>
 			<select name="sub-panel-names">
 			</select>
 			

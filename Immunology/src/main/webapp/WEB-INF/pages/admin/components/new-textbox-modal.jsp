@@ -7,13 +7,14 @@
         <h4 class="modal-title" id="myModalLabel">Create new TextBox</h4>
       </div>
       <div class="modal-body">
-       	
+       		<label class="col-sm-12 control-label">Select Panel:</label>
 			<select name="panel-names">
 			</select>
+			<label class="col-sm-12 control-label">Select SubPanel:</label>
 			<select name="sub-panel-names">
 			</select>
 			
-				<label class="col-sm-12 control-label">Set TextBox Name:</label>
+			<label class="col-sm-12 control-label">Set TextBox Name:</label>
 			<input type="text" class="form-control"  id="text-box-name" />
       </div>
       <div class="modal-footer">

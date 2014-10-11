@@ -66,6 +66,12 @@ function getComlaintsResouces(url){
 		success : function(response) {
 			syndrom = response;
 			console.log(syndrom);
+			//if(response.surveys.length == 0){
+		
+			//}
+			
+			
+			
 			if(response.surveys[0].complaintsForm == null){
 				formObject = {};
 				formObject["panels"] = [];
@@ -175,6 +181,24 @@ function initPanelNames(){
 		optionElement.val(index);
 		$(panelNameSelects).append(optionElement); 
 	});
+//	panelIndex = panelNameSelects.val();
+//	var subPanelSelect = $("select[name=sub-panel-names]");
+//	$(formObject.panels[parseInt(panelIndex)].elements).each(function(index, element){
+//		if(element.objectType == "Panel"){
+//			optionElement = $("<option>"+element.name+"</option>");
+//			optionElement.val(index);
+//			$(subPanelSelect).append(optionElement); 
+//		}else{
+//			if(elementPanelSelect != null){
+//				optionElement = $("<option>"+element.name+"</option>");
+//				optionElement.val(index);
+//				$(elementPanelSelect).append(optionElement); 
+//			}
+//		}
+//		
+//	});
+	
+//	$(subPanelSelect).append("<option value='-1'>- EMPTY -</option>");
 	
 };
 function renderPreviewMedForm(){
@@ -447,7 +471,12 @@ function createPanel(title){
  	panel["order"] = order.panel;
  	panel["elements"] = [];
  	
- 	
+ 	if(formObject == null){
+ 		formObject = {};
+ 		formObject["panels"] = [];
+ 		formObject["name"] = "";
+ 		formObject["objectType"] = "AnamnesticDataForm";
+ 	}
  	formObject.panels.push(panel); 
  	initPanelNames();
  	renderPreviewMedForm();
@@ -481,7 +510,7 @@ function createDropDown(panelIndex,subPanelIndex,title,values){
  	dropDown["checked"] = false;
  	dropDown["objectType"] ="DropDown";
  	dropDown["values"] = values;
- 	if(parseInt(subPanelIndex) == -1){
+ 	if(parseInt(subPanelIndex) == -1 || subPanelIndex == null){
  		formObject.panels[panelIndex].elements.push(dropDown);
  	}else{
  		formObject.panels[panelIndex].elements[subPanelIndex].elements.push(dropDown);
@@ -491,7 +520,7 @@ function createDropDown(panelIndex,subPanelIndex,title,values){
 }
 function createButtonGroup(panelIndex,subPanelIndex,title,values){
 	var groupButton = {};
-	groupButton["name"]=title;
+	groupButton["name"] = title;
 	groupButton["checked"] = false;
 	groupButton["objectType"] ="ButtonGroup";
 	groupButton["choosed"] = 0;

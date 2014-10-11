@@ -197,6 +197,32 @@
 			newSyndromObject = {};
 			newSyndromObject["name"] = syndromName;
 			newSyndromObject["surveys"] = [];
+			
+			var survey = {};
+			survey["complaintsForm"]= {};
+			 var  complaintsForm = {};
+			 complaintsForm["name"] = "";
+			 complaintsForm["panels"] = [];
+			 complaintsForm["objectType"] = "ComplaintsForm";
+			 survey.complaintsForm = complaintsForm;
+			 
+			survey["clinicalManifestationsForm"] ={};
+			 var clinicalManifestationsForm = {};
+			 clinicalManifestationsForm["name"] = ""; 
+			 clinicalManifestationsForm["panels"] = [];
+			 clinicalManifestationsForm["objectType"] = "ClinicalManifestationsForm"
+			 survey.clinicalManifestationsForm = clinicalManifestationsForm;
+				 
+			survey["laboratoryDataForm"]= {};
+			 var laboratoryDataForm = {};
+			 laboratoryDataForm["name"] = "";
+			 laboratoryDataForm["panels"] = [];
+			 laboratoryDataForm["objectType"] = "LaboratoryDataForm";
+			 survey.laboratoryDataForm = laboratoryDataForm;
+			
+			 newSyndromObject.surveys.push(survey);
+			 //response.surveys.push(survey);
+			
 		}else{
 		// Get Parent Template;
 		$.ajax({

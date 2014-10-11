@@ -51,7 +51,6 @@ public class SurveyController {
 			@PathVariable("syndromeName") String syndromeName) {
 		Syndrome syndrome = syndromeService.getPatientSyndrome(patientId, syndromeName);
 		survey.setDisease(syndrome);
-		syndromeService.saveSyndrome(syndrome);
 		return surveyService.saveOrUpdateSurvey(survey);
 	}
 	

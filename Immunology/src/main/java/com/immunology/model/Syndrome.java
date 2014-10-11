@@ -1,5 +1,6 @@
 package com.immunology.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -48,7 +49,7 @@ public class Syndrome {
 
 	@ManyToMany(mappedBy = "syndromeTemplates")
 	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<User> users;
+	private List<User> users = new ArrayList<User>();
 	
 	public long getId() {
 		return id;

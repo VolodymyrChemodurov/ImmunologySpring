@@ -210,6 +210,7 @@ function saveSyrvey(){
 		    async: false,
 			success : function(response) {
 				currentSyrvey = response;
+				console.log("Survey Saved");
 			},
 			error: function (request, status, error) {
 				alert(error);

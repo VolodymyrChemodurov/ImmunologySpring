@@ -71,7 +71,7 @@
 							<div class="form-group">
 								<label class="col-sm-3 control-label">Роль користувача</label>
 								<div class="col-sm-5">
-									<select class="populate placeholder" name="user_role" id="user_role">
+									<select class="form-control dropdown" name="user_role" id="user_role">
 										<option value="">-- Оберіть роль --</option>
 										<option value="ROLE_USER">Звичайний користувач</option>
 										<option value="ROLE_ADMIN">Адміністратор</option>

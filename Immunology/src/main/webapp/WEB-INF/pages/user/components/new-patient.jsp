@@ -2,7 +2,7 @@
 <div class="row">
 	<div id="breadcrumb" class="col-md-12">
 		<ol class="breadcrumb">
-			<li><a href="index.html">Головна</a></li>
+			<li><a href="#">Головна</a></li>
 			<li><a href="#">Мої пацієнти</a></li>
 			<li><a href="#">Додати нового пацієнта</a></li>
 		</ol>
@@ -181,53 +181,53 @@
 			fields: {
 				
 				firstName: {
-					message: 'The username is not valid',
+					message: 'The first name is not valid',
 					validators: {
 						notEmpty: {
-							message: 'The username is required and can\'t be empty'
+							message: 'The first rname is required and can\'t be empty'
 						},
 						stringLength: {
-							min: 6,
+							min: 2,
 							max: 30,
-							message: 'The username must be more than 6 and less than 30 characters long'
+							message: 'The first name must be more than 2 and less than 30 characters long'
 						},
 						regexp: {
-							regexp: /^[a-zA-Z0-9_\.]+$/,
-							message: 'The username can only consist of alphabetical, number, dot and underscore'
+							regexp: /^([a-zA-Z\u0400-\u052F]+[-// /']?)*$/,
+							message: 'The first name must contains only letters,apostrophe or hyphen.'
 						}
 					}
 				},
 				lastName: {
-					message: 'The username is not valid',
+					message: 'The last name is not valid',
 					validators: {
 						notEmpty: {
-							message: 'The username is required and can\'t be empty'
+							message: 'The last name is required and can\'t be empty'
 						},
 						stringLength: {
-							min: 6,
+							min: 2,
 							max: 30,
-							message: 'The username must be more than 6 and less than 30 characters long'
+							message: 'The last name must be more than 2 and less than 30 characters long'
 						},
 						regexp: {
-							regexp: /^[a-zA-Z0-9_\.]+$/,
-							message: 'The username can only consist of alphabetical, number, dot and underscore'
+							regexp: /^([a-zA-Z\u0400-\u052F]+[-// /']?)*$/,
+							message: 'The last name must contains only letters,apostrophe or hyphen.'
 						}
 					}
 				},
 				middleName: {
-					message: 'The username is not valid',
+					message: 'The middle name is not valid',
 					validators: {
 						notEmpty: {
-							message: 'The username is required and can\'t be empty'
+							message: 'The middle name is required and can\'t be empty'
 						},
 						stringLength: {
 							min: 6,
 							max: 30,
-							message: 'The username must be more than 6 and less than 30 characters long'
+							message: 'The middle name must be more than 6 and less than 30 characters long'
 						},
 						regexp: {
-							regexp: /^[a-zA-Z0-9_\.]+$/,
-							message: 'The username can only consist of alphabetical, number, dot and underscore'
+							regexp: /^([a-zA-Z\u0400-\u052F]+[-// /']?)*$/,
+							message: 'The middle name must contains only letters,apostrophe or hyphen.'
 						}
 					}
 				},
@@ -239,10 +239,14 @@
 							message: 'The region is required and can\'t be empty'
 						},
 						stringLength: {
-							min: 3,
+							min: 6,
 							max: 30,
-							message: 'The region must be more than 3 and less than 30 characters long'
+							message: 'The region must be more than 6 and less than 30 characters long'
 						},
+						regexp: {
+							regexp: /^([a-zA-Z\u0400-\u052F]+[-// /']?)*$/,
+							message: 'The region must contains only letters,apostrophe or hyphen.'
+						}
 					}
 				},
 				city: {
@@ -256,6 +260,10 @@
 							max: 30,
 							message: 'The city must be more than 3 and less than 30 characters long'
 						},
+						regexp: {
+							regexp: /^([a-zA-Z\u0400-\u052F]+[-// /']?)*$/,
+							message: 'The city must contains only letters,apostrophe or hyphen.'
+						}
 					}
 				},
 				login: {
@@ -268,7 +276,7 @@
 							min: 3,
 							max: 30,
 							message: 'The login must be more than 3 and less than 30 characters long'
-						},
+						}
 					}
 				},
 				street: {
@@ -282,6 +290,10 @@
 							max: 30,
 							message: 'The street must be more than 3 and less than 30 characters long'
 						},
+						regexp: {
+							regexp: /^([a-zA-Z\u0400-\u052F]+[-// /']?)*$/,
+							message: 'The street name must contains only letters,apostrophe or hyphen.'
+						}
 					}
 				},
 				house: {
@@ -291,13 +303,16 @@
 							message: 'The house is required and can\'t be empty'
 						},
 						stringLength: {
-							min: 3,
-							max: 30,
-							message: 'The house must be more than 3 and less than 30 characters long'
+							min: 1,
+							max: 3,
+							message: 'The house must be more than 1 and less than 3 characters long'
 						},
+						regexp: {
+							regexp: /^[a-zA-Z\u0400-\u052F0-9]+$/,
+							message: 'The house must contains only letters or numbers.',
+						}
 					}
 				},
-				
 				dateOfBirth: {
 					message: 'The date is not valid',
 					validators: {
@@ -309,6 +324,10 @@
 							max: 10,
 							message: 'The date must be format mm/dd/yyyy'
 						},
+						regexp: {
+							regexp: /^[F0-9/]+$/,
+							message: 'The input is not a valid date',
+						}
 					}
 				},
 				
@@ -317,13 +336,17 @@
 					validators: {
 						notEmpty: {
 							message: 'The country is required and can\'t be empty'
+						},
+						regexp: {
+							regexp: /^([a-zA-Z\u0400-\u052F]+[-// /']?)*$/,
+							message: 'The country name must contains only letters,apostrophe or hyphen.'
 						}
 					}
 				},
 				sex: {
 					validators: {
 						notEmpty: {
-							message: 'The country is required and can\'t be empty'
+							message: 'The sex is required and can\'t be empty'
 						}
 					}
 				},
@@ -339,12 +362,12 @@
 						notEmpty: {
 							message: 'The email address is required and can\'t be empty'
 						},
-						emailAddress: {
-							message: 'The input is not a valid email address'
+						regexp: {
+							regexp: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\.[a-zA-Z.]+$/,
+							message: 'The input is not a valid email address',
 						}
 					}
 				},
-				
 				password: {
 					validators: {
 						notEmpty: {
@@ -364,7 +387,7 @@
 						identical: {
 							field: 'password',
 							message: 'The password and its confirm are not the same'
-						}
+						}				
 					}
 				}
 				

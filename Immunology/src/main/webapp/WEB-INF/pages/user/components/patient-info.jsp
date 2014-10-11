@@ -78,7 +78,7 @@ display: none;
 					</div>
 					<div id="tabs-4">
 						<div id="SyrveyDataContainer">
-						<div class="box-content no-padding" style="border: 2px solid; border-color: beige; border-radius: 5px;">
+						<div class="box-content no-padding" style="border: 2px solid; border-color: beige; border-radius: 5px; box-shadow: 10px 10px 30px #888;">
 						<table
 						class="table table-bordered table-striped table-hover table-heading table-datatable"
 						id="datatable-3">
@@ -89,7 +89,7 @@ display: none;
 									<th>Лікар</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody id="survey-table-body">
 								<c:forEach items="${syndrom.surveys}" var="survey">
 									<tr>
 										<td>${survey.creationDate}</td>
@@ -163,14 +163,39 @@ var anamnesticData  = new Builder("anamnesticData");
 	function initSyndromeEvent(){
 		$("#select_syndrome_button").click(function(){
 			anamnesticData.init('#AnamnesticDataContainer',"AnamnesticDataForm", $('#patient_id').val(), $('#syndrom').val() );
+			refreshTable($('#syndrom').val());
 		})
 		$("#newSurveyButton").click(function(){
-			window.location.href='/survey/patientId=' + $("#patient_id").val()+'syndrome=' + $('#syndrom').val();
-			}	
+			if($("#syndrom").val() != null){
+				window.location.href='/survey/patientId=' + $("#patient_id").val()+'syndrome=' + $('#syndrom').val();	
+			}
+		}	
 		);
 		
 	}
-	
+	function refreshTable(syndromName){
+		var patientId = "${patient.id}";
+		var syndromName = $('#syndrom').val();
+		var table = $("#survey-table-body");
+		$.ajax({
+			type : "get",
+			url :  "/syndromes/patient/{id}/{name}".replace("{id}", patientId).replace("{name}", syndromName),
+			dataType : "json",
+			async:   false,
+			success : function(response) {
+				table.html("");
+				for (var int = 0; int < response.surveys.length; int++) {
+					var tr = $("<tr/>");
+					tr.append("<td>"+ response.surveys[int].creationDate  +"</td><td>"+response.surveys[int].severityLevel +"</td><td>"+response.surveys[int].user.firstName +"</td>");
+					table.append(tr);
+				}
+			},
+			error: function (request, status, error) {
+				alert(error);
+		    }
+		});
+		
+	}
 
 	
 

@@ -198,6 +198,17 @@
 			newSyndromObject["name"] = syndromName;
 			newSyndromObject["surveys"] = [];
 			
+			
+			
+			newSyndromObject["anamnesticData"] = {};
+			
+			var anamnesticData = {};
+			anamnesticData["name"] = "";
+			anamnesticData["objectType"] = "AnamnesticDataForm";
+			anamnesticData["panels"] = [];
+			newSyndromObject.anamnesticData = anamnesticData;
+			
+			
 			var survey = {};
 			survey["complaintsForm"]= {};
 			 var  complaintsForm = {};

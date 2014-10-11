@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.immunology.logic.dao.CrudDao;
 import com.immunology.logic.dao.SyndromeDao;
@@ -66,12 +67,11 @@ public class SyndromeServiceImpl implements SyndromeService {
 		return syndromeDao.updateSyndromeTemplate(templateName, syndrome);
 	}
 
+	@Transactional
 	public Boolean wireUserToSyndromeTemplate(String syndromeName, Long userId) {
 		Syndrome syndrome = syndromeDao.findSyndrome(syndromeName);
-		com.immunology.model.User user = new com.immunology.model.User();
-		List<com.immunology.model.User> users = new ArrayList<com.immunology.model.User>();
-		users.add(user);
-		syndrome.setUsers(users);
+		com.immunology.model.User user  = crudDao.find(com.immunology.model.User.class, userId);
+		syndrome.getUsers().add(user);
 		return syndromeDao.updateSyndromeTemplate(syndromeName, syndrome);
 	}
 

@@ -1,5 +1,7 @@
 package com.immunology.logic.service.impl;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,9 @@ public class SurveyServiceImpl implements SurveyService {
 	private CrudDao crudDao;
 	
 	public Survey saveOrUpdateSurvey(Survey survey) {
+		if(survey.getId() == 0) {
+			survey.setCreationDate(new Date());
+		}
 		return crudDao.saveOrUpdate(survey);
 	}
 

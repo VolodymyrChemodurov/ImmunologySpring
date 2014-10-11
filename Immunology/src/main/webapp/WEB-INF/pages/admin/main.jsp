@@ -30,7 +30,7 @@
 						</a>
 						<ul class="dropdown-menu">
 							<li><a class="ajax-link" href="#"  onclick="doAjaxGet('/users');">All users</a></li>
-							<li><a class="ajax-link" href="#" onclick="doAjaxGet('/user/create');">Add New User</a></li>
+							<li><a class="ajax-link" href="#" onclick="doAjaxGet('/user/create');">Add new user</a></li>
 						</ul>
 					</li>
 					<li>
@@ -67,7 +67,7 @@
 									<span class="hidden-xs">Survey Forms</span>
 								</a>
 								<ul class="dropdown-menu" style="display: block;">
-									<li><a class="ajax-link" href="#"  data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'comlaints'">Comlaints Form</a></li>
+									<li><a class="ajax-link" href="#"  data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'comlaints'">Complaints Form</a></li>
 									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'clinicalManifestation'" >Clinical Manifestation Form</a></li>
 									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'laboratoryData'" >Laboratory Data Form</a></li>
 	

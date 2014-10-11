@@ -1,8 +1,8 @@
 <div class="row">
 	<div id="breadcrumb" class="col-md-12">
 		<ol class="breadcrumb">
-			<li><a href="#">Dashboard</a></li>
-			<li><a href="#">Forms</a></li>
+			<li><a href="#">Main</a></li>
+			<li><a href="#">Survey Forms</a></li>
 			<li><a href="#">Anamnestic Data</a></li>
 		</ol>
 	</div>

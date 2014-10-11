@@ -5,6 +5,7 @@
 	<div id="breadcrumb" class="col-md-12">
 		<ol class="breadcrumb">
 			<li><a href="#">Main</a></li>
+			<li><a href="#">Users</a></li>
 			<li><a href="#">All users</a></li>
 		</ol>
 	</div>
@@ -16,7 +17,7 @@
 			<div class="box-header">
 				<div class="box-name">
 					<i class="fa fa-users"></i>
-					<span>All patients list</span>
+					<span>All users list</span>
 				</div>
 				<div class="box-icons">
 					<a class="collapse-link">

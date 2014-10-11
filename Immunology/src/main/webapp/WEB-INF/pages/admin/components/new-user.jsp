@@ -3,9 +3,9 @@
 <div class="row">
 	<div id="breadcrumb" class="col-md-12">
 		<ol class="breadcrumb">
-			<li><a href="index.html">Головна</a></li>
-			<li><a href="#">Мої пацієнти</a></li>
-			<li><a href="#">Додати нового пацієнта</a></li>
+			<li><a href="index.html">Main</a></li>
+			<li><a href="#">Users</a></li>
+			<li><a href="#">Add new user</a></li>
 		</ol>
 	</div>
 </div>
@@ -15,7 +15,7 @@
 		<div class="box" id="new-user">
 			<div class="box-header">
 				<div class="box-name">
-					<i class="fa fa-search"></i> <span>Новий користувач</span>
+					<i class="fa fa-search"></i> <span>New user</span>
 				</div>
 				<div class="box-icons">
 					<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
@@ -31,21 +31,21 @@
 					<fieldset>
 						<legend></legend>
 						<div class="form-group">
-							<label class="col-sm-3 control-label">Прізвище</label>
+							<label class="col-sm-3 control-label">Last name</label>
 							<div class="col-sm-5">
 								<input type="text" class="form-control" name="lastName"
 									id="lastName" />
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-sm-3 control-label">Ім'я</label>
+							<label class="col-sm-3 control-label">First name</label>
 							<div class="col-sm-5">
 								<input type="text" class="form-control" name="firstName"
 									id="firstName" />
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-sm-3 control-label">По-батькові</label>
+							<label class="col-sm-3 control-label">Middle name</label>
 							<div class="col-sm-5">
 								<input type="text" class="form-control" name="middleName"
 									id="middleName" />
@@ -53,34 +53,34 @@
 						</div>
 
 						<div class="form-group">
-							<label class="col-sm-3 control-label">Логін</label>
+							<label class="col-sm-3 control-label">Login</label>
 							<div class="col-sm-5">
-								<input type="text" class="form-control" name="login"
-									id="login" />
+								<input type="text" class="form-control" name="login" id="login" />
 							</div>
 						</div>
 
 						<div class="form-group">
-							<label class="col-sm-3 control-label">Пароль</label>
+							<label class="col-sm-3 control-label">Password</label>
 							<div class="col-sm-5">
 								<input type="text" class="form-control" name="password"
 									id="password" />
 							</div>
 						</div>
-						
-							<div class="form-group">
-								<label class="col-sm-3 control-label">Роль користувача</label>
-								<div class="col-sm-5">
-									<select class="form-control dropdown" name="user_role" id="user_role">
-										<option value="">-- Оберіть роль --</option>
-										<option value="ROLE_USER">Звичайний користувач</option>
-										<option value="ROLE_ADMIN">Адміністратор</option>
-										<option value="ROLE_DOCTOR">Лікар</option>
-									</select>
-								</div>
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label">User's role</label>
+							<div class="col-sm-5">
+								<select class="form-control dropdown" name="user_role"
+									id="user_role">
+									<option value="">-- Choose the role --</option>
+									<option value="ROLE_USER">User</option>
+									<option value="ROLE_ADMIN">Admin</option>
+									<option value="ROLE_DOCTOR">Doctor</option>
+								</select>
 							</div>
+						</div>
 					</fieldset>
-					
+
 
 
 
@@ -88,7 +88,7 @@
 
 					<div class="form-group">
 						<div class="col-sm-11 col-sm-offset-3">
-							<button type="submit" class="btn btn-primary">Створити</button>
+							<button type="submit" class="btn btn-primary">Create</button>
 						</div>
 					</div>
 				</form>
@@ -130,186 +130,79 @@
 		// Add drag-n-drop feature to boxes
 		WinMove();
 	});
-	function UserValidator(){
-		$('#new-user').bootstrapValidator({
-			message: 'This value is not valid',
-			fields: {
-				
-				firstName: {
-					message: 'The username is not valid',
-					validators: {
-						notEmpty: {
-							message: 'The username is required and can\'t be empty'
-						},
-						stringLength: {
-							min: 6,
-							max: 30,
-							message: 'The username must be more than 6 and less than 30 characters long'
-						},
-						regexp: {
-							regexp: /^[a-zA-Z0-9_\.]+$/,
-							message: 'The username can only consist of alphabetical, number, dot and underscore'
-						}
-					}
-				},
-				lastName: {
-					message: 'The username is not valid',
-					validators: {
-						notEmpty: {
-							message: 'The username is required and can\'t be empty'
-						},
-						stringLength: {
-							min: 6,
-							max: 30,
-							message: 'The username must be more than 6 and less than 30 characters long'
-						},
-						regexp: {
-							regexp: /^[a-zA-Z0-9_\.]+$/,
-							message: 'The username can only consist of alphabetical, number, dot and underscore'
-						}
-					}
-				},
-				middleName: {
-					message: 'The username is not valid',
-					validators: {
-						notEmpty: {
-							message: 'The username is required and can\'t be empty'
-						},
-						stringLength: {
-							min: 6,
-							max: 30,
-							message: 'The username must be more than 6 and less than 30 characters long'
-						},
-						regexp: {
-							regexp: /^[a-zA-Z0-9_\.]+$/,
-							message: 'The username can only consist of alphabetical, number, dot and underscore'
-						}
-					}
-				},
-				
-				region: {
-					message: 'The region is not valid',
-					validators: {
-						notEmpty: {
-							message: 'The region is required and can\'t be empty'
-						},
-						stringLength: {
-							min: 3,
-							max: 30,
-							message: 'The region must be more than 3 and less than 30 characters long'
-						},
-					}
-				},
-				city: {
-					message: 'The city is not valid',
-					validators: {
-						notEmpty: {
-							message: 'The city is required and can\'t be empty'
-						},
-						stringLength: {
-							min: 3,
-							max: 30,
-							message: 'The city must be more than 3 and less than 30 characters long'
-						},
-					}
-				},
-				login: {
-					message: 'The login is not valid',
-					validators: {
-						notEmpty: {
-							message: 'The login is required and can\'t be empty'
-						},
-						stringLength: {
-							min: 3,
-							max: 30,
-							message: 'The login must be more than 3 and less than 30 characters long'
-						},
-					}
-				},
-				street: {
-					message: 'The street is not valid',
-					validators: {
-						notEmpty: {
-							message: 'The street is required and can\'t be empty'
-						},
-						stringLength: {
-							min: 3,
-							max: 30,
-							message: 'The street must be more than 3 and less than 30 characters long'
-						},
-					}
-				},
-				house: {
-					message: 'The house is not valid',
-					validators: {
-						notEmpty: {
-							message: 'The house is required and can\'t be empty'
-						},
-						stringLength: {
-							min: 3,
-							max: 30,
-							message: 'The house must be more than 3 and less than 30 characters long'
-						},
-					}
-				},
-				
-				dateOfBirth: {
-					message: 'The date is not valid',
-					validators: {
-						notEmpty: {
-							message: 'The date is required and can\'t be empty'
-						},
-						stringLength: {
-							min: 10,
-							max: 10,
-							message: 'The date must be format mm/dd/yyyy'
-						},
-					}
-				},
-				
-				
-				country: {
-					validators: {
-						notEmpty: {
-							message: 'The country is required and can\'t be empty'
-						}
-					}
-				},
-				sex: {
-					validators: {
-						notEmpty: {
-							message: 'The country is required and can\'t be empty'
-						}
-					}
-				},
-				acceptTerms: {
-					validators: {
-						notEmpty: {
-							message: 'You have to accept the terms and policies'
-						}
-					}
-				},
-				email: {
-					validators: {
-						notEmpty: {
-							message: 'The email address is required and can\'t be empty'
-						},
-						emailAddress: {
-							message: 'The input is not a valid email address'
-						}
-					}
-				},
-				
-				password: {
-					validators: {
-						notEmpty: {
-							message: 'The password is required and can\'t be empty'
-						}
-						
-					}
-				},
-				
-			}
-		});
+	function UserValidator() {
+		$('#new-user')
+				.bootstrapValidator(
+						{
+							message : 'This value is not valid',
+							fields : {
+
+								firstName : {
+									message : 'The first name is not valid',
+									validators : {
+										notEmpty : {
+											message : 'The first rname is required and can\'t be empty'
+										},
+										stringLength : {
+											min : 2,
+											max : 30,
+											message : 'The first name must be more than 2 and less than 30 characters long'
+										},
+										regexp : {
+											regexp : /^([a-zA-Z\u0400-\u052F]+[-// /']?)*$/,
+											message : 'The first name must contains only letters,apostrophe or hyphen.'
+										}
+									}
+								},
+								lastName : {
+									message : 'The last name is not valid',
+									validators : {
+										notEmpty : {
+											message : 'The last name is required and can\'t be empty'
+										},
+										stringLength : {
+											min : 2,
+											max : 30,
+											message : 'The last name must be more than 2 and less than 30 characters long'
+										},
+										regexp : {
+											regexp : /^([a-zA-Z\u0400-\u052F]+[-// /']?)*$/,
+											message : 'The last name must contains only letters,apostrophe or hyphen.'
+										}
+									}
+								},
+								middleName : {
+									message : 'The middle name is not valid',
+									validators : {
+										notEmpty : {
+											message : 'The middle name is required and can\'t be empty'
+										},
+										stringLength : {
+											min : 6,
+											max : 30,
+											message : 'The middle name must be more than 6 and less than 30 characters long'
+										},
+										regexp : {
+											regexp : /^([a-zA-Z\u0400-\u052F]+[-// /']?)*$/,
+											message : 'The middle name must contains only letters,apostrophe or hyphen.'
+										}
+									}
+								},
+								login : {
+									message : 'The login is not valid',
+									validators : {
+										notEmpty : {
+											message : 'The login is required and can\'t be empty'
+										},
+										stringLength : {
+											min : 3,
+											max : 30,
+											message : 'The login must be more than 3 and less than 30 characters long'
+										},
+									}
+								},
+
+							}
+						});
 	}
 </script>

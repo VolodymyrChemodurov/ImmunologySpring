@@ -6,9 +6,8 @@
 <div class="row">
 	<div id="breadcrumb" class="col-md-12">
 		<ol class="breadcrumb">
-			<li><a href="index.html">Dashboard</a></li>
-			<li><a href="#">Forms</a></li>
-			<li><a href="#">Mediical Card</a></li>
+			<li><a href="index.html">Main</a></li>
+			<li><a href="#">Medical Card</a></li>
 		</ol>
 	</div>
 </div>

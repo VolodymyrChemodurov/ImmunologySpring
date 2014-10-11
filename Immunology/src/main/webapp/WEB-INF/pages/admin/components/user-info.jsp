@@ -12,8 +12,8 @@ display: none;
 <div class="row">
 	<div id="breadcrumb" class="col-md-12">
 		<ol class="breadcrumb">
-			<li><a href="index.html">Головна</a></li>
-			<li><a href="#">Мої пацієнти</a></li>
+			<li><a href="index.html">Main</a></li>
+			<li><a href="#">All users</a></li>
 			<li><a href="#">${user.firstName} ${user.lastName}</a></li>
 		</ol>
 	</div>

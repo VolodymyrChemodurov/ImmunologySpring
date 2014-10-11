@@ -13,10 +13,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "users")
@@ -59,6 +64,11 @@ public class User {
 		joinColumns={@JoinColumn(name="user_id")}, 
 		inverseJoinColumns={@JoinColumn(name="syndrome_id")})
 	private List<Syndrome> syndromeTemplates;
+	
+	@OneToMany(mappedBy = "user")
+	@JsonManagedReference("user_reference")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<Survey> surveys;
 	
 	public String getLastName() {
 		return lastName;
@@ -137,6 +147,14 @@ public class User {
 
 	public void setSyndromeTemplates(List<Syndrome> syndromeTemplates) {
 		this.syndromeTemplates = syndromeTemplates;
+	}
+
+	public List<Survey> getSurveys() {
+		return surveys;
+	}
+
+	public void setSurveys(List<Survey> surveys) {
+		this.surveys = surveys;
 	}
 
 }

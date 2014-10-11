@@ -13,7 +13,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -59,7 +58,9 @@ public class Survey {
 	@JoinColumn(name = "laboratory_data_form_id")
 	private LaboratoryDataForm laboratoryDataForm;
 	
-	@Transient
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name = "user_id")
+	@JsonBackReference("user_reference")
 	private User user;
 	
 	public Date getCreationDate() {

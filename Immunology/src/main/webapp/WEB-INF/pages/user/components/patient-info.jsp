@@ -150,13 +150,12 @@ var anamnesticData  = new Builder("anamnesticData");
 		// Add tooltip to form-controls
 		$('.form-control').tooltip();
 		Select2Script(DemoSelect2);
-		// Load example of form validation
-		//BootstrapValidatorScript(DemoFormValidator);
-		
-		
+		BootstrapValidatorScript(PatientValidator);	
 		// New Form Builder //
 		//1) ID Container div 2) Patient Id 3) Form Type;
 		medCard.init('#container', "MedicalCardForm", $('#patient_id').val());
+			
+		WinMove();
 		
 		
 	});

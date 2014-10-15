@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <header class="navbar">
-		</div>
-	<div class="container-fluid expanded-panel">
+<div class="container-fluid expanded-panel">
 		
 		<div class="row">
 			<div id="logo" class="col-xs-12 col-sm-2">

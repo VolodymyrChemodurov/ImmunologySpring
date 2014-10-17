@@ -86,7 +86,7 @@ display: none;
 								<tr>
 									<th>Дата створення</th>
 									<th>Ступінь важкості</th>
-									<th>Лікар</th>
+<!-- 									<th>Лікар</th> -->
 								</tr>
 							</thead>
 							<tbody id="survey-table-body">
@@ -94,7 +94,7 @@ display: none;
 									<tr>
 										<td>${survey.creationDate}</td>
 										<td>${survey.severityLevel}</td>
-										<td>${survey.user.firstName}</td>
+<%-- 										<td>${survey.user.firstName}</td> --%>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -102,7 +102,7 @@ display: none;
 								<tr>
 									<th>Дата створення</th>
 									<th>Ступінь важкості</th>
-									<th>Лікар</th>
+<!-- 									<th>Лікар</th> -->
 								</tr>
 							</tfoot>
 						</table>
@@ -186,14 +186,15 @@ var anamnesticData  = new Builder("anamnesticData");
 				table.html("");
 				for (var int = 0; int < response.surveys.length; int++) {
 					var tr = $("<tr/>");
-					tr.append("<td>"+ response.surveys[int].creationDate  +"</td><td>"+response.surveys[int].severityLevel +"</td><td>"+response.surveys[int].user.firstName +"</td>");
+					tr.append("<td>"+ response.surveys[int].creationDate  +"</td><td>"+response.surveys[int].severityLevel +"</td>");//+"<td>"+response.surveys[int].user.firstName +"</td>");
 					table.append(tr);
 				}
+				response.surveys[int].user.firstName;
 			},
 			error: function (request, status, error) {
 				alert(error);
 		    }
-		});
+		})
 		
 	}
 

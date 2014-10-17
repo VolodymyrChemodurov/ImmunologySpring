@@ -130,33 +130,31 @@ var anamnesticData  = new Builder("anamnesticData");
 	//	$('#country').select2();
 	//	$('#sex').select2();
 	}
-	// Run timepicker
-	function DemoTimePicker() {
-		$('#input_time').timepicker({
-			setDate : new Date()
-		});
-	}
+
 	$(document).ready(function() {
-		// Load TimePicker plugin and callback all time and date pickers
 		// Create jQuery-UI tabs
 		$("#tabs").tabs();
-		$('#input_date').datepicker({
-			setDate : new Date()
+		$('#dateOfBirth').datepicker({
+			dateFormat: "dd/mm/yy",
+			changeMonth : true,
+			changeYear : true,
+			yearRange: "-110:+2"
+		});
+		$('#datepicker').click(function() {
+			$('#dateOfBirth').datepicker("show");
 		});
 		TestTable3();
 		initSyndromeEvent();
 		
-		// Load Timepicker plugin
 		// Add tooltip to form-controls
 		$('.form-control').tooltip();
 		Select2Script(DemoSelect2);
-		// Load example of form validation
-		//BootstrapValidatorScript(DemoFormValidator);
-		
-		
+		BootstrapValidatorScript(PatientValidator);	
 		// New Form Builder //
 		//1) ID Container div 2) Patient Id 3) Form Type;
 		medCard.init('#container', "MedicalCardForm", $('#patient_id').val());
+			
+		WinMove();
 		
 		
 	});

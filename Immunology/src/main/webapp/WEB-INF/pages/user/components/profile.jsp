@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <div class="row">
 	<div id="breadcrumb" class="col-md-12">
 		<ol class="breadcrumb">
@@ -24,8 +25,8 @@
 				<div class="no-move"></div>
 			</div>
 			<div class="box-content">
-				<form id="defaultForm" method="POST"
-					action="/cabinet/profile/edit" class="form-horizontal">
+				<form id="defaultForm" method="POST" action="/cabinet/profile/edit"
+					class="form-horizontal">
 
 
 					<fieldset>
@@ -51,13 +52,8 @@
 									id="middleName" value="${user.middleName}" />
 							</div>
 						</div>
-
-
 					</fieldset>
-
-
-
-					<fieldset>
+				<fieldset>
 						<legend></legend>
 
 						<div class="form-group">
@@ -95,8 +91,7 @@
 			</div>
 			<div class="box-content">
 				<form id="defaultForm" method="POST"
-					action="/cabinet/profile/edit/password"
-					class="form-horizontal">
+					action="/cabinet/profile/edit/password" class="form-horizontal">
 					<fieldset>
 						<legend></legend>
 
@@ -132,39 +127,11 @@
 			</div>
 		</div>
 	</div>
-
 </div>
 <script type="text/javascript">
-	// Run Select2 plugin on elements
-	function DemoSelect2() {
-		//$('#s2_with_tag').select2({placeholder: "Select OS"});
-		$('#country').select2();
-		$('#sex').select2();
-	}
-	// Run timepicker
-	function DemoTimePicker() {
-		$('#input_time').timepicker({
-			setDate : new Date()
-		});
-	}
 	$(document).ready(function() {
-		// Create Wysiwig editor for textare
-		//TinyMCEStart('#wysiwig_simple', null);
-		//TinyMCEStart('#wysiwig_full', 'extreme');
-		// Add slider for change test input length
-		//FormLayoutExampleInputLength($( ".slider-style" ));
-		// Initialize datepicker
-		$('#input_date').datepicker({
-			setDate : new Date()
-		});
-		// Load Timepicker plugin
-		//LoadTimePickerScript(DemoTimePicker);
-		// Add tooltip to form-controls
 		$('.form-control').tooltip();
-		Select2Script(DemoSelect2);
-		// Load example of form validation
-		BootstrapValidatorScript(DemoFormValidator);
-		// Add drag-n-drop feature to boxes
+		BootstrapValidatorScript(PatientValidator);
 		WinMove();
-	});
+	});	
 </script>

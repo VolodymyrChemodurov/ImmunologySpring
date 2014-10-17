@@ -68,6 +68,7 @@ $("#add-syndrom-button").click(function(){
 	$.ajax({
 		type : "post",
 		url :  "syndromes/template/{name}/user/{id}".replace("{id}", userId).replace("{name}", syndromName),
+		contentType: "application/json; charset=utf-8",
 		async:   false,
 		success : function(response) {
 				console.log("successfull ajax request" + response);

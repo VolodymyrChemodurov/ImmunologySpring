@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <div class="row">
 	<div id="breadcrumb" class="col-md-12">
 		<ol class="breadcrumb">
@@ -97,6 +98,8 @@
 	</div>
 
 </div>
+
+
 <script type="text/javascript">
 	// Run Select2 plugin on elements
 	function DemoSelect2() {
@@ -104,105 +107,14 @@
 		$('#country').select2();
 		$('#sex').select2();
 	}
-	// Run timepicker
-	function DemoTimePicker() {
-		$('#input_time').timepicker({
-			setDate : new Date()
-		});
-	}
+
 	$(document).ready(function() {
-		// Create Wysiwig editor for textare
-		//TinyMCEStart('#wysiwig_simple', null);
-		//TinyMCEStart('#wysiwig_full', 'extreme');
-		// Add slider for change test input length
-		//FormLayoutExampleInputLength($( ".slider-style" ));
-		// Initialize datepicker
-		$('#input_date').datepicker({
-			setDate : new Date()
-		});
-		// Load Timepicker plugin
-		//LoadTimePickerScript(DemoTimePicker);
 		// Add tooltip to form-controls
 		$('.form-control').tooltip();
 		Select2Script(DemoSelect2);
 		// Load example of form validation
-		BootstrapValidatorScript(UserValidator);
+		BootstrapValidatorScript(PatientValidator);
 		// Add drag-n-drop feature to boxes
 		WinMove();
-	});
-	function UserValidator() {
-		$('#new-user')
-				.bootstrapValidator(
-						{
-							message : 'This value is not valid',
-							fields : {
-
-								firstName : {
-									message : 'The first name is not valid',
-									validators : {
-										notEmpty : {
-											message : 'The first rname is required and can\'t be empty'
-										},
-										stringLength : {
-											min : 2,
-											max : 30,
-											message : 'The first name must be more than 2 and less than 30 characters long'
-										},
-										regexp : {
-											regexp : /^([a-zA-Z\u0400-\u052F]+[-// /']?)*$/,
-											message : 'The first name must contains only letters,apostrophe or hyphen.'
-										}
-									}
-								},
-								lastName : {
-									message : 'The last name is not valid',
-									validators : {
-										notEmpty : {
-											message : 'The last name is required and can\'t be empty'
-										},
-										stringLength : {
-											min : 2,
-											max : 30,
-											message : 'The last name must be more than 2 and less than 30 characters long'
-										},
-										regexp : {
-											regexp : /^([a-zA-Z\u0400-\u052F]+[-// /']?)*$/,
-											message : 'The last name must contains only letters,apostrophe or hyphen.'
-										}
-									}
-								},
-								middleName : {
-									message : 'The middle name is not valid',
-									validators : {
-										notEmpty : {
-											message : 'The middle name is required and can\'t be empty'
-										},
-										stringLength : {
-											min : 6,
-											max : 30,
-											message : 'The middle name must be more than 6 and less than 30 characters long'
-										},
-										regexp : {
-											regexp : /^([a-zA-Z\u0400-\u052F]+[-// /']?)*$/,
-											message : 'The middle name must contains only letters,apostrophe or hyphen.'
-										}
-									}
-								},
-								login : {
-									message : 'The login is not valid',
-									validators : {
-										notEmpty : {
-											message : 'The login is required and can\'t be empty'
-										},
-										stringLength : {
-											min : 3,
-											max : 30,
-											message : 'The login must be more than 3 and less than 30 characters long'
-										},
-									}
-								},
-
-							}
-						});
-	}
+	});	
 </script>

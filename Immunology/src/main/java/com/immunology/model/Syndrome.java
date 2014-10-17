@@ -42,7 +42,7 @@ public class Syndrome {
 	@JsonManagedReference("anamnestic_reference")
 	private AnamnesticDataForm anamnesticData;
 	
-	@OneToMany(mappedBy = "disease")
+	@OneToMany(mappedBy = "disease", cascade=CascadeType.MERGE)
 	@JsonManagedReference("surveys_reference")
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Survey> surveys;

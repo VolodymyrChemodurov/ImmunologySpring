@@ -29,8 +29,8 @@
 						 	<span class="hidden-xs">Users</span>
 						</a>
 						<ul class="dropdown-menu">
+							<li><a class="ajax-link" href="#" onclick="doAjaxGet('/user/create');">Add new user</a></li>						
 							<li><a class="ajax-link" href="#"  onclick="doAjaxGet('/users');">All users</a></li>
-							<li><a class="ajax-link" href="#" onclick="doAjaxGet('/user/create');">Add new user</a></li>
 						</ul>
 					</li>
 					<li>

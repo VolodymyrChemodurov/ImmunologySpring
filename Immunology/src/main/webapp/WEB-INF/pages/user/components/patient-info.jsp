@@ -187,7 +187,7 @@ var anamnesticData  = new Builder("anamnesticData");
 					tr.append("<td>"+ response.surveys[int].creationDate  +"</td><td>"+response.surveys[int].severityLevel +"</td>");//+"<td>"+response.surveys[int].user.firstName +"</td>");
 					table.append(tr);
 				}
-				response.surveys[int].user.firstName;
+	//			response.surveys[int].user.firstName;
 			},
 			error: function (request, status, error) {
 				alert(error);

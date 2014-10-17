@@ -197,10 +197,10 @@ function saveSyrvey(){
 	patientId = "${patient.id}";
 	syndromName = "${syndrom.name}";
 	
-	currentSyrvey.complaintsForm = complaintsData;
-	currentSyrvey.laboratoryDataForm = laboratoryData;
-	currentSyrvey.clinicalManifestationsForm = clinicalManifestationData;
-	
+	currentSyrvey.complaintsForm = complaintsData.formObject;
+	currentSyrvey.laboratoryDataForm = laboratoryData.formObject;
+	currentSyrvey.clinicalManifestationsForm = clinicalManifestationData.formObject;
+	console.log(currentSyrvey);
 	 $.ajax({
 			type : "post",
 			url :   "/survey/patient/{patientId}/syndrome/{syndromeName}".replace("{patientId}", patientId).replace("{syndromeName}", syndromName),
@@ -209,6 +209,7 @@ function saveSyrvey(){
 		    dataType: "json",
 		    async: false,
 			success : function(response) {
+				console.log(response);
 				currentSyrvey = response;
 				console.log("Survey Saved");
 			},

@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <div class="row">
 	<div id="breadcrumb" class="col-md-12">
 		<ol class="breadcrumb">
@@ -25,8 +26,7 @@
 				<div class="no-move"></div>
 			</div>
 			<div class="box-content">
-				<form id="defaultForm" method="POST"
-					action="/patients"
+				<form id="defaultForm" method="POST" action="/patients"
 					class="form-horizontal">
 					<fieldset>
 						<legend></legend>
@@ -70,10 +70,10 @@
 						<div class="form-group has-feedback">
 							<label class="col-sm-3 control-label">Дата народження</label>
 							<div class="col-sm-5">
-								<input type="text" name="dateOfBirth" id="datepicker"
-									class="form-control" placeholder="дд/мм/рррр"> <span
-									class="fa fa-calendar form-control-feedback"></span>
-									
+								<input type="text" name="dateOfBirth" class="form-control"
+									placeholder="дд/мм/рррр" id="dateOfBirth"> <span
+									class="fa fa-calendar form-control-feedback" id="datepicker"></span>
+
 							</div>
 
 
@@ -146,25 +146,20 @@
 <script type="text/javascript">
 	// Run Select2 plugin on elements
 	function DemoSelect2() {
-		//$('#s2_with_tag').select2({placeholder: "Select OS"});
 		$('#country').select2();
 		$('#sex').select2();
 	}
 
 	$(document).ready(function() {
-		// Create Wysiwig editor for textare
-		//TinyMCEStart('#wysiwig_simple', null);
-		//TinyMCEStart('#wysiwig_full', 'extreme');
-		// Add slider for change test input length
-		//FormLayoutExampleInputLength($( ".slider-style" ));
-		// Initialize datepicker
-		$(function() {
-	$('#datepicker').datepicker({
-		setDate : new Date()
-	});
-});
-		// Load Timepicker plugin
-		//LoadTimePickerScript(DemoTimePicker);
+		$('#dateOfBirth').datepicker({
+			dateFormat: "dd/mm/yy",
+			changeMonth : true,
+			changeYear : true,
+			yearRange: "-110:+2"
+		});
+		$('#datepicker').click(function() {
+			$('#dateOfBirth').datepicker("show");
+		});
 		// Add tooltip to form-controls
 		$('.form-control').tooltip();
 		Select2Script(DemoSelect2);
@@ -172,5 +167,5 @@
 		BootstrapValidatorScript(PatientValidator);
 		// Add drag-n-drop feature to boxes
 		WinMove();
-	});				
+	});
 </script>

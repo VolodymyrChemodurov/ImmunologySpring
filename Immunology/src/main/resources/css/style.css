@@ -1471,16 +1471,16 @@ td.beauty-hover {
   cursor: pointer;
 }
 .ui-icon-circle-triangle-w {
-  background: url(../resources/img/ui-left.png) 0 0 no-repeat !important;
+  background: url(/resources/img/ui-left.png) 0 0 no-repeat !important;
 }
 .ui-icon-circle-triangle-e {
-  background: url(../resources/img/ui-right.png) 0 0 no-repeat !important;
+  background: url(/resources/img/ui-right.png) 0 0 no-repeat !important;
 }
 .ui-icon-circle-arrow-s {
   background: url(../resources/img/ui-accordion-down.png) 0 0 no-repeat !important;
 }
 .ui-icon-circle-arrow-e {
-  background: url(../resources/img/ui-accordion-right.png) 0 0 no-repeat !important;
+  background: url(..//img/ui-accordion-right.png) 0 0 no-repeat !important;
 }
 #ui-datepicker-div .ui-slider-horizontal {
   background: rgba(0, 0, 0, 0.5);

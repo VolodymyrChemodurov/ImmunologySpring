@@ -43,7 +43,7 @@
 						<label class="col-sm-3 control-label">Дата народження</label>
 						<div class="col-sm-5">
 							<input type="text"  name="dateOfBirth" id="dateOfBirth" class="form-control" placeholder="Date" value="${patient.dateOfBirth}">
-							<span class="fa fa-calendar form-control-feedback"></span>
+							<span class="fa fa-calendar form-control-feedback" id="datepicker"></span>
 						</div>
 						
 						

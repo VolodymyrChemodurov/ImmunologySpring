@@ -22,4 +22,8 @@ public class SurveyServiceImpl implements SurveyService {
 		return crudDao.saveOrUpdate(survey);
 	}
 
+	public Survey getById(Long surveyId) {
+		return crudDao.find(Survey.class, surveyId);
+	}
+
 }

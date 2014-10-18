@@ -56,4 +56,8 @@ public class SurveyController {
 		return surveyService.saveOrUpdateSurvey(survey);
 	}
 	
+	@RequestMapping(value = "/patient/{patientId}/survey/{surveyId}", method = RequestMethod.GET)
+	public @ResponseBody Survey getPatientSurvey(@PathVariable("patientId") Long patientId, @PathVariable("surveyId") Long syrveyId) {
+		return surveyService.getById(syrveyId);
+	}
 }

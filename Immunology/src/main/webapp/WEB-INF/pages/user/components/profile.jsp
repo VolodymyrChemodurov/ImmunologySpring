@@ -9,9 +9,9 @@
 	</div>
 </div>
 
-<div class="row">
+<div class="row" id="validation">
 	<div class="col-xs-12 col-sm-6">
-		<div class="box">
+	<div class="box">
 			<div class="box-header">
 				<div class="box-name">
 					<i class="fa fa-user-md"></i> <span>Ваш профіль</span>
@@ -106,13 +106,13 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Новий пароль</label>
 							<div class="col-sm-5">
-								<input type="password" class="form-control" />
+								<input type="password" class="form-control" id="password"/>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Повторіть пароль</label>
 							<div class="col-sm-5">
-								<input type="password" class="form-control" />
+								<input type="password" class="form-control" id="confirmPassword"/>
 							</div>
 						</div>
 					</fieldset>

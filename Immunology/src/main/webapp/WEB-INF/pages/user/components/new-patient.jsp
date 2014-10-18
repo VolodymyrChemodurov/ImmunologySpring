@@ -12,6 +12,7 @@
 
 <div class="row">
 	<div class="col-xs-12">
+	<div id="validation">
 		<div class="box" id="new-patient">
 			<div class="box-header">
 				<div class="box-name">
@@ -141,7 +142,7 @@
 			</div>
 		</div>
 	</div>
-
+</div>
 </div>
 <script type="text/javascript">
 	// Run Select2 plugin on elements

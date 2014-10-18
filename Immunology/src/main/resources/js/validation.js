@@ -1,6 +1,6 @@
 
 	function PatientValidator(){
-		$('#new-patient').bootstrapValidator({
+		$('#validation').bootstrapValidator({
 			message: 'This value is not valid',
 			fields: {
 				
@@ -100,9 +100,13 @@
 							min: 3,
 							max: 30,
 							message: 'The login must be more than 3 and less than 30 characters long'
+						},
+						regexp: {
+							regexp: /^([a-zA-Z\u0400-\u052F0-9]+[-_]?)*/,
+							message: 'The login must contains only letters, numbers, dashes or hyphens.'
 						}
 					}
-				},
+				},				
 				street: {
 					message: 'The street is not valid.',
 					validators: {
@@ -132,7 +136,7 @@
 							message: 'The house must be more than 1 and less than 5 characters long.'
 						},
 						regexp: {
-							regexp: /^[a-zA-Z\u0400-\u052F0-9]+$/,
+							regexp: /^\d+[a-zA-Z]*$/,
 							message: 'The house must contains only letters or numbers.',
 						}
 					}
@@ -197,6 +201,11 @@
 						notEmpty: {
 							message: 'The password is required and can\'t be empty'
 						},
+						stringLength: {
+							min: 8,
+							max: 16,
+							message: 'The password must be more than 8 and less than 16 characters long.'
+						},
 						identical: {
 							field: 'confirmPassword',
 							message: 'The password and its confirm are not the same'
@@ -207,6 +216,11 @@
 					validators: {
 						notEmpty: {
 							message: 'The confirm password is required and can\'t be empty'
+						},
+						stringLength: {
+							min: 8,
+							max: 16,
+							message: 'The house must be more than 8 and less than 16 characters long.'
 						},
 						identical: {
 							field: 'password',

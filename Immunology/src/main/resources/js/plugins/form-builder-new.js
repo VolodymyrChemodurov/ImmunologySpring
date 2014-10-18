@@ -135,6 +135,73 @@ this.initNewSurveyForm = function(blockID,type ,patientId, formName) {
 		this.event.init();
 		this.prepareForm();
 	};
+this.initNewSurveyFormWithNewUrl = function(blockID,type, url) {
+		
+		//this.formName = formName;
+		//this.patientId = patientId;
+		this.setContainer($(blockID));
+		this.container.html("");
+		this.container.attr("object",this.objectName);
+		
+		if(type == this.TYPE.LABORATORY_DATA){
+			$.ajax({
+				type : "get",
+				url :  url,
+				dataType : "json",
+				async:   false,
+				success : function(response) {
+						syndrom = response;
+						form = response.laboratoryDataForm;
+				},
+				error: function (request, status, error) {
+					alert(error);
+			    }
+			});
+			this.setForm(form);
+			console.log(this.formObject);
+			this.renderFormBody(false);
+		}
+		if(type == this.TYPE.COMPLAINTS_DATA){
+			$.ajax({
+				type : "get",
+				url :  url,
+				dataType : "json",
+				async:   false,
+				success : function(response) {
+						syndrom = response;
+						form = response.complaintsForm;
+				},
+				error: function (request, status, error) {
+					alert(error);
+			    }
+			});
+			this.setForm(form);
+			console.log(this.formObject);
+			this.renderFormBody(false);
+		}
+		if(type == this.TYPE.CLINICAL_MANIFESTATIONS_DATA){
+			$.ajax({
+				type : "get",
+				url :  url,
+				dataType : "json",
+				async:   false,
+				success : function(response) {
+						syndrom = response;
+						form = response.clinicalManifestationsForm;
+				},
+				error: function (request, status, error) {
+					alert(error);
+			    }
+			});
+			this.setForm(form);
+			console.log(this.formObject);
+			this.renderFormBody(false);
+		}
+		
+		
+		this.event.init();
+		this.prepareForm();
+};
 	
 	
 	

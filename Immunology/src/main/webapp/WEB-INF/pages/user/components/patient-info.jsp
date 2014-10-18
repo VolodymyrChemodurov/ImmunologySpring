@@ -169,7 +169,11 @@ var anamnesticData  = new Builder("anamnesticData");
 			}
 		}	
 		);
-		
+	}
+	function initSurveyRowesEvent(){
+		$(".surveyRow").click(function(){
+			window.location.href='/survey/edit/patientId=' + $("#patient_id").val()+'surveyId=' +$(this).attr("surveyId");
+		})
 	}
 	function refreshTable(syndromName){
 		var patientId = "${patient.id}";
@@ -183,11 +187,12 @@ var anamnesticData  = new Builder("anamnesticData");
 			success : function(response) {
 				table.html("");
 				for (var int = 0; int < response.surveys.length; int++) {
-					var tr = $("<tr/>");
+					var tr = $("<tr class='surveyRow' surveyId='"+response.surveys[int].id+"'/>");
 					tr.append("<td>"+ response.surveys[int].creationDate  +"</td><td>"+response.surveys[int].severityLevel +"</td>");//+"<td>"+response.surveys[int].user.firstName +"</td>");
 					table.append(tr);
 				}
 	//			response.surveys[int].user.firstName;
+				initSurveyRowesEvent();
 			},
 			error: function (request, status, error) {
 				alert(error);

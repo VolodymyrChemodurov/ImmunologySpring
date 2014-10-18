@@ -185,7 +185,7 @@ function getSurveyTemplate(){
 		dataType : "json",
 		async:   false,
 		success : function(response) {
-			currentSyrvey = response.surveys[0];
+			currentSurvey = response.surveys[0];
 		},
 		error: function (request, status, error) {
 			alert(error);
@@ -197,10 +197,10 @@ function saveSyrvey(){
 	patientId = "${patient.id}";
 	syndromName = "${syndrom.name}";
 	
-	currentSyrvey.complaintsForm = complaintsData.formObject;
-	currentSyrvey.laboratoryDataForm = laboratoryData.formObject;
-	currentSyrvey.clinicalManifestationsForm = clinicalManifestationData.formObject;
-	console.log(currentSyrvey);
+	currentSurvey.complaintsForm = complaintsData.formObject;
+	currentSurvey.laboratoryDataForm = laboratoryData.formObject;
+	currentSurvey.clinicalManifestationsForm = clinicalManifestationData.formObject;
+	console.log(JSON.stringify(currentSurvey));
 	 $.ajax({
 			type : "post",
 			url :   "/survey/patient/{patientId}/syndrome/{syndromeName}".replace("{patientId}", patientId).replace("{syndromeName}", syndromName),
@@ -210,7 +210,7 @@ function saveSyrvey(){
 		    async: false,
 			success : function(response) {
 				console.log(response);
-				currentSyrvey = response;
+				currentSurvey = response;
 				console.log("Survey Saved");
 			},
 			error: function (request, status, error) {

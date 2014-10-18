@@ -28,7 +28,7 @@
 					</ul>
 					<div id="tabs-1">
 						<div class="row">
-							<div class="col-xs-12 col-sm-6">
+							<div class="col-xs-12 col-sm-12">
 								<div class="box">
 									<div class="box-header">
 										<div class="box-name">
@@ -46,10 +46,42 @@
 										<div id="chart_div"></div>
 									</div>
 								</div>
+
+
+								<div class="box">
+									<div class="box-header">
+										<div class="box-name">
+											<span>Статистика віку</span>
+										</div>
+										<div class="box-icons">
+											<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+											</a> <a class="expand-link"> <i class="fa fa-expand"></i>
+											</a> <a class="close-link"> <i class="fa fa-times"></i>
+											</a>
+										</div>
+										<div class="no-move"></div>
+									</div>
+									<div class="box-content"></div>
+
+								</div>
+
+								<div class="box">
+									<div class="box-header">
+										<div class="box-name">
+											<span>Статистика хвороб</span>
+										</div>
+										<div class="box-icons">
+											<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+											</a> <a class="expand-link"> <i class="fa fa-expand"></i>
+											</a> <a class="close-link"> <i class="fa fa-times"></i>
+											</a>
+										</div>
+										<div class="no-move"></div>
+									</div>
+									<div class="box-content"></div>
+								</div>
 							</div>
-
 						</div>
-
 					</div>
 					<div id="tabs-2">
 						<div class="box-content no-padding">
@@ -98,20 +130,55 @@
 
 					</div>
 					<div id="tabs-3">
-						<div class="box-content no-padding">
-							<table
-								class="table table-bordered table-striped table-hover table-heading table-datatable">
-
-								<tbody>
-									<c:forEach items="${medicalCardCreationStatistic}" var="med">
-										<tr>
-											<td>${med}</td>
-										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
+						<div class="row">
+							<div class="col-xs-12 col-sm-12">
+								<div class="box">
+									<div class="box-header">
+										<div class="box-name">
+											<span>Переносимість препарату</span>
+										</div>
+										<div class="box-icons">
+											<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+											</a> <a class="expand-link"> <i class="fa fa-expand"></i>
+											</a> <a class="close-link"> <i class="fa fa-times"></i>
+											</a>
+										</div>
+										<div class="no-move"></div>
+									</div>
+									<div class="box-content"></div>
+								</div>
+								<div class="box">
+									<div class="box-header">
+										<div class="box-name">
+											<span>Оцінка ефективність препарату</span>
+										</div>
+										<div class="box-icons">
+											<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+											</a> <a class="expand-link"> <i class="fa fa-expand"></i>
+											</a> <a class="close-link"> <i class="fa fa-times"></i>
+											</a>
+										</div>
+										<div class="no-move"></div>
+									</div>
+									<div class="box-content"></div>
+								</div>
+								<div class="box">
+									<div class="box-header">
+										<div class="box-name">
+											<span>Ступінь вираженості ПЕ</span>
+										</div>
+										<div class="box-icons">
+											<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+											</a> <a class="expand-link"> <i class="fa fa-expand"></i>
+											</a> <a class="close-link"> <i class="fa fa-times"></i>
+											</a>
+										</div>
+										<div class="no-move"></div>
+									</div>
+									<div class="box-content"></div>
+								</div>
+							</div>
 						</div>
-
 					</div>
 				</div>
 			</div>
@@ -127,21 +194,31 @@
 			dataType : "json",
 			async : false
 		}).responseText;
-		
-		
-	
+
 		var data = new google.visualization.DataTable();
-		data.addColumn({"type": "number","label": "Years"});
-		data.addColumn({"type": "number","label": "Amount"});
+		data.addColumn({
+			"type" : "number",
+			"label" : "Years"
+		});
+		data.addColumn({
+			"type" : "number",
+			"label" : "Amount"
+		});
 		data.addRows(JSON.parse(jsonData));
 
 		var options = {
-		width: 700, height: 320,
+			width : '50%',
+			height : 400,
 		};
 		var dataView = new google.visualization.DataView(data);
-	      dataView.setColumns([{calc: function(data, row) { return data.getFormattedValue(row, 0); }, type:'string'}, 1]);
-		
-	      var chart = new google.visualization.PieChart(document
+		dataView.setColumns([ {
+			calc : function(data, row) {
+				return data.getFormattedValue(row, 0);
+			},
+			type : 'string'
+		}, 1 ]);
+
+		var chart = new google.visualization.PieChart(document
 				.getElementById('chart_div'));
 
 		chart.draw(dataView, options);
@@ -154,6 +231,6 @@
 
 	$(document).ready(function() {
 		$("#tabs").tabs();
-		
+
 	});
 </script>

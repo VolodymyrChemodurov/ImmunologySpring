@@ -37,7 +37,7 @@ public class Survey {
 	@Column(name = "insufficiency_level")
 	private double insufficiencyLevel;
 
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.MERGE)
 	@JoinColumn(name = "disease_id")
 	@JsonBackReference("surveys_reference")
 	private Syndrome disease;

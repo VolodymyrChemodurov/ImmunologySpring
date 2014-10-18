@@ -16,6 +16,7 @@ import com.immunology.logic.service.PatientService;
 import com.immunology.logic.service.SurveyService;
 import com.immunology.logic.service.SyndromeService;
 import com.immunology.logic.service.UserService;
+import com.immunology.logic.utils.ReferenceHelper;
 import com.immunology.logic.utils.UserUtils;
 import com.immunology.model.Survey;
 import com.immunology.model.Syndrome;
@@ -44,13 +45,13 @@ public class SurveyController {
 		model.addAttribute("patient", patientService.getPatientById(patientId));
 		return "user/survey";
 	}
+	
 	@RequestMapping(value = "/edit/patientId={id}surveyId={surveyId}", method = RequestMethod.GET)
 	public String  editUserSyndromes(Model model, @PathVariable("id") long patientId, @PathVariable("surveyId") long surveyId) {
 		User user = UserUtils.getCurrentUser();
 		model.addAttribute("user", userService.getUserByLogin(user.getUsername()));
 		
 		model.addAttribute("surveyId", surveyId);
-	//	model.addAttribute("syndrom", syndromeService.getPatientSyndrome(patientId, syndromeName));
 		model.addAttribute("patient", patientService.getPatientById(patientId));
 		return "user/survey";
 	}
@@ -59,6 +60,10 @@ public class SurveyController {
 	public @ResponseBody Survey saveOrUpdateSurvey(@RequestBody Survey survey, @PathVariable("patientId") Long patientId,
 			@PathVariable("syndromeName") String syndromeName) {
 		Syndrome syndrome = syndromeService.getPatientSyndrome(patientId, syndromeName);
+		if(syndrome.getPatient() == null) {
+			syndrome.setPatient(patientService.getPatientById(patientId));
+			ReferenceHelper.setTemplatesReferences(syndrome);
+		}
 		survey.setDisease(syndrome);
 		User user = UserUtils.getCurrentUser();
 		survey.setUser(userService.getUserByLogin(user.getUsername()));

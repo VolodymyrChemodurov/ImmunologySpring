@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.immunology.logic.dao.CrudDao;
 import com.immunology.logic.service.SurveyService;
+import com.immunology.logic.utils.ReferenceHelper;
 import com.immunology.model.Survey;
 
 @Service
@@ -19,6 +20,7 @@ public class SurveyServiceImpl implements SurveyService {
 		if(survey.getId() == 0) {
 			survey.setCreationDate(new Date());
 		}
+		ReferenceHelper.setTemplateReferences(survey);
 		return crudDao.saveOrUpdate(survey);
 	}
 

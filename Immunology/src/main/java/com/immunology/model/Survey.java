@@ -42,15 +42,15 @@ public class Survey {
 	@JsonBackReference("surveys_reference")
 	private Syndrome disease;
 	
-	@OneToOne(cascade=CascadeType.MERGE)
+	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "complaints_form_id")
 	private ComplaintsForm complaintsForm;
 	
-	@OneToOne(cascade=CascadeType.MERGE)
+	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "clinical_manifestations_form_id")
 	private ClinicalManifestationsForm clinicalManifestationsForm;
 	
-	@OneToOne(cascade=CascadeType.MERGE)
+	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "laboratory_data_form_id")
 	private LaboratoryDataForm laboratoryDataForm;
 	

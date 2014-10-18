@@ -3,6 +3,7 @@ package com.immunology.logic.utils;
 import java.util.List;
 import java.util.Set;
 
+import com.immunology.model.Survey;
 import com.immunology.model.Syndrome;
 import com.immunology.model.ui.Element;
 import com.immunology.model.ui.MedicalCardForm;
@@ -19,6 +20,15 @@ public class ReferenceHelper {
 	
 	public static void setTemplatesReferences(Syndrome syndrome) {
 		List<Panel> panels = syndrome.getAnamnesticData().getPanels();
+		for(Panel panel: panels) {
+			setPanelReferences(panel);
+		}
+	}
+	
+	public static void setTemplateReferences(Survey survey) {
+		List<Panel> panels = survey.getClinicalManifestationsForm().getPanels();
+		panels.addAll(survey.getComplaintsForm().getPanels());
+		panels.addAll(survey.getLaboratoryDataForm().getPanels());
 		for(Panel panel: panels) {
 			setPanelReferences(panel);
 		}

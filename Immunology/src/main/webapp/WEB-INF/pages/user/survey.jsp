@@ -137,10 +137,18 @@ var currentSurvey = {};
 $(document).ready(function() {
 	$("#tabs").tabs();
 	$("#tabs").css("display", "inline");
-	complaintsData.initNewSurveyForm("#complaints", "ComplaintsForm", $('#patient_id').val(), "${syndrom.name}");
-	laboratoryData.initNewSurveyForm('#laboratoryData', "LaboratoryDataForm", $('#patient_id').val(),  "${syndrom.name}");
-	clinicalManifestationData.initNewSurveyForm('#clinicalManifestations', "ClinicalManifestationsForm", $('#patient_id').val(), "${syndrom.name}");
-	getSurveyTemplate();
+	if("${surveyId}".length > 0){
+		complaintsData.initNewSurveyFormWithNewUrl("#complaints", "ComplaintsForm", "/survey/patient/${patient.id}/survey/${surveyId}");
+		laboratoryData.initNewSurveyFormWithNewUrl('#laboratoryData', "LaboratoryDataForm", "/survey/patient/${patient.id}/survey/${surveyId}");
+		clinicalManifestationData.initNewSurveyFormWithNewUrl('#clinicalManifestations', "ClinicalManifestationsForm", "/survey/patient/${patient.id}/survey/${surveyId}");
+
+	}else{
+		complaintsData.initNewSurveyForm("#complaints", "ComplaintsForm", $('#patient_id').val(), "${syndrom.name}");
+		laboratoryData.initNewSurveyForm('#laboratoryData', "LaboratoryDataForm", $('#patient_id').val(),  "${syndrom.name}");
+		clinicalManifestationData.initNewSurveyForm('#clinicalManifestations', "ClinicalManifestationsForm", $('#patient_id').val(), "${syndrom.name}");
+		getSurveyTemplate();
+	}
+
 	$("#complaints").append('<button type="button" style="margin-left: 48%;" onClick="saveSyrvey();" class="btn btn-primary">Save</button>');
 	$("#clinicalManifestations").append('<button type="button" style="margin-left: 48%;" onClick="saveSyrvey();" class="btn btn-primary">Save</button>');
 	$("#laboratoryData").append('<button type="button" style="margin-left: 48%;" onClick="saveSyrvey();" class="btn btn-primary">Save</button>');

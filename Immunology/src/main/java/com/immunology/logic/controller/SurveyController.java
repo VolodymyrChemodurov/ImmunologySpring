@@ -40,8 +40,17 @@ public class SurveyController {
 		User user = UserUtils.getCurrentUser();
 		model.addAttribute("user", userService.getUserByLogin(user.getUsername()));
 		
-		
 		model.addAttribute("syndrom", syndromeService.getPatientSyndrome(patientId, syndromeName));
+		model.addAttribute("patient", patientService.getPatientById(patientId));
+		return "user/survey";
+	}
+	@RequestMapping(value = "/edit/patientId={id}surveyId={surveyId}", method = RequestMethod.GET)
+	public String  editUserSyndromes(Model model, @PathVariable("id") long patientId, @PathVariable("surveyId") long surveyId) {
+		User user = UserUtils.getCurrentUser();
+		model.addAttribute("user", userService.getUserByLogin(user.getUsername()));
+		
+		model.addAttribute("surveyId", surveyId);
+	//	model.addAttribute("syndrom", syndromeService.getPatientSyndrome(patientId, syndromeName));
 		model.addAttribute("patient", patientService.getPatientById(patientId));
 		return "user/survey";
 	}
@@ -58,6 +67,7 @@ public class SurveyController {
 	
 	@RequestMapping(value = "/patient/{patientId}/survey/{surveyId}", method = RequestMethod.GET)
 	public @ResponseBody Survey getPatientSurvey(@PathVariable("patientId") Long patientId, @PathVariable("surveyId") Long syrveyId) {
-		return surveyService.getById(syrveyId);
+		Survey survey = surveyService.getById(syrveyId);
+		return survey;
 	}
 }

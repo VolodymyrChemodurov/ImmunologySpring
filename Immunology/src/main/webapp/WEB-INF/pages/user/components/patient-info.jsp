@@ -186,10 +186,12 @@ var anamnesticData  = new Builder("anamnesticData");
 			async:   false,
 			success : function(response) {
 				table.html("");
-				for (var int = 0; int < response.surveys.length; int++) {
+				for (var int = 1; int < response.surveys.length; int++) {
+					if(response.surveys[int].id != 0){
 					var tr = $("<tr class='surveyRow' surveyId='"+response.surveys[int].id+"'/>");
 					tr.append("<td>"+ response.surveys[int].creationDate  +"</td><td>"+response.surveys[int].severityLevel +"</td>");//+"<td>"+response.surveys[int].user.firstName +"</td>");
 					table.append(tr);
+					}
 				}
 	//			response.surveys[int].user.firstName;
 				initSurveyRowesEvent();

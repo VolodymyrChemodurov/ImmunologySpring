@@ -2,6 +2,7 @@ package com.immunology.model.ui.elements.impl;
 
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,6 +19,7 @@ import com.immunology.model.ui.elements.Element;
 public class ButtonGroup extends Element implements Computable {
 
 	@ElementCollection(fetch = FetchType.EAGER)
+	@Column(name = "button_group_values")
 	private Set<Double> values;
 	
 	private Double selected;

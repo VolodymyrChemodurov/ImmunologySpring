@@ -1,4 +1,4 @@
-package com.immunology.model.ui.elements;
+package com.immunology.model.ui.elements.impl;
 
 import java.util.Set;
 
@@ -15,8 +15,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import com.immunology.model.ui.Element;
 import com.immunology.model.ui.Form;
+import com.immunology.model.ui.elements.Element;
 
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.PROPERTY, property="objectType")

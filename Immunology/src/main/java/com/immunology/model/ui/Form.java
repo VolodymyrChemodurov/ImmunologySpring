@@ -13,12 +13,11 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
-import javax.persistence.SequenceGenerator;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.immunology.model.ui.elements.Panel;
+import com.immunology.model.ui.elements.impl.Panel;
 
 @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.PROPERTY, property="objectType")
 @JsonSubTypes({
@@ -29,12 +28,10 @@ import com.immunology.model.ui.elements.Panel;
         @JsonSubTypes.Type(value=AnamnesticDataForm.class)
 })
 @Entity
-//@SequenceGenerator(name="from_sequence", initialValue=20)
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Form {
 
 	@Id
-	//@GeneratedValue(generator = "from_sequence", strategy = GenerationType.TABLE)
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	@Column(name = "form_id")
 	private Long id;

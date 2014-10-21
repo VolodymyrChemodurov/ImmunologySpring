@@ -5,9 +5,9 @@ import java.util.Set;
 
 import com.immunology.model.Survey;
 import com.immunology.model.Syndrome;
-import com.immunology.model.ui.Element;
 import com.immunology.model.ui.MedicalCardForm;
-import com.immunology.model.ui.elements.Panel;
+import com.immunology.model.ui.elements.Element;
+import com.immunology.model.ui.elements.impl.Panel;
 
 public class ReferenceHelper {
 

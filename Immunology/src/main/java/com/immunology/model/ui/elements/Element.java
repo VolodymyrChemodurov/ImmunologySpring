@@ -1,4 +1,4 @@
-package com.immunology.model.ui;
+package com.immunology.model.ui.elements;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,15 +11,14 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import com.immunology.model.ui.elements.DropDown;
-import com.immunology.model.ui.elements.Panel;
-import com.immunology.model.ui.elements.TextBox;
+import com.immunology.model.ui.elements.impl.DropDown;
+import com.immunology.model.ui.elements.impl.Panel;
+import com.immunology.model.ui.elements.impl.TextBox;
 
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.PROPERTY, property="objectType")
@@ -29,12 +28,10 @@ import com.immunology.model.ui.elements.TextBox;
         @JsonSubTypes.Type(value=TextBox.class)
 })
 @Entity
-//@SequenceGenerator(name="element_sequence", initialValue=40)
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Element {
 
 	@Id
-	//@GeneratedValue(generator = "element_sequence", strategy = GenerationType.TABLE)
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	@Column(name = "element_id")
 	protected Long id;

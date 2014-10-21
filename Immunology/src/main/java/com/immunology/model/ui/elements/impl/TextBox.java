@@ -1,10 +1,10 @@
-package com.immunology.model.ui.elements;
+package com.immunology.model.ui.elements.impl;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.immunology.model.ui.Element;
+import com.immunology.model.ui.elements.Element;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "objectType")
 @Entity

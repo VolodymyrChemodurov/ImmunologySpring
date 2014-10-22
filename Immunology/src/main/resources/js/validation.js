@@ -16,7 +16,7 @@
 							message: 'The first name must be more than 2 and less than 30 characters long.'
 						},
 						regexp: {
-							regexp: /^([a-zA-Z\u0400-\u052F]+[-// /']?)*$/,
+							regexp: /^([a-zA-Z\u0400-\u052F]+[-']?)*$/,
 							message: 'The first name must contains only letters,apostrophe or hyphen.'
 						}
 					}
@@ -33,7 +33,7 @@
 							message: 'The last name must be more than 2 and less than 30 characters long.'
 						},
 						regexp: {
-							regexp: /^([a-zA-Z\u0400-\u052F]+[-// /']?)*$/,
+							regexp: /^([a-zA-Z\u0400-\u052F]+[-']?)*$/,
 							message: 'The last name must contains only letters,apostrophe or hyphen.'
 						}
 					}
@@ -50,7 +50,7 @@
 							message: 'The middle name must be more than 5 and less than 30 characters long.'
 						},
 						regexp: {
-							regexp: /^([a-zA-Z\u0400-\u052F]+[-// /']?)*$/,
+							regexp: /^([a-zA-Z\u0400-\u052F]+[-']?)*$/,
 							message: 'The middle name must contains only letters,apostrophe or hyphen.'
 						}
 					}
@@ -68,7 +68,7 @@
 							message: 'The region must be more than 6 and less than 30 characters long.'
 						},
 						regexp: {
-							regexp: /^([a-zA-Z\u0400-\u052F]+[-// /']?)*$/,
+							regexp: /^([a-zA-Z\u0400-\u052F]+[-']?)*$/,
 							message: 'The region must contains only letters,apostrophe or hyphen.'
 						}
 					}
@@ -85,24 +85,24 @@
 							message: 'The city must be more than 3 and less than 30 characters long.'
 						},
 						regexp: {
-							regexp: /^([a-zA-Z\u0400-\u052F]+[-// /']?)*$/,
+							regexp: /^([a-zA-Z\u0400-\u052F]+[-']?)*$/,
 							message: 'The city must contains only letters,apostrophe or hyphen.'
 						}
 					}
 				},
 				login: {
-					message: 'The login is not valid',
+					message: 'The login is not valid.',
 					validators: {
 						notEmpty: {
-							message: 'The login is required and can\'t be empty'
+							message: 'The login is required and can\'t be empty.'
 						},
 						stringLength: {
 							min: 3,
-							max: 30,
-							message: 'The login must be more than 3 and less than 30 characters long'
+							max: 16,
+							message: 'The login must be more than 3 and less than 1630 characters long.'
 						},
 						regexp: {
-							regexp: /^([a-zA-Z\u0400-\u052F0-9]+[-_]?)*/,
+							regexp: /^([a-zA-Z\u0400-\u052F0-9]+[-_]?)*$/,
 							message: 'The login must contains only letters, numbers, dashes or hyphens.'
 						}
 					}
@@ -119,7 +119,7 @@
 							message: 'The street must be more than 3 and less than 30 characters long.'
 						},
 						regexp: {
-							regexp: /^([a-zA-Z\u0400-\u052F]+[-// /']?)*$/,
+							regexp: /^([a-zA-Z\u0400-\u052F]+[-']?)*$/,
 							message: 'The street name must contains only letters,apostrophe or hyphen.'
 						}
 					}
@@ -166,7 +166,7 @@
 							message: 'The country is required and can\'t be empty'
 						},
 						regexp: {
-							regexp: /^([a-zA-Z\u0400-\u052F]+[-// /']?)*$/,
+							regexp: /^([a-zA-Z\u0400-\u052F]+[-']?)*$/,
 							message: 'The country name must contains only letters,apostrophe or hyphen.'
 						}
 					}
@@ -206,13 +206,12 @@
 							max: 16,
 							message: 'The password must be more than 8 and less than 16 characters long.'
 						},
-						identical: {
-							field: 'confirmPassword',
-							message: 'The password and its confirm are not the same'
+						regexp: {
+							regexp: /^([a-zA-Z\u0400-\u052F0-9]+[-_]?)*$/,
+							message: 'The password must contains only letters, numbers, dashes or hyphens.'
 						}
 					}
-				},
-				confirmPassword: {
+				},	nfirmPassword: {
 					validators: {
 						notEmpty: {
 							message: 'The confirm password is required and can\'t be empty'
@@ -225,7 +224,11 @@
 						identical: {
 							field: 'password',
 							message: 'The password and its confirm are not the same'
-						}				
+						},				
+						regexp: {
+							regexp: /^([a-zA-Z\u0400-\u052F0-9]+[-_]?)*$/,
+							message: 'The password must contains only letters, numbers, dashes or hyphens.'
+						}
 					}
 				}
 				

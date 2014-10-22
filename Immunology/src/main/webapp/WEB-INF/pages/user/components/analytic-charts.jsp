@@ -14,6 +14,32 @@
 	</div>
 </div>
 <div class="row">
+<div class="col-xs-12">
+		<div class="box">
+			<div class="box-header">
+				<div class="box-name">
+					 <span>Виберіть діаграму:</span>
+				</div>
+				<div class="no-move"></div>
+			</div>
+				<div class="box-content" style="display: list-item;">
+						<div class="col-sm-9">
+							<select id="typeofchart" class="form-control">
+    								<option>Кругова діаграма</option>
+    								<option>Стовпчикова діаграма</option>
+    								<option>Гістограма</option>
+    								<option>Графік</option>
+							</select>
+						</div>
+						<div class="col-sm-3">
+							<button type="button" id="select_chart_button" class="btn btn-default"><i class="fa fa-arrow-circle-down"></i> Вибрати</button>
+						
+						</div>
+				</div>
+			</div>
+		</div>
+</div>
+<div class="row">
 	<div class="col-xs-12">
 		<div class="box">
 			<div class="box-header">
@@ -43,7 +69,7 @@
 										<div class="no-move"></div>
 									</div>
 									<div class="box-content">
-										<div id="chart_div"></div>
+										<div id="chart_dateofregistration"></div>
 									</div>
 								</div>
 
@@ -188,7 +214,8 @@
 
 
 <script type="text/javascript">
-	function drawChart() {
+var typeOfChart;
+	function drawChartDateOfRegistration() {
 		var jsonData = $.ajax({
 			url : "/statistic/medical_cards/by_years",
 			dataType : "json",
@@ -218,16 +245,38 @@
 			type : 'string'
 		}, 1 ]);
 
-		var chart = new google.visualization.PieChart(document
-				.getElementById('chart_div'));
-
-		chart.draw(dataView, options);
+		var pieChart = new google.visualization.PieChart(document
+				.getElementById('chart_dateofregistration'));
+		
+		var histogram = new google.visualization.Histogram(document
+				.getElementById('chart_dateofregistration'));
+		
+		var columnChart = new google.visualization.ColumnChart(document
+				.getElementById('chart_dateofregistration'));
+		
+		var lineChart = new google.visualization.LineChart(document
+				.getElementById('chart_dateofregistration'));
+		
+		if(typeOfChart.trim()=='Кругова діаграма'){
+			pieChart.draw(dataView, options);
+			}else if (typeOfChart.trim()=='Стовпчикова діаграма'){
+				columnChart.draw(dataView, options);
+			}else if (typeOfChart.trim()=='Гістограма'){
+				histogram.draw(dataView, options);
+			}else if (typeOfChart.trim()=='Графік'){
+				lineChart.draw(dataView, options);
+			}
 	}
-
-	google.load("visualization", "1", {
-		packages : [ "corechart" ],
-		callback : drawChart
+	
+	$("#select_chart_button").click(function(){
+		typeOfChart=$('#typeofchart').val();
+		google.load("visualization", "1", {
+			packages : [ "corechart" ],
+			callback : drawChartDateOfRegistration
+		});
 	});
+	
+	
 
 	$(document).ready(function() {
 		$("#tabs").tabs();

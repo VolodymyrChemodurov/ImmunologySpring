@@ -34,7 +34,8 @@ public class MedicalCardDaoImpl extends GenericMongoDao<MedicalCardForm> impleme
 	
 	public MedicalCardForm getMedicalCardFormTemplate() {
 		Iterable<MedicalCardForm> templates = collection.find("{}").projection("{_id: 0}").as(MedicalCardForm.class);
-		return convertToList(templates).get(0);
+		List<MedicalCardForm> result = convertToList(templates);
+		return result.size() > 0 ? result.get(0) : null;
 	}
 
 	public boolean updateMedicalCardFormTemplate(MedicalCardForm form) {

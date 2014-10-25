@@ -8,13 +8,14 @@ import javax.persistence.FetchType;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.immunology.model.ui.elements.Computable;
 import com.immunology.model.ui.elements.Element;
 
 @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.PROPERTY, property="objectType")
 
 @Entity
 @Table(name = "dropdowns")
-public class DropDown extends Element {
+public class DropDown extends Element implements Computable {
 
 	@ElementCollection(fetch = FetchType.EAGER)
 	private Map<String, Double> values;
@@ -22,6 +23,8 @@ public class DropDown extends Element {
 	private String text;
 
 	private String selected;
+	
+	private Double multiplier;
 	
 	public Map<String, Double> getValues() {
 		return values;
@@ -50,6 +53,18 @@ public class DropDown extends Element {
 	@Override
 	public String toString() {
 		return "Dropdown [values=" + values + "]";
+	}
+
+	public Double getMultiplier() {
+		return multiplier;
+	}
+
+	public void setMultiplier(Double multiplier) {
+		this.multiplier = multiplier;
+	}
+
+	public Double getValue() {
+		return values.get(selected);
 	}
 
 }

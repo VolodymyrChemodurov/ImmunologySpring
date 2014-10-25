@@ -68,6 +68,11 @@ public class ButtonGroup extends Element implements Computable {
 		return result;
 	}
 
+
+	public Double getValue() {
+		return selected;
+	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

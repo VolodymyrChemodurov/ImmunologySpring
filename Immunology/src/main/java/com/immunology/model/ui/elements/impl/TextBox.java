@@ -4,15 +4,18 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.immunology.model.ui.elements.Computable;
 import com.immunology.model.ui.elements.Element;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "objectType")
 @Entity
 @Table(name = "text_boxes")
-public class TextBox extends Element {
+public class TextBox extends Element implements Computable {
 
 	private String text;
 
+	private Double multiplier;
+	
 	public String getText() {
 		return text;
 	}
@@ -25,6 +28,18 @@ public class TextBox extends Element {
 	public String toString() {
 		return "TextBox [id=" + id + ", name=" + name + ", checked=" + checked
 				+ ", place=" + place + ", text=" + text + "]";
+	}
+
+	public Double getMultiplier() {
+		return multiplier;
+	}
+
+	public void setMultiplier(Double multiplier) {
+		this.multiplier = multiplier;
+	}
+
+	public Double getValue() {
+		return this.checked ? 1.0 : 0;
 	}
 
 }

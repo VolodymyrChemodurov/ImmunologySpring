@@ -204,6 +204,7 @@ function initPanelNames(){
 function renderPreviewMedForm(){
 	var constructor = new Builder("constructor");
 	constructor.constructorInit('#container', formObject);
+	cleanConstructorFields($("#panelName"), $("#sub-panel-name"), $("#text-box-name"), $("#group-button-name"), $("#dropdownName"));
  }
 
 
@@ -533,9 +534,18 @@ function createButtonGroup(panelIndex,subPanelIndex,title,values){
  	
 }
 
+function cleanConstructorFields() {
+	$(arguments).each(function() {
+		this.val("");
+	});
+	cleanDropDowns();
+}
 
-
-
-
-
-
+function cleanDropDowns() {
+	$(".select2-chosen").each(function() {
+		$(this).prop("textContent", "");
+	});
+	$(".select2-search-choice").each(function() {
+		$(this).remove();
+	});
+}

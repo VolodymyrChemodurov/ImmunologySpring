@@ -1,11 +1,6 @@
 package com.immunology.model.ui.elements.impl;
 
-import java.util.Set;
-
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -18,11 +13,7 @@ import com.immunology.model.ui.elements.Element;
 @Table(name = "button_group")
 public class ButtonGroup extends Element implements Computable {
 
-	@ElementCollection(fetch = FetchType.EAGER)
-	@Column(name = "button_group_values")
-	private Set<Double> values;
-	
-	private Double selected;
+	private Double value;
 	
 	private Double multiplier;
 
@@ -34,70 +25,18 @@ public class ButtonGroup extends Element implements Computable {
 		this.multiplier = multiplier;
 	}
 
-	public Set<Double> getValues() {
-		return values;
+	public Double getValue() {
+		return value;
 	}
 
-	public void setValues(Set<Double> values) {
-		this.values = values;
-	}
-
-	public Double getSelected() {
-		return selected;
-	}
-
-	public void setSelected(Double selected) {
-		this.selected = selected;
+	public void setValue(Double value) {
+		this.value = value;
 	}
 
 	@Override
 	public String toString() {
-		return "ButtonGroup [values=" + values + ", selected=" + selected
-				+ ", multiplier=" + multiplier + "]";
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((multiplier == null) ? 0 : multiplier.hashCode());
-		result = prime * result
-				+ ((selected == null) ? 0 : selected.hashCode());
-		result = prime * result + ((values == null) ? 0 : values.hashCode());
-		return result;
-	}
-
-
-	public Double getValue() {
-		return selected;
-	}
-	
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ButtonGroup other = (ButtonGroup) obj;
-		if (multiplier == null) {
-			if (other.multiplier != null)
-				return false;
-		} else if (!multiplier.equals(other.multiplier))
-			return false;
-		if (selected == null) {
-			if (other.selected != null)
-				return false;
-		} else if (!selected.equals(other.selected))
-			return false;
-		if (values == null) {
-			if (other.values != null)
-				return false;
-		} else if (!values.equals(other.values))
-			return false;
-		return true;
+		return "ButtonGroup [value=" + value + ", multiplier=" + multiplier
+				+ "]";
 	}
 
 }

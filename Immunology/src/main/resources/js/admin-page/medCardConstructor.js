@@ -11,7 +11,6 @@ function init(){
 	getResouces(getMedCardUrl);
 	console.log("->MED.CARD AFTER getResources");
 	console.log(formObject);
-	
 }
 function initSurveyForm(syndromName){
 	if(formType == "anamnestic"){
@@ -204,6 +203,7 @@ function initPanelNames(){
 function renderPreviewMedForm(){
 	var constructor = new Builder("constructor");
 	constructor.constructorInit('#container', formObject);
+	initCoefficientEvents();
  }
 
 
@@ -375,6 +375,7 @@ function initEvents(){
 		}
 		renderPreviewMedForm();
 		initPanelNames();
+		
 	});
 	
 	$("button[name=save-button]").unbind("click");
@@ -404,8 +405,19 @@ function initEvents(){
 		
 	});
 	
-	
-	
+}
+function initCoefficientEvents(){
+	//COEFFICIENTS
+	$(".element_row").mouseout(function(){
+		$(this).css("border","0px solid");
+		});
+	$(".element_row").mouseover(function(){
+		$(this).css("border","1px solid");
+		$(this).css("border-color","rgb(33, 145, 192)");
+		});
+	$(".element_row").click(function(){
+		 $('#coeficient-modal').modal('show');
+	})
 }
 
 function saveMedicalCard() {

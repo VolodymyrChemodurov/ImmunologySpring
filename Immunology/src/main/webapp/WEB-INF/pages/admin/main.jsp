@@ -87,12 +87,13 @@
 			</div>
 			
 		</div>
-			<jsp:include page="/WEB-INF/pages/admin/components/new-panel-modal.jsp"></jsp:include>
-			<jsp:include page="/WEB-INF/pages/admin/components/new-sub-panel-modal.jsp"></jsp:include>
-			<jsp:include page="/WEB-INF/pages/admin/components/new-textbox-modal.jsp"></jsp:include>
-			<jsp:include page="/WEB-INF/pages/admin/components/new-dropdown-modal.jsp"></jsp:include>
-			<jsp:include page="/WEB-INF/pages/admin/components/new-group-button.jsp"></jsp:include>
-			<jsp:include page="/WEB-INF/pages/admin/components/remove-element-modal.jsp"></jsp:include>
+			<jsp:include page="/WEB-INF/pages/admin/components/modal/new-panel-modal.jsp"></jsp:include>
+			<jsp:include page="/WEB-INF/pages/admin/components/modal/new-sub-panel-modal.jsp"></jsp:include>
+			<jsp:include page="/WEB-INF/pages/admin/components/modal/new-textbox-modal.jsp"></jsp:include>
+			<jsp:include page="/WEB-INF/pages/admin/components/modal/new-dropdown-modal.jsp"></jsp:include>
+			<jsp:include page="/WEB-INF/pages/admin/components/modal/new-group-button.jsp"></jsp:include>
+			<jsp:include page="/WEB-INF/pages/admin/components/modal/remove-element-modal.jsp"></jsp:include>
+			<jsp:include page="/WEB-INF/pages/admin/components/modal/coeficient-modal.jsp"></jsp:include>
 			<!-- Anamnestic DATA -->
 			<div class="modal fade" id="select-syndrom-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog">

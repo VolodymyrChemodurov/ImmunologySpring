@@ -20,6 +20,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.immunology.model.calculation.Formula;
 import com.immunology.model.ui.AnamnesticDataForm;
 
 @Entity
@@ -50,6 +51,11 @@ public class Syndrome {
 	@ManyToMany(mappedBy = "syndromeTemplates")
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<User> users = new ArrayList<User>();
+	
+	@OneToMany(mappedBy = "syndrome")
+	@JsonManagedReference("formula_reference")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<Formula> formulas;
 	
 	public long getId() {
 		return id;
@@ -97,6 +103,14 @@ public class Syndrome {
 
 	public void setUsers(List<User> users) {
 		this.users = users;
+	}
+
+	public List<Formula> getFormulas() {
+		return formulas;
+	}
+
+	public void setFormulas(List<Formula> formulas) {
+		this.formulas = formulas;
 	}
 
 }

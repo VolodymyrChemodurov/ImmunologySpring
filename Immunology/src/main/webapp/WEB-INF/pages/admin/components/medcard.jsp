@@ -77,6 +77,7 @@
 $(document).ready(function() {
 	init();
 	initEvents();
+	initCoefficientEvents();
 });
 </script>
 	

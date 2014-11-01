@@ -26,6 +26,7 @@
 		<junit.version>4.11</junit.version>
 		<mockito.version>1.9.5</mockito.version>
 		<powermock.version>1.5.4</powermock.version>
+		<exp4j.version>0.4.3.BETA-3</exp4j.version>
 	</properties>
 
 	<dependencies>
@@ -140,7 +141,11 @@
 		</dependency>
 		<!-- Hibernate dependencies end -->
 		<!-- DB dependencies -->
-
+		<dependency>
+			<groupId>net.objecthunter</groupId>
+			<artifactId>exp4j</artifactId>
+			<version>${exp4j.version}</version>
+		</dependency>
 		<!-- loggining -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -260,8 +265,8 @@
 					<configuration>
 						<driver>${db.driverClassName}</driver>
 						<url>jdbc:postgresql://localhost/Immunology</url>
-						<username>postgres</username>
-						<password>root</password>
+						<username>admin</username>
+						<password>adminadmin</password>
 						<encoding>UTF8</encoding>
 					</configuration>
 					<executions>

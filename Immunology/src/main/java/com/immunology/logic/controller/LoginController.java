@@ -24,29 +24,29 @@ public class LoginController {
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login() {
-//		Syndrome syndrome = new Syndrome();
-//		List<Survey> surveys = new ArrayList<Survey>();
-//		Survey survey = new Survey();
-//		
-//		ClinicalManifestationsForm clinicalManifestationsForm = new ClinicalManifestationsForm();
-//		ComplaintsForm complaintsForm = new ComplaintsForm();
-//		LaboratoryDataForm laboratoryDataForm = new LaboratoryDataForm();
-//		
-//		survey.setLaboratoryDataForm(laboratoryDataForm);
-//		survey.setComplaintsForm(complaintsForm);
-//		survey.setClinicalManifestationsForm(clinicalManifestationsForm);
-//		
-//		surveys.add(survey);
-//		syndrome.setSurveys(surveys);
-//		
-//		ObjectMapper mapper = new ObjectMapper();
-//		try {
-//			String result = mapper.writeValueAsString(syndrome);
-//			LOG.info(result);
-//		} catch (JsonProcessingException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		Syndrome syndrome = new Syndrome();
+		List<Survey> surveys = new ArrayList<Survey>();
+		Survey survey = new Survey();
+		
+		ClinicalManifestationsForm clinicalManifestationsForm = new ClinicalManifestationsForm();
+		ComplaintsForm complaintsForm = new ComplaintsForm();
+		LaboratoryDataForm laboratoryDataForm = new LaboratoryDataForm();
+		
+		survey.setLaboratoryDataForm(laboratoryDataForm);
+		survey.setComplaintsForm(complaintsForm);
+		survey.setClinicalManifestationsForm(clinicalManifestationsForm);
+		
+		surveys.add(survey);
+		syndrome.setSurveys(surveys);
+		
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			String result = mapper.writeValueAsString(syndrome);
+			LOG.info(result);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return "login";
 	}
 	

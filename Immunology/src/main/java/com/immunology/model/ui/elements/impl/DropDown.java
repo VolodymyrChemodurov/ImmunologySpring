@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.immunology.model.ui.elements.Computable;
 import com.immunology.model.ui.elements.Element;
@@ -63,6 +64,7 @@ public class DropDown extends Element implements Computable {
 		this.multiplier = multiplier;
 	}
 
+	@JsonIgnore
 	public Double getValue() {
 		return values.get(selected);
 	}

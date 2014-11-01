@@ -3,6 +3,7 @@ package com.immunology.model.ui.elements.impl;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.immunology.model.ui.elements.Computable;
 import com.immunology.model.ui.elements.Element;
@@ -34,10 +35,12 @@ public class TextBox extends Element implements Computable {
 		return multiplier;
 	}
 
+	@JsonIgnore
 	public void setMultiplier(Double multiplier) {
 		this.multiplier = multiplier;
 	}
 
+	@JsonIgnore
 	public Double getValue() {
 		return this.checked ? 1.0 : 0;
 	}

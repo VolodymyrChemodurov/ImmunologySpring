@@ -51,13 +51,15 @@ public class PatientController {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public String createNewPatinet(Patient patient, Model model, HttpServletResponse response) {	
-		User user = UserUtils.getCurrentUser();
-		patient.addUser(userService.getUserByLogin(user.getUsername()));
+		User currentUser = UserUtils.getCurrentUser();
+		com.immunology.model.User user = userService.getUserByLogin(currentUser.getUsername());
+		//patient.addUser(user);
+		user.getPatients().add(patient);
 		MedicalCardForm medicalCard = medicalCardService.getMedicalCardTemplate();
 		medicalCard.setCreationDate(new Date());
 		patient.setMedicalCard(medicalCard);
 		medicalCard.setPatient(patient);
-		patientService.updatePatient(patient);
+		userService.updateUser(user);
 		return "redirect:/cabinet";
 	}
 	

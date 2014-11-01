@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.immunology.logic.service.PatientService;
@@ -90,7 +91,7 @@ public class SyndromeController {
 	}
 	
 	@RequestMapping(value = "/template/{name}/user/{id}", method = RequestMethod.POST)
-	public @ResponseBody Boolean wireUserToSyndromeTemplate(@PathVariable("name") String syndromeName, @PathVariable("id") Long userId) {
+	public @ResponseBody Boolean wireUserToSyndromeTemplate(@RequestParam("name") String syndromeName, @PathVariable("id") Long userId) {
 		return syndromeService.wireUserToSyndromeTemplate(syndromeName, userId);
 	}
 	

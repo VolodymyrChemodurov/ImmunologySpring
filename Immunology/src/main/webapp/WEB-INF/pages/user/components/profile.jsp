@@ -90,7 +90,7 @@
 				<div class="no-move"></div>
 			</div>
 			<div class="box-content">
-				<form id="defaultForm" method="POST"
+				<form id="defaultForm-password" method="POST"
 					action="/cabinet/profile/edit/password" class="form-horizontal">
 					<fieldset>
 						<legend></legend>
@@ -98,7 +98,7 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Поточний пароль</label>
 							<div class="col-sm-5">
-								<input type="password" class="form-control" name="oldPassword"
+								<input type="password" name="oldPassword" class="form-control" name="oldPassword"
 									id="oldPassword" value="" />
 							</div>
 						</div>
@@ -106,13 +106,13 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Новий пароль</label>
 							<div class="col-sm-5">
-								<input type="password" class="form-control" id="password"/>
+								<input type="password" name="password" class="form-control" id="password"/>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Повторіть пароль</label>
 							<div class="col-sm-5">
-								<input type="password" class="form-control" id="confirmPassword"/>
+								<input type="password" name="confirmPassword" class="form-control" id="confirmPassword"/>
 							</div>
 						</div>
 					</fieldset>
@@ -132,6 +132,7 @@
 	$(document).ready(function() {
 		$('.form-control').tooltip();
 		BootstrapValidatorScript(PatientValidator);
+		BootstrapValidatorScript(PasswordValidator);
 		WinMove();
 	});	
 </script>

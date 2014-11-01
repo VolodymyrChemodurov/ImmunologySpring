@@ -52,7 +52,7 @@
 								<td>${patient.key.city}</td>
 								<td><c:out
 										value="${patient.key.street}, ${patient.key.house}"></c:out></td>
-								<td class="custom-size">
+							<td class="custom-size">
 									<c:if test="${!patient.value}">
 										<button class="btn btn-primary btn-table"
 											onclick="doAjaxPost('patients/${patient.key.id}')">Додати</button>

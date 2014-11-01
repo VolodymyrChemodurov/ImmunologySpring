@@ -60,7 +60,7 @@
 							</div>
 						</div>
 
-						<div class="form-group">
+						<div class="form-group" id="defaultForm-password">
 							<label class="col-sm-3 control-label">Password</label>
 							<div class="col-sm-5">
 								<input type="text" class="form-control" name="password"
@@ -114,6 +114,7 @@
 		Select2Script(DemoSelect2);
 		// Load example of form validation
 		BootstrapValidatorScript(PatientValidator);
+		BootstrapValidatorScript(PasswordValidator);
 		// Add drag-n-drop feature to boxes
 		WinMove();
 	});	

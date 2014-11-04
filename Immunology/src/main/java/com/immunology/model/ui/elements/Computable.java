@@ -8,4 +8,5 @@ public interface Computable {
 	
 	Double getValue();
 	
+	void setValue(Double value);
 }

@@ -45,4 +45,12 @@ public class TextBox extends Element implements Computable {
 		return this.checked ? 1.0 : 0;
 	}
 
+	public void setValue(Double value) {
+		if(value > 0) {
+			checked = true;
+		} else {
+			checked = false;
+		}
+	}
+
 }

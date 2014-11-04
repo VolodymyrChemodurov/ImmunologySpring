@@ -1,6 +1,7 @@
 package com.immunology.model.ui.elements.impl;
 
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -67,6 +68,17 @@ public class DropDown extends Element implements Computable {
 	@JsonIgnore
 	public Double getValue() {
 		return values.get(selected);
+	}
+
+	public void setValue(Double value) {
+		if(values.containsValue(value)) {
+			for(Entry<String, Double> entry: values.entrySet()) {
+				if(entry.getValue().equals(value)) {
+					selected = entry.getKey();
+					break;
+				}
+			}
+		}
 	}
 
 }

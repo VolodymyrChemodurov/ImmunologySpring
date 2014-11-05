@@ -16,6 +16,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.immunology.model.ui.elements.impl.ButtonGroup;
 import com.immunology.model.ui.elements.impl.DropDown;
 import com.immunology.model.ui.elements.impl.Panel;
 import com.immunology.model.ui.elements.impl.TextBox;
@@ -25,7 +26,8 @@ import com.immunology.model.ui.elements.impl.TextBox;
 @JsonSubTypes({
         @JsonSubTypes.Type(value=Panel.class),
         @JsonSubTypes.Type(value=DropDown.class),
-        @JsonSubTypes.Type(value=TextBox.class)
+        @JsonSubTypes.Type(value=TextBox.class),
+        @JsonSubTypes.Type(value=ButtonGroup.class)
 })
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)

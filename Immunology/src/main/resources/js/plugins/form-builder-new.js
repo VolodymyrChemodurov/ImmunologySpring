@@ -449,7 +449,7 @@ this.initNewSurveyFormWithNewUrl = function(blockID,type, url) {
 			rowRightSide = $('<div class="col-sm-7" />');
 			buttonsDiv = $('<div class="btn-group col-sm-12" data-toggle="buttons" style="padding: 0px"/>');
 			for (var int = 0; int < 4; int++) {
-				if(buttonGroup.choosed == int){
+				if(buttonGroup.value == int){
 					buttonsDiv.append('<label class="btn btn-primary active group-button-item" style=" width: 25%; margin-bottom: 0px;"><input type="radio" name="options">'+ int +' </label>');
 				}else{
 					buttonsDiv.append('<label class="btn btn-primary group-button-item" style=" width: 25%; margin-bottom: 0px;"><input type="radio" name="options">'+ int +' </label>');
@@ -549,6 +549,16 @@ this.initNewSurveyFormWithNewUrl = function(blockID,type, url) {
 				obj.setTextBoxValue($(fieldset).attr("index"), $(row).attr("index"),subPanelBlock.attr("index"), $(this).val());
 			});
 			
+			$(".group-button-item").click(function(){
+				var fieldset = $(this).parents(".panel-fieldset");
+				var row = $(this).parents(".element_row");
+				var subPanelBlock = $(this).parents(".sub-panel");
+				var container = $(this).parents(".form-container");
+				var obj =window[container.attr("object")];
+				console.log($(this));
+				obj.setGroupButtonValue($(fieldset).attr("index"), $(row).attr("index"),subPanelBlock.attr("index"), $(this).text());
+			})
+			
 		},
 		},
 	this.prepareForm = function(){
@@ -606,6 +616,14 @@ this.initNewSurveyFormWithNewUrl = function(blockID,type, url) {
 			this.formObject.panels[panel_index].elements[element_index].text = text;
 		}else{
 			this.formObject.panels[panel_index].elements[sub_panel_index].elements[element_index].text = text;
+		}
+		
+	};
+	this.setGroupButtonValue =  function(panel_index, element_index,sub_panel_index, value){
+		if(sub_panel_index == undefined){
+			this.formObject.panels[panel_index].elements[element_index].value = parseFloat(value);
+		}else{
+			this.formObject.panels[panel_index].elements[sub_panel_index].elements[element_index].value =  parseFloat(value);
 		}
 		
 	};

@@ -410,11 +410,11 @@ function initEvents(){
 function initCoefficientEvents(){
 	//COEFFICIENTS
 	$(".element_row").mouseout(function(){
-		$(this).css("border","0px solid");
+		$(this).css("outline","0px solid");
 		});
 	$(".element_row").mouseover(function(){
-		$(this).css("border","1px solid");
-		$(this).css("border-color","rgb(33, 145, 192)");
+		$(this).css("outline","1px solid");
+		$(this).css("outline-color","rgb(33, 145, 192)");
 		});
 	$(".element_row").click(function(){
 		 $('#coeficient-modal').modal('show');
@@ -509,6 +509,7 @@ function createTextBox(panelIndex,subPanelIndex,title){
  	textBox["checked"] = false;
  	textBox["objectType"] = "TextBox";
  	textBox["text"] = "";
+ 	textBox["multiplier"] = 0;
  	if(parseInt(subPanelIndex) == -1 || subPanelIndex == null){
  		formObject.panels[panelIndex].elements.push(textBox);
  	}else{
@@ -536,7 +537,8 @@ function createButtonGroup(panelIndex,subPanelIndex,title,values){
 	groupButton["name"] = title;
 	groupButton["checked"] = false;
 	groupButton["objectType"] ="ButtonGroup";
-	groupButton["choosed"] = 0;
+	groupButton["value"] = 0;
+	groupButton["multiplier"] = 0;
  	if(parseInt(subPanelIndex) == -1 || subPanelIndex == null){
  		formObject.panels[panelIndex].elements.push(groupButton);
  	}else{

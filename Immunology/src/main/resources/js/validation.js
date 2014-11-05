@@ -234,7 +234,7 @@
 			}
 		});
 	}
-=======
+//=======
 function PatientValidator() {
 	$('#defaultForm')
 			.bootstrapValidator(

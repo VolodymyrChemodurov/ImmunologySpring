@@ -14,8 +14,9 @@
 			<select name="sub-panel-names">
 			</select>
 			
-				<label class="col-sm-12 control-label">Set Group Buttons Name:</label>
+			<label class="col-sm-12 control-label">Set Group Buttons Name:</label>
 			<input type="text" class="form-control"  id="group-button-name" />
+			
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

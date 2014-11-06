@@ -12,10 +12,6 @@
 						<a href="#" class="show-sidebar marg-top-8px">
 						  <i class="fa fa-bars"></i>
 						</a>
-						<div id="search">
-							<input type="text" placeholder="пошук"/>
-							<i class="fa fa-search"></i>
-						</div>
 					</div>
 					<div class="col-xs-4 col-sm-8 top-panel-right">
 						<ul class="nav navbar-nav pull-right panel-menu">
@@ -32,12 +28,6 @@
 										<a href="#" onclick="doAjaxGet('cabinet/profile')">
 											<i class="fa fa-user"></i>
 											<span class="hidden-sm text">Профіль</span>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<i class="fa fa-cog"></i>
-											<span class="hidden-sm text">Налаштування</span>
 										</a>
 									</li>
 									<li>

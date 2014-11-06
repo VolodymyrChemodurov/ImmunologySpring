@@ -573,7 +573,7 @@ this.initNewSurveyFormWithNewUrl = function(blockID,type, url) {
 			
 			if(this.checked){
 				$(input).removeAttr("disabled");
-				$(select).removeAttr("disabled");
+			//	$(select).removeAttr("disabled");
 			}else{
 				$(input).attr("disabled","disabled");
 			//	$(select).attr("disabled","true");

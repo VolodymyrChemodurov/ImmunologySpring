@@ -107,7 +107,7 @@ display: none;
 							</tfoot>
 						</table>
 						</div>
-						<button id="newSurveyButton" type="button" style="width: 20%; height: 35px; margin-top: 10px;" class="btn btn-primary btn-sm btn-block">Додати нове обстеження</button>
+						<button id="newSurveyButton" type="button" style="width: 30%; height: 35px; margin-top: 10px; display: none;" class="btn btn-primary btn-sm btn-block" >Додати нове обстеження</button>
 						</div>
 					</div>
 					</div>
@@ -124,7 +124,6 @@ display: none;
 <script>
 var medCard = new Builder("medCard");
 var anamnesticData  = new Builder("anamnesticData");
-var clickSyndromeButton = false;
 	function DemoSelect2() {
 		//$('#s2_with_tag').select2({placeholder: "Select OS"});
 	//	$('#country').select2();
@@ -161,15 +160,13 @@ var clickSyndromeButton = false;
 	
 	function initSyndromeEvent(){
 		$("#select_syndrome_button").click(function(){
-			clickSyndromeButton = true;
+			$("#newSurveyButton").css("display", "inline");
 			anamnesticData.init('#AnamnesticDataContainer',"AnamnesticDataForm", $('#patient_id').val(), $('#syndrom').val() );
 			refreshTable($('#syndrom').val());
-		})
+		});
 		$("#newSurveyButton").click(function(){
-			if($("#syndrom").val() != null & clickSyndromeButton == true){
+			if($("#syndrom").val() != null){
 				window.location.href='/survey/patientId=' + $("#patient_id").val()+'syndrome=' + $('#syndrom').val();	
-			}else{
-				alert("Виберіть синдром!");
 			}
 		}	
 		);

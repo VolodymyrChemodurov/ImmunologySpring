@@ -2,6 +2,8 @@ package com.immunology.logic.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +13,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.immunology.logic.service.PatientService;
 import com.immunology.logic.service.SyndromeService;
 import com.immunology.logic.service.UserService;
+import com.immunology.logic.utils.URIUtils;
 import com.immunology.logic.utils.UserUtils;
 import com.immunology.model.Patient;
 import com.immunology.model.Syndrome;
@@ -47,11 +49,10 @@ public class SyndromeController {
 	}
 	
 	@RequestMapping(value = "/patient/{id}/{name}", method = RequestMethod.GET)
-	public @ResponseBody Syndrome getPatientSyndrome(@PathVariable("id") Long id, 
-			@PathVariable("name") String syndromeName) {
+	public @ResponseBody Syndrome getPatientSyndrome(@PathVariable("id") Long id,  @PathVariable("name") String syndromeName, HttpServletRequest request) {
 		
 		LOG.info("getPatientSyndrome");
-		return syndromeService.getPatientSyndrome(id, syndromeName);
+		return syndromeService.getPatientSyndrome(id, URIUtils.decodePathVariable(request.getRequestURI(), 3));
 	}
 	
 	@RequestMapping(value = "/patient/{id}", method = RequestMethod.POST)
@@ -86,18 +87,18 @@ public class SyndromeController {
 	}
 	
 	@RequestMapping(value = "/template/{name}", method = RequestMethod.POST)
-	public @ResponseBody Boolean updateSyndromeTemplate(@PathVariable("name") String name, @RequestBody Syndrome syndrome) {
-		return syndromeService.updateSyndromeTemplate(name, syndrome);
+	public @ResponseBody Boolean updateSyndromeTemplate(@PathVariable("name") String name, @RequestBody Syndrome syndrome, HttpServletRequest request) {
+		return syndromeService.updateSyndromeTemplate(URIUtils.decodePathVariable(request.getRequestURI(), 2), syndrome);
 	}
 	
 	@RequestMapping(value = "/template/{name}/user/{id}", method = RequestMethod.POST)
-	public @ResponseBody Boolean wireUserToSyndromeTemplate(@RequestParam("name") String syndromeName, @PathVariable("id") Long userId) {
-		return syndromeService.wireUserToSyndromeTemplate(syndromeName, userId);
+	public @ResponseBody Boolean wireUserToSyndromeTemplate(@PathVariable("name") String syndromeName, @PathVariable("id") Long userId, HttpServletRequest request) {
+		return syndromeService.wireUserToSyndromeTemplate(URIUtils.decodePathVariable(request.getRequestURI(), 2), userId);
 	}
 	
 	@RequestMapping(value = "template/{name}", method = RequestMethod.GET)
-	public @ResponseBody Syndrome getSyndromeByName(@PathVariable("name") String templateName) {
-		return syndromeService.getSyndromeByName(templateName);
+	public @ResponseBody Syndrome getSyndromeByName(@PathVariable("name") String templateName, HttpServletRequest request) {
+		return syndromeService.getSyndromeByName(URIUtils.decodePathVariable(request.getRequestURI(), 2));
 	}
 	
 }

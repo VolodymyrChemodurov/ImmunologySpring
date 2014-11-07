@@ -135,6 +135,7 @@ var laboratoryData  = new Builder("laboratoryData");
 var currentSurvey = {};
 
 $(document).ready(function() {
+	console.log("${syndrom.name}; ${syndrom.id}");
 	$("#tabs").tabs();
 	$("#tabs").css("display", "inline");
 	if("${surveyId}".length > 0){
@@ -143,6 +144,7 @@ $(document).ready(function() {
 		clinicalManifestationData.initNewSurveyFormWithNewUrl('#clinicalManifestations', "ClinicalManifestationsForm", "/survey/patient/${patient.id}/survey/${surveyId}");
 
 	}else{
+		
 		complaintsData.initNewSurveyForm("#complaints", "ComplaintsForm", $('#patient_id').val(), "${syndrom.name}");
 		laboratoryData.initNewSurveyForm('#laboratoryData', "LaboratoryDataForm", $('#patient_id').val(),  "${syndrom.name}");
 		clinicalManifestationData.initNewSurveyForm('#clinicalManifestations', "ClinicalManifestationsForm", $('#patient_id').val(), "${syndrom.name}");
@@ -204,7 +206,7 @@ function getSurveyTemplate(){
 function saveSyrvey(){
 	patientId = "${patient.id}";
 	syndromName = "${syndrom.name}";
-	
+	currentSurvey = complaintsData.surveyObject;
 	currentSurvey.complaintsForm = complaintsData.formObject;
 	currentSurvey.laboratoryDataForm = laboratoryData.formObject;
 	currentSurvey.clinicalManifestationsForm = clinicalManifestationData.formObject;

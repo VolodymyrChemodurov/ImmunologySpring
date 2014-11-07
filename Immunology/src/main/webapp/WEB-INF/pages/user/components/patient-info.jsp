@@ -173,7 +173,7 @@ var anamnesticData  = new Builder("anamnesticData");
 	}
 	function initSurveyRowesEvent(){
 		$(".surveyRow").click(function(){
-			window.location.href='/survey/edit/patientId=' + $("#patient_id").val()+'surveyId=' +$(this).attr("surveyId");
+			window.location.href='/survey/edit/patientId/' + $("#patient_id").val()+'/surveyId/' +$(this).attr("surveyId")+'/syndrome/'+$('#syndrom').val();
 		})
 	}
 	function refreshTable(syndromName){

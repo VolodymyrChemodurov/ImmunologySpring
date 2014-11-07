@@ -28,9 +28,14 @@ function Builder(object_Name) {
 	this.objectName = object_Name;
 	this.container = [];
 	this.syndromObject = {};
+	this.surveyObject = {};
 	this.formObject = {};
 	this.patientId;
 	this.formName;
+	
+	this.setSurvey = function(survey){
+		this.surveyObject = survey;
+	};
 	
 	this.setSyndrom = function(syndrom){
 		this.syndromObject = syndrom;
@@ -150,7 +155,7 @@ this.initNewSurveyFormWithNewUrl = function(blockID,type, url) {
 				dataType : "json",
 				async:   false,
 				success : function(response) {
-						syndrom = response;
+						survey = response;
 						form = response.laboratoryDataForm;
 				},
 				error: function (request, status, error) {
@@ -158,6 +163,7 @@ this.initNewSurveyFormWithNewUrl = function(blockID,type, url) {
 			    }
 			});
 			this.setForm(form);
+			this.setSurvey(survey);
 			console.log(this.formObject);
 			this.renderFormBody(false);
 		}
@@ -168,7 +174,7 @@ this.initNewSurveyFormWithNewUrl = function(blockID,type, url) {
 				dataType : "json",
 				async:   false,
 				success : function(response) {
-						syndrom = response;
+						survey = response;
 						form = response.complaintsForm;
 				},
 				error: function (request, status, error) {
@@ -176,6 +182,7 @@ this.initNewSurveyFormWithNewUrl = function(blockID,type, url) {
 			    }
 			});
 			this.setForm(form);
+			this.setSurvey(survey);
 			console.log(this.formObject);
 			this.renderFormBody(false);
 		}
@@ -186,7 +193,7 @@ this.initNewSurveyFormWithNewUrl = function(blockID,type, url) {
 				dataType : "json",
 				async:   false,
 				success : function(response) {
-						syndrom = response;
+						survey = response;
 						form = response.clinicalManifestationsForm;
 				},
 				error: function (request, status, error) {
@@ -194,6 +201,7 @@ this.initNewSurveyFormWithNewUrl = function(blockID,type, url) {
 			    }
 			});
 			this.setForm(form);
+			this.setSurvey(survey);
 			console.log(this.formObject);
 			this.renderFormBody(false);
 		}
@@ -256,6 +264,7 @@ this.initNewSurveyFormWithNewUrl = function(blockID,type, url) {
 					form = response;
 				}else{
 					syndrom = response;
+					this.surveyObject = response;
 					form = response.anamnesticData;
 				}
 				
@@ -282,6 +291,7 @@ this.initNewSurveyFormWithNewUrl = function(blockID,type, url) {
 			async:   false,
 			success : function(response) {
 					syndrom = response;
+					this.surveyObject = response;
 					form = response.surveys[0].laboratoryDataForm;
 			},
 			error: function (request, status, error) {
@@ -302,6 +312,7 @@ this.initNewSurveyFormWithNewUrl = function(blockID,type, url) {
 			async:   false,
 			success : function(response) {
 					syndrom = response;
+					this.surveyObject = response;
 					form = response.surveys[0].complaintsForm;
 			},
 			error: function (request, status, error) {

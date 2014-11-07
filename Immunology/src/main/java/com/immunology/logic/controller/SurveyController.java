@@ -46,11 +46,12 @@ public class SurveyController {
 		return "user/survey";
 	}
 	
-	@RequestMapping(value = "/edit/patientId={id}surveyId={surveyId}", method = RequestMethod.GET)
-	public String  editUserSyndromes(Model model, @PathVariable("id") long patientId, @PathVariable("surveyId") long surveyId) {
+	@RequestMapping(value = "/edit/patientId/{id}/surveyId/{surveyId}/syndrome/{syndromeName}", method = RequestMethod.GET)
+	public String  editUserSyndromes(Model model, @PathVariable("id") long patientId, @PathVariable("surveyId") long surveyId, @PathVariable("syndromeName") String syndromeName) {
 		User user = UserUtils.getCurrentUser();
 		model.addAttribute("user", userService.getUserByLogin(user.getUsername()));
 		
+		model.addAttribute("syndrom", syndromeService.getPatientSyndrome(patientId, syndromeName));
 		model.addAttribute("surveyId", surveyId);
 		model.addAttribute("patient", patientService.getPatientById(patientId));
 		return "user/survey";

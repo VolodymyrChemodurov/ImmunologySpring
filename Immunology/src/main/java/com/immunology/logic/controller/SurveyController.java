@@ -1,5 +1,7 @@
 package com.immunology.logic.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import com.immunology.logic.service.SurveyService;
 import com.immunology.logic.service.SyndromeService;
 import com.immunology.logic.service.UserService;
 import com.immunology.logic.utils.ReferenceHelper;
+import com.immunology.logic.utils.URIUtils;
 import com.immunology.logic.utils.UserUtils;
 import com.immunology.model.Survey;
 import com.immunology.model.Syndrome;
@@ -36,22 +39,22 @@ public class SurveyController {
 	@Autowired
 	private SurveyService surveyService;
 	
-	@RequestMapping(value = "/patientId={id}syndrome={syndromeName}", method = RequestMethod.GET)
-	public String  getUserSyndromes(Model model, @PathVariable("id") long patientId, @PathVariable("syndromeName") String syndromeName) {
+	@RequestMapping(value = "/patientId/{id}/syndrome/{syndromeName}", method = RequestMethod.GET)
+	public String  getUserSyndromes(Model model, @PathVariable("id") long patientId, @PathVariable("syndromeName") String syndromeName, HttpServletRequest request) {
 		User user = UserUtils.getCurrentUser();
 		model.addAttribute("user", userService.getUserByLogin(user.getUsername()));
 		
-		model.addAttribute("syndrom", syndromeService.getPatientSyndrome(patientId, syndromeName));
+		model.addAttribute("syndrom", syndromeService.getPatientSyndrome(patientId, URIUtils.decodePathVariable(request.getRequestURI(), 4)));
 		model.addAttribute("patient", patientService.getPatientById(patientId));
 		return "user/survey";
 	}
 	
 	@RequestMapping(value = "/edit/patientId/{id}/surveyId/{surveyId}/syndrome/{syndromeName}", method = RequestMethod.GET)
-	public String  editUserSyndromes(Model model, @PathVariable("id") long patientId, @PathVariable("surveyId") long surveyId, @PathVariable("syndromeName") String syndromeName) {
+	public String  editUserSyndromes(Model model, @PathVariable("id") long patientId, @PathVariable("surveyId") long surveyId, @PathVariable("syndromeName") String syndromeName, HttpServletRequest request) {
 		User user = UserUtils.getCurrentUser();
 		model.addAttribute("user", userService.getUserByLogin(user.getUsername()));
 		
-		model.addAttribute("syndrom", syndromeService.getPatientSyndrome(patientId, syndromeName));
+		model.addAttribute("syndrom", syndromeService.getPatientSyndrome(patientId, URIUtils.decodePathVariable(request.getRequestURI(), 7)));
 		model.addAttribute("surveyId", surveyId);
 		model.addAttribute("patient", patientService.getPatientById(patientId));
 		return "user/survey";
@@ -59,8 +62,8 @@ public class SurveyController {
 	
 	@RequestMapping(value = "/patient/{patientId}/syndrome/{syndromeName}", method = RequestMethod.POST)
 	public @ResponseBody Survey saveOrUpdateSurvey(@RequestBody Survey survey, @PathVariable("patientId") Long patientId,
-			@PathVariable("syndromeName") String syndromeName) {
-		Syndrome syndrome = syndromeService.getPatientSyndrome(patientId, syndromeName);
+			@PathVariable("syndromeName") String syndromeName, HttpServletRequest request) {
+		Syndrome syndrome = syndromeService.getPatientSyndrome(patientId, URIUtils.decodePathVariable(request.getRequestURI(), 4));
 		if(syndrome.getPatient() == null) {
 			syndrome.setPatient(patientService.getPatientById(patientId));
 			ReferenceHelper.setTemplatesReferences(syndrome);

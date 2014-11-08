@@ -166,7 +166,7 @@ var anamnesticData  = new Builder("anamnesticData");
 		});
 		$("#newSurveyButton").click(function(){
 			if($("#syndrom").val() != null){
-				window.location.href='/survey/patientId=' + $("#patient_id").val()+'syndrome=' + $('#syndrom').val();	
+				window.location.href='/survey/patientId/' + $("#patient_id").val()+'/syndrome/' + $('#syndrom').val();	
 			}
 		}	
 		);

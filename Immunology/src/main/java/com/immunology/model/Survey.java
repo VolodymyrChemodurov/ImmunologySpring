@@ -18,6 +18,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.immunology.model.ui.ClinicalManifestationsForm;
 import com.immunology.model.ui.ComplaintsForm;
 import com.immunology.model.ui.DiagnosisVerificationData;
+import com.immunology.model.ui.EfficacyData;
 import com.immunology.model.ui.InstrumentalData;
 import com.immunology.model.ui.LaboratoryDataForm;
 import com.immunology.model.ui.MainTreatmentData;
@@ -83,6 +84,10 @@ public class Survey {
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "preventive_measures_data_id")
 	private PreventiveMeasuresData preventiveMeasuresData;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name = "efficacy_data_data_id")
+	private EfficacyData efficacyData;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "user_id")
@@ -186,6 +191,14 @@ public class Survey {
 	public void setPreventiveMeasuresData(
 			PreventiveMeasuresData preventiveMeasuresData) {
 		this.preventiveMeasuresData = preventiveMeasuresData;
+	}
+
+	public EfficacyData getEfficacyData() {
+		return efficacyData;
+	}
+
+	public void setEfficacyData(EfficacyData efficacyData) {
+		this.efficacyData = efficacyData;
 	}
 
 	public User getUser() {

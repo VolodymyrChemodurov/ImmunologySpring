@@ -25,7 +25,13 @@ import com.immunology.model.ui.elements.impl.Panel;
         @JsonSubTypes.Type(value=LaboratoryDataForm.class),
         @JsonSubTypes.Type(value=ClinicalManifestationsForm.class),
         @JsonSubTypes.Type(value=ComplaintsForm.class),
-        @JsonSubTypes.Type(value=AnamnesticDataForm.class)
+        @JsonSubTypes.Type(value=AnamnesticDataForm.class),
+        @JsonSubTypes.Type(value=DiagnosisVerificationData.class),
+        @JsonSubTypes.Type(value=InstrumentalData.class),
+        @JsonSubTypes.Type(value=MainTreatmentData.class),
+        @JsonSubTypes.Type(value=MorphologicalData.class),
+        @JsonSubTypes.Type(value=PreventiveMeasuresData.class),
+        @JsonSubTypes.Type(value=RehabilitationData.class)
 })
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)

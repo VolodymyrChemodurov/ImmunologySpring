@@ -14,7 +14,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.LazyCollection;
@@ -25,11 +24,10 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "users")
-@SequenceGenerator(name="user_sequence", initialValue=10)
 public class User {
 	
 	@Id
-	@GeneratedValue(generator = "user_sequence")
+	@GeneratedValue
 	private long id;
 	
 	@Column(name = "first_name")

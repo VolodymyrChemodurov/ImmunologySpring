@@ -20,12 +20,11 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.immunology.model.ui.MedicalCardForm;
 
 @Entity
-//@SequenceGenerator(name="patient_sequence", initialValue=40)
 @Table(name = "patient")
 public class Patient {
 	
 	@Id
-	@GeneratedValue//(generator="patient_sequence")
+	@GeneratedValue
 	private long id;
 
 	@JsonIgnore

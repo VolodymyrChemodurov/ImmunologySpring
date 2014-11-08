@@ -17,7 +17,13 @@ import javax.persistence.TemporalType;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.immunology.model.ui.ClinicalManifestationsForm;
 import com.immunology.model.ui.ComplaintsForm;
+import com.immunology.model.ui.DiagnosisVerificationData;
+import com.immunology.model.ui.InstrumentalData;
 import com.immunology.model.ui.LaboratoryDataForm;
+import com.immunology.model.ui.MainTreatmentData;
+import com.immunology.model.ui.MorphologicalData;
+import com.immunology.model.ui.PreventiveMeasuresData;
+import com.immunology.model.ui.RehabilitationData;
 
 @Entity
 @Table(name = "surveys")
@@ -53,6 +59,30 @@ public class Survey {
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "laboratory_data_form_id")
 	private LaboratoryDataForm laboratoryDataForm;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name = "morphological_data_id")
+	private MorphologicalData morphologicalData;
+
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name = "instrumental_data_id")
+	private InstrumentalData instrumentalData;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name = "diagnosis_verification_data_id")
+	private DiagnosisVerificationData diagnosisVerificationData;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name = "main_treatment_data_id")
+	private MainTreatmentData mainTreatmentData;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name = "rehabilitation_data_id")
+	private RehabilitationData rehabilitationData;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name = "preventive_measures_data_id")
+	private PreventiveMeasuresData preventiveMeasuresData;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "user_id")
@@ -106,6 +136,56 @@ public class Survey {
 
 	public void setLaboratoryDataForm(LaboratoryDataForm laboratoryDataForm) {
 		this.laboratoryDataForm = laboratoryDataForm;
+	}
+
+	public MorphologicalData getMorphologicalData() {
+		return morphologicalData;
+	}
+
+	public void setMorphologicalData(MorphologicalData morphologicalData) {
+		this.morphologicalData = morphologicalData;
+	}
+
+	public InstrumentalData getInstrumentalData() {
+		return instrumentalData;
+	}
+
+	public void setInstrumentalData(InstrumentalData instrumentalData) {
+		this.instrumentalData = instrumentalData;
+	}
+
+	public DiagnosisVerificationData getDiagnosisVerificationData() {
+		return diagnosisVerificationData;
+	}
+
+	public void setDiagnosisVerificationData(
+			DiagnosisVerificationData diagnosisVerificationData) {
+		this.diagnosisVerificationData = diagnosisVerificationData;
+	}
+
+	public MainTreatmentData getMainTreatmentData() {
+		return mainTreatmentData;
+	}
+
+	public void setMainTreatmentData(MainTreatmentData mainTreatmentData) {
+		this.mainTreatmentData = mainTreatmentData;
+	}
+
+	public RehabilitationData getRehabilitationData() {
+		return rehabilitationData;
+	}
+
+	public void setRehabilitationData(RehabilitationData rehabilitationData) {
+		this.rehabilitationData = rehabilitationData;
+	}
+
+	public PreventiveMeasuresData getPreventiveMeasuresData() {
+		return preventiveMeasuresData;
+	}
+
+	public void setPreventiveMeasuresData(
+			PreventiveMeasuresData preventiveMeasuresData) {
+		this.preventiveMeasuresData = preventiveMeasuresData;
 	}
 
 	public User getUser() {

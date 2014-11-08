@@ -13,7 +13,6 @@
 				<h4 class="modal-title" id="SetEfficiencyOfDrug">Встановити
 					ефективність препарату</h4>
 			</div>
-			<div class="modal-body">
 				<div class="col-sm-12">
 					<div class="col-sm-4" style="float: left">
 						<div class="effinciency_div_first">Переносимість
@@ -54,8 +53,7 @@
 						<div class="effinciency_div_second"></div>
 					</div>
 				</div>
-			</div>
-			<div class="modal-footer">
+			<div class="modal-footer" style="margin-top: 0px">
 				<button type="button" class="btn btn-primary"
 					id="save-sub-efficiency-button" data-dismiss="modal">Зберегти</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal">Закрити</button>

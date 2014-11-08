@@ -28,20 +28,20 @@
 							скасування?</div>
 					</div>
 					<div class="col-sm-4">
-						<select name="tolerability" class="form-control dropdown effinciency_select">
+						<select name="drug_tolerance" class="form-control dropdown effinciency_select">
 							<option value="good">Добра</option>
 							<option value="satisfactory">Задовільна</option>
 							<option value="poor">Незадовільна</option>
-						</select> <select name="efficiencyOfDrug" class="form-control dropdown effinciency_select">
+						</select> <select name="efficacy_evaluation" class="form-control dropdown effinciency_select">
 							<option value="without">Відсутність ефекту</option>
 							<option value="high">Висока (позит. динаміка > 70)</option>
 							<option value="moderate">Помірна (позит. динаміка 50-70)</option>
-						</select> <input type="text" class="form-control" style="margin-left:9px"/> <select
-							name="degreeOfPE" class="form-control dropdown effinciency_select">
+						</select> <input name="side_effect_description" type="text" class="form-control" style="margin-left:9px"/> <select
+							name="side_effects_severity_degree" class="form-control dropdown effinciency_select">
 							<option value="easy">Легкий</option>
 							<option value="middle">Середній</option>
 							<option value="hard">Тяжкий</option>
-						</select> <select name="requiresCancellation" class="form-control dropdown effinciency_select">
+						</select> <select name="cancel" class="form-control dropdown effinciency_select">
 							<option value="yes">Так</option>
 							<option value="no">Ні</option>
 						</select>

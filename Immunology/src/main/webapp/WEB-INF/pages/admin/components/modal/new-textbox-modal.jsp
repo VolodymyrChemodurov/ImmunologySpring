@@ -8,10 +8,10 @@
       </div>
       <div class="modal-body">
        		<label class="col-sm-12 control-label">Select Panel:</label>
-			<select name="panel-names">
+			<select class="form-control" name="panel-names">
 			</select>
 			<label class="col-sm-12 control-label">Select SubPanel:</label>
-			<select name="sub-panel-names">
+			<select class="form-control" name="sub-panel-names">
 			</select>
 			
 			<label class="col-sm-12 control-label">Set TextBox Name:</label>

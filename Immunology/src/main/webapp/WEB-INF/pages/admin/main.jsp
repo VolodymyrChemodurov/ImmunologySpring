@@ -182,7 +182,6 @@
 	}
 	$(document).ready(function(){
 		doAjaxGet('/users');
-		
 		$("#save-syndrom-button").click(function(){
 			createNewSyndrom();	
 			location.reload();

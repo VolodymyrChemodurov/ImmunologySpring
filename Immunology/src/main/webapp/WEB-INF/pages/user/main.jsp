@@ -25,8 +25,10 @@
 	</head>
 <body>
 
+<jsp:include page="/WEB-INF/pages/user/components/modal/efficiency-modal.jsp"></jsp:include>
 
 <!--Start Header-->
+
 	<jsp:include page="/WEB-INF/pages/user/components/navbar.jsp"></jsp:include>
 <!--End Header-->
 <!--Start Container-->
@@ -80,6 +82,7 @@
 	<jsp:include page="/WEB-INF/pages/base-scripts.jsp">
 		<jsp:param value="${baseURL}" name="baseURL"/>
 	</jsp:include>
+
 	
 	
 	

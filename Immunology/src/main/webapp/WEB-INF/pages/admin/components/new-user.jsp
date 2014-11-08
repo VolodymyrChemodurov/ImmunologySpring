@@ -102,16 +102,16 @@
 
 <script type="text/javascript">
 	// Run Select2 plugin on elements
-	function DemoSelect2() {
-		//$('#s2_with_tag').select2({placeholder: "Select OS"});
-		$('#country').select2();
-		$('#sex').select2();
-	}
+// 	function DemoSelect2() {
+// 		//$('#s2_with_tag').select2({placeholder: "Select OS"});
+// 		$('#country').select2();
+// 		$('#sex').select2();
+// 	}
 
 	$(document).ready(function() {
 		// Add tooltip to form-controls
 		$('.form-control').tooltip();
-		Select2Script(DemoSelect2);
+		//Select2Script(DemoSelect2);
 		// Load example of form validation
 		BootstrapValidatorScript(PatientValidator);
 		BootstrapValidatorScript(PasswordValidator);

@@ -60,7 +60,7 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Стать</label>
 							<div class="col-sm-5">
-								<select class="populate placeholder" name="sex" id="sex">
+								<select class="form-control dropdown" name="sex" id="sex">
 									<option value="">-- Оберіть стать --</option>
 									<option value="чоловік">Чоловіча</option>
 									<option value="жінка">Жіноча</option>
@@ -87,7 +87,7 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Країна</label>
 							<div class="col-sm-5">
-								<select class="populate placeholder" name="country" id="country">
+								<select class="form-control dropdown" name="country" id="country">
 									<option value="">-- Оберіть країну --</option>
 									<option value="Україна">Україна</option>
 									<option value="Франція">Франція</option>
@@ -146,10 +146,10 @@
 </div>
 <script type="text/javascript">
 	// Run Select2 plugin on elements
-	function DemoSelect2() {
-		$('#country').select2();
-		$('#sex').select2();
-	}
+// 	function DemoSelect2() {
+// 		$('#country').select2();
+// 		$('#sex').select2();
+// 	}
 
 	$(document).ready(function() {
 		$('#dateOfBirth').datepicker({
@@ -162,8 +162,7 @@
 			$('#dateOfBirth').datepicker("show");
 		});
 		// Add tooltip to form-controls
-		$('.form-control').tooltip();
-		Select2Script(DemoSelect2);
+ 		//Select2Script(DemoSelect2);
 		// Load example of form validation
 		BootstrapValidatorScript(PatientValidator);
 		// Add drag-n-drop feature to boxes

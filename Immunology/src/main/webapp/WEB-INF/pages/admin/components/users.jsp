@@ -64,7 +64,8 @@ function AllTables(){
 	Select2Script(MakeSelect2);
 }
 function MakeSelect2(){
-	$('select').select2();
+	$('select[name=datatable-3_length').select2();
+	$('#dropdownValues').select2();
 	$('.dataTables_filter').each(function(){
 		$(this).find('label input[type=text]').attr('placeholder', 'Search');
 	});

@@ -8,7 +8,7 @@
       </div>
       <div class="modal-body">
       	<label class="col-sm-12 control-label">Set Panel Name:</label>
-       	<select name="panel-names">
+       	<select class="form-control" name="panel-names">
 		</select>
 		<label class="col-sm-12 control-label">Set sub-Panel Name:</label>
 		<input type="text" class="form-control"  id="sub-panel-name" />

@@ -8,14 +8,14 @@
       </div>
       <div class="modal-body">
       	<label class="col-sm-12 control-label">Select Panel Name:</label>
-		<select name="panel-names">
+		<select class="form-control" name="panel-names">
 		</select>
 		<label class="col-sm-12 control-label">Set sub-Panel Name:</label>
-		<select id="sp-remove" name="sub-panel-names" onclick="spClick();">
+		<select class="form-control" id="sp-remove" name="sub-panel-names" onclick="spClick();">
 			<option value="-1">-EMPTY-</option>
 		</select>
 		<label class="col-sm-12 control-label">Set element Name:</label>
-		<select name="element-title">
+		<select class="form-control" name="element-title">
 			<option value="-1">-EMPTY-</option>
 		</select>
       </div>

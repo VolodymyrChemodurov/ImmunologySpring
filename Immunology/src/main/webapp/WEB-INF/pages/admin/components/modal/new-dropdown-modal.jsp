@@ -8,10 +8,10 @@
       </div>
       <div class="modal-body">
       		<label class="col-sm-12 control-label">Set Panel Name:</label>
-			<select name="panel-names" style="margin: 5px;">
+			<select class="form-control" name="panel-names" style="margin: 5px;">
 			</select>
 			<label class="col-sm-12 control-label">Set sub-panel Name:</label>
-			<select name="sub-panel-names" style="margin: 5px;">
+			<select class="form-control" name="sub-panel-names" style="margin: 5px;">
 			</select>
 			<label class="col-sm-12 control-label">Set DropDown Title:</label>
 			<input type="text" class="form-control"  id="dropdownName"  placeholder="Dropdown title"  style="margin: 5px;"/>
@@ -32,3 +32,4 @@
     </div>
   </div>
 </div>
+

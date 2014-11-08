@@ -62,3 +62,20 @@ fieldset  .border{
 }
 
 /*==================== STYLES FOR MEDICAL FORM  -FINISHED  ==================== */
+
+/*==================== STYLES FOR EFICIENCY  ==================== */
+.effinciency_div_first{
+	padding: 2px; 
+	margin: 10px; 
+	height:26px;
+	background-color: rgb(33, 145, 192);
+}
+.effinciency_div_second{
+	padding: 2px; 
+	margin: 10px; 
+	height:26px;
+	background-color: rgb(33, 192, 89);
+}
+.effinciency_select{
+	margin: 10px; 
+}	

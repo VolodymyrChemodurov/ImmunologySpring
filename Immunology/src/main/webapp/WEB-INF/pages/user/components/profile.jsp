@@ -90,8 +90,8 @@
 				<div class="no-move"></div>
 			</div>
 			<div class="box-content">
-				<form id="defaultForm-password" method="POST"
-					action="/cabinet/profile/edit/password" class="form-horizontal">
+				<div id="defaultForm-password"
+					 class="form-horizontal">
 					<fieldset>
 						<legend></legend>
 
@@ -120,10 +120,10 @@
 
 					<div class="form-group">
 						<div class="col-sm-11 col-sm-offset-3">
-							<button type="submit" class="btn btn-primary">Зберегти</button>
+							<button class="btn btn-primary" onClick="changePassword();">Зберегти</button>
 						</div>
 					</div>
-				</form>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -135,4 +135,29 @@
 		BootstrapValidatorScript(PasswordValidator);
 		WinMove();
 	});	
+	function changePassword(){
+		var oldPassword = $("#oldPassword").val();
+		var password = $("#password").val();
+		$.ajax({
+			type : "post",
+			url : "/cabinet/change/password",
+			data: {
+				'oldPassword': oldPassword,
+				'password': password
+			},
+			success : function(response) {
+				alert(response);
+				if(response.toString() == 'true') {
+					alert('Пароль змінено успішно');
+				} else {
+					alert('Паролі не співпадають');
+				}
+		
+			},
+			error: function (request, status, error) {
+				alert(error);
+		    }
+
+		});
+	}
 </script>

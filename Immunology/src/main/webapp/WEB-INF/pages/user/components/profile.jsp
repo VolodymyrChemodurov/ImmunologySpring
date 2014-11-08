@@ -60,7 +60,7 @@
 							<label class="col-sm-3 control-label">Логін</label>
 							<div class="col-sm-5">
 								<input type="text" class="form-control" name="login" id="login"
-									value="${user.login}" />
+									value="${user.login}" disabled="disabled"/>
 							</div>
 						</div>
 					</fieldset>

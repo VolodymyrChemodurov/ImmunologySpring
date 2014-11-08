@@ -82,4 +82,23 @@ public class AdminController {
 		return form;
 	}
 	
+	@RequestMapping(value="/profile",  method=RequestMethod.GET)
+    public String getMyProfile(Model model) {
+		User user = UserUtils.getCurrentUser();
+		model.addAttribute("user", userService.getUserByLogin(user.getUsername()));
+        return "admin/components/profile";
+    }
+	
+	@RequestMapping(value="/profile/edit",  method=RequestMethod.POST)
+    public String editProfile(com.immunology.model.User editedUser, Model model, HttpServletResponse response) {
+		User user = UserUtils.getCurrentUser();
+		com.immunology.model.User immunologyUser = userService.getUserByLogin(user.getUsername());
+		
+		immunologyUser.setFirstName(editedUser.getFirstName());
+		immunologyUser.setLastName(editedUser.getLastName());
+		immunologyUser.setMiddleName(editedUser.getMiddleName());
+		userService.updateUser(immunologyUser);
+
+		return "redirect:/admin";
+    }
 }

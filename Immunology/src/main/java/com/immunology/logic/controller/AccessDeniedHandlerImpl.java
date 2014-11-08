@@ -20,9 +20,9 @@ public class AccessDeniedHandlerImpl implements AccessDeniedHandler{
 	public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException deniedException) throws IOException, ServletException {
 		User user = UserUtils.getCurrentUser();
 		if(RoleUtils.isAdmin(user)) {
-			response.sendRedirect("/Immunology/admin");
+			response.sendRedirect("/admin");
 		} else {
-			response.sendRedirect("/Immunology/cabinet");
+			response.sendRedirect("/cabinet");
 		}
 	}
 

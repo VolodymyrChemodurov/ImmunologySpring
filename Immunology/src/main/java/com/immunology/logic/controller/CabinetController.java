@@ -62,7 +62,6 @@ public class CabinetController {
 		immunologyUser.setFirstName(editedUser.getFirstName());
 		immunologyUser.setLastName(editedUser.getLastName());
 		immunologyUser.setMiddleName(editedUser.getMiddleName());
-		immunologyUser.setLogin(editedUser.getLogin());
 		userService.updateUser(immunologyUser);
 
 		return "redirect:/cabinet";

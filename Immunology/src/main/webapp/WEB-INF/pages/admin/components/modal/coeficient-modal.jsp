@@ -7,8 +7,7 @@
         <h4 class="modal-title" id="myModalLabel">Set Coefficient to Element</h4>
       </div>
       <div class="modal-body">	
-			<label class="col-sm-12 control-label">Set coefficient value:</label>
-			<input type="text" class="form-control"  id="coefficientValue" />
+			
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

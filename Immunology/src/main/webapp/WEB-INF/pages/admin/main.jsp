@@ -106,7 +106,7 @@
 						</div>
 						<div class="modal-body">
 							<label class="col-sm-12 control-label">Select Syndrom:</label> 
-							<select name="syndrrom-names">
+							<select class="form-control" name="syndrrom-names">
 							<c:forEach items="${syndromes}" var="syndrome">
     							<option>${syndrome}</option>
 							</c:forEach>

@@ -24,6 +24,7 @@ import com.immunology.logic.service.SyndromeService;
 import com.immunology.logic.service.UserService;
 import com.immunology.logic.utils.URIUtils;
 import com.immunology.logic.utils.UserUtils;
+import com.immunology.logic.utils.calculation.CalculationHelper;
 import com.immunology.logic.utils.enums.SyndromeFormulaType;
 import com.immunology.model.Patient;
 import com.immunology.model.Syndrome;
@@ -132,7 +133,7 @@ public class SyndromeController {
 	@RequestMapping(value = "/template/{name}/severityLevelFormula", method = RequestMethod.POST)
 	public @ResponseBody Boolean saveSyndromeSeverityLevelFormula(@RequestParam("formula") String formula, HttpServletRequest request) {
 		boolean result = false;
-		if(validateFormula(formula)) {
+		if(CalculationHelper.validateFormula(formula)) {
 			String decodedSyndromeName = URIUtils.decodePathVariable(request.getRequestURI(), 2);
 			syndromeService.saveSyndromeFormula(decodedSyndromeName, SyndromeFormulaType.SEVERITY_LEVEL, formula);
 			result = true;
@@ -143,7 +144,7 @@ public class SyndromeController {
 	@RequestMapping(value = "/template/{name}/insufficiencyLevelFormula", method = RequestMethod.POST)
 	public @ResponseBody Boolean saveSyndromeInsufficiencyLevelFormula(@RequestParam("formula") String formula, HttpServletRequest request) {
 		boolean result = false;
-		if(validateFormula(formula)) {
+		if(CalculationHelper.validateFormula(formula)) {
 			String decodedSyndromeName = URIUtils.decodePathVariable(request.getRequestURI(), 2);
 			syndromeService.saveSyndromeFormula(decodedSyndromeName, SyndromeFormulaType.INSUFFICIENCY_LEVEL, formula);
 			result = true;
@@ -151,15 +152,4 @@ public class SyndromeController {
 		return result;
 	}
 	
-	private Boolean validateFormula(String formula) {
-		boolean validationResult = false;
-		try {
-			Expression expression = new ExpressionBuilder(formula).variable("x").build();
-			validationResult = expression.validate(false).isValid();
-		} catch (Exception e) {
-			LOG.error(e.toString());
-			validationResult = false;
-		}
-		return validationResult;
-	}
 }

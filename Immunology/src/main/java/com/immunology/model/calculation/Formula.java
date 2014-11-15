@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.immunology.logic.utils.enums.SyndromeFormulaType;
+import com.immunology.logic.utils.enums.FormulaType;
 import com.immunology.model.Syndrome;
 
 @Entity
@@ -32,7 +32,7 @@ public class Formula {
 	private Syndrome syndrome;
 	
 	@Enumerated(EnumType.STRING)
-	private SyndromeFormulaType type;
+	private FormulaType type;
 	
 	public Long getId() {
 		return id;
@@ -58,11 +58,11 @@ public class Formula {
 		this.syndrome = syndrome;
 	}
 
-	public SyndromeFormulaType getType() {
+	public FormulaType getType() {
 		return type;
 	}
 
-	public void setType(SyndromeFormulaType type) {
+	public void setType(FormulaType type) {
 		this.type = type;
 	}
 

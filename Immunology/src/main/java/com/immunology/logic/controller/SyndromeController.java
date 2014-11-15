@@ -21,7 +21,8 @@ import com.immunology.logic.service.SyndromeService;
 import com.immunology.logic.service.UserService;
 import com.immunology.logic.utils.URIUtils;
 import com.immunology.logic.utils.UserUtils;
-import com.immunology.logic.utils.enums.SyndromeFormulaType;
+import com.immunology.logic.utils.calculation.CalculationHelper;
+import com.immunology.logic.utils.enums.FormulaType;
 import com.immunology.model.Patient;
 import com.immunology.model.Syndrome;
 import com.immunology.model.calculation.Formula;
@@ -99,21 +100,21 @@ public class SyndromeController {
 		return syndromeService.wireUserToSyndromeTemplate(URIUtils.decodePathVariable(request.getRequestURI(), 2), userId);
 	}
 	
+	@RequestMapping(value = "template/{name}", method = RequestMethod.GET)
+	public @ResponseBody Syndrome getSyndromeByName(@PathVariable("name") String templateName, HttpServletRequest request) {
+		return syndromeService.getSyndromeByName(URIUtils.decodePathVariable(request.getRequestURI(), 2));
+	}
+
 	@RequestMapping(value = "/template/{name}/user/{id}", method = RequestMethod.DELETE)
 	public @ResponseBody Boolean removeSyndromeTemplateFromUser(@PathVariable("name") String syndromeName, @PathVariable("id") Long userId, HttpServletRequest request) {
 		syndromeService.removeSyndromeTemplateFromUser(URIUtils.decodePathVariable(request.getRequestURI(), 2), userId);
 		return true;
 	}
 	
-	@RequestMapping(value = "template/{name}", method = RequestMethod.GET)
-	public @ResponseBody Syndrome getSyndromeByName(@PathVariable("name") String templateName, HttpServletRequest request) {
-		return syndromeService.getSyndromeByName(URIUtils.decodePathVariable(request.getRequestURI(), 2));
-	}
-
-	@RequestMapping(value = "/template/{name}/severityLevelFormula", method = RequestMethod.GET)
-	public @ResponseBody String getSyndromeSeverityLevelFormula(HttpServletRequest request) {
+	@RequestMapping(value = "/template/{name}/{formulaType}", method = RequestMethod.GET)
+	public @ResponseBody String getSyndromeSeverityLevelFormula(@PathVariable("formulaType") String formulaType, HttpServletRequest request) {
 		String decodedSyndromeName = URIUtils.decodePathVariable(request.getRequestURI(), 2);
-		Formula result = syndromeService.getSybdromeFormula(decodedSyndromeName, SyndromeFormulaType.SEVERITY_LEVEL);
+		Formula result = syndromeService.getSybdromeFormula(decodedSyndromeName, FormulaType.getByName(formulaType));
 		if(result != null) {
 			return result.getFormulaExpression();
 		} else {
@@ -121,31 +122,15 @@ public class SyndromeController {
 		}
 	}
 
-	@RequestMapping(value = "/template/{name}/insufficiencyLevelFormula", method = RequestMethod.GET)
-	public @ResponseBody String getSyndromeInsufficiencyLevelFormula(HttpServletRequest request) {
-		String decodedSyndromeName = URIUtils.decodePathVariable(request.getRequestURI(), 2);
-		Formula result = syndromeService.getSybdromeFormula(decodedSyndromeName, SyndromeFormulaType.INSUFFICIENCY_LEVEL);
-		if(result != null) {
-			return result.getFormulaExpression();
-		} else {
-			return null;
+	@RequestMapping(value = "/template/{name}/{formulaType}", method = RequestMethod.POST)
+	public @ResponseBody Boolean saveSyndromeSeverityLevelFormula(@RequestParam("formula") String formula, @PathVariable("formulaType") String formulaType, HttpServletRequest request) {
+		boolean result = false;
+		if(CalculationHelper.validateFormula(formula)) {
+			String decodedSyndromeName = URIUtils.decodePathVariable(request.getRequestURI(), 2);
+			syndromeService.saveSyndromeFormula(decodedSyndromeName, FormulaType.getByName(formulaType), formula);
+			result = true;
 		}
-	}
-	
-	@RequestMapping(value = "/template/{name}/severityLevelFormula", method = RequestMethod.POST)
-	public @ResponseBody Boolean saveSyndromeSeverityLevelFormula(@RequestParam("formula") String formula, HttpServletRequest request) {
-		//TODO validate formula
-		String decodedSyndromeName = URIUtils.decodePathVariable(request.getRequestURI(), 2);
-		syndromeService.saveSyndromeFormula(decodedSyndromeName, SyndromeFormulaType.SEVERITY_LEVEL, formula);
-		return true;
+		return result;
 	}
 
-	@RequestMapping(value = "/template/{name}/insufficiencyLevelFormula", method = RequestMethod.POST)
-	public @ResponseBody Boolean saveSyndromeInsufficiencyLevelFormula(@RequestParam("formula") String formula, HttpServletRequest request) {
-		//TODO validate formula
-		String decodedSyndromeName = URIUtils.decodePathVariable(request.getRequestURI(), 2);
-		syndromeService.saveSyndromeFormula(decodedSyndromeName, SyndromeFormulaType.INSUFFICIENCY_LEVEL, formula);
-		return true;
-	}
-	
 }

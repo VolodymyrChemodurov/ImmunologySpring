@@ -4,6 +4,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import net.objecthunter.exp4j.Expression;
+import net.objecthunter.exp4j.ExpressionBuilder;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -128,18 +131,35 @@ public class SyndromeController {
 	
 	@RequestMapping(value = "/template/{name}/severityLevelFormula", method = RequestMethod.POST)
 	public @ResponseBody Boolean saveSyndromeSeverityLevelFormula(@RequestParam("formula") String formula, HttpServletRequest request) {
-		//TODO validate formula
-		String decodedSyndromeName = URIUtils.decodePathVariable(request.getRequestURI(), 2);
-		syndromeService.saveSyndromeFormula(decodedSyndromeName, SyndromeFormulaType.SEVERITY_LEVEL, formula);
-		return true;
+		boolean result = false;
+		if(validateFormula(formula)) {
+			String decodedSyndromeName = URIUtils.decodePathVariable(request.getRequestURI(), 2);
+			syndromeService.saveSyndromeFormula(decodedSyndromeName, SyndromeFormulaType.SEVERITY_LEVEL, formula);
+			result = true;
+		}
+		return result;
 	}
 
 	@RequestMapping(value = "/template/{name}/insufficiencyLevelFormula", method = RequestMethod.POST)
 	public @ResponseBody Boolean saveSyndromeInsufficiencyLevelFormula(@RequestParam("formula") String formula, HttpServletRequest request) {
-		//TODO validate formula
-		String decodedSyndromeName = URIUtils.decodePathVariable(request.getRequestURI(), 2);
-		syndromeService.saveSyndromeFormula(decodedSyndromeName, SyndromeFormulaType.INSUFFICIENCY_LEVEL, formula);
-		return true;
+		boolean result = false;
+		if(validateFormula(formula)) {
+			String decodedSyndromeName = URIUtils.decodePathVariable(request.getRequestURI(), 2);
+			syndromeService.saveSyndromeFormula(decodedSyndromeName, SyndromeFormulaType.INSUFFICIENCY_LEVEL, formula);
+			result = true;
+		}
+		return result;
 	}
 	
+	private Boolean validateFormula(String formula) {
+		boolean validationResult = false;
+		try {
+			Expression expression = new ExpressionBuilder(formula).variable("x").build();
+			validationResult = expression.validate(false).isValid();
+		} catch (Exception e) {
+			LOG.error(e.toString());
+			validationResult = false;
+		}
+		return validationResult;
+	}
 }

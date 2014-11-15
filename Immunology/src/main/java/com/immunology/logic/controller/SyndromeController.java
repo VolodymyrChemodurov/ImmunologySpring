@@ -24,6 +24,7 @@ import com.immunology.logic.utils.UserUtils;
 import com.immunology.logic.utils.enums.SyndromeFormulaType;
 import com.immunology.model.Patient;
 import com.immunology.model.Syndrome;
+import com.immunology.model.calculation.Formula;
 
 @Controller
 @RequestMapping(value = "/syndromes")
@@ -106,13 +107,23 @@ public class SyndromeController {
 	@RequestMapping(value = "/template/{name}/severityLevelFormula", method = RequestMethod.GET)
 	public @ResponseBody String getSyndromeSeverityLevelFormula(HttpServletRequest request) {
 		String decodedSyndromeName = URIUtils.decodePathVariable(request.getRequestURI(), 2);
-		return syndromeService.getSybdromeFormula(decodedSyndromeName, SyndromeFormulaType.SEVERITY_LEVEL).getFormulaExpression();
+		Formula result = syndromeService.getSybdromeFormula(decodedSyndromeName, SyndromeFormulaType.SEVERITY_LEVEL);
+		if(result != null) {
+			return result.getFormulaExpression();
+		} else {
+			return null;
+		}
 	}
 
 	@RequestMapping(value = "/template/{name}/insufficiencyLevelFormula", method = RequestMethod.GET)
 	public @ResponseBody String getSyndromeInsufficiencyLevelFormula(HttpServletRequest request) {
 		String decodedSyndromeName = URIUtils.decodePathVariable(request.getRequestURI(), 2);
-		return syndromeService.getSybdromeFormula(decodedSyndromeName, SyndromeFormulaType.INSUFFICIENCY_LEVEL).getFormulaExpression();
+		Formula result = syndromeService.getSybdromeFormula(decodedSyndromeName, SyndromeFormulaType.INSUFFICIENCY_LEVEL);
+		if(result != null) {
+			return result.getFormulaExpression();
+		} else {
+			return null;
+		}
 	}
 	
 	@RequestMapping(value = "/template/{name}/severityLevelFormula", method = RequestMethod.POST)

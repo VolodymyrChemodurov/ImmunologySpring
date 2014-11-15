@@ -94,8 +94,14 @@ public class SyndromeServiceImpl implements SyndromeService {
 		return formula;
 	}
 
-	public void saveSyndromeFormula(String syndormeName, SyndromeFormulaType formulaType, String formula) {
-		syndromeDao.saveSyndromeFormula(syndormeName, formulaType, formula);
+	public void saveSyndromeFormula(String syndoromeName, SyndromeFormulaType formulaType, String formulaExpression) {
+		Syndrome syndrome = syndromeDao.findSyndrome(syndoromeName);
+		Formula formula = new Formula();
+		formula.setFormulaExpression(formulaExpression);
+		formula.setType(formulaType);
+		formula.setSyndrome(syndrome);
+		syndrome.getFormulas().add(formula);
+		syndromeDao.updateSyndromeTemplate(syndoromeName, syndrome);
 	}
 
 }

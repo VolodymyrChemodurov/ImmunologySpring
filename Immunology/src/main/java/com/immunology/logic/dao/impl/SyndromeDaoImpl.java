@@ -17,7 +17,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.immunology.logic.dao.GenericMongoDao;
 import com.immunology.logic.dao.SyndromeDao;
-import com.immunology.logic.utils.enums.SyndromeFormulaType;
 import com.immunology.model.Syndrome;
 import com.mongodb.WriteResult;
 
@@ -30,7 +29,6 @@ public class SyndromeDaoImpl extends GenericMongoDao<Syndrome> implements Syndro
 	private static final String GET_USER_TEMPLATE_BY_NAME = "{'users.id':#, 'name':'#'}";
 	private static final String GET_SYNDROME_NAMES = "{}";
 	private static final String GET_TEMPLATE = "{'name':#}";
-	
 	private static final String GET_PATIENT_SYNDROME = "SELECT syndrome FROM Syndrome syndrome WHERE syndrome.name = :name AND syndrome.patient.id = :id";
 	
 	@PersistenceContext
@@ -110,12 +108,6 @@ public class SyndromeDaoImpl extends GenericMongoDao<Syndrome> implements Syndro
 		Iterable<Syndrome> templates = collection.find(GET_TEMPLATE, templateName)
 				.projection("{_id: 0}").as(Syndrome.class);
 		return convertToList(templates).get(0);
-	}
-
-	public void saveSyndromeFormula(String syndromeName,
-			SyndromeFormulaType formulaType, String formula) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

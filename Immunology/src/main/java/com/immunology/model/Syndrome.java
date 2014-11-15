@@ -55,7 +55,7 @@ public class Syndrome {
 	@OneToMany(mappedBy = "syndrome")
 	@JsonManagedReference("formula_reference")
 	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<Formula> formulas;
+	private List<Formula> formulas = new ArrayList<Formula>();
 	
 	public long getId() {
 		return id;

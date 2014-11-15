@@ -76,7 +76,7 @@ public class CabinetController {
     }
 	
 	@RequestMapping(value="/change/password",  method=RequestMethod.POST)
-    public @ResponseBody Boolean editProfile(Model model, @RequestParam String password, @RequestParam String oldPassword) {
+    public @ResponseBody Boolean changePassword(Model model, @RequestParam String password, @RequestParam String oldPassword) {
 		User user = UserUtils.getCurrentUser();
 		com.immunology.model.User immunologyUser = userService.getUserByLogin(user.getUsername());
 		boolean match = encoder.matches(oldPassword, immunologyUser.getPassword());

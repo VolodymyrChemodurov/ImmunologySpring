@@ -146,11 +146,11 @@
 				'password': password
 			},
 			success : function(response) {
-				alert(response);
 				if(response.toString() == 'true') {
 					alert('Пароль змінено успішно');
+					location.href = "/cabinet";
 				} else {
-					alert('Паролі не співпадають');
+					alert('Невірний поточний пароль');
 				}
 		
 			},

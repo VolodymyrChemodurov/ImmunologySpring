@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.immunology.logic.service.PatientService;
@@ -99,6 +100,16 @@ public class SyndromeController {
 	@RequestMapping(value = "template/{name}", method = RequestMethod.GET)
 	public @ResponseBody Syndrome getSyndromeByName(@PathVariable("name") String templateName, HttpServletRequest request) {
 		return syndromeService.getSyndromeByName(URIUtils.decodePathVariable(request.getRequestURI(), 2));
+	}
+
+	@RequestMapping(value = "/template/severityLevelFormula", method = RequestMethod.POST)
+	public @ResponseBody Boolean saveSyndromeSeverityLevelFormula(@RequestParam("formula") String formula) {
+		return true;
+	}
+
+	@RequestMapping(value = "/template/insufficiencyLevelFormula", method = RequestMethod.POST)
+	public @ResponseBody Boolean saveSyndromeInsufficiencyLevelFormula(@RequestParam("formula") String formula) {
+		return true;
 	}
 	
 }

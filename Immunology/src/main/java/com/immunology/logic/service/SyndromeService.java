@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.immunology.logic.utils.enums.SyndromeFormulaType;
 import com.immunology.model.Syndrome;
+import com.immunology.model.calculation.Formula;
 
 public interface SyndromeService {
 
@@ -27,7 +28,7 @@ public interface SyndromeService {
 	
 	Syndrome getSyndromeByName(String syndromeName);
 	
-	String getSybdromeFormula(String syndromeName, SyndromeFormulaType formulaType);
+	Formula getSybdromeFormula(String syndromeName, SyndromeFormulaType formulaType);
 	
 	void saveSyndromeFormula(String syndormeName, SyndromeFormulaType formulaType, String formula);
 }

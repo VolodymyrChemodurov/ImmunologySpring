@@ -112,11 +112,6 @@ public class SyndromeDaoImpl extends GenericMongoDao<Syndrome> implements Syndro
 		return convertToList(templates).get(0);
 	}
 
-	public String getSyndromeFormula(String syndromeName, SyndromeFormulaType formula) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public void saveSyndromeFormula(String syndromeName,
 			SyndromeFormulaType formulaType, String formula) {
 		// TODO Auto-generated method stub

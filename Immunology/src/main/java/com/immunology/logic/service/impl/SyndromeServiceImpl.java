@@ -15,6 +15,7 @@ import com.immunology.logic.utils.ReferenceHelper;
 import com.immunology.logic.utils.UserUtils;
 import com.immunology.logic.utils.enums.SyndromeFormulaType;
 import com.immunology.model.Syndrome;
+import com.immunology.model.calculation.Formula;
 
 @Service
 public class SyndromeServiceImpl implements SyndromeService {
@@ -79,8 +80,18 @@ public class SyndromeServiceImpl implements SyndromeService {
 		return syndromeDao.findSyndrome(syndromeName);
 	}
 
-	public String getSybdromeFormula(String syndromeName, SyndromeFormulaType formulaType) {
-		return syndromeDao.getSyndromeFormula(syndromeName, formulaType);
+	public Formula getSybdromeFormula(String syndromeName, SyndromeFormulaType formulaType) {
+		Syndrome syndrome = syndromeDao.findSyndrome(syndromeName);
+		Formula formula = null;
+		if(syndrome.getFormulas() != null) {
+			for(Formula currentFormula: syndrome.getFormulas()) {
+				if(currentFormula.getType().equals(formulaType)) {
+					formula = currentFormula;
+					break;
+				}
+			}
+		}
+		return formula;
 	}
 
 	public void saveSyndromeFormula(String syndormeName, SyndromeFormulaType formulaType, String formula) {

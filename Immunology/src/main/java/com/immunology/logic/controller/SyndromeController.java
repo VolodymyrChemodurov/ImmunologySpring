@@ -106,13 +106,13 @@ public class SyndromeController {
 	@RequestMapping(value = "/template/{name}/severityLevelFormula", method = RequestMethod.GET)
 	public @ResponseBody String getSyndromeSeverityLevelFormula(HttpServletRequest request) {
 		String decodedSyndromeName = URIUtils.decodePathVariable(request.getRequestURI(), 2);
-		return syndromeService.getSybdromeFormula(decodedSyndromeName, SyndromeFormulaType.SEVERITY_LEVEL);
+		return syndromeService.getSybdromeFormula(decodedSyndromeName, SyndromeFormulaType.SEVERITY_LEVEL).getFormulaExpression();
 	}
 
 	@RequestMapping(value = "/template/{name}/insufficiencyLevelFormula", method = RequestMethod.GET)
 	public @ResponseBody String getSyndromeInsufficiencyLevelFormula(HttpServletRequest request) {
 		String decodedSyndromeName = URIUtils.decodePathVariable(request.getRequestURI(), 2);
-		return syndromeService.getSybdromeFormula(decodedSyndromeName, SyndromeFormulaType.INSUFFICIENCY_LEVEL);
+		return syndromeService.getSybdromeFormula(decodedSyndromeName, SyndromeFormulaType.INSUFFICIENCY_LEVEL).getFormulaExpression();
 	}
 	
 	@RequestMapping(value = "/template/{name}/severityLevelFormula", method = RequestMethod.POST)

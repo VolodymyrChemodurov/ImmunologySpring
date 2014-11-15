@@ -25,7 +25,5 @@ public interface SyndromeDao {
 	
 	Syndrome findSyndrome(String templateName);
 	
-	String getSyndromeFormula(String syndromeName, SyndromeFormulaType formulaType);
-	
 	void saveSyndromeFormula(String syndromeName, SyndromeFormulaType formulaType, String formula);
 }

@@ -34,12 +34,18 @@
 						</ul>
 					</li>
 					<li>
+						<a href="#"  data-toggle="modal" data-target="#formula-modal" class="ajax-link">
+							<i class="fa fa-flask"></i> 
+							<span class="hidden-xs">Analitic Block</span>
+						</a>
+					</li>
+					<li>
 						<a href="#" onclick="doAjaxGet('/medcard');" class="ajax-link">
 							<i class="fa fa-file-o"></i>
 							<span class="hidden-xs">Medical Card</span>
 						</a>
 					</li>
-					
+				
 					
 					
 					<li id="survey-parent" class="dropdown">
@@ -55,11 +61,7 @@
 								</a>
 							</li>
 							
-							<li>
-								<a href="#"  data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'anamnestic'" class="ajax-link">
-									<span class="hidden-xs">Anamnestic Data</span>
-								</a>
-							</li>
+							
 						
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle active-parent active">
@@ -144,6 +146,37 @@
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 								<button type="button" id="save-syndrom-button" class="btn btn-primary" data-dismiss="modal">Save</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+<!-- 			Analitic Block <Formula> -->
+	<div class="modal fade" id="formula-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">
+								<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+							</button>
+							<h4 class="modal-title" id="myModalLabel">Syndroms</h4>
+						</div>
+						<div class="modal-body">
+							<label class="col-sm-12 control-label">Select Syndrom:</label> 
+							<select class="form-control" name="syndrrom-names" style="margin-bottom: 20px;">
+							<c:forEach items="${syndromes}" var="syndrome">
+    							<option>${syndrome}</option>
+							</c:forEach>
+							</select>
+							<label class="col-sm-12 control-label" style="margin-left: 10px;">Severity Level formula:</label> 
+							<h3 style="width: 3%; float: left;">Σ</h3><input type="text" class="form-control" id="severity-formula" style="width: 96%; float: right;">
+							<small style="float: right;">You can use such symbols: ' * ' , ' ^ ' , ' / ' , ' X ' ; Х - is the coeficient value </small>
+							<label class="col-sm-12 control-label"  style="margin-left: 10px;">Insufficiency Level formula</label>
+							<h3 style="width: 3%; float: left;">Σ</h3><input type="text" class="form-control" id="insufficiency-formula" style="width: 96%; float: right;">
+							<small style="float: right;">You can use such symbols: ' * ' , ' ^ ' , ' / ' , ' X ' ; Х - is the coeficient value </small>
+							<div class="modal-footer" style="margin-top: 160px; height: 40px;">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								<button type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
 							</div>
 						</div>
 					</div>

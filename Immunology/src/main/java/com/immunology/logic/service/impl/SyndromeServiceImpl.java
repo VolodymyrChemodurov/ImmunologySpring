@@ -11,9 +11,10 @@ import com.immunology.logic.dao.CrudDao;
 import com.immunology.logic.dao.SyndromeDao;
 import com.immunology.logic.dao.UserDao;
 import com.immunology.logic.service.SyndromeService;
+import com.immunology.logic.service.calculation.FormulaBuilder;
 import com.immunology.logic.utils.ReferenceHelper;
 import com.immunology.logic.utils.UserUtils;
-import com.immunology.logic.utils.enums.SyndromeFormulaType;
+import com.immunology.logic.utils.enums.FormulaType;
 import com.immunology.model.Syndrome;
 import com.immunology.model.calculation.Formula;
 
@@ -80,7 +81,7 @@ public class SyndromeServiceImpl implements SyndromeService {
 		return syndromeDao.findSyndrome(syndromeName);
 	}
 
-	public Formula getSybdromeFormula(String syndromeName, SyndromeFormulaType formulaType) {
+	public Formula getSybdromeFormula(String syndromeName, FormulaType formulaType) {
 		Syndrome syndrome = syndromeDao.findSyndrome(syndromeName);
 		Formula formula = null;
 		if(syndrome.getFormulas() != null) {
@@ -94,12 +95,9 @@ public class SyndromeServiceImpl implements SyndromeService {
 		return formula;
 	}
 
-	public void saveSyndromeFormula(String syndoromeName, SyndromeFormulaType formulaType, String formulaExpression) {
+	public void saveSyndromeFormula(String syndoromeName, FormulaType formulaType, String formulaExpression) {
 		Syndrome syndrome = syndromeDao.findSyndrome(syndoromeName);
-		Formula formula = new Formula();
-		formula.setFormulaExpression(formulaExpression);
-		formula.setType(formulaType);
-		formula.setSyndrome(syndrome);
+		Formula formula = new FormulaBuilder().expression(formulaExpression).formulaType(formulaType).syndrome(syndrome).build();
 		syndrome.getFormulas().add(formula);
 		syndromeDao.updateSyndromeTemplate(syndoromeName, syndrome);
 	}

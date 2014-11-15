@@ -47,6 +47,7 @@ display: none;
 					</c:forEach>
 				</select>
 				<button id="add-syndrom-button" class="btn btn-primary" style="margin-top: 10px; width: 30%;">Add</button>
+				<button id="remove-syndrom-button" class="btn btn-danger" style="margin-top: 10px; width: 30%;">Remove</button>
 				</div>
 				
 			</fieldset>
@@ -61,16 +62,16 @@ display: none;
 
 <script type="text/javascript">
 $("#add-syndrom-button").click(function(){
-	var syndromName = $("#not-used-syndroms").val();
+	var syndromeName = $("#not-used-syndroms").val();
 	var userId = $("#user_id").val();
-	console.log("You choose :" + syndromName);
+	console.log("You choose :" + syndromeName);
 	
 	$.ajax({
 		type : "post",
-		url :  "syndromes/template/{name}/user/{id}".replace("{id}", userId).replace("{name}", syndromName),
+		url :  "syndromes/template/{name}/user/{id}".replace("{id}", userId).replace("{name}", syndromeName),
 		async:   false,
 		success : function(response) {
-				console.log("successfull ajax request" + response);
+				console.log("successful ajax request" + response);
 				reloadPageUSingUrl('users/'+userId);
 		},
 		error: function (request, status, error) {
@@ -81,7 +82,30 @@ $("#add-syndrom-button").click(function(){
 	
 });
 
-
+$("#remove-syndrom-button").click(function(){
+	var syndromeName = $("#user-syndroms option:selected").val();
+	var userId = $("#user_id").val();
+	console.log("You choose to remove:" + syndromeName);
+	
+	
+ 	if(syndromeName!= undefined)
+	 	{
+ 			$.ajax({
+			type : "delete",
+			url :  "syndromes/template/{name}/user/{id}".replace("{id}", userId).replace("{name}", syndromeName),
+			async:   false,
+			success : function(response) {
+					console.log("successful ajax request" + response);
+					reloadPageUSingUrl('users/'+userId);
+			},
+			error: function (request, status, error) {
+				alert(error);
+		    }
+			}); 
+ 		}
+	
+	
+});
 
 
 </script>

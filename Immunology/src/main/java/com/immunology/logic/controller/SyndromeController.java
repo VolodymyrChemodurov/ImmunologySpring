@@ -99,6 +99,12 @@ public class SyndromeController {
 		return syndromeService.wireUserToSyndromeTemplate(URIUtils.decodePathVariable(request.getRequestURI(), 2), userId);
 	}
 	
+	@RequestMapping(value = "/template/{name}/user/{id}", method = RequestMethod.DELETE)
+	public @ResponseBody Boolean removeSyndromeTemplateFromUser(@PathVariable("name") String syndromeName, @PathVariable("id") Long userId, HttpServletRequest request) {
+		syndromeService.removeSyndromeTemplateFromUser(URIUtils.decodePathVariable(request.getRequestURI(), 2), userId);
+		return true;
+	}
+	
 	@RequestMapping(value = "template/{name}", method = RequestMethod.GET)
 	public @ResponseBody Syndrome getSyndromeByName(@PathVariable("name") String templateName, HttpServletRequest request) {
 		return syndromeService.getSyndromeByName(URIUtils.decodePathVariable(request.getRequestURI(), 2));

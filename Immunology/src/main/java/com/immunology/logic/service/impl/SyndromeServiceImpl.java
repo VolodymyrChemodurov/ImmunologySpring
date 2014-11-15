@@ -1,5 +1,6 @@
 package com.immunology.logic.service.impl;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -102,6 +103,18 @@ public class SyndromeServiceImpl implements SyndromeService {
 		formula.setSyndrome(syndrome);
 		syndrome.getFormulas().add(formula);
 		syndromeDao.updateSyndromeTemplate(syndoromeName, syndrome);
+	}
+
+	public void removeSyndromeTemplateFromUser(String syndromeName, Long userId) {
+		Syndrome syndrome = syndromeDao.findSyndrome(syndromeName);
+		List<com.immunology.model.User> users = syndrome.getUsers();
+		Iterator<com.immunology.model.User> iterator = users.iterator();
+		while(iterator.hasNext()) {
+			if(iterator.next().getId() == userId) {
+				iterator.remove();
+			}
+		}
+		syndromeDao.updateSyndromeTemplate(syndromeName, syndrome);
 	}
 
 }

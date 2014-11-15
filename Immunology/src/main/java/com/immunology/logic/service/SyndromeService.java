@@ -31,4 +31,6 @@ public interface SyndromeService {
 	Formula getSybdromeFormula(String syndromeName, SyndromeFormulaType formulaType);
 	
 	void saveSyndromeFormula(String syndormeName, SyndromeFormulaType formulaType, String formula);
+	
+	void removeSyndromeTemplateFromUser(String syndromeName, Long userId);
 }

@@ -3,8 +3,8 @@
 <div class="row">
 	<div id="breadcrumb" class="col-md-12">
 		<ol class="breadcrumb">
-<!-- 			<li><a href="/cabinet">Головна</a></li>
-			<li><a href="#">Профіль</a></li> -->
+ 			<li><a href="/admin">Головна</a></li>
+			<li><a href="#">Профіль</a></li> 
 		</ol>
 	</div>
 </div>
@@ -90,15 +90,15 @@
 				<div class="no-move"></div>
 			</div>
 			<div class="box-content">
-				<form id="defaultForm" method="POST"
-					action="/cabinet/profile/edit/password" class="form-horizontal">
+				<div id="defaultForm-password"
+					 class="form-horizontal">
 					<fieldset>
 						<legend></legend>
 
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Поточний пароль</label>
 							<div class="col-sm-5">
-								<input type="password" class="form-control" name="oldPassword"
+								<input type="password" name="oldPassword" class="form-control" name="oldPassword"
 									id="oldPassword" value="" />
 							</div>
 						</div>
@@ -106,13 +106,13 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Новий пароль</label>
 							<div class="col-sm-5">
-								<input type="password" class="form-control" id="password"/>
+								<input type="password" name="password" class="form-control" id="password"/>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Повторіть пароль</label>
 							<div class="col-sm-5">
-								<input type="password" class="form-control" id="confirmPassword"/>
+								<input type="password" name="confirmPassword" class="form-control" id="confirmPassword"/>
 							</div>
 						</div>
 					</fieldset>
@@ -120,10 +120,10 @@
 
 					<div class="form-group">
 						<div class="col-sm-11 col-sm-offset-3">
-							<button type="submit" class="btn btn-primary">Зберегти</button>
+							<button class="btn btn-primary" onClick="changePassword();">Зберегти</button>
 						</div>
 					</div>
-				</form>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -132,6 +132,33 @@
 	$(document).ready(function() {
 		$('.form-control').tooltip();
 		BootstrapValidatorScript(PatientValidator);
+		BootstrapValidatorScript(PasswordValidator);
 		WinMove();
 	});	
+	
+	function changePassword(){
+		var oldPassword = $("#oldPassword").val();
+		var password = $("#password").val();
+		$.ajax({
+			type : "post",
+			url : "/admin/change/password",
+			data: {
+				'oldPassword': oldPassword,
+				'password': password
+			},
+			success : function(response) {
+				if(response.toString() == 'true') {
+					alert('Пароль змінено успішно');
+					location.href = "/admin";
+				} else {
+					alert('Невірний поточний пароль');
+				}
+		
+			},
+			error: function (request, status, error) {
+				alert(error);
+		    }
+		} );
+		
+	}
 </script>

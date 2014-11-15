@@ -13,6 +13,7 @@ import com.immunology.logic.dao.UserDao;
 import com.immunology.logic.service.SyndromeService;
 import com.immunology.logic.utils.ReferenceHelper;
 import com.immunology.logic.utils.UserUtils;
+import com.immunology.logic.utils.enums.SyndromeFormulaType;
 import com.immunology.model.Syndrome;
 
 @Service
@@ -76,6 +77,14 @@ public class SyndromeServiceImpl implements SyndromeService {
 
 	public Syndrome getSyndromeByName(String syndromeName) {
 		return syndromeDao.findSyndrome(syndromeName);
+	}
+
+	public String getSybdromeFormula(String syndromeName, SyndromeFormulaType formulaType) {
+		return syndromeDao.getSyndromeFormula(syndromeName, formulaType);
+	}
+
+	public void saveSyndromeFormula(String syndormeName, SyndromeFormulaType formulaType, String formula) {
+		syndromeDao.saveSyndromeFormula(syndormeName, formulaType, formula);
 	}
 
 }

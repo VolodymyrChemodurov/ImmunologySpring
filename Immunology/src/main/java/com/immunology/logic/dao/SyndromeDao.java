@@ -2,6 +2,7 @@ package com.immunology.logic.dao;
 
 import java.util.List;
 
+import com.immunology.logic.utils.enums.SyndromeFormulaType;
 import com.immunology.model.Syndrome;
 
 public interface SyndromeDao {
@@ -23,4 +24,8 @@ public interface SyndromeDao {
 	Boolean updateSyndromeTemplate(String templateName, Syndrome syndrome);
 	
 	Syndrome findSyndrome(String templateName);
+	
+	String getSyndromeFormula(String syndromeName, SyndromeFormulaType formulaType);
+	
+	void saveSyndromeFormula(String syndromeName, SyndromeFormulaType formulaType, String formula);
 }

@@ -17,6 +17,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.immunology.logic.dao.GenericMongoDao;
 import com.immunology.logic.dao.SyndromeDao;
+import com.immunology.logic.utils.enums.SyndromeFormulaType;
 import com.immunology.model.Syndrome;
 import com.mongodb.WriteResult;
 
@@ -109,6 +110,17 @@ public class SyndromeDaoImpl extends GenericMongoDao<Syndrome> implements Syndro
 		Iterable<Syndrome> templates = collection.find(GET_TEMPLATE, templateName)
 				.projection("{_id: 0}").as(Syndrome.class);
 		return convertToList(templates).get(0);
+	}
+
+	public String getSyndromeFormula(String syndromeName, SyndromeFormulaType formula) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void saveSyndromeFormula(String syndromeName,
+			SyndromeFormulaType formulaType, String formula) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

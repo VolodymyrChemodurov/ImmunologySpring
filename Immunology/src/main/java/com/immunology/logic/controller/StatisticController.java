@@ -25,4 +25,15 @@ public class StatisticController {
 	public @ResponseBody List retrieveMedicalCardCreationStatistic() {
 		return statisticService.retrieveMedicalCardCreationStatistic();
 	}
+	
+	@RequestMapping(value = "/syndrome/by_patient", method = RequestMethod.GET)
+	public @ResponseBody List retrieveSyndromePatientStatistic() {
+		return statisticService.retrieveSyndromePatientStatistic();
+	}
+	
+	@RequestMapping(value = "/patient/by_sex", method = RequestMethod.GET)
+	public @ResponseBody List retrievePatientSexStatistic() {
+		return statisticService.retrievePatientSexStatistic();
+	}
+	
 }

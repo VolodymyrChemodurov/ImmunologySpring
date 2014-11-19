@@ -23,4 +23,6 @@ public interface SyndromeDao {
 	Boolean updateSyndromeTemplate(String templateName, Syndrome syndrome);
 	
 	Syndrome findSyndrome(String templateName);
+	
+	List retrieveSyndromePatientStatistic();
 }

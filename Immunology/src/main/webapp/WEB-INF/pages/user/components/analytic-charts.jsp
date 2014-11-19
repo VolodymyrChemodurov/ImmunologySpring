@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@	taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<script src="${param.baseURL}/resources/js/statistic.js"></script>
 <div class="row">
 	<div id="breadcrumb" class="col-md-12">
 		<ol class="breadcrumb">
@@ -27,7 +28,6 @@
 					<select id="typeofchart" class="form-control">
 						<option>Кругова діаграма</option>
 						<option>Стовпчикова діаграма</option>
-						<option>Гістограма</option>
 						<option>Графік</option>
 					</select>
 				</div>
@@ -80,7 +80,7 @@
 								<div class="box">
 									<div class="box-header">
 										<div class="box-name">
-											<span>Статистика віку</span>
+											<span>Статистика статі</span>
 										</div>
 										<div class="box-icons">
 											<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
@@ -90,14 +90,16 @@
 										</div>
 										<div class="no-move"></div>
 									</div>
-									<div class="box-content"></div>
+									<div class="box-content">
+										<div id="chart_patient_sex"></div>
+									</div>
 
 								</div>
 
 								<div class="box">
 									<div class="box-header">
 										<div class="box-name">
-											<span>Статистика хвороб</span>
+											<span>Статистика синдромів</span>
 										</div>
 										<div class="box-icons">
 											<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
@@ -107,7 +109,9 @@
 										</div>
 										<div class="no-move"></div>
 									</div>
-									<div class="box-content"></div>
+									<div class="box-content">
+										<div id="chart_syndrome_patient"></div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -214,83 +218,3 @@
 		</div>
 	</div>
 </div>
-
-
-<script type="text/javascript">
-	var typeOfChart;
-	function drawChartDateOfRegistration() {
-		var jsonData = $.ajax({
-			url : "/statistic/medical_cards/by_years",
-			dataType : "json",
-			async : false
-		}).responseText;
-		console.log(jsonData);
-	
-		var array =[ ['12','Smith'],['13', 'Jones']];
-		jsonData = $.parseJSON(jsonData);
-		jsonData.sort(function(a, b) {
-			var a1 = a[1], b1 = b[1];
-			if (a1 == b1)
-				return 0;
-			return a1 > b1 ? 1 : -1;
-		});
-
-		var data = new google.visualization.DataTable();
-		data.addColumn({
-			"type" : "number",
-			"label" : "Years"
-		});
-		data.addColumn({
-			"type" : "number",
-			"label" : "Amount"
-		});
-
-		data.addRows(jsonData);
-		var options = {
-			width : '50%',
-			height : 350,
-		};
-		var dataView = new google.visualization.DataView(data);
-		dataView.setColumns([ {
-			calc : function(data, row) {
-				return data.getFormattedValue(row, 0);
-			},
-			type : 'string'
-		}, 1 ]);
-
-		var pieChart = new google.visualization.PieChart(document
-				.getElementById('chart_dateofregistration'));
-
-		var histogram = new google.visualization.Histogram(document
-				.getElementById('chart_dateofregistration'));
-
-		var columnChart = new google.visualization.ColumnChart(document
-				.getElementById('chart_dateofregistration'));
-
-		var lineChart = new google.visualization.LineChart(document
-				.getElementById('chart_dateofregistration'));
-
-		if (typeOfChart.trim() == 'Кругова діаграма') {
-			pieChart.draw(dataView, options);
-		} else if (typeOfChart.trim() == 'Стовпчикова діаграма') {
-			columnChart.draw(dataView, options);
-		} else if (typeOfChart.trim() == 'Гістограма') {
-			histogram.draw(dataView, options);
-		} else if (typeOfChart.trim() == 'Графік') {
-			lineChart.draw(dataView, options);
-		}
-	}
-
-	$("#select_chart_button").click(function() {
-		typeOfChart = $('#typeofchart').val();
-		google.load("visualization", "1", {
-			packages : [ "corechart" ],
-			callback : drawChartDateOfRegistration
-		});
-	});
-
-	$(document).ready(function() {
-		$("#tabs").tabs();
-
-	});
-</script>

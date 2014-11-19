@@ -98,6 +98,7 @@
 						<li><a href="#tabs-1">Скарги</a></li>
 						<li><a href="#tabs-2">Клінічні прояви</a></li>
 						<li><a href="#tabs-3">Лабораторні дані</a></li>
+						<li><a href="#tabs-4">Препарат</a></li>
 					</ul>
 					<div id="tabs-1">
 						<div id="complaints" class="form-container" ></div>
@@ -107,6 +108,11 @@
 					</div>
 					<div id="tabs-3">
 						<div id="laboratoryData" class="form-container">
+					</div>
+					<div id="tabs-4">
+						<div>
+
+						</div>
 					</div>
 					</div>
 				</div>

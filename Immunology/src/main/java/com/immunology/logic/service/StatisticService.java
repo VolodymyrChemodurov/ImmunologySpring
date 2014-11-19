@@ -5,4 +5,6 @@ import java.util.List;
 public interface StatisticService {
 
 	List retrieveMedicalCardCreationStatistic();
+	List retrieveSyndromePatientStatistic();
+	List retrievePatientSexStatistic();
 }

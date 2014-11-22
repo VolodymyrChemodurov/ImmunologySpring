@@ -1,5 +1,6 @@
 package com.immunology.logic.service.impl;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +12,12 @@ import com.immunology.logic.dao.CrudDao;
 import com.immunology.logic.dao.SyndromeDao;
 import com.immunology.logic.dao.UserDao;
 import com.immunology.logic.service.SyndromeService;
+import com.immunology.logic.service.calculation.FormulaBuilder;
 import com.immunology.logic.utils.ReferenceHelper;
 import com.immunology.logic.utils.UserUtils;
+import com.immunology.logic.utils.enums.FormulaType;
 import com.immunology.model.Syndrome;
+import com.immunology.model.calculation.Formula;
 
 @Service
 public class SyndromeServiceImpl implements SyndromeService {
@@ -78,4 +82,36 @@ public class SyndromeServiceImpl implements SyndromeService {
 		return syndromeDao.findSyndrome(syndromeName);
 	}
 
+	public Formula getSybdromeFormula(String syndromeName, FormulaType formulaType) {
+		Syndrome syndrome = syndromeDao.findSyndrome(syndromeName);
+		Formula formula = null;
+		if(syndrome.getFormulas() != null) {
+			for(Formula currentFormula: syndrome.getFormulas()) {
+				if(currentFormula.getType().equals(formulaType)) {
+					formula = currentFormula;
+					break;
+				}
+			}
+		}
+		return formula;
+	}
+
+	public void saveSyndromeFormula(String syndoromeName, FormulaType formulaType, String formulaExpression) {
+		Syndrome syndrome = syndromeDao.findSyndrome(syndoromeName);
+		Formula formula = new FormulaBuilder().expression(formulaExpression).formulaType(formulaType).syndrome(syndrome).build();
+		syndrome.getFormulas().add(formula);
+		syndromeDao.updateSyndromeTemplate(syndoromeName, syndrome);
+	}
+
+	public void removeSyndromeTemplateFromUser(String syndromeName, Long userId) {
+		Syndrome syndrome = syndromeDao.findSyndrome(syndromeName);
+		List<com.immunology.model.User> users = syndrome.getUsers();
+		Iterator<com.immunology.model.User> iterator = users.iterator();
+		while(iterator.hasNext()) {
+			if(iterator.next().getId() == userId) {
+				iterator.remove();
+			}
+		}
+		syndromeDao.updateSyndromeTemplate(syndromeName, syndrome);
+	}
 }

@@ -2,7 +2,9 @@ package com.immunology.logic.service;
 
 import java.util.List;
 
+import com.immunology.logic.utils.enums.FormulaType;
 import com.immunology.model.Syndrome;
+import com.immunology.model.calculation.Formula;
 
 public interface SyndromeService {
 
@@ -25,4 +27,10 @@ public interface SyndromeService {
 	Boolean wireUserToSyndromeTemplate(String syndromeName, Long userId);
 	
 	Syndrome getSyndromeByName(String syndromeName);
+	
+	Formula getSybdromeFormula(String syndromeName, FormulaType formulaType);
+	
+	void saveSyndromeFormula(String syndormeName, FormulaType formulaType, String formula);
+	
+	void removeSyndromeTemplateFromUser(String syndromeName, Long userId);
 }

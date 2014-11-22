@@ -29,9 +29,8 @@ public class SyndromeDaoImpl extends GenericMongoDao<Syndrome> implements Syndro
 	private static final String GET_USER_TEMPLATE_BY_NAME = "{'users.id':#, 'name':'#'}";
 	private static final String GET_SYNDROME_NAMES = "{}";
 	private static final String GET_TEMPLATE = "{'name':#}";
-	
 	private static final String GET_PATIENT_SYNDROME = "SELECT syndrome FROM Syndrome syndrome WHERE syndrome.name = :name AND syndrome.patient.id = :id";
-	private static final String SYNDROME_PATIENT_STATISTIC = "SELECT disease_name, COUNT (patient_id) FROM diseases GROUP BY disease_name";
+	
 	@PersistenceContext
 	EntityManager entityManager;
 	
@@ -109,10 +108,6 @@ public class SyndromeDaoImpl extends GenericMongoDao<Syndrome> implements Syndro
 		Iterable<Syndrome> templates = collection.find(GET_TEMPLATE, templateName)
 				.projection("{_id: 0}").as(Syndrome.class);
 		return convertToList(templates).get(0);
-	}
-	
-	public List retrieveSyndromePatientStatistic() {
-		return entityManager.createNativeQuery( SYNDROME_PATIENT_STATISTIC).getResultList();
 	}
 
 }

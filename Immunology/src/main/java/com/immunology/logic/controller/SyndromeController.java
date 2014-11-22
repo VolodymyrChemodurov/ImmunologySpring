@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.immunology.logic.service.PatientService;
@@ -20,8 +21,11 @@ import com.immunology.logic.service.SyndromeService;
 import com.immunology.logic.service.UserService;
 import com.immunology.logic.utils.URIUtils;
 import com.immunology.logic.utils.UserUtils;
+import com.immunology.logic.utils.calculation.CalculationHelper;
+import com.immunology.logic.utils.enums.FormulaType;
 import com.immunology.model.Patient;
 import com.immunology.model.Syndrome;
+import com.immunology.model.calculation.Formula;
 
 @Controller
 @RequestMapping(value = "/syndromes")
@@ -100,5 +104,33 @@ public class SyndromeController {
 	public @ResponseBody Syndrome getSyndromeByName(@PathVariable("name") String templateName, HttpServletRequest request) {
 		return syndromeService.getSyndromeByName(URIUtils.decodePathVariable(request.getRequestURI(), 2));
 	}
+
+	@RequestMapping(value = "/template/{name}/user/{id}", method = RequestMethod.DELETE)
+	public @ResponseBody Boolean removeSyndromeTemplateFromUser(@PathVariable("name") String syndromeName, @PathVariable("id") Long userId, HttpServletRequest request) {
+		syndromeService.removeSyndromeTemplateFromUser(URIUtils.decodePathVariable(request.getRequestURI(), 2), userId);
+		return true;
+	}
 	
+	@RequestMapping(value = "/template/{name}/{formulaType}", method = RequestMethod.GET)
+	public @ResponseBody String getSyndromeSeverityLevelFormula(@PathVariable("formulaType") String formulaType, HttpServletRequest request) {
+		String decodedSyndromeName = URIUtils.decodePathVariable(request.getRequestURI(), 2);
+		Formula result = syndromeService.getSybdromeFormula(decodedSyndromeName, FormulaType.getByName(formulaType));
+		if(result != null) {
+			return result.getFormulaExpression();
+		} else {
+			return null;
+		}
+	}
+
+	@RequestMapping(value = "/template/{name}/{formulaType}", method = RequestMethod.POST)
+	public @ResponseBody Boolean saveSyndromeSeverityLevelFormula(@RequestParam("formula") String formula, @PathVariable("formulaType") String formulaType, HttpServletRequest request) {
+		boolean result = false;
+		if(CalculationHelper.validateFormula(formula)) {
+			String decodedSyndromeName = URIUtils.decodePathVariable(request.getRequestURI(), 2);
+			syndromeService.saveSyndromeFormula(decodedSyndromeName, FormulaType.getByName(formulaType), formula);
+			result = true;
+		}
+		return result;
+	}
+
 }

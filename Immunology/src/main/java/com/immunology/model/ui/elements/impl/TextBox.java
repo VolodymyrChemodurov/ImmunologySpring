@@ -35,7 +35,6 @@ public class TextBox extends Element implements Computable {
 		return multiplier;
 	}
 
-	@JsonIgnore
 	public void setMultiplier(Double multiplier) {
 		this.multiplier = multiplier;
 	}

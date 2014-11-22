@@ -2,14 +2,18 @@ package com.immunology.logic.controller;
 
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.immunology.logic.service.PatientService;
@@ -26,6 +30,9 @@ public class CabinetController {
 	
 	@Autowired
 	PatientService patientService;
+	
+	@Autowired
+	private PasswordEncoder encoder; 
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String cabinet(Model model) {
@@ -48,9 +55,10 @@ public class CabinetController {
     }
 	
 	@RequestMapping(value="/profile",  method=RequestMethod.GET)
-    public String getMyProfile(Model model) {
+    public String getMyProfile(Model model, HttpServletRequest request) {
 		User user = UserUtils.getCurrentUser();
 		model.addAttribute("user", userService.getUserByLogin(user.getUsername()));
+		String result = (String)request.getAttribute("result");
         return "user/components/profile";
     }
 	
@@ -66,5 +74,18 @@ public class CabinetController {
 
 		return "redirect:/cabinet";
     }
+	
+	@RequestMapping(value="/change/password",  method=RequestMethod.POST)
+    public @ResponseBody Boolean changePassword(Model model, @RequestParam String password, @RequestParam String oldPassword) {
+		User user = UserUtils.getCurrentUser();
+		com.immunology.model.User immunologyUser = userService.getUserByLogin(user.getUsername());
+		boolean match = encoder.matches(oldPassword, immunologyUser.getPassword());
+		if(match){
+			immunologyUser.setPassword(encoder.encode(password));
+			userService.updateUser(immunologyUser);
+			
+		}
+		return match;
+	}
 	
 }

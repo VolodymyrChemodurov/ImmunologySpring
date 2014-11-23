@@ -2,8 +2,10 @@ package com.immunology.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -11,6 +13,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.immunology.model.ui.EfficacyData;
 
 @Entity
@@ -29,7 +32,8 @@ public class Drug {
 	@Column(name = "name")
 	private String name;
 	
-	@ManyToMany
+	@JsonIgnore
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name="drug_efficacy_data", 
 		joinColumns={@JoinColumn(name="drug_id")}, 
 		inverseJoinColumns={@JoinColumn(name="efficacy_data_id")})
@@ -78,6 +82,12 @@ public class Drug {
 
 	public void setEfficacyData(List<EfficacyData> efficacyData) {
 		this.efficacyData = efficacyData;
+	}
+
+	@Override
+	public String toString() {
+		return "Drug [id=" + id + ", species=" + species + ", type=" + type
+				+ ", name=" + name + ", efficacyData=" + efficacyData + "]";
 	}
 
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 
 import com.immunology.logic.dao.MedicalCardFormDao;
 import com.immunology.logic.dao.PatientDao;
+import com.immunology.logic.dao.SurveyDao;
 import com.immunology.logic.dao.SyndromeDao;
 import com.immunology.logic.service.StatisticService;
 
@@ -19,6 +20,8 @@ public class StatisticServiceImpl implements StatisticService {
 	private SyndromeDao  syndromeDao;
 	@Autowired
 	private PatientDao patientDao;
+	@Autowired
+	private SurveyDao surveyDao;
 	
 	public List retrieveMedicalCardCreationStatistic() {
 		return medicalCardDao.retrieveMedicalCardCreationStatistic();
@@ -30,6 +33,10 @@ public class StatisticServiceImpl implements StatisticService {
 	
 	public List retrievePatientSexStatistic(){
 		return patientDao.retrievePatientSexStatistic();
+	}
+	
+	public List  retrieveInsufficiency(long userId){
+		return surveyDao.retrieveInsufficiency(userId);
 	}
 	
 }

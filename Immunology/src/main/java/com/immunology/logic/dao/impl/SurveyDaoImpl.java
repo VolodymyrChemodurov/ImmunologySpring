@@ -3,6 +3,8 @@ package com.immunology.logic.dao.impl;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,12 +20,17 @@ import com.immunology.model.Survey;
 public class SurveyDaoImpl extends GenericMongoDao<Survey> implements SurveyDao {
 
 	private static final String SURVEYS_TEMPLATES_COLLECTION = "surveys";
+
 	private static final Logger LOG = LoggerFactory.getLogger(SurveyDaoImpl.class);
 	
 	@PostConstruct
 	public void init() {
 		super.init(SURVEYS_TEMPLATES_COLLECTION);
 	}
+	
+	@PersistenceContext
+	private EntityManager em;
+
 	
 	public boolean createSurveyTemplate(Survey formTemplate) {
 		boolean saveResult = false;
@@ -43,4 +50,8 @@ public class SurveyDaoImpl extends GenericMongoDao<Survey> implements SurveyDao 
 		return convertToList(templates);
 	}
 	
+	public List  retrieveInsufficiency(long userId) {
+		System.out.println("id"+userId);
+		return em.createNativeQuery("SELECT insufficiency_level,to_char(creation_date,'DD-MM-YYYY') FROM surveys WHERE user_id = :user_id").setParameter("user_id", userId).getResultList();
+		}
 }

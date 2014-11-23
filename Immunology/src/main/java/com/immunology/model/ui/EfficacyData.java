@@ -2,17 +2,16 @@ package com.immunology.model.ui;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
 import com.immunology.model.Drug;
 
@@ -43,8 +42,7 @@ public class EfficacyData {
 	
 
 	
-	@ManyToMany(mappedBy = "efficacyData")
-	@LazyCollection(LazyCollectionOption.FALSE)
+	@ManyToMany(fetch = FetchType.EAGER,mappedBy = "efficacyData", cascade = CascadeType.ALL)
 	private List<Drug> drugs;
 	
 	public DrugTolerance getDrugTolerance() {

@@ -261,19 +261,21 @@ jsp
 		$("#newSurveyButton").click(
 				function() {
 					if ($("#syndrom").val() != null) {
-						window.location.href = '/survey/patientId/'
+						var href = 'survey/patientId/'
 								+ $("#patient_id").val() + '/syndrome/'
 								+ $('#syndrom').val();
+						doAjaxGet(href);
 					}
 				});
 	}
 	function initSurveyRowesEvent() {
 		$(".surveyRow").click(
 				function() {
-					window.location.href = '/survey/edit/patientId/'
+					var href = 'survey/edit/patientId/'
 							+ $("#patient_id").val() + '/surveyId/'
 							+ $(this).attr("surveyId") + '/syndrome/'
 							+ $('#syndrom').val();
+					doAjaxGet(href);
 				});
 		$('.efficiency').click(function() {
 			$('#efficiency-modal').modal('show');

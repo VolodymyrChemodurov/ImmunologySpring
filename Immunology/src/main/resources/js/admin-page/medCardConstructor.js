@@ -9,6 +9,12 @@ var order = {
 
 function init(){
 	getResouces(getMedCardUrl);
+	
+	if(formObject == null){
+		formObject = {};
+		formObject["panels"] = [];
+		formObject["objectType"] = "MedicalCardForm";
+	}
 	console.log("->MED.CARD AFTER getResources");
 	console.log(formObject);
 }
@@ -30,7 +36,30 @@ function initSurveyForm(syndromName){
 		console.log("Show Laboratory Data Form");
 		getLaboratoryResouces(getSyndromUrl.replace('{name}',syndromName));
 	}
-	
+	if(formType == "morphologicalData"){
+		console.log("Show Morphological Data Form");
+		getMorphologicalDataResouces(getSyndromUrl.replace('{name}',syndromName));
+	}
+	if(formType == "instrumentalData"){
+		console.log("Show Morphological Data Form");
+		getInstrumentalDataResouces(getSyndromUrl.replace('{name}',syndromName));
+	}
+	if(formType == "diagnosisVerificationData"){
+		console.log("Show Diagnosis Verification Data Form");
+		getDiagnosisVerificationDataResouces(getSyndromUrl.replace('{name}',syndromName));
+	}
+	if(formType == "mainTreatmentData"){
+		console.log("Show Main Treatment Data Form");
+		getMainTreatmentDataResouces(getSyndromUrl.replace('{name}',syndromName));
+	}
+	if(formType == "rehabilitationData"){
+		console.log("Show Main Rehabilitation Data Form");
+		getRehabilitationDataResouces(getSyndromUrl.replace('{name}',syndromName));
+	}
+	if(formType == "preventiveMeasuresData"){
+		console.log("Show PreventiveMeasures Data Data Form");
+		getPreventiveMeasuresDataResouces(getSyndromUrl.replace('{name}',syndromName));
+	}
 }
 
 function getAnamnesticResouces(url){
@@ -150,6 +179,182 @@ function getLaboratoryResouces(url){
 	});
 }
 
+function getMorphologicalDataResouces(url){
+	$.ajax({
+		type : "get",
+		url : url,
+		dataType : "json",
+		async:   false,
+		success : function(response) {
+			syndrom = response;
+			console.log(syndrom);
+			if(response.surveys[0].morphologicalData == null){
+				formObject = {};
+				formObject["panels"] = [];
+				formObject["objectType"] = "MorphologicalData";
+			}else{
+				formObject = response.surveys[0].morphologicalData;
+			}
+			if(formObject != null){
+				initPanelNames();
+				renderPreviewMedForm();
+				initOrderValues(formObject);
+			}
+		},
+		error: function (request, status, error) {
+			alert("Error in MorphologicalData data");
+			alert(error);
+	    }
+
+	});
+}
+function getInstrumentalDataResouces(url){
+	$.ajax({
+		type : "get",
+		url : url,
+		dataType : "json",
+		async:   false,
+		success : function(response) {
+			syndrom = response;
+			console.log(syndrom);
+			if(response.surveys[0].instrumentalData == null){
+				formObject = {};
+				formObject["panels"] = [];
+				formObject["objectType"] = "InstrumentalData";
+			}else{
+				formObject = response.surveys[0].instrumentalData;
+			}
+			if(formObject != null){
+				initPanelNames();
+				renderPreviewMedForm();
+				initOrderValues(formObject);
+			}
+		},
+		error: function (request, status, error) {
+			alert("Error in Instrumental data");
+			alert(error);
+	    }
+
+	});
+}
+function getDiagnosisVerificationDataResouces(url){
+	$.ajax({
+		type : "get",
+		url : url,
+		dataType : "json",
+		async:   false,
+		success : function(response) {
+			syndrom = response;
+			console.log(syndrom);
+			if(response.surveys[0].diagnosisVerificationData == null){
+				formObject = {};
+				formObject["panels"] = [];
+				formObject["objectType"] = "DiagnosisVerificationData";
+			}else{
+				formObject = response.surveys[0].diagnosisVerificationData;
+			}
+			if(formObject != null){
+				initPanelNames();
+				renderPreviewMedForm();
+				initOrderValues(formObject);
+			}
+		},
+		error: function (request, status, error) {
+			alert("Error in Diagnosis Verification data");
+			alert(error);
+	    }
+
+	});
+}
+
+function getMainTreatmentDataResouces(url){
+	$.ajax({
+		type : "get",
+		url : url,
+		dataType : "json",
+		async:   false,
+		success : function(response) {
+			syndrom = response;
+			console.log(syndrom);
+			if(response.surveys[0].mainTreatmentData == null){
+				formObject = {};
+				formObject["panels"] = [];
+				formObject["objectType"] = "MainTreatmentData";
+			}else{
+				formObject = response.surveys[0].mainTreatmentData;
+			}
+			if(formObject != null){
+				initPanelNames();
+				renderPreviewMedForm();
+				initOrderValues(formObject);
+			}
+		},
+		error: function (request, status, error) {
+			alert("ERROR: Error in Main Treatmentdata");
+			alert(error);
+	    }
+
+	});
+}
+function getRehabilitationDataResouces(url){
+	$.ajax({
+		type : "get",
+		url : url,
+		dataType : "json",
+		async:   false,
+		success : function(response) {
+			syndrom = response;
+			console.log(syndrom);
+			if(response.surveys[0].rehabilitationData == null){
+				formObject = {};
+				formObject["panels"] = [];
+				formObject["objectType"] = "RehabilitationData";
+			}else{
+				formObject = response.surveys[0].rehabilitationData;
+			}
+			if(formObject != null){
+				initPanelNames();
+				renderPreviewMedForm();
+				initOrderValues(formObject);
+			}
+		},
+		error: function (request, status, error) {
+			alert("ERROR: Error in Rehabilitation Data");
+			alert(error);
+	    }
+
+	});
+}
+function getPreventiveMeasuresDataResouces(url){
+	$.ajax({
+		type : "get",
+		url : url,
+		dataType : "json",
+		async:   false,
+		success : function(response) {
+			syndrom = response;
+			console.log(syndrom);
+			if(response.surveys[0].preventiveMeasuresData == null){
+				formObject = {};
+				formObject["panels"] = [];
+				formObject["objectType"] = "PreventiveMeasuresData";
+			}else{
+				formObject = response.surveys[0].preventiveMeasuresData;
+			}
+			if(formObject != null){
+				initPanelNames();
+				renderPreviewMedForm();
+				initOrderValues(formObject);
+			}
+		},
+		error: function (request, status, error) {
+			alert("ERROR: Error in Preventive Measures Data");
+			alert(error);
+	    }
+
+	});
+}
+
 function getResouces(){
 	$.ajax({
 		type : "get",
@@ -209,6 +414,8 @@ function renderPreviewMedForm(){
 
 
 function saveMedicalCard() {
+	console.log("INFO: Saving medical card")
+	conole.log(formObject);
 	$.ajax({
 		  type:"POST", 
 	      url:"/patients/medical_card",
@@ -402,12 +609,45 @@ function initEvents(){
 			syndrom.surveys[0].laboratoryDataForm = formObject;
 			saveSyndromData(syndrom);
 		}
-		
+//		MORPHOLOGICAL_DATA : "MorphologicalData",
+//		INSTRUMENTAL_DATA : "InstrumentalData",
+//		DIAGNOSIS_VERIFICATION_DATA: "DiagnosisVerificationData",
+//		MAIN_TREATMENT_DATA : "MainTreatmentData",
+//		REHABILITATION_DATA : "RehabilitationData",
+//		PREVENTIVE_MEASURES_DATA : "PreventiveMeasuresData"
+		if(formObject.objectType == "MorphologicalData"){
+			syndrom.surveys[0].morphologicalData = formObject;
+			saveSyndromData(syndrom);
+		}
+		if(formObject.objectType == "InstrumentalData"){
+			syndrom.surveys[0].instrumentalData = formObject;
+			saveSyndromData(syndrom);
+		}
+		if(formObject.objectType == "DiagnosisVerificationData"){
+			syndrom.surveys[0].diagnosisVerificationData = formObject;
+			saveSyndromData(syndrom);
+		}
+		if(formObject.objectType == "MainTreatmentData"){
+			syndrom.surveys[0].mainTreatmentData = formObject;
+			saveSyndromData(syndrom);
+		}
+		if(formObject.objectType == "RehabilitationData"){
+			syndrom.surveys[0].rehabilitationData = formObject;
+			saveSyndromData(syndrom);
+		}
+		if(formObject.objectType == "PreventiveMeasuresData"){
+			syndrom.surveys[0].preventiveMeasuresData = formObject;
+			saveSyndromData(syndrom);
+		}
 		
 	});
 	
 }
 function saveMedicalCard() {
+	
+	console.log("INFO: Saving medical card ")
+	console.log(formObject);
+	
 	$.ajax({
 		  type:"POST", 
 	      url:"/patients/medical_card",

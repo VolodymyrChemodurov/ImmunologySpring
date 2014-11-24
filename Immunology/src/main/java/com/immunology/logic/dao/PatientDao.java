@@ -6,6 +6,7 @@ import com.immunology.model.Patient;
 
 public interface PatientDao {
 
-	
 	List<Patient> fingByUserId(long userId);
+
+	List retrievePatientSexStatistic();
 }

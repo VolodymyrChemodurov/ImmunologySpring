@@ -53,7 +53,6 @@ public class PatientController {
 	public String createNewPatinet(Patient patient, Model model, HttpServletResponse response) {	
 		User currentUser = UserUtils.getCurrentUser();
 		com.immunology.model.User user = userService.getUserByLogin(currentUser.getUsername());
-		//patient.addUser(user);
 		user.getPatients().add(patient);
 		MedicalCardForm medicalCard = medicalCardService.getMedicalCardTemplate();
 		medicalCard.setCreationDate(new Date());

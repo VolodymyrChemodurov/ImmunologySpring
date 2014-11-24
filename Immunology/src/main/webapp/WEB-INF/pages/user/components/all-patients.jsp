@@ -55,7 +55,7 @@
 							<td class="custom-size">
 									<c:if test="${!patient.value}">
 										<button class="btn btn-primary btn-table"
-											onclick="doAjaxPost('patients/${patient.key.id}')">Додати</button>
+											onclick="addPatient(${patient.key.id})">Додати</button>
 									</c:if>
 								</td>
 							</tr>
@@ -100,5 +100,23 @@
 		// Add Drag-n-Drop feature
 		WinMove();
 	});
+	
+	function addPatient(id){
+		var patient = "patients/"+id;
+		$.ajax({
+			type : "post",
+			url : patient,
+			success : function(response) {
+				/* alert(patient); */
+				location.href = "/cabinet";
+			}, 
+			
+			error: function (request, status, error) {
+				alert(error);
+		    }
+
+		});
+	
+	}
 </script>
 </html>

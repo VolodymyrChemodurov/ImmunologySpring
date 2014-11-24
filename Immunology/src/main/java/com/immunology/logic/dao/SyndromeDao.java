@@ -24,4 +24,6 @@ public interface SyndromeDao {
 	
 	Syndrome findSyndrome(String templateName);
 	
+	List retrieveSyndromePatientStatistic();
+	
 }

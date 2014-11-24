@@ -29,8 +29,9 @@
 						<li><a href="#tabs-4">Морфологічні дані</a></li>
 						<li><a href="#tabs-5">Інструментальні дані</a></li>
 						<li><a href="#tabs-6">Верифікація діагнозу</a></li>
-						<li><a href="#tabs-7">ЛТ</a></li>
+						<li><a href="#tabs-7">ЛТ</a></li>			
 						
+
 					</ul>
 					<div id="tabs-1">
 						<div id="complaints" class="form-container" ></div>
@@ -56,7 +57,7 @@
 									<li><a href="#sub-tabs-1">Основне лікування</a></li>
 									<li><a href="#sub-tabs-2">Реабілітація</a></li>
 									<li><a href="#sub-tabs-3">Профілактичні заходи</a></li>
-									
+									<li><a href="#sub-tabs-4"> Препарат </a></li>
 								</ul>
 								<div id="sub-tabs-1">
 									<div id="mainTreatmentData" class="form-container" ></div>
@@ -67,8 +68,14 @@
 								<div id="sub-tabs-3">
 									<div id="preventiveMeasuresData" class="form-container"></div>
 								</div>
+								<div id="sub-tabs-4">
+									<div>
+			
+									</div>
+								</div>
 							</div>
 					</div>
+					
 					</div>
 				</div>
 			</div>

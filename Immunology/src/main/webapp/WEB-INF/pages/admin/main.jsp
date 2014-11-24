@@ -72,7 +72,13 @@
 									<li><a class="ajax-link" href="#"  data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'comlaints'">Complaints Form</a></li>
 									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'clinicalManifestation'" >Clinical Manifestation Form</a></li>
 									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'laboratoryData'" >Laboratory Data Form</a></li>
-	
+									
+									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'morphologicalData'" >Morphological Data</a></li>
+									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'instrumentalData'" >Instrumental Data</a></li>
+									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'diagnosisVerificationData'" >DiagnosisVerificationData Form</a></li>
+									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'mainTreatmentData'" >Main Treatment Data Form</a></li>
+									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'rehabilitationData'" >Rehabilitation Data Form</a></li>
+									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'preventiveMeasuresData'" >Preventive Measures Data Form</a></li>
 								</ul>
 							</li>
 						</li>
@@ -265,7 +271,50 @@
 			 laboratoryDataForm["panels"] = [];
 			 laboratoryDataForm["objectType"] = "LaboratoryDataForm";
 			 survey.laboratoryDataForm = laboratoryDataForm;
+			 
+			 survey["morphologicalData"]= {};
+			 var morphologicalData = {};
+			 laboratoryDataForm["name"] = "";
+			 laboratoryDataForm["panels"] = [];
+			 laboratoryDataForm["objectType"] = "MorphologicalData";
+			 survey.laboratoryDataForm = morphologicalData;
+			 
+			 survey["instrumentalData"]= {};
+			 var instrumentalData = {};
+			 laboratoryDataForm["name"] = "";
+			 laboratoryDataForm["panels"] = [];
+			 laboratoryDataForm["objectType"] = "InstrumentalData";
+			 survey.instrumentalData = instrumentalData;
+			 
+			 survey["diagnosisVerificationData"]= {};
+			 var diagnosisVerificationData = {};
+			 laboratoryDataForm["name"] = "";
+			 laboratoryDataForm["panels"] = [];
+			 laboratoryDataForm["objectType"] = "DiagnosisVerificationData";
+			 survey.diagnosisVerificationData = diagnosisVerificationData;
+			 
+			 survey["mainTreatmentData"]= {};
+			 var mainTreatmentData = {};
+			 laboratoryDataForm["name"] = "";
+			 laboratoryDataForm["panels"] = [];
+			 laboratoryDataForm["objectType"] = "MainTreatmentData";
+			 survey.mainTreatmentData = mainTreatmentData;
+			 
+			 survey["rehabilitationData"]= {};
+			 var rehabilitationData = {};
+			 laboratoryDataForm["name"] = "";
+			 laboratoryDataForm["panels"] = [];
+			 laboratoryDataForm["objectType"] = "RehabilitationData";
+			 survey.rehabilitationData = rehabilitationData;
+			 
+			 survey["preventiveMeasuresData"]= {};
+			 var preventiveMeasuresData = {};
+			 laboratoryDataForm["name"] = "";
+			 laboratoryDataForm["panels"] = [];
+			 laboratoryDataForm["objectType"] = "PreventiveMeasuresData";
+			 survey.preventiveMeasuresData = preventiveMeasuresData;
 			
+			 
 			 newSyndromObject.surveys.push(survey);
 			 //response.surveys.push(survey);
 			

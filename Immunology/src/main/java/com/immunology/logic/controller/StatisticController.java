@@ -28,7 +28,7 @@ public class StatisticController {
 			.getLogger(StatisticController.class);
 
 	private String nameOfDrugs;
-	private long userId;
+	private long patientId;
 
 	@Autowired
 	private StatisticService statisticService;
@@ -53,9 +53,13 @@ public class StatisticController {
 	
 	@RequestMapping(value = "/user/insufficiency", method = RequestMethod.GET)
 	public @ResponseBody List retrieveInsufficiency() {
-		return statisticService.retrieveInsufficiency(userId);
+		return statisticService.retrieveInsufficiency(patientId);
 	}
 
+	@RequestMapping(value = "/user/severity", method = RequestMethod.GET)
+	public @ResponseBody List retrieveSeverity() {
+		return statisticService.retrieveSeverity(patientId);
+	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String showPatient(ModelMap model, @PathVariable("id") int number) {
@@ -83,12 +87,11 @@ public class StatisticController {
 
 	@RequestMapping(value = "/userId", method = RequestMethod.POST)
 	public @ResponseBody Boolean getUserId(Model model,
-			@RequestParam long userId) {
-		if (userId == 0) {
+			@RequestParam long patientId) {
+		if (patientId == 0) {
 			return false;
 		} else {
-			this.userId = userId;
-			System.out.println(userId);
+			this.patientId = patientId;
 			return true;
 		}
 	}

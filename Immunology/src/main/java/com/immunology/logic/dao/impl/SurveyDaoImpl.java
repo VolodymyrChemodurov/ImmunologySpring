@@ -50,8 +50,11 @@ public class SurveyDaoImpl extends GenericMongoDao<Survey> implements SurveyDao 
 		return convertToList(templates);
 	}
 	
-	public List  retrieveInsufficiency(long userId) {
-		System.out.println("id"+userId);
-		return em.createNativeQuery("SELECT insufficiency_level,to_char(creation_date,'DD-MM-YYYY') FROM surveys WHERE user_id = :user_id").setParameter("user_id", userId).getResultList();
+	public List  retrieveInsufficiency(long patientId) {
+		return em.createNativeQuery("SELECT insufficiency_level,to_char(creation_date,'DD-MM-YYYY') FROM surveys JOIN diseases ON  surveys.disease_id=diseases.id WHERE patient_id = :patient_id").setParameter("patient_id", patientId).getResultList();
 		}
+	
+	public List retrieveSeverity(long patientId){
+		return em.createNativeQuery("SELECT severity_level,to_char(creation_date,'DD-MM-YYYY') FROM surveys JOIN diseases ON  surveys.disease_id=diseases.id WHERE patient_id = :patient_id").setParameter("patient_id", patientId).getResultList();	
+	}
 }

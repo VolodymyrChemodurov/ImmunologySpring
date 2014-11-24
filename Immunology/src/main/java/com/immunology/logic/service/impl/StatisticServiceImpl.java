@@ -35,8 +35,11 @@ public class StatisticServiceImpl implements StatisticService {
 		return patientDao.retrievePatientSexStatistic();
 	}
 	
-	public List  retrieveInsufficiency(long userId){
-		return surveyDao.retrieveInsufficiency(userId);
+	public List  retrieveInsufficiency(long patientId){
+		return surveyDao.retrieveInsufficiency(patientId);
 	}
 	
+	public List  retrieveSeverity(long patientId){
+		return surveyDao.retrieveSeverity(patientId);
+	}
 }

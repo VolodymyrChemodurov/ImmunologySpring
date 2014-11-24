@@ -2,6 +2,8 @@ var typeOfChart;
 
 var typeOfDrugs;
 
+var patientId=0;
+
 function drawChartDateOfRegistration() {
 	var jsonData = $.ajax({
 		url : "/statistic/medical_cards/by_years",
@@ -24,7 +26,7 @@ function drawChartDateOfRegistration() {
 
 	data.addRows(jsonData);
 	var options = {
-		width : '50%',
+		width : 1492,
 		height : 350,
 	};
 	var dataView = new google.visualization.DataView(data);
@@ -56,7 +58,7 @@ function drawSyndromePatient() {
 
 	data.addRows($.parseJSON(jsonData));
 	var options = {
-		width : '50%',
+		width : 1492,
 		height : 350,
 	};
 	var dataView = new google.visualization.DataView(data);
@@ -88,7 +90,7 @@ function drawPatientSex() {
 
 	data.addRows($.parseJSON(jsonData));
 	var options = {
-		width : '50%',
+		width : 1492,
 		height : 350,
 	};
 	var dataView = new google.visualization.DataView(data);
@@ -122,7 +124,7 @@ function drawInsufficiency() {
 
 	data.addRows($.parseJSON(jsonData));
 	var options = {
-		width : '50%',
+		width : 1492,
 		height : 350,
 	};
 	var dataView = new google.visualization.DataView(data);
@@ -134,6 +136,41 @@ function drawInsufficiency() {
 	}, 0 ]);
 	selectTypeOfChart('chart_insufficiency', dataView, options);
 }
+
+function drawSeverity() {
+	var jsonData = $.ajax({
+		url : "/statistic/user/severity",
+		dataType : "json",
+		async : false
+	}).responseText;
+
+	var data = new google.visualization.DataTable();
+
+	data.addColumn({
+		"type" : "number",
+		"label" : "Ступінь недостатності,%"
+	});
+
+	data.addColumn({
+		"type" : "string",
+		"label" : "Роки"
+	});
+
+	data.addRows($.parseJSON(jsonData));
+	var options = {
+		width : 1492,
+		height : 350,
+	};
+	var dataView = new google.visualization.DataView(data);
+	dataView.setColumns([ {
+		calc : function(data, row) {
+			return data.getFormattedValue(row, 1);
+		},
+		type : 'string'
+	}, 0 ]);
+	selectTypeOfChart('chart_severity', dataView, options);
+}
+
 
 function selectTypeOfChart(nameOfDiv, dataView, options) {
 	var pieChart = new google.visualization.PieChart(document
@@ -175,8 +212,17 @@ function drawAllGeneral() {
 
 function drawUserChart() {
 	drawInsufficiency();
+	drawSeverity();
 }
-
+function drawAll() {
+	drawAllGeneral();
+	if (patientId == 0) {
+		$(".messageUser").css("display", "inline");
+	} else {
+		$(".messageUser").css("display", "none");
+		drawUserChart();
+	}
+}
 $("#select_chart_button").click(function() {
 	typeOfChart = $('#typeofchart').val();
 	$(".message").css("display", "none");
@@ -184,7 +230,7 @@ $("#select_chart_button").click(function() {
 	$(".users").css("display", "inline");
 	google.load("visualization", "1", {
 		packages : [ "corechart" ],
-		callback : drawAllGeneral
+		callback : drawAll
 	});
 });
 
@@ -218,11 +264,13 @@ $("#select_drug_name_button").click(function() {
 });
 
 function userChart(userId) {
+	$(".messageUser").css("display", "none");
+	patientId = userId;
 	$.ajax({
 		type : "post",
 		url : "/statistic/userId",
 		data : {
-			'userId' : userId,
+			'patientId' : userId,
 		},
 		success : function(response) {
 			google.load("visualization", "1", {

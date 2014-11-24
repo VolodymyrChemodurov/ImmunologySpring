@@ -10,5 +10,7 @@ public interface StatisticService {
 
 	List retrievePatientSexStatistic();
 
-	List retrieveInsufficiency(long userId);
+	List retrieveInsufficiency(long patientId);
+
+	List retrieveSeverity(long patientId);
 }

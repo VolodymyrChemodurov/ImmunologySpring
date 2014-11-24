@@ -11,4 +11,6 @@ public interface SurveyDao {
 	List<Survey> getSurveyTemplatesByUserId(long id);
 
 	List retrieveInsufficiency(long userId);
+	
+	List retrieveSeverity(long patientId);
 }

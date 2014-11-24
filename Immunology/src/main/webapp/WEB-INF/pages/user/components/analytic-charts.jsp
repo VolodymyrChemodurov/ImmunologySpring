@@ -45,7 +45,7 @@
 <div class="row">
 	<div class="col-xs-12">
 		<div class="box">
-		<div class="box-header">
+			<div class="box-header">
 				<div class="no-move"></div>
 			</div>
 			<div class="box-content">
@@ -115,6 +115,10 @@
 						</div>
 					</div>
 					<div id="tabs-2">
+						<div class="box-name messageUser"
+							style="display: none; color: red">
+							<span>Виберіть користувача</span>
+						</div>
 						<div class="box-content no-padding users" style="display: none;">
 							<table
 								class="table table-bordered table-striped table-hover table-heading table-datatable"
@@ -195,7 +199,7 @@
 								<div class="no-move"></div>
 							</div>
 							<div class="box-content">
-								<div id="chart_insufficiency"></div>
+								<div id="chart_severity"></div>
 							</div>
 						</div>
 					</div>

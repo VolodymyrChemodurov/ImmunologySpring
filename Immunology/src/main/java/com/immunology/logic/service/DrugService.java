@@ -7,7 +7,11 @@ import com.immunology.model.Drug;
 public interface DrugService {
 
 	List<Drug> getAllDrags();
-	
-	public List  retrieveDrugTolerance(String name);
+
+	List getDrugSpecies(String type);
+
+	List getDrugNames(String species);
+
+	List<Drug> getDrugsType();
 
 }

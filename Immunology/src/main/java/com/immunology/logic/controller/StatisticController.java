@@ -28,6 +28,7 @@ public class StatisticController {
 			.getLogger(StatisticController.class);
 
 	private String nameOfDrugs;
+	
 	private long patientId;
 
 	@Autowired
@@ -60,29 +61,21 @@ public class StatisticController {
 	public @ResponseBody List retrieveSeverity() {
 		return statisticService.retrieveSeverity(patientId);
 	}
-
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public String showPatient(ModelMap model, @PathVariable("id") int number) {
-		User user = UserUtils.getCurrentUser();
-
-		return "user/components/patient-info";
-	}
-
-	@RequestMapping(value = "/setDrugName", method = RequestMethod.POST)
+		
+	@RequestMapping(value = "/getDrugName", method = RequestMethod.POST)
 	public @ResponseBody Boolean getDrugName(Model model,
 			@RequestParam String nameOfDrugs) {
 		if (nameOfDrugs == null) {
 			return false;
 		} else {
 			this.nameOfDrugs = nameOfDrugs;
-			System.out.println(nameOfDrugs);
 			return true;
 		}
 	}
 
 	@RequestMapping(value = "/drug/by_tolerance", method = RequestMethod.GET)
 	public @ResponseBody List retrieveDrugTolerance() {
-		return drugService.retrieveDrugTolerance(nameOfDrugs);
+		return statisticService.retrieveDrugTolerance(nameOfDrugs);
 	}
 
 	@RequestMapping(value = "/userId", method = RequestMethod.POST)

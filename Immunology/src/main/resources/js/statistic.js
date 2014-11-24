@@ -1,8 +1,11 @@
+
 var typeOfChart;
 
-var typeOfDrugs;
+var drugName = null;
 
-var patientId=0;
+var drugType;
+
+var patientId = 0;
 
 function drawChartDateOfRegistration() {
 	var jsonData = $.ajax({
@@ -171,6 +174,39 @@ function drawSeverity() {
 	selectTypeOfChart('chart_severity', dataView, options);
 }
 
+function drawTolerance() {
+	var jsonData = $.ajax({
+		url : "statistic/drug/by_tolerance",
+		dataType : "json",
+		async : false
+	}).responseText;
+
+	var data = new google.visualization.DataTable();
+
+	data.addColumn({
+		"type" : "string",
+		"label" : "Переносимість препарату"
+	});
+
+	data.addColumn({
+		"type" : "number",
+		"label" : "Кількість значень переносимості препарату"
+	});
+
+	data.addRows($.parseJSON(jsonData));
+	var options = {
+		width : 1492,
+		height : 350,
+	};
+	var dataView = new google.visualization.DataView(data);
+	dataView.setColumns([ {
+		calc : function(data, row) {
+			return data.getFormattedValue(row, 0);
+		},
+		type : 'string'
+	}, 1 ]);
+	selectTypeOfChart('chart_tolerance', dataView, options);
+}
 
 function selectTypeOfChart(nameOfDiv, dataView, options) {
 	var pieChart = new google.visualization.PieChart(document
@@ -214,6 +250,10 @@ function drawUserChart() {
 	drawInsufficiency();
 	drawSeverity();
 }
+
+function drawAllDrugs() {
+	drawTolerance();
+}
 function drawAll() {
 	drawAllGeneral();
 	if (patientId == 0) {
@@ -221,6 +261,9 @@ function drawAll() {
 	} else {
 		$(".messageUser").css("display", "none");
 		drawUserChart();
+	}
+	if (drugName != null) {
+		drawAllDrugs();
 	}
 }
 $("#select_chart_button").click(function() {
@@ -234,25 +277,54 @@ $("#select_chart_button").click(function() {
 	});
 });
 
-$("#select_drug_type_button").click(function() {
-	typeOfDrugs = $('#typeofdrugs').val();
-	$(".species").css("display", "inline");
-
-});
+$("#select_drug_type_button").click(
+		function() {
+			$(".name").css("display", "none");
+			$(".species").css("display", "inline");
+			drugType = $('#typeOfDrugs').val();
+			$.ajax({
+				type : "post",
+				url : "/drugs/getDrugSpecies",
+				data : {
+					'typeOfDrugs' : drugType
+				},
+				success : function(response) {
+					var species = (response);	
+					  $("#speciesOfDrugs").html("");
+					jQuery.each(species, function(index,value) {						
+						$("#speciesOfDrugs").append($("<option></option>").text(value).attr('value', index));
+					});
+				},
+			});
+		});
 
 $("#select_drug_species_button").click(function() {
-	speciesOfDrugs = $('#speciesofdrugs').val();
 	$(".name").css("display", "inline");
-
+	speciesOfDrugs = $('#speciesOfDrugs option:selected').text();
+	$.ajax({
+		type : "post",
+		url : "/drugs/getDrugNames",
+		data : {
+			'speciesOfDrugs' : speciesOfDrugs
+		},
+		success : function(response) {
+			var names = (response);
+			$("#nameOfDrugs").html("");
+			jQuery.each(names, function(index,value) {
+				$("#nameOfDrugs").append($("<option></option>").text(value).attr('value', index));
+			});
+		},
+	});
 });
 
 $("#select_drug_name_button").click(function() {
-	nameOfDrugs = $('#speciesofdrugs').val();
+	drugName = $('#nameOfDrugs option:selected').text();
+	console.log(drugName);
 	$.ajax({
 		type : "post",
-		url : "/statistic/setDrugName",
+		url : "/statistic/getDrugName",
 		data : {
-			'nameOfDrugs' : nameOfDrugs
+			'nameOfDrugs' : drugName
 		},
 		success : function(response) {
 			google.load("visualization", "1", {

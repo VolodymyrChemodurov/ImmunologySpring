@@ -54,12 +54,8 @@ public class CabinetController {
 		User user = UserUtils.getCurrentUser();
 		Set<Patient> myPatients = userService
 				.getUserByLogin(user.getUsername()).getPatients();
-		List<Drug> drugs = new ArrayList<Drug>();
-		for (Drug drug : drugService.getAllDrags()) {
-			drugs.add(drug);
-		}
 		return new ModelAndView("user/components/analytic-charts").addObject(
-				"myPatients", myPatients).addObject("drugs", drugs);
+				"myPatients", myPatients).addObject("drugsType", drugService.getDrugsType());
 	}
 
 	@RequestMapping(value = "/analytic/block", method = RequestMethod.GET)

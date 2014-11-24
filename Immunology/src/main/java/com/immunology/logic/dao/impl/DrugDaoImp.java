@@ -22,8 +22,21 @@ public class DrugDaoImp implements DrugDao {
 		List<Drug> results = query.getResultList();
 		return results; 
 	}
+	
+	public List<Drug> getDrugsType() {	
+		return em.createNativeQuery("SELECT DISTINCT(type) FROM drugs")
+				.getResultList();
+	}
+	
+	public List  getDrugSpecies(String type) {
+		return em.createNativeQuery("SELECT DISTINCT(species) FROM drugs WHERE type= :type").setParameter("type", type).getResultList();
+		}
 
+	public List  getDrugNames(String species) {
+		return em.createNativeQuery("SELECT name FROM drugs WHERE species= :species").setParameter("species", species).getResultList();
+		}
+	
 	public List  retrieveDrugTolerance(String name) {
-	return em.createQuery("SELECT drug_tolerance,count(drug_tolerance) FROM efficacy_data JOIN drug_efficacy_data ON drug_efficacy_data.efficacy_data_id=efficacy_data.id JOIN drugs ON drug_efficacy_data.drug_id=drugs.id WHERE name= :name GROUP BY drug_tolerance").setParameter("name", name).getResultList();
+	return em.createNativeQuery("SELECT drug_tolerance,count(drug_tolerance) FROM efficacy_data JOIN drug_efficacy_data ON drug_efficacy_data.efficacy_data_id=efficacy_data.id JOIN drugs ON drug_efficacy_data.drug_id=drugs.id WHERE name= :name GROUP BY drug_tolerance").setParameter("name", name).getResultList();
 	}
 }

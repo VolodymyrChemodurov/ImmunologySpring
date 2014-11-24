@@ -208,7 +208,7 @@
 							<div class="col-xs-12 col-sm-12">
 								<div class="box-name message"
 									style="display: inline; color: red">
-									<span>Виберіть тип діаграми</span>
+									<span>Виберіть діаграму</span>
 								</div>
 								<div class="box type" style="display: none;">
 									<div class="box-header">
@@ -218,9 +218,9 @@
 									</div>
 									<div class="box-content" style="display: list-item;">
 										<div class="col-sm-9">
-											<select id="typeofdrugs" class="form-control">
-												<c:forEach items="${drugs}" var="drug">
-													<option>${drug.type}</option>
+											<select id="typeOfDrugs" class="form-control">
+												<c:forEach items="${drugsType}" var="drug">
+													<option>${drug}</option>
 												</c:forEach>
 											</select>
 										</div>
@@ -240,14 +240,11 @@
 									</div>
 									<div class="box-content" style="display: list-item;">
 										<div class="col-sm-9">
-											<select id="speciesofdrugs" class="form-control">
-												<c:forEach items="${drugs}" var="drug">
-													<option>${drug.species}</option>
-												</c:forEach>
+											<select id="speciesOfDrugs" class="form-control">
 											</select>
 										</div>
 										<div class="col-sm-3">
-											<button type="button" id="select_drug_name_button"
+											<button type="button" id="select_drug_species_button"
 												class="btn btn-default">
 												<i class="fa fa-arrow-circle-down"></i> Вибрати
 											</button>
@@ -264,15 +261,12 @@
 										<div class="box-content" style="display: list-item;">
 											<div class="col-sm-9">
 												<select id="nameOfDrugs" class="form-control">
-													<c:forEach items="${drugs}" var="drug">
-														<option>${drug.name}</option>
-													</c:forEach>
 												</select>
 											</div>
 											<div class="col-sm-3">
-												<button type="button" id="select_drug_button"
+												<button type="button" id="select_drug_name_button"
 													class="btn btn-default">
-													<i class="fa fa-arrow-circle-down""></i> Вибрати
+													<i class="fa fa-arrow-circle-down"></i> Вибрати
 												</button>
 											</div>
 										</div>
@@ -291,7 +285,9 @@
 										</div>
 										<div class="no-move"></div>
 									</div>
-									<div class="box-content"></div>
+									<div class="box-content">
+									<div id="chart_tolerance"></div>
+									</div>
 								</div>
 								<div class="box">
 									<div class="box-header">

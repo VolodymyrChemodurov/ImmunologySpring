@@ -15,15 +15,24 @@ public class DrugServiceImpl implements DrugService {
 
 	@Autowired
 	private CrudDao crudDao;
-	
+
 	@Autowired
 	DrugDao drugDao;
-	
+
 	public List<Drug> getAllDrags() {
 		return crudDao.getAll(Drug.class);
 	}
-	
-	public List retrieveDrugTolerance(String name) {
-		return drugDao.retrieveDrugTolerance(name);
+
+	public List getDrugSpecies(String type) {
+		return drugDao.getDrugSpecies(type);
 	}
+
+	public List<Drug> getDrugsType() {
+		return drugDao.getDrugsType();
+	}
+
+	public List getDrugNames(String species) {
+		return drugDao.getDrugNames(species);
+	}
+
 }

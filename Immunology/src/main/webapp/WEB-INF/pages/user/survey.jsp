@@ -3,9 +3,9 @@
 <div class="row">
 	<div id="breadcrumb" class="col-md-12">
 		<ol class="breadcrumb">
-			<li><a href="index.html">Головна</a></li>
-			<li><a href="#">Мої пацієнти</a></li>
-			<li><a href="#">${patient.firstName} ${patient.lastName}</a></li>
+			<li><a href="#">Головна</a></li>
+			<li><a href="#" onclick="doAjaxGet('patients/my');">Мої пацієнти</a></li>
+			<li><a href="#" onclick="doAjaxGet('patients/${patient.id}');">${patient.firstName} ${patient.lastName}</a></li>
 		</ol>
 	</div>
 </div>

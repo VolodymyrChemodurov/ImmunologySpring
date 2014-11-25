@@ -14,17 +14,17 @@
 					ефективність препарату</h4>
 			</div>
 			<div class="modal-body">
-				<div class="col-sm-12">
-					<div class="col-sm-4" style="float: left">
-						<div class="effinciency_div_first">Переносимість
+				<div class="col-sm-12" style="padding: 0px">
+					<div class="col-sm-4" style="float: left; padding: 0px;">
+						<div class="effinciency_div_first" style="margin-left: 0px; margin-right: 0px;">Переносимість
 							препарату</div>
-						<div class="effinciency_div_first">Оцінка
-							ефективності препарату</div>
-						<div class="effinciency_div_first">Опис
+						<div class="effinciency_div_first" style="margin-left: 0px; margin-right: 0px;">Оцінка
+							ефект. препарату</div>
+						<div class="effinciency_div_first" style="margin-left: 0px; margin-right: 0px;">Опис
 							ПЕ</div>
-						<div class="effinciency_div_first">Ступінь
+						<div class="effinciency_div_first" style="margin-left: 0px; margin-right: 0px;">Ступінь
 							вираженості ПЕ</div>
-						<div class="effinciency_div_first">Вимагає
+						<div class="effinciency_div_first" style="margin-left: 0px; margin-right: 0px;">Вимагає
 							скасування?</div>
 					</div>
 					<div class="col-sm-4">
@@ -55,7 +55,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="modal-footer">
+			<div class="modal-footer" style="margin-top: 180px;">
 				<button type="button" class="btn btn-primary"
 					id="save-sub-efficiency-button" data-dismiss="modal">Зберегти</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal">Закрити</button>

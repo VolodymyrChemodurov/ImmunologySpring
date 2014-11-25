@@ -169,7 +169,7 @@
 						</div>
 						<div class="modal-body">
 							<label class="col-sm-12 control-label">Select Syndrom:</label> 
-							<select class="form-control" name="syndrrom-names" style="margin-bottom: 20px;">
+							<select class="form-control" id="syndrrom-names" name="syndrrom-names" style="margin-bottom: 20px;">
 							<c:forEach items="${syndromes}" var="syndrome">
     							<option>${syndrome}</option>
 							</c:forEach>
@@ -182,7 +182,7 @@
 							<small style="float: right;">You can use such symbols: ' * ' , ' ^ ' , ' / ' , ' X ' ; Х - is the coeficient value </small>
 							<div class="modal-footer" style="margin-top: 160px; height: 40px;">
 								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-								<button type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
+								<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="sendFormulaValues();">Save</button>
 							</div>
 						</div>
 					</div>
@@ -354,6 +354,62 @@
 		}});
 		
 	}
+	function getFormulaForSyndrom(formulaType){
+		 var syndromName = $("#syndrrom-names").val();
+		 var url= "/syndromes/template/{name}/{formulaType}".replace("{formulaType}",formulaType).replace("{name}",syndromName)
+		 $.ajax({
+			  type:"GET", 
+		      url: url,
+		     // dataType: "json",
+		      async:   false,
+		      success: function(response){
+		    	 console.log(response);
+		    	 if(formulaType == "severityLevel"){
+		    		 $("#severity-formula").val(response);
+		    	 }
+		    	 if(formulaType == "insufficiencyLevel"){
+		    		 $("#insufficiency-formula").val(response);
+		    	 }
+		    	 
+		      },
+			
+			error: function (request, status, error) {
+				console.log(formulaType +"= null;");
+		}});
+	}
+	function saveFormulaForSyndrom(formulaType, formula){
+		 var syndromName = $("#syndrrom-names").val();
+		 var url= "/syndromes/template/{name}/{formulaType}".replace("{formulaType}",formulaType).replace("{name}",syndromName)
+		$.ajax({
+			  type:"POST", 
+		      url: url,
+		      data:  {"formula": formula},
+		      dataType: "json",
+		      async:   false,
+		      success: function(response){
+		    	 console.log(response);
+		      },
+			
+			error: function (request, status, error) {
+				alert(error);
+		}});
+	}
+	function sendFormulaValues(){
+		var severity = $("#severity-formula").val();
+		var insufficiency = $("#insufficiency-formula").val();
+		
+		saveFormulaForSyndrom("severityLevel", severity);
+		saveFormulaForSyndrom("insufficiencyLevel", insufficiency);
+		
+	}
+	function refreshFormulaValues(){
+		getFormulaForSyndrom("severityLevel");
+		getFormulaForSyndrom("insufficiencyLevel");
+	}
+	
+	$( document ).ready(function() {
+		refreshFormulaValues();
+	});
 	
 	
 	</script>

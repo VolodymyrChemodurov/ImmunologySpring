@@ -1,4 +1,3 @@
-
 var typeOfChart;
 
 var drugName = null;
@@ -193,7 +192,8 @@ function drawTolerance() {
 		"label" : "Кількість значень переносимості препарату"
 	});
 
-	data.addRows($.parseJSON(jsonData));
+	data.addRows(replaceTolerance(jsonData));
+	
 	var options = {
 		width : 1492,
 		height : 350,
@@ -236,6 +236,22 @@ function sort(jsonData) {
 		if (a1 == b1)
 			return 0;
 		return a1 > b1 ? 1 : -1;
+	});
+	return jsonData;
+}
+
+function replaceTolerance(jsonData) {
+	jsonData = $.parseJSON(jsonData);
+	$.each(jsonData, function(index, value) {
+		if (value[0] == "SATISFYING") {
+			value[0] = "Задовільна";
+		}
+		if (value[0] == "GOOD") {
+			value[0] = "Добра";
+		}
+		if (value[0] == "BAD") {
+			value[0] = "Незадовільна";
+		}
 	});
 	return jsonData;
 }
@@ -289,37 +305,41 @@ $("#select_drug_type_button").click(
 					'typeOfDrugs' : drugType
 				},
 				success : function(response) {
-					var species = (response);	
-					  $("#speciesOfDrugs").html("");
-					jQuery.each(species, function(index,value) {						
-						$("#speciesOfDrugs").append($("<option></option>").text(value).attr('value', index));
+					var species = (response);
+					$("#speciesOfDrugs").html("");
+					jQuery.each(species, function(index, value) {
+						$("#speciesOfDrugs").append(
+								$("<option></option>").text(value).attr(
+										'value', index));
 					});
 				},
 			});
 		});
 
-$("#select_drug_species_button").click(function() {
-	$(".name").css("display", "inline");
-	speciesOfDrugs = $('#speciesOfDrugs option:selected').text();
-	$.ajax({
-		type : "post",
-		url : "/drugs/getDrugNames",
-		data : {
-			'speciesOfDrugs' : speciesOfDrugs
-		},
-		success : function(response) {
-			var names = (response);
-			$("#nameOfDrugs").html("");
-			jQuery.each(names, function(index,value) {
-				$("#nameOfDrugs").append($("<option></option>").text(value).attr('value', index));
+$("#select_drug_species_button").click(
+		function() {
+			$(".name").css("display", "inline");
+			speciesOfDrugs = $('#speciesOfDrugs option:selected').text();
+			$.ajax({
+				type : "post",
+				url : "/drugs/getDrugNames",
+				data : {
+					'speciesOfDrugs' : speciesOfDrugs
+				},
+				success : function(response) {
+					var names = (response);
+					$("#nameOfDrugs").html("");
+					jQuery.each(names, function(index, value) {
+						$("#nameOfDrugs").append(
+								$("<option></option>").text(value).attr(
+										'value', index));
+					});
+				},
 			});
-		},
-	});
-});
+		});
 
 $("#select_drug_name_button").click(function() {
 	drugName = $('#nameOfDrugs option:selected').text();
-	console.log(drugName);
 	$.ajax({
 		type : "post",
 		url : "/statistic/getDrugName",

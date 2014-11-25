@@ -146,6 +146,7 @@
 		//$('#s2_with_tag').select2({placeholder: "Select OS"});
 		//	$('#country').select2();
 		//	$('#sex').select2();
+		$('select[name=datatable-3_length').select2();
 	}
 
 	$(document).ready(function() {

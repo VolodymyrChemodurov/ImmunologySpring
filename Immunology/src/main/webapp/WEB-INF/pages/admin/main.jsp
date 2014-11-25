@@ -143,7 +143,7 @@
 							<input type="text" class="form-control" id="new-syndrom-name">
 							
 							<label class="col-sm-12 control-label">Select syndrom as a parent syndrom</label> 
-							<select name="parent-syndrom-name">
+							<select name="parent-syndrom-name" class="form-control">
 							<option>None</option>
 							<c:forEach items="${syndromes}" var="syndrome">
     							<option>${syndrome}</option>

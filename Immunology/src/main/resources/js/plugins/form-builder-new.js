@@ -930,7 +930,7 @@ this.initNewSurveyFormWithNewUrl = function(blockID,type, url) {
 	      contentType: "application/json; charset=utf-8",
 	      dataType: "json",
 	      success: function(resposeJsonObject){
-	    	  alert("Successfully saved.");
+	    	  console.log("Successfully saved.");
 	    	  console.log(resposeJsonObject);
 	      },
 		

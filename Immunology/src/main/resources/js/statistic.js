@@ -17,11 +17,11 @@ function drawChartDateOfRegistration() {
 
 	data.addColumn({
 		"type" : "number",
-		"label" : "Роки"
+		"label" : "Ð Ð¾ÐºÐ¸"
 	});
 	data.addColumn({
 		"type" : "number",
-		"label" : "Кількість пацієнтів"
+		"label" : "ÐšÑ–Ð»ÑŒÐºÑ–Ñ�Ñ‚ÑŒ Ð¿Ð°Ñ†Ñ–Ñ”Ð½Ñ‚Ñ–Ð²"
 	});
 
 	jsonData = sort(jsonData);
@@ -51,11 +51,11 @@ function drawSyndromePatient() {
 	var data = new google.visualization.DataTable();
 	data.addColumn({
 		"type" : "string",
-		"label" : "Синдром"
+		"label" : "Ð¡Ð¸Ð½Ð´Ñ€Ð¾Ð¼"
 	});
 	data.addColumn({
 		"type" : "number",
-		"label" : "Кількість пацієнтів"
+		"label" : "ÐšÑ–Ð»ÑŒÐºÑ–Ñ�Ñ‚ÑŒ Ð¿Ð°Ñ†Ñ–Ñ”Ð½Ñ‚Ñ–Ð²"
 	});
 
 	data.addRows($.parseJSON(jsonData));
@@ -83,11 +83,11 @@ function drawPatientSex() {
 	var data = new google.visualization.DataTable();
 	data.addColumn({
 		"type" : "string",
-		"label" : "Стать"
+		"label" : "Ð¡Ñ‚Ð°Ñ‚ÑŒ"
 	});
 	data.addColumn({
 		"type" : "number",
-		"label" : "Кількість пацієнтів"
+		"label" : "ÐšÑ–Ð»ÑŒÐºÑ–Ñ�Ñ‚ÑŒ Ð¿Ð°Ñ†Ñ–Ñ”Ð½Ñ‚Ñ–Ð²"
 	});
 
 	data.addRows($.parseJSON(jsonData));
@@ -116,12 +116,12 @@ function drawInsufficiency() {
 
 	data.addColumn({
 		"type" : "number",
-		"label" : "Ступінь важкості,%"
+		"label" : "Ð¡Ñ‚ÑƒÐ¿Ñ–Ð½ÑŒ Ð²Ð°Ð¶ÐºÐ¾Ñ�Ñ‚Ñ–,%"
 	});
 
 	data.addColumn({
 		"type" : "string",
-		"label" : "Роки"
+		"label" : "Ð Ð¾ÐºÐ¸"
 	});
 
 	data.addRows($.parseJSON(jsonData));
@@ -150,12 +150,12 @@ function drawSeverity() {
 
 	data.addColumn({
 		"type" : "number",
-		"label" : "Ступінь недостатності,%"
+		"label" : "Ð¡Ñ‚ÑƒÐ¿Ñ–Ð½ÑŒ Ð½ÐµÐ´Ð¾Ñ�Ñ‚Ð°Ñ‚Ð½Ð¾Ñ�Ñ‚Ñ–,%"
 	});
 
 	data.addColumn({
 		"type" : "string",
-		"label" : "Роки"
+		"label" : "Ð Ð¾ÐºÐ¸"
 	});
 
 	data.addRows($.parseJSON(jsonData));
@@ -184,12 +184,12 @@ function drawTolerance() {
 
 	data.addColumn({
 		"type" : "string",
-		"label" : "Переносимість препарату"
+		"label" : "ÐŸÐµÑ€ÐµÐ½Ð¾Ñ�Ð¸Ð¼Ñ–Ñ�Ñ‚ÑŒ Ð¿Ñ€ÐµÐ¿Ð°Ñ€Ð°Ñ‚Ñƒ"
 	});
 
 	data.addColumn({
 		"type" : "number",
-		"label" : "Кількість значень переносимості препарату"
+		"label" : "ÐšÑ–Ð»ÑŒÐºÑ–Ñ�Ñ‚ÑŒ Ð·Ð½Ð°Ñ‡ÐµÐ½ÑŒ Ð¿ÐµÑ€ÐµÐ½Ð¾Ñ�Ð¸Ð¼Ð¾Ñ�Ñ‚Ñ– Ð¿Ñ€ÐµÐ¿Ð°Ñ€Ð°Ñ‚Ñƒ"
 	});
 
 	data.addRows(replaceTolerance(jsonData));
@@ -218,13 +218,13 @@ function selectTypeOfChart(nameOfDiv, dataView, options) {
 	var lineChart = new google.visualization.LineChart(document
 			.getElementById(nameOfDiv));
 
-	if (typeOfChart.trim() == 'Кругова діаграма') {
+	if (typeOfChart.trim() == 'ÐšÑ€ÑƒÐ³Ð¾Ð²Ð° Ð´Ñ–Ð°Ð³Ñ€Ð°Ð¼Ð°') {
 		pieChart.draw(dataView, options);
-	} else if (typeOfChart.trim() == 'Стовпчикова діаграма') {
+	} else if (typeOfChart.trim() == 'Ð¡Ñ‚Ð¾Ð²Ð¿Ñ‡Ð¸ÐºÐ¾Ð²Ð° Ð´Ñ–Ð°Ð³Ñ€Ð°Ð¼Ð°') {
 		columnChart.draw(dataView, options);
-	} else if (typeOfChart.trim() == 'Гістограма') {
+	} else if (typeOfChart.trim() == 'Ð“Ñ–Ñ�Ñ‚Ð¾Ð³Ñ€Ð°Ð¼Ð°') {
 		histogram.draw(dataView, options);
-	} else if (typeOfChart.trim() == 'Графік') {
+	} else if (typeOfChart.trim() == 'Ð“Ñ€Ð°Ñ„Ñ–Ðº') {
 		lineChart.draw(dataView, options);
 	}
 }
@@ -244,13 +244,13 @@ function replaceTolerance(jsonData) {
 	jsonData = $.parseJSON(jsonData);
 	$.each(jsonData, function(index, value) {
 		if (value[0] == "SATISFYING") {
-			value[0] = "Задовільна";
+			value[0] = "Ð—Ð°Ð´Ð¾Ð²Ñ–Ð»ÑŒÐ½Ð°";
 		}
 		if (value[0] == "GOOD") {
-			value[0] = "Добра";
+			value[0] = "Ð”Ð¾Ð±Ñ€Ð°";
 		}
 		if (value[0] == "BAD") {
-			value[0] = "Незадовільна";
+			value[0] = "Ð�ÐµÐ·Ð°Ð´Ð¾Ð²Ñ–Ð»ÑŒÐ½Ð°";
 		}
 	});
 	return jsonData;

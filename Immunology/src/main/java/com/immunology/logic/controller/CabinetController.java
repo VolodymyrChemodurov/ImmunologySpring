@@ -1,7 +1,5 @@
 package com.immunology.logic.controller;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +20,6 @@ import com.immunology.logic.service.DrugService;
 import com.immunology.logic.service.PatientService;
 import com.immunology.logic.service.UserService;
 import com.immunology.logic.utils.UserUtils;
-import com.immunology.model.Drug;
 import com.immunology.model.Patient;
 
 @Controller

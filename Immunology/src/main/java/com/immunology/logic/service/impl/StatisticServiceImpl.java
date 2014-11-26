@@ -1,4 +1,3 @@
-
 package com.immunology.logic.service.impl;
 
 import java.util.List;

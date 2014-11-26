@@ -15,4 +15,5 @@ public interface StatisticService {
 	List retrieveSeverity(long patientId);
 	
 	List retrieveDrugTolerance(String name);
+
 }

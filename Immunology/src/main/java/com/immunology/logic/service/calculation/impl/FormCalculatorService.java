@@ -23,7 +23,7 @@ public class FormCalculatorService implements CalculatorService<Form> {
 		List<Panel> panels = entity.getPanels();
 		for(Panel panel: panels) {
 			for(Element element: panel.getElements()) {
-				if(element.getClass().equals(Computable.class)) {
+				if(element.getClass().equals(Computable.class) && element.isChecked()) {
 					Computable computableElement = (Computable) element;
 					result += new ExpressionBuilder(formula.getFormulaExpression()).variable(VARIABLE_NAME)
 							.build()

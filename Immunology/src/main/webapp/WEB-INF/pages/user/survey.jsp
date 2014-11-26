@@ -1,83 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="en">
-	<head>
-
-		<meta charset="utf-8">
-		<title>Immunology</title>
-		<meta name="description" content="description">
-		<meta name="author" content="DevOOPS">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		
-		<c:set var="baseURL" value="${fn:replace(pageContext.request.requestURL,
-		pageContext.request.requestURI, pageContext.request.contextPath)}" />
-		
-		 <jsp:include page="/WEB-INF/pages/head.jsp">
-    		<jsp:param value="${baseURL}" name="baseURL"/>
-    	</jsp:include>
-
-
-	</head>
-	
-	
-	
-<body>
-
-
-<!--Start Header-->
-	<jsp:include page="/WEB-INF/pages/user/components/navbar.jsp"></jsp:include>
-<!--End Header-->
-<!--Start Container-->
-<div id="main" class="container-fluid">
-	<div class="row">
-		<div id="sidebar-left" class="col-xs-2 col-sm-2">
-			<ul class="nav main-menu">
-				
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle">
-						<i class="fa fa-user"></i>
-						 <span class="hidden-xs">Мої пацієнти</span>
-					</a>
-					<ul class="dropdown-menu">
-						<li><a class="ajax-link" href="#" onclick="doAjaxGet('patients/new');">Додати нового пацієнта</a></li>
-						<li><a class="ajax-link" href="#" onclick="doAjaxGet('patients/my');">Список моїх пацієнтів</a></li>
-					</ul>
-				</li>
-				
-				<li>
-					<a href="#" class="" onclick="doAjaxGet('patients/all');">
-						<i class="fa fa-users"></i>
-						<span class="hidden-xs">Всі пацієнти</span>
-					</a>
-				</li>
-				
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle">
-						<i class="fa fa-align-left"></i>
-						 <span class="hidden-xs">Аналітика</span>
-					</a>
-					<ul class="dropdown-menu">
-						<li><a class="ajax-link" href="#" onclick="doAjaxGet('cabinet/analytic/block');">Аналітичний блок</a></li>
-						<li><a class="ajax-link" href="#" onclick="doAjaxGet('cabinet/analytic/charts');">Діаграми</a></li>
-					</ul>
-				</li>
-
-			
-			</ul>
-		</div>
+﻿
 		<!--Start Content-->
-		<div id="content" class="col-xs-12 col-sm-10">
-		<div class="row">
+<div class="row">
 	<div id="breadcrumb" class="col-md-12">
 		<ol class="breadcrumb">
-			<li><a href="index.html">Головна</a></li>
-			<li><a href="#">Мої пацієнти</a></li>
-			<li><a href="#">${patient.firstName} ${patient.lastName}</a></li>
+			<li><a href="#">Головна</a></li>
+			<li><a href="#" onclick="doAjaxGet('patients/my');">Мої пацієнти</a></li>
+			<li><a href="#" onclick="doAjaxGet('patients/${patient.id}');">${patient.firstName} ${patient.lastName}</a></li>
 		</ol>
 	</div>
 </div>
@@ -98,7 +26,12 @@
 						<li><a href="#tabs-1">Скарги</a></li>
 						<li><a href="#tabs-2">Клінічні прояви</a></li>
 						<li><a href="#tabs-3">Лабораторні дані</a></li>
-						<li><a href="#tabs-4">Препарат</a></li>
+						<li><a href="#tabs-4">Морфологічні дані</a></li>
+						<li><a href="#tabs-5">Інструментальні дані</a></li>
+						<li><a href="#tabs-6">Верифікація діагнозу</a></li>
+						<li><a href="#tabs-7">ЛТ</a></li>			
+						
+
 					</ul>
 					<div id="tabs-1">
 						<div id="complaints" class="form-container" ></div>
@@ -107,13 +40,42 @@
 						<div id="clinicalManifestations" class="form-container" ></div>
 					</div>
 					<div id="tabs-3">
-						<div id="laboratoryData" class="form-container">
+						<div id="laboratoryData" class="form-container"></div>
 					</div>
 					<div id="tabs-4">
-						<div>
-
-						</div>
+						<div id="morphologicalData" class="form-container"></div>
 					</div>
+					<div id="tabs-5">
+						<div id="instrumentalData" class="form-container"></div>
+					</div>
+					<div id="tabs-6">
+						<div id="diagnosisVerificationData" class="form-container"></div>
+					</div>
+					<div id="tabs-7">
+							<div id="sub-tabs" style="display: none">
+								<ul>
+									<li><a href="#sub-tabs-1">Основне лікування</a></li>
+									<li><a href="#sub-tabs-2">Реабілітація</a></li>
+									<li><a href="#sub-tabs-3">Профілактичні заходи</a></li>
+									<li><a href="#sub-tabs-4"> Препарат </a></li>
+								</ul>
+								<div id="sub-tabs-1">
+									<div id="mainTreatmentData" class="form-container" ></div>
+								</div>
+								<div id="sub-tabs-2">
+									<div id="rehabilitationData" class="form-container" ></div>
+								</div>
+								<div id="sub-tabs-3">
+									<div id="preventiveMeasuresData" class="form-container"></div>
+								</div>
+								<div id="sub-tabs-4">
+									<div>
+			
+									</div>
+								</div>
+							</div>
+					</div>
+					
 					</div>
 				</div>
 			</div>
@@ -121,48 +83,64 @@
 	</div>
 
 	<input type="hidden" id="patient_id" value="${patient.id}"/>
-		</div>
 		<!--End Content-->
-	</div>
-</div>
-	<jsp:include page="/WEB-INF/pages/base-scripts.jsp">
-		<jsp:param value="${baseURL}" name="baseURL"/>
-	</jsp:include>
 	
 	
 	
 	
 <script type="text/javascript">
+var surveyURL = "/survey/patient/${patient.id}/survey/${surveyId}";
 
 var complaintsData  = new Builder("complaintsData");
 var clinicalManifestationData  = new Builder("clinicalManifestationData");
 var laboratoryData  = new Builder("laboratoryData");
-
+var morphologicalData = new Builder("morphologicalData");
+var instrumentalData = new Builder("instrumentalData");
+var diagnosisVerificationData = new Builder("diagnosisVerificationData");
+var mainTreatmentData = new Builder("mainTreatmentData");
+var rehabilitationData = new Builder("rehabilitationData");
+var preventiveMeasuresData = new Builder("preventiveMeasuresData");
 var currentSurvey = {};
 
 $(document).ready(function() {
 	console.log("${syndrom.name}; ${syndrom.id}");
 	$("#tabs").tabs();
+	$("#sub-tabs").tabs();
+	$("#sub-tabs").css("display", "block");
 	$("#tabs").css("display", "inline");
 	if("${surveyId}".length > 0){
-		complaintsData.initNewSurveyFormWithNewUrl("#complaints", "ComplaintsForm", "/survey/patient/${patient.id}/survey/${surveyId}");
-		laboratoryData.initNewSurveyFormWithNewUrl('#laboratoryData', "LaboratoryDataForm", "/survey/patient/${patient.id}/survey/${surveyId}");
-		clinicalManifestationData.initNewSurveyFormWithNewUrl('#clinicalManifestations', "ClinicalManifestationsForm", "/survey/patient/${patient.id}/survey/${surveyId}");
-
+		complaintsData.initNewSurveyFormWithNewUrl("#complaints", "ComplaintsForm",surveyURL );
+		laboratoryData.initNewSurveyFormWithNewUrl('#laboratoryData', "LaboratoryDataForm", surveyURL);
+		clinicalManifestationData.initNewSurveyFormWithNewUrl('#clinicalManifestations', "ClinicalManifestationsForm", surveyURL);
+		morphologicalData.initNewSurveyFormWithNewUrl('#morphologicalData', "MorphologicalData", surveyURL);
+		instrumentalData.initNewSurveyFormWithNewUrl('#instrumentalData', "InstrumentalData", surveyURL);
+		diagnosisVerificationData.initNewSurveyFormWithNewUrl('#diagnosisVerificationData', "DiagnosisVerificationData", surveyURL);
+		mainTreatmentData.initNewSurveyFormWithNewUrl('#mainTreatmentData', "MainTreatmentData", surveyURL);
+		rehabilitationData.initNewSurveyFormWithNewUrl('#rehabilitationData', "RehabilitationData", surveyURL);
+		preventiveMeasuresData.initNewSurveyFormWithNewUrl('#preventiveMeasuresData', "PreventiveMeasuresData", surveyURL);
 	}else{
 		
 		complaintsData.initNewSurveyForm("#complaints", "ComplaintsForm", $('#patient_id').val(), "${syndrom.name}");
 		laboratoryData.initNewSurveyForm('#laboratoryData', "LaboratoryDataForm", $('#patient_id').val(),  "${syndrom.name}");
 		clinicalManifestationData.initNewSurveyForm('#clinicalManifestations', "ClinicalManifestationsForm", $('#patient_id').val(), "${syndrom.name}");
+		morphologicalData.initNewSurveyForm('#morphologicalData', "MorphologicalData", $('#patient_id').val(), "${syndrom.name}");
+		instrumentalData.initNewSurveyForm('#instrumentalData', "InstrumentalData", $('#patient_id').val(), "${syndrom.name}");
+		diagnosisVerificationData.initNewSurveyForm('#diagnosisVerificationData', "DiagnosisVerificationData", $('#patient_id').val(), "${syndrom.name}");
+		mainTreatmentData.initNewSurveyForm('#mainTreatmentData', "MainTreatmentData", $('#patient_id').val(), "${syndrom.name}");
+		rehabilitationData.initNewSurveyForm('#rehabilitationData', "RehabilitationData", $('#patient_id').val(), "${syndrom.name}");
+		preventiveMeasuresData.initNewSurveyForm('#preventiveMeasuresData', "PreventiveMeasuresData", $('#patient_id').val(), "${syndrom.name}");
 		getSurveyTemplate();
 	}
 
 	$("#complaints").append('<button type="button" style="margin-left: 48%;" onClick="saveSyrvey();" class="btn btn-primary">Save</button>');
 	$("#clinicalManifestations").append('<button type="button" style="margin-left: 48%;" onClick="saveSyrvey();" class="btn btn-primary">Save</button>');
 	$("#laboratoryData").append('<button type="button" style="margin-left: 48%;" onClick="saveSyrvey();" class="btn btn-primary">Save</button>');
+	$("#morphologicalData").append('<button type="button" style="margin-left: 48%;" onClick="saveSyrvey();" class="btn btn-primary">Save</button>');
+	$("#instrumentalData").append('<button type="button" style="margin-left: 48%;" onClick="saveSyrvey();" class="btn btn-primary">Save</button>');
+	$("#diagnosisVerificationData").append('<button type="button" style="margin-left: 48%;" onClick="saveSyrvey();" class="btn btn-primary">Save</button>');
+	$("#mainTreatmentData").append('<button type="button" style="margin-left: 48%;" onClick="saveSyrvey();" class="btn btn-primary">Save</button>');
+	$("#rehabilitationData").append('<button type="button" style="margin-left: 48%;" onClick="saveSyrvey();" class="btn btn-primary">Save</button>');
 	
-	
-
 });
 
 function doAjaxGet(pageName) {
@@ -216,7 +194,14 @@ function saveSyrvey(){
 	currentSurvey.complaintsForm = complaintsData.formObject;
 	currentSurvey.laboratoryDataForm = laboratoryData.formObject;
 	currentSurvey.clinicalManifestationsForm = clinicalManifestationData.formObject;
-	console.log(JSON.stringify(currentSurvey));
+	currentSurvey.morphologicalData = morphologicalData.formObject;
+	currentSurvey.instrumentalData = instrumentalData.formObject;
+	currentSurvey.diagnosisVerificationData = diagnosisVerificationData.formObject;
+	currentSurvey.mainTreatmentData = mainTreatmentData.formObject;
+ 	currentSurvey.rehabilitationData = rehabilitationData.formObject;
+	currentSurvey.preventiveMeasuresData = preventiveMeasuresData.formObject;
+	
+	console.log(currentSurvey);
 	 $.ajax({
 			type : "post",
 			url :   "/survey/patient/{patientId}/syndrome/{syndromeName}".replace("{patientId}", patientId).replace("{syndromeName}", syndromName),

@@ -20,15 +20,18 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "users")
+@JsonInclude(Include.NON_NULL)
 public class User {
 	
 	@Id
 	@GeneratedValue
-	private long id;
+	private Long id;
 	
 	@Column(name = "first_name")
 	private String firstName;
@@ -77,11 +80,11 @@ public class User {
 		return this;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public User setId(long id) {
+	public User setId(Long id) {
 		this.id = id;
 		return this;
 	}
@@ -155,4 +158,46 @@ public class User {
 		this.surveys = surveys;
 	}
 
+	public static class UserBuilder {
+		
+		private User user;
+		
+		public UserBuilder() {
+			user = new User();
+		}
+		
+		public UserBuilder withId(Long id) {
+			user.setId(id);
+			return this;
+		}
+		
+		public UserBuilder withFirstName(String firstName) {
+			user.setFirstName(firstName);
+			return this;
+		}
+		
+		public UserBuilder withLastName(String lastName) {
+			user.setLastName(lastName);
+			return this;
+		}
+		
+		public UserBuilder withMiddletName(String middleName) {
+			user.setMiddleName(middleName);
+			return this;
+		}
+		
+		public UserBuilder withLogin(String login) {
+			user.setLogin(login);
+			return this;
+		}
+		
+		public UserBuilder withPassword(String password) {
+			user.setPassword(password);
+			return this;
+		}
+		
+		public User build() {
+			return user;
+		}
+	}
 }

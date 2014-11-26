@@ -1,5 +1,6 @@
 package com.immunology.logic.service.impl;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -63,10 +64,12 @@ public class SyndromeServiceImpl implements SyndromeService {
 	}
 
 	public Boolean saveSyndromeTemplate(Syndrome syndrome) {
+		cleanSyndromeTemplateBeforeSaving(syndrome);
 		return syndromeDao.saveSyndromeTemplate(syndrome);
 	}
 
 	public Boolean updateSyndromeTemplate(String templateName, Syndrome syndrome) {
+		cleanSyndromeTemplateBeforeSaving(syndrome);
 		return syndromeDao.updateSyndromeTemplate(templateName, syndrome);
 	}
 
@@ -74,7 +77,7 @@ public class SyndromeServiceImpl implements SyndromeService {
 	public Boolean wireUserToSyndromeTemplate(String syndromeName, Long userId) {
 		Syndrome syndrome = syndromeDao.findSyndrome(syndromeName);
 		com.immunology.model.User user  = crudDao.find(com.immunology.model.User.class, userId);
-		syndrome.getUsers().add(user);
+		syndrome.getUsers().add(new com.immunology.model.User.UserBuilder().withId(user.getId()).build());
 		return syndromeDao.updateSyndromeTemplate(syndromeName, syndrome);
 	}
 
@@ -114,4 +117,13 @@ public class SyndromeServiceImpl implements SyndromeService {
 		}
 		syndromeDao.updateSyndromeTemplate(syndromeName, syndrome);
 	}
+	
+	private void cleanSyndromeTemplateBeforeSaving(Syndrome syndromeTemplate) {
+		List<com.immunology.model.User> cleanedUsers = new ArrayList<com.immunology.model.User>(syndromeTemplate.getUsers().size());
+		for(com.immunology.model.User user: syndromeTemplate.getUsers()) {
+			cleanedUsers.add(new com.immunology.model.User.UserBuilder().withId(user.getId()).build());
+		}
+		syndromeTemplate.setUsers(cleanedUsers);
+	}
+	
 }

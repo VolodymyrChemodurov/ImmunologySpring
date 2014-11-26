@@ -112,7 +112,7 @@ public class SyndromeController {
 	}
 	
 	@RequestMapping(value = "/template/{name}/{formulaType}", method = RequestMethod.GET)
-	public @ResponseBody String getSyndromeSeverityLevelFormula(@PathVariable("formulaType") String formulaType, HttpServletRequest request) {
+	public @ResponseBody String getSyndromeFormula(@PathVariable("formulaType") String formulaType, HttpServletRequest request) {
 		String decodedSyndromeName = URIUtils.decodePathVariable(request.getRequestURI(), 2);
 		Formula result = syndromeService.getSybdromeFormula(decodedSyndromeName, FormulaType.getByName(formulaType));
 		if(result != null) {
@@ -123,7 +123,7 @@ public class SyndromeController {
 	}
 
 	@RequestMapping(value = "/template/{name}/{formulaType}", method = RequestMethod.POST)
-	public @ResponseBody Boolean saveSyndromeSeverityLevelFormula(@RequestParam("formula") String formula, @PathVariable("formulaType") String formulaType, HttpServletRequest request) {
+	public @ResponseBody Boolean saveSyndromeFormula(@RequestParam("formula") String formula, @PathVariable("formulaType") String formulaType, HttpServletRequest request) {
 		boolean result = false;
 		if(CalculationHelper.validateFormula(formula)) {
 			String decodedSyndromeName = URIUtils.decodePathVariable(request.getRequestURI(), 2);

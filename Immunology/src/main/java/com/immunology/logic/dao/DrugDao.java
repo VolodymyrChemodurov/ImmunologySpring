@@ -6,5 +6,13 @@ import com.immunology.model.Drug;
 
 public interface DrugDao {
 
-	public List<Drug> getAllDrags();
+	List<Drug> getAllDrags();
+
+	List retrieveDrugTolerance(String name);
+	
+	List getDrugSpecies(String type);
+	
+	List getDrugNames(String species);
+	
+	List<Drug> getDrugsType();
 }

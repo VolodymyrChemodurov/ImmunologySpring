@@ -75,8 +75,6 @@
 										<div id="chart_dateofregistration"></div>
 									</div>
 								</div>
-
-
 								<div class="box">
 									<div class="box-header">
 										<div class="box-name">
@@ -117,7 +115,11 @@
 						</div>
 					</div>
 					<div id="tabs-2">
-						<div class="box-content no-padding">
+						<div class="box-name messageUser"
+							style="display: none; color: red">
+							<span>Виберіть користувача</span>
+						</div>
+						<div class="box-content no-padding users" style="display: none;">
 							<table
 								class="table table-bordered table-striped table-hover table-heading table-datatable"
 								id="datatable-3">
@@ -133,15 +135,13 @@
 								</thead>
 								<tbody>
 									<c:forEach items="${myPatients}" var="patient">
-										<tr onclick="doAjaxGet('patients/${patient.id}')">
+										<tr onclick="userChart(${patient.id})">
 											<td>${patient.lastName}</td>
 											<td>${patient.firstName}</td>
 											<td>${patient.dateOfBirth}</td>
 											<td>${patient.country}</td>
 											<td>${patient.city}</td>
 											<td><c:out value="${patient.street}, ${patient.house}"></c:out></td>
-
-
 										</tr>
 
 									</c:forEach>
@@ -160,11 +160,118 @@
 								</tfoot>
 							</table>
 						</div>
-
+						<div class="row">
+							<div class="col-xs-12 col-sm-12">
+								<div class="box-name message"
+									style="display: inline; color: red">
+									<span>Виберіть тип діаграми</span>
+								</div>
+								<div class="box">
+									<div class="box-header">
+										<div class="box-name">
+											<span>Ступінь важкості</span>
+										</div>
+										<div class="box-icons">
+											<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+											</a> <a class="expand-link"> <i class="fa fa-expand"></i>
+											</a> <a class="close-link"> <i class="fa fa-times"></i>
+											</a>
+										</div>
+										<div class="no-move"></div>
+									</div>
+									<div class="box-content">
+										<div id="chart_insufficiency"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="box">
+							<div class="box-header">
+								<div class="box-name">
+									<span>Ступінь недостатності</span>
+								</div>
+								<div class="box-icons">
+									<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+									</a> <a class="expand-link"> <i class="fa fa-expand"></i>
+									</a> <a class="close-link"> <i class="fa fa-times"></i>
+									</a>
+								</div>
+								<div class="no-move"></div>
+							</div>
+							<div class="box-content">
+								<div id="chart_severity"></div>
+							</div>
+						</div>
 					</div>
 					<div id="tabs-3">
 						<div class="row">
 							<div class="col-xs-12 col-sm-12">
+								<div class="box-name message"
+									style="display: inline; color: red">
+									<span>Виберіть діаграму</span>
+								</div>
+								<div class="box type" style="display: none;">
+									<div class="box-header">
+										<div class="box-name">
+											<span>Виберіть тип препарату:</span>
+										</div>
+									</div>
+									<div class="box-content" style="display: list-item;">
+										<div class="col-sm-9">
+											<select id="typeOfDrugs" class="form-control">
+												<c:forEach items="${drugsType}" var="drug">
+													<option>${drug}</option>
+												</c:forEach>
+											</select>
+										</div>
+										<div class="col-sm-3">
+											<button type="button" id="select_drug_type_button"
+												class="btn btn-default">
+												<i class="fa fa-arrow-circle-down"></i> Вибрати
+											</button>
+										</div>
+									</div>
+								</div>
+								<div class="box species" style="display: none;">
+									<div class="box-header">
+										<div class="box-name">
+											<span>Виберіть вид препарату:</span>
+										</div>
+									</div>
+									<div class="box-content" style="display: list-item;">
+										<div class="col-sm-9">
+											<select id="speciesOfDrugs" class="form-control">
+											</select>
+										</div>
+										<div class="col-sm-3">
+											<button type="button" id="select_drug_species_button"
+												class="btn btn-default">
+												<i class="fa fa-arrow-circle-down"></i> Вибрати
+											</button>
+										</div>
+									</div>
+								</div>
+								<div class="box name" style="display: none;">
+									<div class="box">
+										<div class="box-header">
+											<div class="box-name">
+												<span>Виберіть назву препарату:</span>
+											</div>
+										</div>
+										<div class="box-content" style="display: list-item;">
+											<div class="col-sm-9">
+												<select id="nameOfDrugs" class="form-control">
+												</select>
+											</div>
+											<div class="col-sm-3">
+												<button type="button" id="select_drug_name_button"
+													class="btn btn-default">
+													<i class="fa fa-arrow-circle-down"></i> Вибрати
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
 								<div class="box">
 									<div class="box-header">
 										<div class="box-name">
@@ -178,7 +285,9 @@
 										</div>
 										<div class="no-move"></div>
 									</div>
-									<div class="box-content"></div>
+									<div class="box-content">
+									<div id="chart_tolerance"></div>
+									</div>
 								</div>
 								<div class="box">
 									<div class="box-header">
@@ -218,3 +327,4 @@
 		</div>
 	</div>
 </div>
+

@@ -72,7 +72,13 @@
 									<li><a class="ajax-link" href="#"  data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'comlaints'">Complaints Form</a></li>
 									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'clinicalManifestation'" >Clinical Manifestation Form</a></li>
 									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'laboratoryData'" >Laboratory Data Form</a></li>
-	
+									
+									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'morphologicalData'" >Morphological Data</a></li>
+									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'instrumentalData'" >Instrumental Data</a></li>
+									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'diagnosisVerificationData'" >DiagnosisVerificationData Form</a></li>
+									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'mainTreatmentData'" >Main Treatment Data Form</a></li>
+									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'rehabilitationData'" >Rehabilitation Data Form</a></li>
+									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'preventiveMeasuresData'" >Preventive Measures Data Form</a></li>
 								</ul>
 							</li>
 						</li>
@@ -137,7 +143,7 @@
 							<input type="text" class="form-control" id="new-syndrom-name">
 							
 							<label class="col-sm-12 control-label">Select syndrom as a parent syndrom</label> 
-							<select name="parent-syndrom-name">
+							<select name="parent-syndrom-name" class="form-control">
 							<option>None</option>
 							<c:forEach items="${syndromes}" var="syndrome">
     							<option>${syndrome}</option>
@@ -163,7 +169,7 @@
 						</div>
 						<div class="modal-body">
 							<label class="col-sm-12 control-label">Select Syndrom:</label> 
-							<select class="form-control" name="syndrrom-names" style="margin-bottom: 20px;">
+							<select class="form-control" id="syndrrom-names" name="syndrrom-names" style="margin-bottom: 20px;">
 							<c:forEach items="${syndromes}" var="syndrome">
     							<option>${syndrome}</option>
 							</c:forEach>
@@ -176,7 +182,7 @@
 							<small style="float: right;">You can use such symbols: ' * ' , ' ^ ' , ' / ' , ' X ' ; Х - is the coeficient value </small>
 							<div class="modal-footer" style="margin-top: 160px; height: 40px;">
 								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-								<button type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
+								<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="sendFormulaValues();">Save</button>
 							</div>
 						</div>
 					</div>
@@ -265,7 +271,50 @@
 			 laboratoryDataForm["panels"] = [];
 			 laboratoryDataForm["objectType"] = "LaboratoryDataForm";
 			 survey.laboratoryDataForm = laboratoryDataForm;
+			 
+			 survey["morphologicalData"]= {};
+			 var morphologicalData = {};
+			 laboratoryDataForm["name"] = "";
+			 laboratoryDataForm["panels"] = [];
+			 laboratoryDataForm["objectType"] = "MorphologicalData";
+			 survey.laboratoryDataForm = morphologicalData;
+			 
+			 survey["instrumentalData"]= {};
+			 var instrumentalData = {};
+			 laboratoryDataForm["name"] = "";
+			 laboratoryDataForm["panels"] = [];
+			 laboratoryDataForm["objectType"] = "InstrumentalData";
+			 survey.instrumentalData = instrumentalData;
+			 
+			 survey["diagnosisVerificationData"]= {};
+			 var diagnosisVerificationData = {};
+			 laboratoryDataForm["name"] = "";
+			 laboratoryDataForm["panels"] = [];
+			 laboratoryDataForm["objectType"] = "DiagnosisVerificationData";
+			 survey.diagnosisVerificationData = diagnosisVerificationData;
+			 
+			 survey["mainTreatmentData"]= {};
+			 var mainTreatmentData = {};
+			 laboratoryDataForm["name"] = "";
+			 laboratoryDataForm["panels"] = [];
+			 laboratoryDataForm["objectType"] = "MainTreatmentData";
+			 survey.mainTreatmentData = mainTreatmentData;
+			 
+			 survey["rehabilitationData"]= {};
+			 var rehabilitationData = {};
+			 laboratoryDataForm["name"] = "";
+			 laboratoryDataForm["panels"] = [];
+			 laboratoryDataForm["objectType"] = "RehabilitationData";
+			 survey.rehabilitationData = rehabilitationData;
+			 
+			 survey["preventiveMeasuresData"]= {};
+			 var preventiveMeasuresData = {};
+			 laboratoryDataForm["name"] = "";
+			 laboratoryDataForm["panels"] = [];
+			 laboratoryDataForm["objectType"] = "PreventiveMeasuresData";
+			 survey.preventiveMeasuresData = preventiveMeasuresData;
 			
+			 
 			 newSyndromObject.surveys.push(survey);
 			 //response.surveys.push(survey);
 			
@@ -305,6 +354,62 @@
 		}});
 		
 	}
+	function getFormulaForSyndrom(formulaType){
+		 var syndromName = $("#syndrrom-names").val();
+		 var url= "/syndromes/template/{name}/{formulaType}".replace("{formulaType}",formulaType).replace("{name}",syndromName)
+		 $.ajax({
+			  type:"GET", 
+		      url: url,
+		     // dataType: "json",
+		      async:   false,
+		      success: function(response){
+		    	 console.log(response);
+		    	 if(formulaType == "severityLevel"){
+		    		 $("#severity-formula").val(response);
+		    	 }
+		    	 if(formulaType == "insufficiencyLevel"){
+		    		 $("#insufficiency-formula").val(response);
+		    	 }
+		    	 
+		      },
+			
+			error: function (request, status, error) {
+				console.log(formulaType +"= null;");
+		}});
+	}
+	function saveFormulaForSyndrom(formulaType, formula){
+		 var syndromName = $("#syndrrom-names").val();
+		 var url= "/syndromes/template/{name}/{formulaType}".replace("{formulaType}",formulaType).replace("{name}",syndromName)
+		$.ajax({
+			  type:"POST", 
+		      url: url,
+		      data:  {"formula": formula},
+		      dataType: "json",
+		      async:   false,
+		      success: function(response){
+		    	 console.log(response);
+		      },
+			
+			error: function (request, status, error) {
+				alert(error);
+		}});
+	}
+	function sendFormulaValues(){
+		var severity = $("#severity-formula").val();
+		var insufficiency = $("#insufficiency-formula").val();
+		
+		saveFormulaForSyndrom("severityLevel", severity);
+		saveFormulaForSyndrom("insufficiencyLevel", insufficiency);
+		
+	}
+	function refreshFormulaValues(){
+		getFormulaForSyndrom("severityLevel");
+		getFormulaForSyndrom("insufficiencyLevel");
+	}
+	
+	$( document ).ready(function() {
+		refreshFormulaValues();
+	});
 	
 	
 	</script>

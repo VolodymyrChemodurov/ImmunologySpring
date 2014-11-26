@@ -15,6 +15,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.immunology.model.ui.ClinicalManifestationsForm;
 import com.immunology.model.ui.ComplaintsForm;
 import com.immunology.model.ui.DiagnosisVerificationData;
@@ -28,21 +30,22 @@ import com.immunology.model.ui.RehabilitationData;
 
 @Entity
 @Table(name = "surveys")
+@JsonInclude(Include.NON_NULL)
 public class Survey {
 
 	@Id
 	@GeneratedValue
-	private long id;
+	private Long id;
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name="creation_date")
 	private Date creationDate;
 	
 	@Column(name = "severity_level")
-	private double severityLevel;
+	private Double severityLevel;
 	
 	@Column(name = "insufficiency_level")
-	private double insufficiencyLevel;
+	private Double insufficiencyLevel;
 
 	@ManyToOne(cascade=CascadeType.MERGE)
 	@JoinColumn(name = "disease_id")
@@ -93,7 +96,15 @@ public class Survey {
 	@JoinColumn(name = "user_id")
 	@JsonBackReference("user_reference")
 	private User user;
-	
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public Date getCreationDate() {
 		return creationDate;
 	}
@@ -102,20 +113,28 @@ public class Survey {
 		this.creationDate = creationDate;
 	}
 
-	public double getSeverityLevel() {
+	public Double getSeverityLevel() {
 		return severityLevel;
 	}
 
-	public void setSeverityLevel(double severityLevel) {
+	public void setSeverityLevel(Double severityLevel) {
 		this.severityLevel = severityLevel;
 	}
 
-	public double getInsufficiencyLevel() {
+	public Double getInsufficiencyLevel() {
 		return insufficiencyLevel;
 	}
 
-	public void setInsufficiencyLevel(double insufficiencyLevel) {
+	public void setInsufficiencyLevel(Double insufficiencyLevel) {
 		this.insufficiencyLevel = insufficiencyLevel;
+	}
+
+	public Syndrome getDisease() {
+		return disease;
+	}
+
+	public void setDisease(Syndrome disease) {
+		this.disease = disease;
 	}
 
 	public ComplaintsForm getComplaintsForm() {
@@ -208,21 +227,5 @@ public class Survey {
 	public void setUser(User user) {
 		this.user = user;
 	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public Syndrome getDisease() {
-		return disease;
-	}
-
-	public void setDisease(Syndrome disease) {
-		this.disease = disease;
-	}
-
+	
 }

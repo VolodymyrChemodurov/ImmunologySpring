@@ -8,4 +8,10 @@ public interface DrugService {
 
 	List<Drug> getAllDrags();
 
+	List getDrugSpecies(String type);
+
+	List getDrugNames(String species);
+
+	List<Drug> getDrugsType();
+
 }

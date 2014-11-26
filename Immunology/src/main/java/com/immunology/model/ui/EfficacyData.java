@@ -1,12 +1,19 @@
 package com.immunology.model.ui;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import com.immunology.model.Drug;
 
 @Entity
 @Table(name = "efficacy_data")
@@ -32,7 +39,12 @@ public class EfficacyData {
 	private SideEffectsSeverityDegree sideEffectsSeverityDegree;
 	
 	private Boolean cancel;
+	
 
+	
+	@ManyToMany(fetch = FetchType.EAGER,mappedBy = "efficacyData", cascade = CascadeType.ALL)
+	private List<Drug> drugs;
+	
 	public DrugTolerance getDrugTolerance() {
 		return drugTolerance;
 	}
@@ -73,5 +85,13 @@ public class EfficacyData {
 	public void setCancel(Boolean cancel) {
 		this.cancel = cancel;
 	}
-	
+
+	public List<Drug> getDrugs() {
+		return drugs;
+	}
+
+	public void setDrug(List<Drug> drugs) {
+		this.drugs = drugs;
+	}
+			
 }

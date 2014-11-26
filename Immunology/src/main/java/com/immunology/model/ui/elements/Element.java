@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -31,6 +33,7 @@ import com.immunology.model.ui.elements.impl.TextBox;
 })
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@JsonInclude(Include.NON_NULL)
 public abstract class Element {
 
 	@Id
@@ -40,9 +43,9 @@ public abstract class Element {
 	
 	protected String name;
 	
-	protected int place;
+	protected Integer place;
 
-	protected boolean checked;
+	protected Boolean checked;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "panel_id")
@@ -72,27 +75,27 @@ public abstract class Element {
 		this.panel = panel;
 	}
 
-	public int getOrder() {
+	public Integer getOrder() {
 		return place;
 	}
 
-	public void setOrder(int order) {
+	public void setOrder(Integer order) {
 		this.place = order;
 	}
 
-	public int getPlace() {
+	public Integer getPlace() {
 		return place;
 	}
 
-	public void setPlace(int place) {
+	public void setPlace(Integer place) {
 		this.place = place;
 	}
 
-	public boolean isChecked() {
+	public Boolean isChecked() {
 		return checked;
 	}
 
-	public void setChecked(boolean checked) {
+	public void setChecked(Boolean checked) {
 		this.checked = checked;
 	}
 

@@ -15,9 +15,9 @@ public class SurveyServiceImpl implements SurveyService {
 
 	@Autowired
 	private CrudDao crudDao;
-	
+
 	public Survey saveOrUpdateSurvey(Survey survey) {
-		if(survey.getId() == 0) {
+		if (survey.getId() == null) {
 			survey.setCreationDate(new Date());
 		}
 		ReferenceHelper.setTemplateReferences(survey);

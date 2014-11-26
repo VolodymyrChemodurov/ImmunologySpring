@@ -14,13 +14,17 @@ import com.immunology.model.Patient;
 public class PatientDaoImpl implements PatientDao{
 	
 	@PersistenceContext
-	private EntityManager em;
+	private EntityManager entityManager;
 
 	public List<Patient> fingByUserId(long userId) {
-		TypedQuery<Patient> query = em.createQuery("SELECT patient FROM Patient patient WHERE user_id = :user_id", Patient.class);
+		TypedQuery<Patient> query = entityManager.createQuery("SELECT patient FROM Patient patient WHERE user_id = :user_id", Patient.class);
 		query.setParameter("user_id", userId);
 		List<Patient> results = query.getResultList();
 		return results.isEmpty() ? null : results; 
+	}
+
+	public List retrievePatientSexStatistic() {
+		return entityManager.createNativeQuery("SELECT sex, COUNT(id) FROM patient GROUP BY sex").getResultList();
 	}
 
 }

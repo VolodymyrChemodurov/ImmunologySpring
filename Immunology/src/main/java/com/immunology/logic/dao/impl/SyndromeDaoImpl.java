@@ -21,67 +21,78 @@ import com.immunology.model.Syndrome;
 import com.mongodb.WriteResult;
 
 @Repository
-public class SyndromeDaoImpl extends GenericMongoDao<Syndrome> implements SyndromeDao {
-	private static final Logger LOG = LoggerFactory.getLogger(SyndromeDaoImpl.class);
-	
+public class SyndromeDaoImpl extends GenericMongoDao<Syndrome> implements
+		SyndromeDao {
+	private static final Logger LOG = LoggerFactory
+			.getLogger(SyndromeDaoImpl.class);
+
 	private static final String SYNDROME_TEMPLATE_COLLECTION = "syndromeTemplates";
 	private static final String GET_USER_TEMPLATES = "{'users.id':#}";
 	private static final String GET_USER_TEMPLATE_BY_NAME = "{'users.id':#, 'name':'#'}";
 	private static final String GET_SYNDROME_NAMES = "{}";
 	private static final String GET_TEMPLATE = "{'name':#}";
 	private static final String GET_PATIENT_SYNDROME = "SELECT syndrome FROM Syndrome syndrome WHERE syndrome.name = :name AND syndrome.patient.id = :id";
-	
+	private static final String SYNDROME_PATIENT_STATISTIC = "SELECT disease_name, COUNT (patient_id) FROM diseases GROUP BY disease_name";
+
 	@PersistenceContext
 	EntityManager entityManager;
-	
+
 	@PostConstruct
 	public void init() {
 		super.init(SYNDROME_TEMPLATE_COLLECTION);
 	}
-	
+
 	public Syndrome getPatientSyndrome(Long patientId, String syndromeName) {
-		TypedQuery<Syndrome> query = entityManager.createQuery(GET_PATIENT_SYNDROME, Syndrome.class)
-				.setParameter("name", syndromeName).setParameter("id", patientId);
+		TypedQuery<Syndrome> query = entityManager
+				.createQuery(GET_PATIENT_SYNDROME, Syndrome.class)
+				.setParameter("name", syndromeName)
+				.setParameter("id", patientId);
 		List<Syndrome> syndromes = query.getResultList();
 		return syndromes.size() > 0 ? syndromes.get(0) : null;
 	}
 
 	public Syndrome getUserSyndromeTemplate(Long userId, String syndromeName) {
-		Iterable<Syndrome> templates = collection.find(GET_USER_TEMPLATE_BY_NAME, userId, syndromeName)
+		Iterable<Syndrome> templates = collection
+				.find(GET_USER_TEMPLATE_BY_NAME, userId, syndromeName)
 				.projection("{_id: 0}").as(Syndrome.class);
 		List<Syndrome> syndromes = convertToList(templates);
 		return syndromes.size() > 0 ? syndromes.get(0) : null;
 	}
-	
+
 	public List<String> getPatientSyndromeNames(Long userId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public List<Syndrome> getUserSyndromeTemplates(Long userId) {
-		Iterable<Syndrome> templates = collection.find(GET_USER_TEMPLATES, userId)
-				.projection("{_id: 0}").as(Syndrome.class);
+		Iterable<Syndrome> templates = collection
+				.find(GET_USER_TEMPLATES, userId).projection("{_id: 0}")
+				.as(Syndrome.class);
 		return convertToList(templates);
 	}
 
 	public List<String> getUserSyndromeTemplatesNames(Long userId) {
-		Iterable<Syndrome> templates = collection.find(GET_USER_TEMPLATES, userId)
-				.projection("{_id: 0, anamnesticData: 0, surveys: 0, users: 0}").as(Syndrome.class);
+		Iterable<Syndrome> templates = collection
+				.find(GET_USER_TEMPLATES, userId)
+				.projection("{_id: 0, anamnesticData: 0, surveys: 0, users: 0}")
+				.as(Syndrome.class);
 		return retrieveSyndromeNames(templates);
 	}
 
 	public List<String> getSyndromeNames() {
-		Iterable<Syndrome> templates = collection.find(GET_SYNDROME_NAMES)
-				.projection("{_id: 0, anamnesticData: 0, surveys: 0, users: 0}").as(Syndrome.class);
+		Iterable<Syndrome> templates = collection
+				.find(GET_SYNDROME_NAMES)
+				.projection("{_id: 0, anamnesticData: 0, surveys: 0, users: 0}")
+				.as(Syndrome.class);
 		return retrieveSyndromeNames(templates);
 	}
-	
+
 	private List<String> retrieveSyndromeNames(Iterable<Syndrome> syndromes) {
 		List<String> names = new ArrayList<String>();
 		Iterator<Syndrome> iterator = syndromes.iterator();
-		 while(iterator.hasNext()) {
-			 names.add(iterator.next().getName());
-		 }
+		while (iterator.hasNext()) {
+			names.add(iterator.next().getName());
+		}
 		return names;
 	}
 
@@ -96,18 +107,24 @@ public class SyndromeDaoImpl extends GenericMongoDao<Syndrome> implements Syndro
 			LOG.error(e.toString());
 			saveResult = false;
 		}
-		return saveResult;	
+		return saveResult;
 	}
 
 	public Boolean updateSyndromeTemplate(String templateName, Syndrome syndrome) {
-		WriteResult result = collection.update("{'name':'" + templateName + "'}").with(syndrome);
+		WriteResult result = collection.update(
+				"{'name':'" + templateName + "'}").with(syndrome);
 		return result.isUpdateOfExisting();
 	}
 
 	public Syndrome findSyndrome(String templateName) {
-		Iterable<Syndrome> templates = collection.find(GET_TEMPLATE, templateName)
-				.projection("{_id: 0}").as(Syndrome.class);
+		Iterable<Syndrome> templates = collection
+				.find(GET_TEMPLATE, templateName).projection("{_id: 0}")
+				.as(Syndrome.class);
 		return convertToList(templates).get(0);
 	}
 
+	public List retrieveSyndromePatientStatistic() {
+		return entityManager.createNativeQuery(SYNDROME_PATIENT_STATISTIC)
+				.getResultList();
+	}
 }

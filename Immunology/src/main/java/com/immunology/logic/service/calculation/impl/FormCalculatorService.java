@@ -20,18 +20,21 @@ public class FormCalculatorService implements CalculatorService<Form> {
 
 	public Double calculate(Form entity, Formula formula) {
 		Double result = 0.0;
-		List<Panel> panels = entity.getPanels();
-		for(Panel panel: panels) {
-			for(Element element: panel.getElements()) {
-				if(element.getClass().equals(Computable.class)) {
-					Computable computableElement = (Computable) element;
-					result += new ExpressionBuilder(formula.getFormulaExpression()).variable(VARIABLE_NAME)
+		if(formula.getFormulaExpression() != null) {
+			List<Panel> panels = entity.getPanels();
+			for(Panel panel: panels) {
+				for(Element element: panel.getElements()) {
+					if(element instanceof Computable && element.isChecked()) {
+						Computable computableElement = (Computable) element;
+						result += new ExpressionBuilder(formula.getFormulaExpression()).variable(VARIABLE_NAME)
 							.build()
 							.setVariable(VARIABLE_NAME, computableElement.getMultiplier() * computableElement.getValue())
 							.evaluate();
+					}
 				}
 			}
 		}
+		
 		return result;
 	}
 

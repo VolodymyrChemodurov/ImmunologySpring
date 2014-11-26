@@ -9,82 +9,8 @@
 .DTTT {
 	display: none;
 }
-<
-jsp
+<jsp:include page="/WEB-INF/pages/user/components/modal/efficiency-modal.jsp"></jsp:include>
 
-
-
-
-
-
-
-
-
-
-:include
-
-
-
-
-
-
-	
-
-
-
-
-
-page
-
-
-
-
-
-
-
-
-
-
-="/
-WEB-INF
-/pages/user/components/modal/efficiency-modal
-
-
-
-
-
-
-
-
-
-
-.jsp
-
-
-
-
-
-
-
-
-
-
-"
->
-</
-jsp
-
-
-
-
-
-
-
-
-
-
-:include
->
 </style>
 <div class="row">
 	<div id="breadcrumb" class="col-md-12">
@@ -220,6 +146,7 @@ jsp
 		//$('#s2_with_tag').select2({placeholder: "Select OS"});
 		//	$('#country').select2();
 		//	$('#sex').select2();
+		$('select[name=datatable-3_length').select2();
 	}
 
 	$(document).ready(function() {
@@ -261,19 +188,21 @@ jsp
 		$("#newSurveyButton").click(
 				function() {
 					if ($("#syndrom").val() != null) {
-						window.location.href = '/survey/patientId/'
+						var href = 'survey/patientId/'
 								+ $("#patient_id").val() + '/syndrome/'
 								+ $('#syndrom').val();
+						doAjaxGet(href);
 					}
 				});
 	}
 	function initSurveyRowesEvent() {
 		$(".surveyRow").click(
 				function() {
-					window.location.href = '/survey/edit/patientId/'
+					var href = 'survey/edit/patientId/'
 							+ $("#patient_id").val() + '/surveyId/'
 							+ $(this).attr("surveyId") + '/syndrome/'
 							+ $('#syndrom').val();
+					doAjaxGet(href);
 				});
 		$('.efficiency').click(function() {
 			$('#efficiency-modal').modal('show');

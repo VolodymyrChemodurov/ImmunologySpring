@@ -103,7 +103,8 @@
 											<tr>
 												<td>${survey.creationDate}</td>
 												<td>${survey.severityLevel}</td>
-												<%-- 										<td>${survey.user.firstName}</td> --%>
+												<td>${survey.insufficiencyLevel}</td>
+												<td>${survey.user.firstName} ${survey.user.lastName}</td>
 												<td class='custom-size'>
 													<button type='button' class='btn btn-primary efficiency'>Ефективність</button>
 												</td>
@@ -231,7 +232,11 @@
 												+ response.surveys[int].creationDate
 												+ "</td><td>"
 												+ response.surveys[int].severityLevel
-												+ "</td><td></td><td></td>"
+												+ "</td><td>"
+												+ response.surveys[int].insufficiencyLevel
+												+ "</td><td>"
+												/* + response.surveys[int].user.firstName + " " + response.surveys[int].user.lastName */
+												+ "</td>"
 												+ "<td class='custom-size'>"
 												+ "<button "+
 										"type='button'"+"class='btn btn-primary efficiency'>Ефективність</button></td>");

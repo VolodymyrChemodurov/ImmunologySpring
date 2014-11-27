@@ -114,6 +114,13 @@ public class SyndromeServiceImpl implements SyndromeService {
 	public void saveSyndromeFormula(String syndoromeName, FormulaType formulaType, String formulaExpression) {
 		Syndrome syndrome = syndromeDao.findSyndrome(syndoromeName);
 		Formula formula = new FormulaBuilder().expression(formulaExpression).formulaType(formulaType).syndrome(syndrome).build();
+		Iterator<Formula> iterator = syndrome.getFormulas().iterator();
+		while(iterator.hasNext()) {
+			if(iterator.next().getType().equals(formula.getType())) {
+				iterator.remove();
+				break;
+			}
+		}
 		syndrome.getFormulas().add(formula);
 		syndromeDao.updateSyndromeTemplate(syndoromeName, syndrome);
 	}

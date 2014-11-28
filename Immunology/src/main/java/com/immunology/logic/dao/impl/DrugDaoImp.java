@@ -39,4 +39,16 @@ public class DrugDaoImp implements DrugDao {
 	public List  retrieveDrugTolerance(String name) {
 	return em.createNativeQuery("SELECT drug_tolerance,count(drug_tolerance) FROM efficacy_data JOIN drug_efficacy_data ON drug_efficacy_data.efficacy_data_id=efficacy_data.id JOIN drugs ON drug_efficacy_data.drug_id=drugs.id WHERE name= :name GROUP BY drug_tolerance").setParameter("name", name).getResultList();
 	}
+	
+	public List  retrieveDrugEvaluation(String name) {
+		return em.createNativeQuery("SELECT efficacy_evaluation,count(drug_tolerance) FROM efficacy_data JOIN drug_efficacy_data ON drug_efficacy_data.efficacy_data_id=efficacy_data.id JOIN drugs ON drug_efficacy_data.drug_id=drugs.id WHERE name= :name GROUP BY efficacy_evaluation").setParameter("name", name).getResultList();
+		}
+	
+	public List  retrieveDrugSideEffect(String name) {
+		return em.createNativeQuery("SELECT side_effects_severity_degree,count(drug_tolerance) FROM efficacy_data JOIN drug_efficacy_data ON drug_efficacy_data.efficacy_data_id=efficacy_data.id JOIN drugs ON drug_efficacy_data.drug_id=drugs.id WHERE name= :name GROUP BY side_effects_severity_degree").setParameter("name", name).getResultList();
+		}
+	
+	public List  retrieveCancel(String name) {
+		return em.createNativeQuery("SELECT cancel,count(drug_tolerance) FROM efficacy_data JOIN drug_efficacy_data ON drug_efficacy_data.efficacy_data_id=efficacy_data.id JOIN drugs ON drug_efficacy_data.drug_id=drugs.id WHERE name= :name GROUP BY cancel").setParameter("name", name).getResultList();
+		}
 }

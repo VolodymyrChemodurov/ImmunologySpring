@@ -4,6 +4,7 @@
 <%@	taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <script src="${param.baseURL}/resources/js/statistic.js"></script>
+<script src="${param.baseURL}/resources/js/drug.js"></script>
 <div class="row">
 	<div id="breadcrumb" class="col-md-12">
 		<ol class="breadcrumb">
@@ -286,13 +287,13 @@
 										<div class="no-move"></div>
 									</div>
 									<div class="box-content">
-									<div id="chart_tolerance"></div>
+										<div id="chart_tolerance"></div>
 									</div>
 								</div>
 								<div class="box">
 									<div class="box-header">
 										<div class="box-name">
-											<span>Оцінка ефективність препарату</span>
+											<span>Оцінка ефективності препарату</span>
 										</div>
 										<div class="box-icons">
 											<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
@@ -302,7 +303,9 @@
 										</div>
 										<div class="no-move"></div>
 									</div>
-									<div class="box-content"></div>
+									<div class="box-content">
+										<div id="chart_evaluation"></div>
+									</div>
 								</div>
 								<div class="box">
 									<div class="box-header">
@@ -317,7 +320,26 @@
 										</div>
 										<div class="no-move"></div>
 									</div>
-									<div class="box-content"></div>
+									<div class="box-content">
+										<div id="chart_sideEffect"></div>
+									</div>
+								</div>
+								<div class="box">
+									<div class="box-header">
+										<div class="box-name">
+											<span>Вимагає скасування</span>
+										</div>
+										<div class="box-icons">
+											<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+											</a> <a class="expand-link"> <i class="fa fa-expand"></i>
+											</a> <a class="close-link"> <i class="fa fa-times"></i>
+											</a>
+										</div>
+										<div class="no-move"></div>
+									</div>
+									<div class="box-content">
+										<div id="chart_cancel"></div>
+									</div>
 								</div>
 							</div>
 						</div>

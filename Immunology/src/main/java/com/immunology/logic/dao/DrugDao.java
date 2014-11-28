@@ -15,4 +15,10 @@ public interface DrugDao {
 	List getDrugNames(String species);
 	
 	List<Drug> getDrugsType();
+	
+	List retrieveDrugEvaluation(String name);
+
+	List retrieveDrugSideEffect(String name);
+	
+	List retrieveCancel(String name);
 }

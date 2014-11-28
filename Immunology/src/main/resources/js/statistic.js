@@ -189,7 +189,7 @@ function drawTolerance() {
 
 	data.addColumn({
 		"type" : "number",
-		"label" : "Кількість значень переносимості препарату"
+		"label" : "Кількість значень"
 	});
 
 	data.addRows(replaceTolerance(jsonData));
@@ -206,6 +206,111 @@ function drawTolerance() {
 		type : 'string'
 	}, 1 ]);
 	selectTypeOfChart('chart_tolerance', dataView, options);
+}
+
+function drawEvaluation() {
+	var jsonData = $.ajax({
+		url : "statistic/drug/by_evaluation",
+		dataType : "json",
+		async : false
+	}).responseText;
+
+	var data = new google.visualization.DataTable();
+
+	data.addColumn({
+		"type" : "string",
+		"label" : "Оцінка ефективності препарату"
+	});
+
+	data.addColumn({
+		"type" : "number",
+		"label" : "Кількість значень"
+	});
+
+	data.addRows(replaceEvaluation(jsonData));
+	
+	var options = {
+		width : 1492,
+		height : 350,
+	};
+	var dataView = new google.visualization.DataView(data);
+	dataView.setColumns([ {
+		calc : function(data, row) {
+			return data.getFormattedValue(row, 0);
+		},
+		type : 'string'
+	}, 1 ]);
+	selectTypeOfChart('chart_evaluation', dataView, options);
+}
+
+function drawSideEffect() {
+	var jsonData = $.ajax({
+		url : "statistic/drug/by_sideEffect",
+		dataType : "json",
+		async : false
+	}).responseText;
+
+	var data = new google.visualization.DataTable();
+
+	data.addColumn({
+		"type" : "string",
+		"label" : "Ступінь вираженості ПЕ"
+	});
+
+	data.addColumn({
+		"type" : "number",
+		"label" : "Кількість значень"
+	});
+
+	data.addRows(replaceSideEffect(jsonData));
+	
+	var options = {
+		width : 1492,
+		height : 350,
+	};
+	var dataView = new google.visualization.DataView(data);
+	dataView.setColumns([ {
+		calc : function(data, row) {
+			return data.getFormattedValue(row, 0);
+		},
+		type : 'string'
+	}, 1 ]);
+	selectTypeOfChart('chart_sideEffect', dataView, options);
+}
+
+function drawCancel() {
+	var jsonData = $.ajax({
+		url : "statistic/drug/cancel",
+		dataType : "json",
+		async : false
+	}).responseText;
+
+	var data = new google.visualization.DataTable();
+	jsonData = replaceCancel(jsonData);
+	data.addColumn({
+		"type" : "string",
+		"label" : "Вимагає скасування"
+	});
+
+	data.addColumn({
+		"type" : "number",
+		"label" : "Кількість значень"
+	});
+
+	data.addRows(jsonData);
+	
+	var options = {
+		width : 1492,
+		height : 350,
+	};
+	var dataView = new google.visualization.DataView(data);
+	dataView.setColumns([ {
+		calc : function(data, row) {
+			return data.getFormattedValue(row, 0);
+		},
+		type : 'string'
+	}, 1 ]);
+	selectTypeOfChart('chart_cancel', dataView, options);
 }
 
 function selectTypeOfChart(nameOfDiv, dataView, options) {
@@ -240,22 +345,6 @@ function sort(jsonData) {
 	return jsonData;
 }
 
-function replaceTolerance(jsonData) {
-	jsonData = $.parseJSON(jsonData);
-	$.each(jsonData, function(index, value) {
-		if (value[0] == "SATISFYING") {
-			value[0] = "Задовільна";
-		}
-		if (value[0] == "GOOD") {
-			value[0] = "Добра";
-		}
-		if (value[0] == "BAD") {
-			value[0] = "Незадовільна";
-		}
-	});
-	return jsonData;
-}
-
 function drawAllGeneral() {
 	drawChartDateOfRegistration();
 	drawSyndromePatient();
@@ -269,6 +358,9 @@ function drawUserChart() {
 
 function drawAllDrugs() {
 	drawTolerance();
+	drawEvaluation();
+	drawSideEffect();
+	drawCancel();
 }
 function drawAll() {
 	drawAllGeneral();
@@ -293,67 +385,6 @@ $("#select_chart_button").click(function() {
 	});
 });
 
-$("#select_drug_type_button").click(
-		function() {
-			$(".name").css("display", "none");
-			$(".species").css("display", "inline");
-			drugType = $('#typeOfDrugs').val();
-			$.ajax({
-				type : "post",
-				url : "/drugs/getDrugSpecies",
-				data : {
-					'typeOfDrugs' : drugType
-				},
-				success : function(response) {
-					var species = (response);
-					$("#speciesOfDrugs").html("");
-					jQuery.each(species, function(index, value) {
-						$("#speciesOfDrugs").append(
-								$("<option></option>").text(value).attr(
-										'value', index));
-					});
-				},
-			});
-		});
-
-$("#select_drug_species_button").click(
-		function() {
-			$(".name").css("display", "inline");
-			speciesOfDrugs = $('#speciesOfDrugs option:selected').text();
-			$.ajax({
-				type : "post",
-				url : "/drugs/getDrugNames",
-				data : {
-					'speciesOfDrugs' : speciesOfDrugs
-				},
-				success : function(response) {
-					var names = (response);
-					$("#nameOfDrugs").html("");
-					jQuery.each(names, function(index, value) {
-						$("#nameOfDrugs").append(
-								$("<option></option>").text(value).attr(
-										'value', index));
-					});
-				},
-			});
-		});
-
-$("#select_drug_name_button").click(function() {
-	drugName = $('#nameOfDrugs option:selected').text();
-	$.ajax({
-		type : "post",
-		url : "/statistic/getDrugName",
-		data : {
-			'nameOfDrugs' : drugName
-		},
-		success : function(response) {
-			google.load("visualization", "1", {
-				packages : [ "corechart" ],
-				callback : drawAllDrugs
-			});
-		},
-	});
-});
 
 function userChart(userId) {
 	$(".messageUser").css("display", "none");

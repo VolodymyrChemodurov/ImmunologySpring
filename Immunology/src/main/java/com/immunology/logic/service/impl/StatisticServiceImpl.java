@@ -50,4 +50,16 @@ public class StatisticServiceImpl implements StatisticService {
 	public List retrieveDrugTolerance(String name) {
 		return drugDao.retrieveDrugTolerance(name);
 	}
+	
+	public List retrieveDrugEvaluation(String name) {
+		return drugDao.retrieveDrugEvaluation(name);
+	}
+	
+	public List  retrieveDrugSideEffect(String name){
+		return drugDao.retrieveDrugSideEffect(name);
+	}
+	
+	public List  retrieveCancel(String name) {
+		return drugDao.retrieveCancel(name);
+	}
 }

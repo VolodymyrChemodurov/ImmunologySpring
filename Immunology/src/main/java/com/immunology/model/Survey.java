@@ -17,6 +17,10 @@ import javax.persistence.TemporalType;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.immunology.logic.utils.json.CustomJsonDateDeserializer;
+import com.immunology.logic.utils.json.CustomJsonDateSerializer;
 import com.immunology.model.ui.ClinicalManifestationsForm;
 import com.immunology.model.ui.ComplaintsForm;
 import com.immunology.model.ui.DiagnosisVerificationData;
@@ -39,6 +43,8 @@ public class Survey {
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name="creation_date")
+	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
+	@JsonSerialize(using = CustomJsonDateSerializer.class)
 	private Date creationDate;
 	
 	@Column(name = "severity_level")

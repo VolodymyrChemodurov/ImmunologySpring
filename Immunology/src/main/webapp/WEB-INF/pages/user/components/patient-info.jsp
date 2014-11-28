@@ -91,6 +91,7 @@
 									id="datatable-3">
 									<thead>
 										<tr>
+											<th>#</th>
 											<th>Дата створення</th>
 											<th>Ступінь важкості %</th>
 											<th>Ступінь недостатності %</th>
@@ -101,6 +102,7 @@
 									<tbody id="survey-table-body">
 										<c:forEach items="${syndrom.surveys}" var="survey">
 											<tr>
+												<td></td>
 												<td>${survey.creationDate}</td>
 												<td>${survey.severityLevel}</td>
 												<td>${survey.insufficiencyLevel}</td>
@@ -113,6 +115,7 @@
 									</tbody>
 									<tfoot>
 										<tr>
+											<th>#</th>
 											<th>Дата створення</th>
 											<th>Ступінь важкості %</th>
 											<th>Ступінь недостатності %</th>
@@ -228,6 +231,8 @@
 							if (response.surveys[int].id != null) {
 								var tr = $("<tr class='surveyRow' surveyId='"+response.surveys[int].id+"'/>");
 								tr.append("<td>"
+												+ (int + 1)
+												+ "</td><td>"
 												+ response.surveys[int].creationDate
 												+ "</td><td>"
 												+ response.surveys[int].severityLevel

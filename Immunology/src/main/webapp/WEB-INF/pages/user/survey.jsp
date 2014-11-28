@@ -101,6 +101,8 @@ var mainTreatmentData = new Builder("mainTreatmentData");
 var rehabilitationData = new Builder("rehabilitationData");
 var preventiveMeasuresData = new Builder("preventiveMeasuresData");
 var currentSurvey = {};
+var currentSurveyId = null;
+var surveyCreationDate = null;
 
 $(document).ready(function() {
 	console.log("${syndrom.name}; ${syndrom.id}");
@@ -200,6 +202,8 @@ function saveSyrvey(){
 	currentSurvey.mainTreatmentData = mainTreatmentData.formObject;
  	currentSurvey.rehabilitationData = rehabilitationData.formObject;
 	currentSurvey.preventiveMeasuresData = preventiveMeasuresData.formObject;
+	currentSurvey.id = currentSurveyId;
+	currentSurvey.creationDate = surveyCreationDate; 
 	
 	console.log(currentSurvey);
 	 $.ajax({
@@ -212,6 +216,8 @@ function saveSyrvey(){
 			success : function(response) {
 				console.log(response);
 				currentSurvey = response;
+				currentSurveyId = response.id;
+				surveyCreationDate = response.creationDate; 
 				console.log("Survey Saved");
 			},
 			error: function (request, status, error) {

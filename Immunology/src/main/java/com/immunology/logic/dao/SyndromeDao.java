@@ -26,4 +26,6 @@ public interface SyndromeDao {
 	
 	List retrieveSyndromePatientStatistic();
 	
+	List<Syndrome> getSyndromesByName(String syndromeName);
+	
 }

@@ -271,8 +271,8 @@
 					<configuration>
 						<driver>${db.driverClassName}</driver>
 						<url>jdbc:postgresql://localhost/Immunology</url>
-						<username>admin</username>
-						<password>adminadmin</password>
+						<username>postgres</username>
+						<password>root</password>
 						<encoding>UTF8</encoding>
 					</configuration>
 					<executions>

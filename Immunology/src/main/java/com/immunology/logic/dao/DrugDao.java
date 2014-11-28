@@ -21,4 +21,5 @@ public interface DrugDao {
 	List retrieveDrugSideEffect(String name);
 	
 	List retrieveCancel(String name);
+
 }

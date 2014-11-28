@@ -94,7 +94,7 @@
 											<th>Дата створення</th>
 											<th>Ступінь важкості %</th>
 											<th>Ступінь недостатності %</th>
-											<th>Лікар</th>
+											<!-- <th>Лікар</th> -->
 											<th>Ефективність</th>
 										</tr>
 									</thead>
@@ -103,7 +103,8 @@
 											<tr>
 												<td>${survey.creationDate}</td>
 												<td>${survey.severityLevel}</td>
-												<%-- 										<td>${survey.user.firstName}</td> --%>
+												<td>${survey.insufficiencyLevel}</td>
+												<%-- <td>${survey.user.firstName} ${survey.user.lastName}</td> --%>
 												<td class='custom-size'>
 													<button type='button' class='btn btn-primary efficiency'>Ефективність</button>
 												</td>
@@ -115,7 +116,7 @@
 											<th>Дата створення</th>
 											<th>Ступінь важкості %</th>
 											<th>Ступінь недостатності %</th>
-											<th>Лікар</th>
+											<!-- <th>Лікар</th> -->
 											<th>Ефективність</th>
 											<!-- 									<th>Лікар</th> -->
 										</tr>
@@ -214,24 +215,27 @@
 		var patientId = "${patient.id}";
 		var syndromName = $('#syndrom').val();
 		var table = $("#survey-table-body");
-		$
-				.ajax({
+		$.ajax({
 					type : "get",
 					url : "/syndromes/patient/{id}/{name}".replace("{id}",
 							patientId).replace("{name}", syndromName),
 					dataType : "json",
 					async : false,
 					success : function(response) {
+						console.log(response);
 						table.html("");
 						for (var int = 0; int < response.surveys.length; int++) {
-							if (response.surveys[int].id != 0) {
+							if (response.surveys[int].id != null) {
 								var tr = $("<tr class='surveyRow' surveyId='"+response.surveys[int].id+"'/>");
-								tr
-										.append("<td>"
+								tr.append("<td>"
 												+ response.surveys[int].creationDate
 												+ "</td><td>"
 												+ response.surveys[int].severityLevel
-												+ "</td><td></td><td></td>"
+												+ "</td><td>"
+												+ response.surveys[int].insufficiencyLevel
+/* 												+ "</td><td>"
+												+ response.surveys[int].user.firstName + " " + response.surveys[int].user.lastName */
+												+ "</td>"
 												+ "<td class='custom-size'>"
 												+ "<button "+
 										"type='button'"+"class='btn btn-primary efficiency'>Ефективність</button></td>");

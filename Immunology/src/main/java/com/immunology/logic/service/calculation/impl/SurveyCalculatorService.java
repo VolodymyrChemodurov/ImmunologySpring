@@ -18,8 +18,13 @@ public class SurveyCalculatorService implements CalculatorService<Survey> {
 		
 		result = formCalculatorService.calculate(survey.getComplaintsForm(), formula) 
 				+ formCalculatorService.calculate(survey.getLaboratoryDataForm(), formula)
-				+ formCalculatorService.calculate(survey.getClinicalManifestationsForm(), formula);
-		
+				+ formCalculatorService.calculate(survey.getClinicalManifestationsForm(), formula)
+				+ formCalculatorService.calculate(survey.getDiagnosisVerificationData(), formula)
+				+ formCalculatorService.calculate(survey.getInstrumentalData(), formula)
+				+ formCalculatorService.calculate(survey.getMainTreatmentData(), formula)
+				+ formCalculatorService.calculate(survey.getMorphologicalData(), formula)
+				+ formCalculatorService.calculate(survey.getPreventiveMeasuresData(), formula)
+				+ formCalculatorService.calculate(survey.getRehabilitationData(), formula); 
 		return result;
 	}
 

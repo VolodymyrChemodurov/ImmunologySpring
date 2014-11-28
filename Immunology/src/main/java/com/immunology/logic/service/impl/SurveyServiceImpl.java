@@ -1,13 +1,11 @@
 package com.immunology.logic.service.impl;
 
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.immunology.logic.dao.CrudDao;
-import com.immunology.logic.dao.SurveyDao;
 import com.immunology.logic.service.SurveyService;
 import com.immunology.logic.utils.ReferenceHelper;
 import com.immunology.model.Survey;
@@ -19,7 +17,7 @@ public class SurveyServiceImpl implements SurveyService {
 	private CrudDao crudDao;
 
 	public Survey saveOrUpdateSurvey(Survey survey) {
-		if (survey.getId() == 0) {
+		if (survey.getId() == null) {
 			survey.setCreationDate(new Date());
 		}
 		ReferenceHelper.setTemplateReferences(survey);

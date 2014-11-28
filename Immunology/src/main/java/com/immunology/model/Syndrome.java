@@ -9,27 +9,30 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.immunology.model.calculation.Formula;
 import com.immunology.model.ui.AnamnesticDataForm;
 
 @Entity
 @Table(name = "diseases")
+@JsonInclude(Include.NON_NULL)
 public class Syndrome {
 
 	@Id
 	@GeneratedValue
-	private long id;
+	private Long id;
 	
 	@Column(name = "disease_name")
 	private String name;
@@ -48,20 +51,22 @@ public class Syndrome {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Survey> surveys;
 
-	@ManyToMany(mappedBy = "syndromeTemplates")
-	@LazyCollection(LazyCollectionOption.FALSE)
+//	@ManyToMany(mappedBy = "syndromeTemplates")
+//	@LazyCollection(LazyCollectionOption.FALSE)
+	@Transient
 	private List<User> users = new ArrayList<User>();
 	
-	@OneToMany(mappedBy = "syndrome")
-	@JsonManagedReference("formula_reference")
-	@LazyCollection(LazyCollectionOption.FALSE)
+//	@OneToMany(mappedBy = "syndrome")
+//	@JsonManagedReference("formula_reference")
+//	@LazyCollection(LazyCollectionOption.FALSE)
+	@Transient
 	private List<Formula> formulas = new ArrayList<Formula>();
 	
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

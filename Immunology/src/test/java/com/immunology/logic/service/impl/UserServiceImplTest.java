@@ -1,6 +1,5 @@
 package com.immunology.logic.service.impl;
 
-import static org.mockito.Mockito.when;
 import junit.framework.TestCase;
 
 import org.junit.Ignore;

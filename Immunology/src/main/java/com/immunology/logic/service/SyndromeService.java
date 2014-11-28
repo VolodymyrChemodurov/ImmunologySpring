@@ -28,7 +28,7 @@ public interface SyndromeService {
 	
 	Syndrome getSyndromeByName(String syndromeName);
 	
-	Formula getSybdromeFormula(String syndromeName, FormulaType formulaType);
+	Formula getSyndromeFormula(String syndromeName, FormulaType formulaType);
 	
 	void saveSyndromeFormula(String syndormeName, FormulaType formulaType, String formula);
 	

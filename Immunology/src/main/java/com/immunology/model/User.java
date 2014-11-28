@@ -15,6 +15,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -60,10 +61,11 @@ public class User {
 				inverseJoinColumns = {@JoinColumn(name = "patient_id")})
 	private Set<Patient> patients;
 	
-	@ManyToMany
-	@JoinTable(name="users_syndromes", 
-		joinColumns={@JoinColumn(name="user_id")}, 
-		inverseJoinColumns={@JoinColumn(name="syndrome_id")})
+//	@ManyToMany
+//	@JoinTable(name="users_syndromes", 
+//		joinColumns={@JoinColumn(name="user_id")}, 
+//		inverseJoinColumns={@JoinColumn(name="syndrome_id")})
+	@Transient
 	private List<Syndrome> syndromeTemplates;
 	
 	@OneToMany(mappedBy = "user")

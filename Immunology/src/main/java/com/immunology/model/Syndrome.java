@@ -9,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -52,8 +51,9 @@ public class Syndrome {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Survey> surveys;
 
-	@ManyToMany(mappedBy = "syndromeTemplates")
-	@LazyCollection(LazyCollectionOption.FALSE)
+//	@ManyToMany(mappedBy = "syndromeTemplates")
+//	@LazyCollection(LazyCollectionOption.FALSE)
+	@Transient
 	private List<User> users = new ArrayList<User>();
 	
 //	@OneToMany(mappedBy = "syndrome")

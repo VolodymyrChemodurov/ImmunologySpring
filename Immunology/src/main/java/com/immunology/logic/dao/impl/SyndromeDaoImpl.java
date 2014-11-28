@@ -21,10 +21,8 @@ import com.immunology.model.Syndrome;
 import com.mongodb.WriteResult;
 
 @Repository
-public class SyndromeDaoImpl extends GenericMongoDao<Syndrome> implements
-		SyndromeDao {
-	private static final Logger LOG = LoggerFactory
-			.getLogger(SyndromeDaoImpl.class);
+public class SyndromeDaoImpl extends GenericMongoDao<Syndrome> implements SyndromeDao {
+	private static final Logger LOG = LoggerFactory.getLogger(SyndromeDaoImpl.class);
 
 	private static final String SYNDROME_TEMPLATE_COLLECTION = "syndromeTemplates";
 	private static final String GET_USER_TEMPLATES = "{'users.id':#}";
@@ -33,6 +31,7 @@ public class SyndromeDaoImpl extends GenericMongoDao<Syndrome> implements
 	private static final String GET_TEMPLATE = "{'name':#}";
 	private static final String GET_PATIENT_SYNDROME = "SELECT syndrome FROM Syndrome syndrome WHERE syndrome.name = :name AND syndrome.patient.id = :id";
 	private static final String SYNDROME_PATIENT_STATISTIC = "SELECT disease_name, COUNT (patient_id) FROM diseases GROUP BY disease_name";
+	private static final String GET_SYNDROMES_BY_NAME = "SELECT syndrome FROM Syndrome syndrome WHERE syndrome.name = :name";
 
 	@PersistenceContext
 	EntityManager entityManager;
@@ -125,6 +124,12 @@ public class SyndromeDaoImpl extends GenericMongoDao<Syndrome> implements
 
 	public List retrieveSyndromePatientStatistic() {
 		return entityManager.createNativeQuery(SYNDROME_PATIENT_STATISTIC)
+				.getResultList();
+	}
+
+	public List<Syndrome> getSyndromesByName(String syndromeName) {
+		return entityManager.createQuery(GET_SYNDROMES_BY_NAME, Syndrome.class)
+				.setParameter("name", syndromeName)
 				.getResultList();
 	}
 }

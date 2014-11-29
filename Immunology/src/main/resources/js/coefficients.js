@@ -16,8 +16,8 @@ function initCoefficientEvents(){
 function getObject(element){
 	var element = element;
 	var panel = $(element).parents(".panel-fieldset");
-	var subPanelBlock = $(this).parents(".sub-panel");
-	var container = $(this).parents(".form-container");
+	var subPanelBlock = $(element).parents(".sub-panel");
+	var container = $(element).parents(".form-container");
 	var obj =window[container.attr("object")];
 	var coeficient;
 	if(subPanelBlock.attr("index") == undefined){

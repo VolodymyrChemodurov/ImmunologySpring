@@ -54,8 +54,16 @@ public class SurveyController {
 		User user = UserUtils.getCurrentUser();
 		model.addAttribute("user", userService.getUserByLogin(user.getUsername()));
 		
-		model.addAttribute("syndrom", syndromeService.getPatientSyndrome(patientId, URIUtils.decodePathVariable(request.getRequestURI(), 7)));
+		Syndrome syndrome = syndromeService.getPatientSyndrome(patientId, URIUtils.decodePathVariable(request.getRequestURI(), 7));
+		Survey survey = null;
+		for(Survey currentSurvey: syndrome.getSurveys()) {
+			if(currentSurvey.getId() == surveyId) {
+				survey = currentSurvey;
+			}
+		}
+		model.addAttribute("syndrom", syndrome);
 		model.addAttribute("surveyId", surveyId);
+		model.addAttribute("survey", survey);
 		model.addAttribute("patient", patientService.getPatientById(patientId));
 		return "user/survey";
 	}

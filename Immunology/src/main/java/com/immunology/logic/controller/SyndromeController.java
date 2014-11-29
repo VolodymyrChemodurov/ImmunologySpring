@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,9 +54,11 @@ public class SyndromeController {
 	}
 	
 	@RequestMapping(value = "/patient/{id}/{name}", method = RequestMethod.GET)
-	public @ResponseBody Syndrome getPatientSyndrome(@PathVariable("id") Long id,  @PathVariable("name") String syndromeName, HttpServletRequest request) {
+	public @ResponseBody Syndrome getPatientSyndrome(@PathVariable("id") Long id,  @PathVariable("name") String syndromeName, HttpServletRequest request, Model model) {
 		
 		LOG.info("getPatientSyndrome");
+		model.addAttribute("surveyId", null);
+		model.addAttribute("survey", null);
 		return syndromeService.getPatientSyndrome(id, URIUtils.decodePathVariable(request.getRequestURI(), 3));
 	}
 	

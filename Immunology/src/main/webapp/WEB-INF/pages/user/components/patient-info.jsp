@@ -86,9 +86,7 @@
 						<div id="SyrveyDataContainer">
 							<div class="box-content no-padding"
 								style="border: 2px solid; border-color: beige; border-radius: 5px; box-shadow: 10px 10px 30px #888;">
-								<table
-									class="table table-bordered table-striped table-hover table-heading table-datatable"
-									id="datatable-3">
+								<table class="table table-bordered table-striped table-hover table-heading table-datatable">
 									<thead>
 										<tr>
 											<th>#</th>

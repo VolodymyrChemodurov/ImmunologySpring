@@ -18,11 +18,14 @@ import com.immunology.logic.service.PatientService;
 import com.immunology.logic.service.SurveyService;
 import com.immunology.logic.service.SyndromeService;
 import com.immunology.logic.service.UserService;
+import com.immunology.logic.service.calculation.impl.SurveyCalculatorService;
 import com.immunology.logic.utils.ReferenceHelper;
 import com.immunology.logic.utils.URIUtils;
 import com.immunology.logic.utils.UserUtils;
+import com.immunology.logic.utils.enums.FormulaType;
 import com.immunology.model.Survey;
 import com.immunology.model.Syndrome;
+import com.immunology.model.calculation.Formula;
 
 @Controller
 @RequestMapping(value = "/survey")
@@ -38,6 +41,8 @@ public class SurveyController {
 	private PatientService patientService;
 	@Autowired
 	private SurveyService surveyService;
+	@Autowired
+	private SurveyCalculatorService surveyCalculatorService;
 	
 	@RequestMapping(value = "/patientId/{id}/syndrome/{syndromeName}", method = RequestMethod.GET)
 	public String  getUserSyndromes(Model model, @PathVariable("id") long patientId, @PathVariable("syndromeName") String syndromeName, HttpServletRequest request) {
@@ -79,6 +84,12 @@ public class SurveyController {
 		survey.setDisease(syndrome);
 		User user = UserUtils.getCurrentUser();
 		survey.setUser(userService.getUserByLogin(user.getUsername()));
+		
+		Formula insufficiencyLevelFormula = syndromeService.getSyndromeFormula(syndrome.getName(), FormulaType.INSUFFICIENCY_LEVEL);
+		Formula severityLevelFormula = syndromeService.getSyndromeFormula(syndrome.getName(), FormulaType.SEVERITY_LEVEL);
+		survey.setInsufficiencyLevel(surveyCalculatorService.calculate(survey, insufficiencyLevelFormula));
+		survey.setSeverityLevel(surveyCalculatorService.calculate(survey, severityLevelFormula));
+		
 		return surveyService.saveOrUpdateSurvey(survey);
 	}
 	

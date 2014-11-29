@@ -18,7 +18,6 @@ import com.immunology.logic.service.calculation.impl.SurveyCalculatorService;
 import com.immunology.logic.utils.ReferenceHelper;
 import com.immunology.logic.utils.UserUtils;
 import com.immunology.logic.utils.enums.FormulaType;
-import com.immunology.model.Survey;
 import com.immunology.model.Syndrome;
 import com.immunology.model.calculation.Formula;
 
@@ -42,13 +41,6 @@ public class SyndromeServiceImpl implements SyndromeService {
 		if(syndrome == null) {
 			User user = UserUtils.getCurrentUser();
 			syndrome = syndromeDao.getUserSyndromeTemplate(userDao.findByLogin(user.getUsername()).getId(), syndromeName);
-		} else {
-			Formula insufficiencyLevelFormula = getSyndromeFormula(syndrome.getName(), FormulaType.INSUFFICIENCY_LEVEL);
-			Formula severityLevelFormula = getSyndromeFormula(syndrome.getName(), FormulaType.SEVERITY_LEVEL);
-			for(Survey survey: syndrome.getSurveys()) {
-				survey.setInsufficiencyLevel(surveyCalculatorService.calculate(survey, insufficiencyLevelFormula));
-				survey.setSeverityLevel(surveyCalculatorService.calculate(survey, severityLevelFormula));
-			}
 		}
 		return syndrome;
 	}

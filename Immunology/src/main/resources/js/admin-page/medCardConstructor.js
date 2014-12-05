@@ -453,7 +453,7 @@ function spClick(){
 	
 	var formElementSelect = $(parent).find("select[name=element-title]");
 
-		$(formElementSelect).html("<option value='-1'>- EMPTY -</option>");
+		$(formElementSelect).html("<option value='-1'>- ПУСТО -</option>");
 		if(subPanelIndex == -1){
 			$(formObject.panels[panelIndex].elements).each(function(index, element){
 				optionElement = $("<option>"+element.name+"</option>");
@@ -497,7 +497,7 @@ function initEvents(){
 			
 		});
 		
-		$(subPanelSelect).append("<option value='-1'>- EMPTY -</option>");
+		$(subPanelSelect).append("<option value='-1'>- ПУСТО -</option>");
 		
 	});
 	$("#save-panel-button").unbind("click");

@@ -43,7 +43,7 @@
 						 <span class="hidden-xs">Мої пацієнти</span>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a class="ajax-link" href="#" onclick="doAjaxGet('patients/new');">Додати нового пацієнта</a></li>
+						<li><a id = "addNewPatient" class="ajax-link" href="#" onclick="doAjaxGet('patients/new');">Додати нового пацієнта</a></li>
 						<li><a class="ajax-link" href="#" onclick="doAjaxGet('patients/my');">Список моїх пацієнтів</a></li>
 					</ul>
 				</li>

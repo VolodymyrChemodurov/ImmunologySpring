@@ -26,23 +26,23 @@
 					<li class="dropdown">
 						<a href="#" class="active dropdown-toggle">
 							<i class="fa fa-user"></i>
-						 	<span class="hidden-xs">Users</span>
+						 	<span class="hidden-xs">Користувачі</span>
 						</a>
 						<ul class="dropdown-menu">
-							<li><a class="ajax-link" href="#" onclick="doAjaxGet('/user/create');">Add new user</a></li>						
-							<li><a class="ajax-link" href="#"  onclick="doAjaxGet('/users');">All users</a></li>
+							<li><a class="ajax-link" href="#" onclick="doAjaxGet('/user/create');">Додати нового користувача</a></li>						
+							<li><a class="ajax-link" href="#"  onclick="doAjaxGet('/users');">Всі користувачі</a></li>
 						</ul>
 					</li>
 					<li>
 						<a href="#"  data-toggle="modal" data-target="#formula-modal" class="ajax-link">
 							<i class="fa fa-flask"></i> 
-							<span class="hidden-xs">Analitic Block</span>
+							<span class="hidden-xs">Аналітичний блок</span>
 						</a>
 					</li>
 					<li>
 						<a href="#" onclick="doAjaxGet('/medcard');" class="ajax-link">
 							<i class="fa fa-file-o"></i>
-							<span class="hidden-xs">Medical Card</span>
+							<span class="hidden-xs">Медична картка</span>
 						</a>
 					</li>
 				
@@ -51,13 +51,13 @@
 					<li id="survey-parent" class="dropdown">
 						<a  href="#"  class="dropdown-toggle">
 							<i class="fa fa-pencil-square-o"></i>
-						 	<span class="hidden-xs">Survey Forms</span>
+						 	<span class="hidden-xs">Форми обстежень</span>
 						</a>
 						<ul class="dropdown-menu">
 						<li class="dropdown">
 							<li>
 								<a href="#"  data-toggle="modal" data-target="#new-syndrom-modal" class="ajax-link">
-									<span class="hidden-xs">New Syndrom</span>
+									<span class="hidden-xs">Новий синдром</span>
 								</a>
 							</li>
 							
@@ -66,19 +66,19 @@
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle active-parent active">
 									<i class="fa fa-plus-square"></i>
-									<span class="hidden-xs">Survey Forms</span>
+									<span class="hidden-xs">Форми обстежень</span>
 								</a>
 								<ul class="dropdown-menu" style="display: block;">
-									<li><a class="ajax-link" href="#"  data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'comlaints'">Complaints Form</a></li>
-									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'clinicalManifestation'" >Clinical Manifestation Form</a></li>
-									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'laboratoryData'" >Laboratory Data Form</a></li>
+									<li><a class="ajax-link" href="#"  data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'comlaints'">Скарги</a></li>
+									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'clinicalManifestation'" >Клінічні симптоми</a></li>
+									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'laboratoryData'" >Лабораторні дані</a></li>
 									
-									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'morphologicalData'" >Morphological Data</a></li>
-									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'instrumentalData'" >Instrumental Data</a></li>
-									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'diagnosisVerificationData'" >DiagnosisVerificationData Form</a></li>
-									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'mainTreatmentData'" >Main Treatment Data Form</a></li>
-									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'rehabilitationData'" >Rehabilitation Data Form</a></li>
-									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'preventiveMeasuresData'" >Preventive Measures Data Form</a></li>
+									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'morphologicalData'" >Морфологічні дані</a></li>
+									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'instrumentalData'" >Інструментальні дані</a></li>
+									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'diagnosisVerificationData'" >Верифікація діагнозу</a></li>
+									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'mainTreatmentData'" >Основне лікування</a></li>
+									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'rehabilitationData'" >Реабілітація</a></li>
+									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'preventiveMeasuresData'" >Профілактичні заходи</a></li>
 								</ul>
 							</li>
 						</li>
@@ -108,20 +108,20 @@
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal">
-								<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+								<span aria-hidden="true">&times;</span><span class="sr-only">Закрити</span>
 							</button>
-							<h4 class="modal-title" id="myModalLabel">Syndroms</h4>
+							<h4 class="modal-title" id="myModalLabel">Синдроми</h4>
 						</div>
 						<div class="modal-body">
-							<label class="col-sm-12 control-label">Select Syndrom:</label> 
+							<label class="col-sm-12 control-label">Вибрати синдром:</label> 
 							<select class="form-control" name="syndrrom-names">
 							<c:forEach items="${syndromes}" var="syndrome">
     							<option>${syndrome}</option>
 							</c:forEach>
 							</select>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-								<button type="button" class="btn btn-primary" onclick="doAjaxGet('anamnestic'); initSurveyForm($('select[name=syndrrom-names]')[0].value)" data-dismiss="modal">Choose</button>
+								<button type="button" class="btn btn-default" data-dismiss="modal">Закрити</button>
+								<button type="button" class="btn btn-primary" onclick="doAjaxGet('anamnestic'); initSurveyForm($('select[name=syndrrom-names]')[0].value)" data-dismiss="modal">Вибрати</button>
 							</div>
 						</div>
 					</div>
@@ -133,16 +133,16 @@
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal">
-								<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+								<span aria-hidden="true">&times;</span><span class="sr-only">Закрити</span>
 							</button>
-							<h4 class="modal-title" id="myModalLabel">Syndroms</h4>
+							<h4 class="modal-title" id="myModalLabel">Синдроми</h4>
 						</div>
 						<div class="modal-body">
 						
-							<label class="col-sm-12 control-label">Set syndrom name:</label>
+							<label class="col-sm-12 control-label">Введіть назву синдрому:</label>
 							<input type="text" class="form-control" id="new-syndrom-name">
 							
-							<label class="col-sm-12 control-label">Select syndrom as a parent syndrom</label> 
+							<label class="col-sm-12 control-label">Створити синдром як дочірній до:</label> 
 							<select name="parent-syndrom-name" class="form-control">
 							<option>None</option>
 							<c:forEach items="${syndromes}" var="syndrome">
@@ -150,8 +150,8 @@
 							</c:forEach>
 							</select>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-								<button type="button" id="save-syndrom-button" class="btn btn-primary" data-dismiss="modal">Save</button>
+								<button type="button" class="btn btn-default" data-dismiss="modal">Закрити</button>
+								<button type="button" id="save-syndrom-button" class="btn btn-primary" data-dismiss="modal">Зберегти</button>
 							</div>
 						</div>
 					</div>
@@ -163,26 +163,26 @@
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal">
-								<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+								<span aria-hidden="true">&times;</span><span class="sr-only">Закрити</span>
 							</button>
-							<h4 class="modal-title" id="myModalLabel">Syndroms</h4>
+							<h4 class="modal-title" id="myModalLabel">Синдроми</h4>
 						</div>
 						<div class="modal-body">
-							<label class="col-sm-12 control-label">Select Syndrom:</label> 
+							<label class="col-sm-12 control-label">Вибрати синдром:</label> 
 							<select class="form-control" id="syndrrom-names" name="syndrrom-names" style="margin-bottom: 20px;">
 							<c:forEach items="${syndromes}" var="syndrome">
     							<option>${syndrome}</option>
 							</c:forEach>
 							</select>
-							<label class="col-sm-12 control-label" style="margin-left: 10px;">Severity Level formula:</label> 
+							<label class="col-sm-12 control-label" style="margin-left: 10px;">Формула обрахунку степені важкості:</label> 
 							<h3 style="width: 3%; float: left;">Σ</h3><input type="text" class="form-control" id="severity-formula" style="width: 96%; float: right;">
-							<small style="float: right;">You can use such symbols: ' * ' , ' ^ ' , ' / ' , ' X ' ; Х - is the coeficient value </small>
-							<label class="col-sm-12 control-label"  style="margin-left: 10px;">Insufficiency Level formula</label>
+							<small style="float: right;">Можна використовувати наступні символи: ' * ' , ' ^ ' , ' / ' , ' X ' ; де Х - значення коефіцієнта </small>
+							<label class="col-sm-12 control-label"  style="margin-left: 10px;">Формула обрахунку степені недостатності:</label>
 							<h3 style="width: 3%; float: left;">Σ</h3><input type="text" class="form-control" id="insufficiency-formula" style="width: 96%; float: right;">
-							<small style="float: right;">You can use such symbols: ' * ' , ' ^ ' , ' / ' , ' X ' ; Х - is the coeficient value </small>
+							<small style="float: right;">Можна використовувати наступні символи: ' * ' , ' ^ ' , ' / ' , ' X ' ; де Х - значення коефіцієнта </small>
 							<div class="modal-footer" style="margin-top: 160px; height: 40px;">
-								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-								<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="sendFormulaValues();">Save</button>
+								<button type="button" class="btn btn-default" data-dismiss="modal">Закрити</button>
+								<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="sendFormulaValues();">Зберегти</button>
 							</div>
 						</div>
 					</div>

@@ -41,7 +41,7 @@ function getObject(element){
 	var fieldset = $("<fieldset/>");
 	var row = $('<div class="col-sm-6">');
 	row.append('<input type="text" class="form-control" value="'+coeficient+'"/>');
-	fieldset.append('<label class="col-sm-6 control-label">Set coefficient value:</label>');
+	fieldset.append('<label class="col-sm-6 control-label">Задати значення коефіцієнта:</label>');
 	fieldset.append(row);
 	modalBody.append(fieldset);
 	if(subPanelBlock.attr("index") == undefined){

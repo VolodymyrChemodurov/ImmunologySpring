@@ -4,9 +4,9 @@
 <div class="row">
 	<div id="breadcrumb" class="col-md-12">
 		<ol class="breadcrumb">
-			<li><a href="index.html">Main</a></li>
-			<li><a href="#">Users</a></li>
-			<li><a href="#">Add new user</a></li>
+			<li><a href="index.html">Головна</a></li>
+			<li><a href="#">Користувачі</a></li>
+			<li><a href="#">Додати нового користувача</a></li>
 		</ol>
 	</div>
 </div>
@@ -16,7 +16,7 @@
 		<div class="box" id="new-user">
 			<div class="box-header">
 				<div class="box-name">
-					<i class="fa fa-search"></i> <span>New user</span>
+					<i class="fa fa-search"></i> <span>Новий користувач</span>
 				</div>
 				<div class="box-icons">
 					<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
@@ -32,21 +32,21 @@
 					<fieldset>
 						<legend></legend>
 						<div class="form-group">
-							<label class="col-sm-3 control-label">Last name</label>
+							<label class="col-sm-3 control-label">Прізвище</label>
 							<div class="col-sm-5">
 								<input type="text" class="form-control" name="lastName"
 									id="lastName" />
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-sm-3 control-label">First name</label>
+							<label class="col-sm-3 control-label">Ім'я</label>
 							<div class="col-sm-5">
 								<input type="text" class="form-control" name="firstName"
 									id="firstName" />
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-sm-3 control-label">Middle name</label>
+							<label class="col-sm-3 control-label">По-батькові</label>
 							<div class="col-sm-5">
 								<input type="text" class="form-control" name="middleName"
 									id="middleName" />
@@ -54,14 +54,14 @@
 						</div>
 
 						<div class="form-group">
-							<label class="col-sm-3 control-label">Login</label>
+							<label class="col-sm-3 control-label">Логін</label>
 							<div class="col-sm-5">
 								<input type="text" class="form-control" name="login" id="login" />
 							</div>
 						</div>
 
 						<div class="form-group" id="defaultForm-password">
-							<label class="col-sm-3 control-label">Password</label>
+							<label class="col-sm-3 control-label">Пароль</label>
 							<div class="col-sm-5">
 								<input type="text" class="form-control" name="password"
 									id="password" />
@@ -69,14 +69,14 @@
 						</div>
 
 						<div class="form-group">
-							<label class="col-sm-3 control-label">User's role</label>
+							<label class="col-sm-3 control-label">Роль користувача</label>
 							<div class="col-sm-5">
 								<select class="form-control dropdown" name="user_role"
 									id="user_role">
-									<option value="">-- Choose the role --</option>
-									<option value="ROLE_USER">User</option>
-									<option value="ROLE_ADMIN">Admin</option>
-									<option value="ROLE_DOCTOR">Doctor</option>
+									<option value="">-- Оберіть роль --</option>
+									<option value="ROLE_USER">Користувач</option>
+									<option value="ROLE_ADMIN">Адміністратор</option>
+									<option value="ROLE_DOCTOR">Лікар</option>
 								</select>
 							</div>
 						</div>
@@ -89,7 +89,7 @@
 
 					<div class="form-group">
 						<div class="col-sm-11 col-sm-offset-3">
-							<button type="submit" class="btn btn-primary">Create</button>
+							<button type="submit" class="btn btn-primary">Створити</button>
 						</div>
 					</div>
 				</form>

@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <header class="navbar">
 	<div class="container-fluid expanded-panel">
 		<div class="row">
@@ -21,7 +23,7 @@
 								<a href="#" class="dropdown-toggle account" data-toggle="dropdown">
 									<i class="fa fa-angle-down pull-right"></i>
 									<div class="user-mini pull-right">
-										<span class="welcome">Welcome,</span>
+										<span class="welcome">Вітання,</span>
 										<span>${user.firstName}  ${user.lastName}</span>
 									</div>
 								</a>
@@ -29,13 +31,13 @@
 									<li>
 										<a href="#" onclick="doAjaxGet('profile')">
 											<i class="fa fa-user"></i>
-											<span class="hidden-sm text">Profile</span>
+											<span class="hidden-sm text">Профіль</span>
 										</a>
 									</li>
 									<li>
 										<a href="/j_spring_security_logout">
 											<i class="fa fa-power-off"></i>
-											<span class="hidden-sm text">Logout</span>
+											<span class="hidden-sm text">Вихід</span>
 										</a>
 									</li>
 								</ul>

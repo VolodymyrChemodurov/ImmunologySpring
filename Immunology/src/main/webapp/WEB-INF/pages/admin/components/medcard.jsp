@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <style>
 .sub-panel .col-sm-7{
 	padding-left: 4px;
@@ -6,8 +8,8 @@
 <div class="row">
 	<div id="breadcrumb" class="col-md-12">
 		<ol class="breadcrumb">
-			<li><a href="index.html">Main</a></li>
-			<li><a href="#">Medical Card</a></li>
+			<li><a href="index.html">Головна</a></li>
+			<li><a href="#">Медична картка</a></li>
 		</ol>
 	</div>
 </div>
@@ -17,7 +19,7 @@
 		<div class="box">
 			<div class="box-header">
 				<div class="box-name">
-					<span>Instruments</span>
+					<span>Інструменти</span>
 				</div>
 				<div class="no-move"></div>
 			</div>
@@ -26,32 +28,32 @@
 				<ul class="nav nav-pills nav-stacked">
 				  <li class="active">
 				    <a href="#" data-toggle="modal" data-target="#create-panel">
-				      Create Panel
+				      Створити Panel
 				    </a>
 				  </li>
 				  <li class="active">
 				    <a href="#" data-toggle="modal" data-target="#create-sub-panel">
-				      Create Sub-Panel
+				      Створити Sub-Panel
 				    </a>
 				  </li>
 				  <li class="active">
 				    <a href="#" data-toggle="modal" data-target="#create-dropdown">
-				      Create DropDown
+				      Створити DropDown
 				    </a>
 				  </li>
 				   <li class="active">
 				    <a href="#" data-toggle="modal" data-target="#create-textbox">
-				      Create TextBox
+				      Створити TextBox
 				    </a>
 				  </li>
 				  <li class="active">
 				    <a href="#" data-toggle="modal" style="background-color: #cc181e" data-target="#remove-element">
-				     	Remove Element
+				     	Видалити елемент
 				    </a>
 				  </li>
 				</ul>
 				<div class="col-sm-5" style="margin-top: 5px;">
-					<button type="button" name="save-button"  class="btn btn-default btn-lg"> Save & Show</button>
+					<button type="button" name="save-button"  class="btn btn-default btn-lg">Зберегти і показати</button>
 				</div>
 
 			</div>
@@ -63,7 +65,7 @@
 		<div class="box">
 			<div class="box-header">
 				<div class="box-name">
-					<span>Quick view</span>
+					<span>Вигляд медичної картки</span>
 				</div>
 				<div class="no-move"></div>
 			</div>

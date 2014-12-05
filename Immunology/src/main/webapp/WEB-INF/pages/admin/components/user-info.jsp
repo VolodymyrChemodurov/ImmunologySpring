@@ -12,9 +12,9 @@ display: none;
 <div class="row">
 	<div id="breadcrumb" class="col-md-12">
 		<ol class="breadcrumb">
-			<li><a href="index.html">Main</a></li>
-			<li><a href="#">All users</a></li>
-			<li><a href="#">${user.firstName} ${user.lastName}</a></li>
+			<li><a href="index.html">Головна</a></li>
+			<li><a href="#">Всі користувачі</a></li>
+			<li><a href="#"> ${user.lastName} ${user.firstName}</a></li>
 		</ol>
 	</div>
 </div>
@@ -23,8 +23,9 @@ display: none;
 		<div class="box">
 			<div class="box-header">
 				<div class="box-name">
-					<i class="fa fa-user"></i> <span>${user.firstName}
-						${user.lastName}</span>
+					<i class="fa fa-user"></i> <span>${user.lastName} 
+						${user.firstName}
+						</span>
 				</div>
 				<div class="no-move"></div>
 			</div>
@@ -32,22 +33,22 @@ display: none;
 			<fieldset>
 				
 				<div class="col-xs-6">
-				<label class="control-label">Current user syndroms:</label>
+				<label class="control-label">Синдроми пов'язані із користувачем:</label>
 					<select id="user-syndroms" multiple="" class="form-control">
 						<c:forEach items="${syndromes}" var="syndrom">
 							<option>${syndrom}</option>
 						</c:forEach>
 					</select>
 				
-				<label class="control-label">Add new syndrom:</label>
+				<label class="control-label">Додати новий синдром:</label>
 				
 				<select id="not-used-syndroms" class="form-control" id="not-subscribed-syndroms">
 					<c:forEach items="${allSyndroms}" var="syndrom">
 						<option>${syndrom}</option>
 					</c:forEach>
 				</select>
-				<button id="add-syndrom-button" class="btn btn-primary" style="margin-top: 10px; width: 30%;">Add</button>
-				<button id="remove-syndrom-button" class="btn btn-danger" style="margin-top: 10px; width: 30%;">Remove</button>
+				<button id="add-syndrom-button" class="btn btn-primary" style="margin-top: 10px; width: 30%;">Додати</button>
+				<button id="remove-syndrom-button" class="btn btn-danger" style="margin-top: 10px; width: 30%;">Видалити</button>
 				</div>
 				
 			</fieldset>

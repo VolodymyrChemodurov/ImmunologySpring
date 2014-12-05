@@ -1,9 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <div class="row">
 	<div id="breadcrumb" class="col-md-12">
 		<ol class="breadcrumb">
-			<li><a href="#">Main</a></li>
-			<li><a href="#">Survey Forms</a></li>
-			<li><a href="#">Anamnestic Data</a></li>
+			<li><a href="#">Головна</a></li>
+			<li><a href="#">Форми обстежень</a></li>
+			<li><a href="#">Анамнестичні дані</a></li>
 		</ol>
 	</div>
 </div>
@@ -13,7 +15,7 @@
 		<div class="box">
 			<div class="box-header">
 				<div class="box-name">
-					<span>Instruments</span>
+					<span>Інструменти</span>
 				</div>
 				<div class="no-move"></div>
 			</div>
@@ -21,32 +23,32 @@
 				<ul class="nav nav-pills nav-stacked">
 				  <li class="active">
 				    <a href="#" data-toggle="modal" data-target="#create-panel">
-				      Create Panel
+				      Створити Panel
 				    </a>
 				  </li>
 				  <li class="active">
 				    <a href="#" data-toggle="modal" data-target="#create-sub-panel">
-				      Create Sub-Panel
+				      Створити Sub-Panel
 				    </a>
 				  </li>
 				  <li class="active">
 				    <a href="#" data-toggle="modal" data-target="#create-dropdown">
-				      Create DropDown
+				      Створити DropDown
 				    </a>
 				  </li>
 				  <li class="active">
 				    <a href="#" data-toggle="modal" data-target="#create-textbox">
-				      Create TextBox
+				      Створити TextBox
 				    </a>
 				  </li>
 				  <li class="active">
 				    <a href="#" data-toggle="modal" data-target="#create-groupButton">
-				      Create GroupButton
+				      Створити GroupButton
 				    </a>
 				  </li>
 				  <li class="active">
 				    <a href="#" data-toggle="modal" style="background-color: #cc181e" data-target="#remove-element">
-				     	Remove Element
+				     	Видалити елемент
 				    </a>
 				  </li>
 				</ul>
@@ -63,7 +65,7 @@
 		<div class="box">
 			<div class="box-header">
 				<div class="box-name">
-					<span>Quick view</span>
+					<span>Вигляд форми:</span>
 				</div>
 				<div class="no-move"></div>
 			</div>

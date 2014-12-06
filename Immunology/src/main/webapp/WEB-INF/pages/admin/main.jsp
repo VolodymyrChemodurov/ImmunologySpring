@@ -60,6 +60,11 @@
 									<span class="hidden-xs">Новий синдром</span>
 								</a>
 							</li>
+							<li>
+								<a a class="ajax-link" href="#"  data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'anamnestic'">
+									<span class="hidden-xs">Анамнестичні дані</span>
+								</a>
+							</li>
 							
 							
 						
@@ -274,44 +279,44 @@
 			 
 			 survey["morphologicalData"]= {};
 			 var morphologicalData = {};
-			 laboratoryDataForm["name"] = "";
-			 laboratoryDataForm["panels"] = [];
-			 laboratoryDataForm["objectType"] = "MorphologicalData";
-			 survey.laboratoryDataForm = morphologicalData;
+			 morphologicalData["name"] = "";
+			 morphologicalData["panels"] = [];
+			 morphologicalData["objectType"] = "MorphologicalData";
+			 survey.morphologicalData = morphologicalData;
 			 
 			 survey["instrumentalData"]= {};
 			 var instrumentalData = {};
-			 laboratoryDataForm["name"] = "";
-			 laboratoryDataForm["panels"] = [];
-			 laboratoryDataForm["objectType"] = "InstrumentalData";
+			 instrumentalData["name"] = "";
+			 instrumentalData["panels"] = [];
+			 instrumentalData["objectType"] = "InstrumentalData";
 			 survey.instrumentalData = instrumentalData;
 			 
 			 survey["diagnosisVerificationData"]= {};
 			 var diagnosisVerificationData = {};
-			 laboratoryDataForm["name"] = "";
-			 laboratoryDataForm["panels"] = [];
-			 laboratoryDataForm["objectType"] = "DiagnosisVerificationData";
+			 diagnosisVerificationData["name"] = "";
+			 diagnosisVerificationData["panels"] = [];
+			 diagnosisVerificationData["objectType"] = "DiagnosisVerificationData";
 			 survey.diagnosisVerificationData = diagnosisVerificationData;
 			 
 			 survey["mainTreatmentData"]= {};
 			 var mainTreatmentData = {};
-			 laboratoryDataForm["name"] = "";
-			 laboratoryDataForm["panels"] = [];
-			 laboratoryDataForm["objectType"] = "MainTreatmentData";
+			 mainTreatmentData["name"] = "";
+			 mainTreatmentData["panels"] = [];
+			 mainTreatmentData["objectType"] = "MainTreatmentData";
 			 survey.mainTreatmentData = mainTreatmentData;
 			 
 			 survey["rehabilitationData"]= {};
 			 var rehabilitationData = {};
-			 laboratoryDataForm["name"] = "";
-			 laboratoryDataForm["panels"] = [];
-			 laboratoryDataForm["objectType"] = "RehabilitationData";
+			 rehabilitationData["name"] = "";
+			 rehabilitationData["panels"] = [];
+			 rehabilitationData["objectType"] = "RehabilitationData";
 			 survey.rehabilitationData = rehabilitationData;
 			 
 			 survey["preventiveMeasuresData"]= {};
 			 var preventiveMeasuresData = {};
-			 laboratoryDataForm["name"] = "";
-			 laboratoryDataForm["panels"] = [];
-			 laboratoryDataForm["objectType"] = "PreventiveMeasuresData";
+			 preventiveMeasuresData["name"] = "";
+			 preventiveMeasuresData["panels"] = [];
+			 preventiveMeasuresData["objectType"] = "PreventiveMeasuresData";
 			 survey.preventiveMeasuresData = preventiveMeasuresData;
 			
 			 

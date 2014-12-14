@@ -33,7 +33,7 @@ function getObject(element){
 			this.formObject.panels[$(panel).attr("index")].elements[subPanelBlock.attr("index")].elements[$(element).attr("index")].multiplier = 0;
 			coeficient = 0;
 		}else{
-			coeficient = this.formObject.panels[$(panel).attr("index")].elements[subPanelBlock.attr("index")].elements[$(element).attr("index")].multiplier;
+			coeficient = this.formObject.panels[$(panel).attr("index")].elements[$(subPanelBlock).attr("index")].elements[$(element).attr("index")].multiplier;
 		}
 	}
 	var modalBody = $("#coeficient-modal").find(".modal-body");
@@ -48,7 +48,7 @@ function getObject(element){
 		var clickFunction = 'formObject.panels['+$(panel).attr("index")+'].elements['+$(element).attr("index")+'].multiplier = $("#coeficient-modal").find("input").val();';
 		$("#coeficient-modal").find("#save-textBox-button").attr("onclick", clickFunction);
 	}else{
-		var clickFunction = 'formObject.panels[$(panel).attr("index")].elements[subPanelBlock.attr("index")].elements[$(element).attr("index")].multiplier = $("#coeficient-modal").find("input").val();'; 
+		var clickFunction = 'formObject.panels['+$(panel).attr("index")+'].elements['+subPanelBlock.attr("index")+'].elements['+$(element).attr("index")+'].multiplier = $("#coeficient-modal").find("input").val();'; 
 		$("#coeficient-modal").find("#save-textBox-button").attr("onclick", clickFunction);
 	}
 }

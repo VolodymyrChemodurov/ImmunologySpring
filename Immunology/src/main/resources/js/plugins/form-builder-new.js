@@ -709,7 +709,7 @@ this.initNewSurveyFormWithNewUrl = function(blockID,type, url) {
 		generateButtonGroup: function(buttonGroup, elementIndex){
 			row = $('<div class = "col-sm-12 element_row" style="margin-top: 2px;"/>').attr("index", elementIndex);
 			rowTitle = $('<div class="col-sm-5"/>');
-			rowTitle.append('<label style= "font-weight: 100;" >' + buttonGroup.name + '<label>');
+			rowTitle.append(this.generateCheckBox(buttonGroup.name, buttonGroup.checked, elementIndex));
 			rowRightSide = $('<div class="col-sm-7" />');
 			buttonsDiv = $('<div class="btn-group col-sm-12" data-toggle="buttons" style="padding: 0px"/>');
 			for (var int = 0; int < 4; int++) {

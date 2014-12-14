@@ -2,17 +2,20 @@ package com.immunology.logic.service.impl;
 
 import junit.framework.TestCase;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.immunology.logic.dao.CrudDao;
+import com.immunology.logic.dao.UserRoleDao;
+import com.immunology.logic.utils.enums.UserRoles;
+import com.immunology.model.Role;
 import com.immunology.model.User;
-@Ignore
+
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceImplTest extends TestCase{
 
@@ -22,7 +25,8 @@ public class UserServiceImplTest extends TestCase{
 	private CrudDao crudDao;
 	@Mock
 	private PasswordEncoder encoder;
-	
+	@Mock
+	private UserRoleDao userRoleDao;
 	@InjectMocks
 	private UserServiceImpl userServiceImpl;
 	
@@ -31,10 +35,11 @@ public class UserServiceImplTest extends TestCase{
 		User user = new User();
 		user.setPassword(PASSWORD);
 
-		when(encoder.encode(PASSWORD)).thenReturn(PASSWORD);
-		when(crudDao.create(user)).thenReturn(user);
+		Mockito.when(encoder.encode(PASSWORD)).thenReturn(PASSWORD);
+		Mockito.when(crudDao.create(user)).thenReturn(user);
+		Mockito.when(userRoleDao.findByUserRole(Mockito.any(UserRoles.class))).thenReturn(new Role());
 		
-		assertEquals(PASSWORD, userServiceImpl.createUser(user).getPassword());
+		assertEquals(PASSWORD, userServiceImpl.createUser(user, UserRoles.ROLE_USER.getValue()).getPassword());
 	}
 
 	@Test

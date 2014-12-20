@@ -37,12 +37,14 @@ public class FormCalculatorService implements CalculatorService<Form> {
 			} else {
 				if (element instanceof Computable && element.isChecked()) {
 					Computable computableElement = (Computable) element;
-					result += new ExpressionBuilder(
+					if(computableElement.getValue() != null && computableElement.getMultiplier() != null) {
+						result += new ExpressionBuilder(
 							formula.getFormulaExpression())
 							.variable(VARIABLE_NAME)
 							.build()
 							.setVariable(VARIABLE_NAME, computableElement.getMultiplier() * computableElement.getValue())
 							.evaluate();
+					}
 				}
 			}
 		}

@@ -83,6 +83,7 @@ public class LoginController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}*/
+		LOG.info("login");
 		return "login";
 	}
 	

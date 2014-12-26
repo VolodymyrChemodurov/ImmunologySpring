@@ -706,8 +706,8 @@ function createPanel(title){
  	panel["name"] = title;
  	panel["checked"] = false;
  	panel["objectType"] = "Panel";
- 	order.panel = order.panel + 1;
- 	panel["order"] = order.panel;
+ 	//order.panel = order.panel + 1;
+ 	panel["order"] = 0;
  	panel["elements"] = [];
  	
  	if(formObject == null){
@@ -716,6 +716,7 @@ function createPanel(title){
  		formObject["name"] = "";
  		formObject["objectType"] = "AnamnesticDataForm";
  	}
+ 	panel.order = formObject.panels.length + 1;
  	formObject.panels.push(panel); 
  	initPanelNames();
  	renderPreviewMedForm();
@@ -726,6 +727,7 @@ function createSubPanel(index,title){
 	subPanel["checked"] = false;
 	subPanel["objectType"] = "Panel";
 	subPanel["elements"] = [];
+	subPanel["order"] = formObject.panels[index].elements.length + 1;
 	formObject.panels[index].elements.push(subPanel); 
 	renderPreviewMedForm();
 }
@@ -737,8 +739,10 @@ function createTextBox(panelIndex,subPanelIndex,title){
  	textBox["text"] = "";
  	textBox["multiplier"] = 0;
  	if(parseInt(subPanelIndex) == -1 || subPanelIndex == null){
+ 		textBox["order"] = formObject.panels[panelIndex].elements.length + 1;
  		formObject.panels[panelIndex].elements.push(textBox);
  	}else{
+ 		textBox["order"] = formObject.panels[panelIndex].elements[subPanelIndex].elements.length + 1;
  		formObject.panels[panelIndex].elements[subPanelIndex].elements.push(textBox);
  		
  	}
@@ -751,8 +755,10 @@ function createDropDown(panelIndex,subPanelIndex,title,values){
  	dropDown["objectType"] ="DropDown";
  	dropDown["values"] = values;
  	if(parseInt(subPanelIndex) == -1 || subPanelIndex == null){
+ 		dropDown["order"] = formObject.panels[panelIndex].elements.length + 1;
  		formObject.panels[panelIndex].elements.push(dropDown);
  	}else{
+ 		dropDown["order"] = formObject.panels[panelIndex].elements[subPanelIndex].elements.length + 1;
  		formObject.panels[panelIndex].elements[subPanelIndex].elements.push(dropDown);
  	}
  	renderPreviewMedForm();
@@ -766,8 +772,10 @@ function createButtonGroup(panelIndex,subPanelIndex,title,values){
 	groupButton["value"] = 0;
 	groupButton["multiplier"] = 0;
  	if(parseInt(subPanelIndex) == -1 || subPanelIndex == null){
+ 		groupButton["order"] = formObject.panels[panelIndex].elements.lengh + 1; 
  		formObject.panels[panelIndex].elements.push(groupButton);
  	}else{
+ 		groupButton["order"] = formObject.panels[panelIndex].elements[subPanelIndex].elements + 1;
  		formObject.panels[panelIndex].elements[subPanelIndex].elements.push(groupButton);
  	}
  	renderPreviewMedForm();

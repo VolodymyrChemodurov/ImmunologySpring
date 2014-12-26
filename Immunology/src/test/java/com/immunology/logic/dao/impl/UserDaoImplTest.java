@@ -50,7 +50,7 @@ public class UserDaoImplTest {
 		when(em.createQuery(GET_BY_LOGIN, User.class)).thenReturn(query);
 		when(query.setParameter(LOGIN, LOGIN)).thenReturn(query);
 		
-		assertEquals(null, userDaoImpl.findByLogin(LOGIN));
+		assertEquals(user, userDaoImpl.findByLogin(LOGIN));
 	}
 	
 	@Test

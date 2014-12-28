@@ -3,7 +3,6 @@ package com.immunology.model.ui.elements.impl;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.immunology.model.ui.elements.Computable;
 import com.immunology.model.ui.elements.Element;
@@ -14,7 +13,6 @@ import com.immunology.model.ui.elements.Element;
 @Table(name = "button_group")
 public class ButtonGroup extends Element implements Computable {
 
-	@JsonIgnore
 	private Double value;
 	
 	private Double multiplier;

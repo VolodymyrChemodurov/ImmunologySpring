@@ -1,33 +1,12 @@
 package com.immunology.logic.controller;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.immunology.logic.dao.CrudDao;
-import com.immunology.logic.utils.enums.FormulaType;
-import com.immunology.model.Survey;
-import com.immunology.model.Syndrome;
-import com.immunology.model.calculation.Formula;
-import com.immunology.model.ui.ClinicalManifestationsForm;
-import com.immunology.model.ui.ComplaintsForm;
-import com.immunology.model.ui.DrugTolerance;
-import com.immunology.model.ui.EfficacyData;
-import com.immunology.model.ui.EfficacyEvaluation;
-import com.immunology.model.ui.LaboratoryDataForm;
-import com.immunology.model.ui.SideEffectsSeverityDegree;
-import com.immunology.model.ui.elements.Element;
-import com.immunology.model.ui.elements.impl.Panel;
-import com.immunology.model.ui.elements.impl.TextBox;
 
 @Controller
 @RequestMapping(value = "/")
@@ -83,7 +62,6 @@ public class LoginController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}*/
-		LOG.info("login");
 		return "login";
 	}
 	

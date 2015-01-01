@@ -6,7 +6,12 @@ import org.springframework.security.core.userdetails.User;
 public class UserUtils {
 
 	public static User getCurrentUser() {
-		return (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if(user != "anonymousUser") {
+			return (User) user;
+		} else {
+			return null;
+		}
 	}
 	
 }

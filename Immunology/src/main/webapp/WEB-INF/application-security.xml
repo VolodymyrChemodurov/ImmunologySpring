@@ -5,14 +5,22 @@
 		http://www.springframework.org/schema/security
 		http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
-	<http auto-config="true">
-		<intercept-url pattern="/admin*" access="ROLE_ADMIN" />
-		<intercept-url pattern="/cabinet*" access="ROLE_USER, ROLE_DOCTOR" />
+	<http pattern="/resources/**" security="none"/>
+	<http use-expressions="true">
+		<intercept-url pattern="/login*" access="permitAll"/>
+		<intercept-url pattern="/admin*" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/cabinet*" access="hasAnyRole('ROLE_USER', 'ROLE_DOCTOR')" />
+		<intercept-url pattern="/**" access="isAuthenticated()" />
 		<access-denied-handler ref="customAccessDeniedHandlerImpl"/>
+		<custom-filter ref="ajaxTimeoutRedirectFilter" after="EXCEPTION_TRANSLATION_FILTER"/>
 		<form-login login-page="/login" default-target-url="/index"
 			authentication-failure-url="/login?fail=true" />
 		<logout logout-success-url="/login" />
 	</http>
+
+	<beans:bean id="ajaxTimeoutRedirectFilter" class="com.immunology.logic.utils.filter.AjaxTimeoutRedirectFilter" >
+		<beans:property name="customSessionExpiredErrorCode" value="901" />
+	</beans:bean>
 
 	<beans:bean id="customAccessDeniedHandlerImpl" class="com.immunology.logic.controller.AccessDeniedHandlerImpl"/>
 

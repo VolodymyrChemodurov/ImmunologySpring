@@ -31,7 +31,7 @@
 										</a>
 									</li>
 									<li>
-										<a href="/">
+										<a href="/j_spring_security_logout">
 											<i class="fa fa-power-off"></i>
 											<span class="hidden-sm text">Вихід</span>
 										</a>

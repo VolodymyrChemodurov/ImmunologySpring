@@ -21,10 +21,12 @@ public class RoleUtils {
 	
 	private static boolean isMatch(User user, UserRoles role) {
 		boolean isMatch = false;
-		for(GrantedAuthority authority: user.getAuthorities()) {
-			if(authority.getAuthority().equals(role.getValue())) {
-				isMatch = true;
-				break;
+		if(user != null) {
+			for(GrantedAuthority authority: user.getAuthorities()) {
+				if(authority.getAuthority().equals(role.getValue())) {
+					isMatch = true;
+					break;
+				}
 			}
 		}
 		return isMatch;

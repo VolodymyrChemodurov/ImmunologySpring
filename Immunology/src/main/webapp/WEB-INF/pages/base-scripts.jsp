@@ -29,3 +29,10 @@
 <script src="${param.baseURL}/resources/js/validation.js"></script>
 <script src="${param.baseURL}/resources/js/coefficients.js"></script>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<script>
+	$(document).ajaxError(function(response) {
+		console.log(response);
+    	window.location = "/login";
+	});
+</script>

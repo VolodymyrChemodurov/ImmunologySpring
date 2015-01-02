@@ -179,6 +179,7 @@ function getSurveyTemplate(){
 		type : "get",
 		url :  "/syndromes/template/{name}".replace("{name}", "${syndrom.name}"),
 		dataType : "json",
+		async:   false,
 		success : function(response) {
 			currentSurvey = response.surveys[0];
 		},
@@ -215,6 +216,7 @@ function saveSyrvey(){
 			data: JSON.stringify(currentSurvey),
 		    contentType: "application/json; charset=utf-8",
 		    dataType: "json",
+		    async: false,
 			success : function(response) {
 				console.log(response);
 				currentSurvey = response;

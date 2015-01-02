@@ -67,6 +67,7 @@ function getAnamnesticResouces(url){
 		type : "get",
 		url : url,
 		dataType : "json",
+		async:   false,
 		success : function(response) {
 			syndrom = response;
 			formObject = response.anamnesticData;
@@ -89,6 +90,7 @@ function getComlaintsResouces(url){
 		type : "get",
 		url : url,
 		dataType : "json",
+		async:   false,
 		success : function(response) {
 			syndrom = response;
 			console.log(syndrom);
@@ -123,6 +125,7 @@ function getClinicalManifestationsResouces(url){
 		type : "get",
 		url : url,
 		dataType : "json",
+		async:   false,
 		success : function(response) {
 			syndrom = response;
 			console.log(syndrom);
@@ -151,6 +154,7 @@ function getLaboratoryResouces(url){
 		type : "get",
 		url : url,
 		dataType : "json",
+		async:   false,
 		success : function(response) {
 			syndrom = response;
 			console.log(syndrom);
@@ -180,6 +184,7 @@ function getMorphologicalDataResouces(url){
 		type : "get",
 		url : url,
 		dataType : "json",
+		async:   false,
 		success : function(response) {
 			syndrom = response;
 			console.log(syndrom);
@@ -208,6 +213,7 @@ function getInstrumentalDataResouces(url){
 		type : "get",
 		url : url,
 		dataType : "json",
+		async:   false,
 		success : function(response) {
 			syndrom = response;
 			console.log(syndrom);
@@ -236,6 +242,7 @@ function getDiagnosisVerificationDataResouces(url){
 		type : "get",
 		url : url,
 		dataType : "json",
+		async:   false,
 		success : function(response) {
 			syndrom = response;
 			console.log(syndrom);
@@ -265,6 +272,7 @@ function getMainTreatmentDataResouces(url){
 		type : "get",
 		url : url,
 		dataType : "json",
+		async:   false,
 		success : function(response) {
 			syndrom = response;
 			console.log(syndrom);
@@ -293,6 +301,7 @@ function getRehabilitationDataResouces(url){
 		type : "get",
 		url : url,
 		dataType : "json",
+		async:   false,
 		success : function(response) {
 			syndrom = response;
 			console.log(syndrom);
@@ -321,6 +330,7 @@ function getPreventiveMeasuresDataResouces(url){
 		type : "get",
 		url : url,
 		dataType : "json",
+		async:   false,
 		success : function(response) {
 			syndrom = response;
 			console.log(syndrom);

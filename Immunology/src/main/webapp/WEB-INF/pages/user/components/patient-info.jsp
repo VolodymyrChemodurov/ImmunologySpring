@@ -221,6 +221,7 @@
 					url : "/syndromes/patient/{id}/{name}".replace("{id}",
 							patientId).replace("{name}", syndromName),
 					dataType : "json",
+					async : false,
 					success : function(response) {
 						console.log(response);
 						table.html("");

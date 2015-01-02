@@ -70,6 +70,7 @@ $("#add-syndrom-button").click(function(){
 	$.ajax({
 		type : "post",
 		url :  "syndromes/template/{name}/user/{id}".replace("{id}", userId).replace("{name}", syndromeName),
+		async:   false,
 		success : function(response) {
 				console.log("successful ajax request" + response);
 				reloadPageUSingUrl('users/'+userId);
@@ -93,6 +94,7 @@ $("#remove-syndrom-button").click(function(){
  			$.ajax({
 			type : "delete",
 			url :  "syndromes/template/{name}/user/{id}".replace("{id}", userId).replace("{name}", syndromeName),
+			async:   false,
 			success : function(response) {
 					console.log("successful ajax request" + response);
 					reloadPageUSingUrl('users/'+userId);

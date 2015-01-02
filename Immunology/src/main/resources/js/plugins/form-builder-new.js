@@ -248,7 +248,6 @@ this.initNewSurveyFormWithNewUrl = function(blockID,type, url) {
 				type : "get",
 				url :  url,
 				dataType : "json",
-				async:   false,
 				success : function(response) {
 						survey = response;
 						form = response.laboratoryDataForm;
@@ -267,7 +266,6 @@ this.initNewSurveyFormWithNewUrl = function(blockID,type, url) {
 				type : "get",
 				url :  url,
 				dataType : "json",
-				async:   false,
 				success : function(response) {
 						survey = response;
 						form = response.complaintsForm;
@@ -286,7 +284,6 @@ this.initNewSurveyFormWithNewUrl = function(blockID,type, url) {
 				type : "get",
 				url :  url,
 				dataType : "json",
-				async:   false,
 				success : function(response) {
 						survey = response;
 						form = response.clinicalManifestationsForm;
@@ -305,7 +302,6 @@ this.initNewSurveyFormWithNewUrl = function(blockID,type, url) {
 				type : "get",
 				url :  url,
 				dataType : "json",
-				async:   false,
 				success : function(response) {
 						survey = response;
 						form = response.morphologicalData;
@@ -324,7 +320,6 @@ this.initNewSurveyFormWithNewUrl = function(blockID,type, url) {
 				type : "get",
 				url :  url,
 				dataType : "json",
-				async:   false,
 				success : function(response) {
 						survey = response;
 						form = response.instrumentalData;
@@ -343,7 +338,6 @@ this.initNewSurveyFormWithNewUrl = function(blockID,type, url) {
 				type : "get",
 				url :  url,
 				dataType : "json",
-				async:   false,
 				success : function(response) {
 						survey = response;
 						form = response.diagnosisVerificationData;
@@ -362,7 +356,6 @@ this.initNewSurveyFormWithNewUrl = function(blockID,type, url) {
 				type : "get",
 				url :  url,
 				dataType : "json",
-				async:   false,
 				success : function(response) {
 						survey = response;
 						form = response.mainTreatmentData;
@@ -381,7 +374,6 @@ this.initNewSurveyFormWithNewUrl = function(blockID,type, url) {
 				type : "get",
 				url :  url,
 				dataType : "json",
-				async:   false,
 				success : function(response) {
 						survey = response;
 						form = response.rehabilitationData;
@@ -400,7 +392,6 @@ this.initNewSurveyFormWithNewUrl = function(blockID,type, url) {
 				type : "get",
 				url :  url,
 				dataType : "json",
-				async:   false,
 				success : function(response) {
 						survey = response;
 						form = response.preventiveMeasuresData;
@@ -468,7 +459,6 @@ this.initNewSurveyFormWithNewUrl = function(blockID,type, url) {
 			type : type,
 			url :  url.replace("${id}", patientID).replace("${name}", formName),
 			dataType : "json",
-			async:   false,
 			success : function(response) {
 				if(response.objectType == "MedicalCardForm"){
 					form = response;
@@ -499,7 +489,6 @@ this.initNewSurveyFormWithNewUrl = function(blockID,type, url) {
 			type : type,
 			url :  url.replace("${id}", patientID).replace("${name}", formName),
 			dataType : "json",
-			async:   false,
 			success : function(response) {
 					syndrom = response;
 					this.surveyObject = response;
@@ -541,7 +530,6 @@ this.initNewSurveyFormWithNewUrl = function(blockID,type, url) {
 			type : type,
 			url :  url.replace("${id}", patientID).replace("${name}", formName),
 			dataType : "json",
-			async:   false,
 			success : function(response) {
 					syndrom = response;
 					this.surveyObject = response;
@@ -562,7 +550,6 @@ this.initNewSurveyFormWithNewUrl = function(blockID,type, url) {
 			type : type,
 			url :  url.replace("${id}", patientID).replace("${name}", formName),
 			dataType : "json",
-			async:   false,
 			success : function(response) {
 					syndrom = response;
 					this.surveyObject = response;
@@ -583,7 +570,6 @@ this.initNewSurveyFormWithNewUrl = function(blockID,type, url) {
 			type : type,
 			url :  url.replace("${id}", patientID).replace("${name}", formName),
 			dataType : "json",
-			async:   false,
 			success : function(response) {
 					syndrom = response;
 					form = response.surveys[0].clinicalManifestationsForm;

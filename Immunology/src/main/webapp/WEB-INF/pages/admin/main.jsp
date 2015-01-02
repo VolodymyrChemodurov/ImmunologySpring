@@ -209,7 +209,6 @@
 	function doAjaxGet(pageName) {
     	$.ajax({
         	type: "GET",
-        	async:   false,
         	url: "/admin/"+pageName,
         	success: function(response) {
             	$("#content").html(response);
@@ -219,7 +218,6 @@
 	function reloadPageUSingUrl(url){
 		$.ajax({
         	type: "GET",
-        	async:   false,
         	url: url,
         	success: function(response) {
             	$("#content").html(response);
@@ -331,7 +329,6 @@
 			type : "get",
 			url : "/syndromes/template/{name}".replace("{name}", parentSyndromName),
 			dataType : "json",
-			async:   false,
 			success : function(response) {
 				newSyndromObject = response;
 				newSyndromObject.name = syndromName
@@ -351,7 +348,6 @@
 		      data: JSON.stringify(newSyndromObject),
 		      contentType: "application/json; charset=utf-8",
 		      dataType: "json",
-		      async:   false,
 		      success: function(response){
 		    	  console.log("Success Save");
 		      },
@@ -368,7 +364,6 @@
 			  type:"GET", 
 		      url: url,
 		     // dataType: "json",
-		      async:   false,
 		      success: function(response){
 		    	 console.log(response);
 		    	 if(formulaType == "severityLevel"){
@@ -392,7 +387,6 @@
 		      url: url,
 		      data:  {"formula": formula},
 		      dataType: "json",
-		      async:   false,
 		      success: function(response){
 		    	 console.log(response);
 		      },

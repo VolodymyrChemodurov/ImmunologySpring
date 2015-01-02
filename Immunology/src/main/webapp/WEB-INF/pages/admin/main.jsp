@@ -193,7 +193,9 @@
 					</div>
 				</div>
 			</div>
+	</div>
 			
+	<jsp:include page="/WEB-INF/pages/loading-screen.jsp" />
 	
 	<jsp:include page="/WEB-INF/pages/base-scripts.jsp">
 		<jsp:param value="${baseURL}" name="baseURL"/>

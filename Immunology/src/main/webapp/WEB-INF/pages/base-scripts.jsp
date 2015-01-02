@@ -35,4 +35,12 @@
 		console.log(response);
     	window.location = "/login";
 	});
+	$(document).ajaxSend(function() {
+		  $("#loading-status").show();
+		  $('#shadow-box').show();
+	});
+	$(document).ajaxComplete(function() {
+		$("#loading-status").hide();
+		$('#shadow-box').hide();
+	});
 </script>

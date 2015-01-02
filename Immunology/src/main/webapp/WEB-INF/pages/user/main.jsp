@@ -77,16 +77,15 @@
 			<div id="ajax-content"></div>
 		</div>
 		<!--End Content-->
-	</div>
+	</div>	
 </div>
-	<jsp:include page="/WEB-INF/pages/base-scripts.jsp">
-		<jsp:param value="${baseURL}" name="baseURL"/>
-	</jsp:include>
 
-	
-	
-	
-	
+<jsp:include page="/WEB-INF/pages/loading-screen.jsp" />
+ 
+<jsp:include page="/WEB-INF/pages/base-scripts.jsp">
+	<jsp:param value="${baseURL}" name="baseURL"/>
+</jsp:include>
+
 <script type="text/javascript">
 function doAjaxGet(pageName) {
     $.ajax({

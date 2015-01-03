@@ -118,4 +118,9 @@ public class Syndrome {
 		this.formulas = formulas;
 	}
 
+	@Override
+	public String toString() {
+		return "Syndrome [id=" + id + ", name=" + name + "]";
+	}
+
 }

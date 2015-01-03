@@ -134,6 +134,7 @@ public class SyndromeServiceImpl implements SyndromeService {
 		Iterator<com.immunology.model.User> iterator = users.iterator();
 		while(iterator.hasNext()) {
 			com.immunology.model.User user = iterator.next();
+			LOG.info("CHEKING USER {} {} {}", user.getId(), user.getLogin(), user.getFirstName());
 			if(user.getId() == userId) {
 				LOG.info("Removing {} {} {}", user.getId(), user.getLogin(), user.getFirstName());
 				iterator.remove();

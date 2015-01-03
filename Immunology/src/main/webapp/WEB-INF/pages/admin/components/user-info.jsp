@@ -88,23 +88,16 @@ $("#remove-syndrom-button").click(function(){
 	var userId = $("#user_id").val();
 	console.log("You choose to remove:" + syndromeName);
 	
-	
- 	if(syndromeName!= undefined)
-	 	{
- 			$.ajax({
+ 	if(syndromeName!= undefined) {
+ 		$.ajax({
 			type : "delete",
 			url :  "syndromes/template/{name}/user/{id}".replace("{id}", userId).replace("{name}", syndromeName),
-			async:   false,
 			success : function(response) {
-					console.log("successful ajax request" + response);
-					reloadPageUSingUrl('users/'+userId);
-			},
-			error: function (request, status, error) {
-				alert(error);
-		    }
-			}); 
- 		}
-	
+				console.log("successful ajax request" + response);
+				reloadPageUSingUrl('users/' + userId);
+			}
+		}); 
+ 	}
 	
 });
 

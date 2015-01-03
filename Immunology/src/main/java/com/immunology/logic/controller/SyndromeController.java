@@ -110,6 +110,7 @@ public class SyndromeController {
 
 	@RequestMapping(value = "/template/{name}/user/{id}", method = RequestMethod.DELETE)
 	public @ResponseBody Boolean removeSyndromeTemplateFromUser(@PathVariable("name") String syndromeName, @PathVariable("id") Long userId, HttpServletRequest request) {
+		LOG.info("Removing user id {} from {}", userId, syndromeName);
 		syndromeService.removeSyndromeTemplateFromUser(URIUtils.decodePathVariable(request.getRequestURI(), 2), userId);
 		return true;
 	}

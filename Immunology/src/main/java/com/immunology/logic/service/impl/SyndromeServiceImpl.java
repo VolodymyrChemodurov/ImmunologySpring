@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,8 @@ import com.immunology.model.calculation.Formula;
 @Service
 public class SyndromeServiceImpl implements SyndromeService {
 
+	private static final Logger LOG = LoggerFactory.getLogger(SyndromeServiceImpl.class);
+	
 	@Autowired
 	private SyndromeDao syndromeDao;
 	
@@ -122,11 +126,13 @@ public class SyndromeServiceImpl implements SyndromeService {
 	}
 
 	public void removeSyndromeTemplateFromUser(String syndromeName, Long userId) {
+		LOG.info("removeSyndromeTemplateFromUser method: syndromeName={}, userId={}", syndromeName, userId);
 		Syndrome syndrome = syndromeDao.findSyndrome(syndromeName);
 		List<com.immunology.model.User> users = syndrome.getUsers();
 		Iterator<com.immunology.model.User> iterator = users.iterator();
 		while(iterator.hasNext()) {
 			if(iterator.next().getId() == userId) {
+				LOG.info("Removing " + userId);
 				iterator.remove();
 			}
 		}

@@ -128,15 +128,11 @@ public class SyndromeServiceImpl implements SyndromeService {
 	public void removeSyndromeTemplateFromUser(String syndromeName, Long userId) {
 		LOG.info("removeSyndromeTemplateFromUser method: syndromeName={}, userId={}", syndromeName, userId);
 		Syndrome syndrome = syndromeDao.findSyndrome(syndromeName);
-		LOG.info("FOUND " + syndrome);
 		List<com.immunology.model.User> users = syndrome.getUsers();
-		LOG.info("COUNT OF USERS WIRED TO {} {}", syndrome, users.size());
 		Iterator<com.immunology.model.User> iterator = users.iterator();
 		while(iterator.hasNext()) {
 			com.immunology.model.User user = iterator.next();
-			LOG.info("CHEKING USER {} {} {}", user.getId(), user.getLogin(), user.getFirstName());
 			if(user.getId().equals(userId)) {
-				LOG.info("Removing {} {} {}", user.getId(), user.getLogin(), user.getFirstName());
 				iterator.remove();
 			}
 		}

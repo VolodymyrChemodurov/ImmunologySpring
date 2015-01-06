@@ -14,6 +14,8 @@
 <body>
 
 	<div class="container">
+		<img src="/resources/img/immunology_logo.png" style="width: 20%"/>
+		<span class="logo-text">IMMUNOLOGY</span>
 		<div class="row">
 			<div class="col-md-4 col-md-offset-4">
 				<div class="login-panel panel panel-default">
@@ -34,7 +36,7 @@
 								<div class="form-group">
 									<input class="form-control" placeholder="Пароль" type="password" id="inputPassword" name='j_password'>
 								</div>
-								<button type="submit" class="btn btn-lg btn-success btn-block">Увійти</button>
+								<button type="submit" class="btn btn-lg btn-primary btn-block">Увійти</button>
 							</fieldset>
 						</form>
 					</div>

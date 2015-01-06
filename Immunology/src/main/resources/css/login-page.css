@@ -3,7 +3,7 @@
 /* ------------------------------- */
 
  body {
-    background-color: #6AA6D6;
+    background-color: #f8f8f8;
     padding-top: 100px;
 }
 
@@ -12,7 +12,16 @@
         padding-top: 50px;
     }
 }
+.container {
+	text-align: center;
+}
 
+.logo-text {
+	display: block;
+	margin-top: 5px;
+	color: #6aa6d6;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
 /* Wrappers */
 
 /* ------------------------------- */

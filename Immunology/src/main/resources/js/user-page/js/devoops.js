@@ -1613,6 +1613,8 @@ function TestTable2(){
 //
 function TestTable3(){
 	$('#datatable-3').dataTable( {
+		"bLengthChange": false,
+		"bFilter": false, 
 		"aaSorting": [[ 0, "asc" ]],
 		"sDom": "T<'box-content'<'col-sm-6'f><'col-sm-6 text-right'l><'clearfix'>>rt<'box-content'<'col-sm-6'i><'col-sm-6 text-right'p><'clearfix'>>",
 		"sPaginationType": "bootstrap",

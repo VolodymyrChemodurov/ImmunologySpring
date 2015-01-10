@@ -54,13 +54,8 @@
 								<td>${patient.country}</td>
 								<td>${patient.city}</td>
 								<td><c:out value="${patient.street}, ${patient.house}"></c:out></td>
-
-
 							</tr>
-
 						</c:forEach>
-
-
 					</tbody>
 					<tfoot>
 						<tr>
@@ -81,10 +76,8 @@
 <script type="text/javascript">
 	//Run Datables plugin and create 3 variants of settings
 	function AllTables() {
-		showLoader();
 		TestTable3();
 		Select2Script(MakeSelect2);
-		hideLoader();
 	}
 	function MakeSelect2() {
 		$('select[name=datatable-3_length').select2();

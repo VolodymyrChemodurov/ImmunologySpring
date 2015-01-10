@@ -83,15 +83,11 @@
 	function AllTables() {
 		TestTable3();
 		Select2Script(MakeSelect2);
+		verifyTableLoaded();
 	}
 	function MakeSelect2() {
 		$('select[name=datatable-3_length').select2();
 		$('#dropdownValues').select2();
-		$('.dataTables_filter').each(
-				function() {
-					$(this).find('label input[type=text]').attr('placeholder',
-							'Пошук');
-				});
 	}
 	$(document).ready(function() {
 		// Load Datatables and run plugin on tables 

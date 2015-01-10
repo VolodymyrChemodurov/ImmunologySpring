@@ -46,12 +46,10 @@
 	
 	function verifyTableLoaded() {
 		var filterLoaded = $(".dataTables_filter");
-		if(filterLoaded.length == 0) {
-			$("#loading-status").show();
-			$('#shadow-box').show();
-		}
 		while(filterLoaded.length == 0) {
 			filterLoaded = $(".dataTables_filter");
+			$("#loading-status").show();
+			$('#shadow-box').show();
 		}
 		$("#loading-status").hide();
 		$('#shadow-box').hide();

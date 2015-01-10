@@ -36,22 +36,20 @@
     	window.location = "/login";
 	});
 	$(document).ajaxSend(function() {
-		  $("#loading-status").show();
-		  $('#shadow-box').show();
+		showLoader();
 	});
 	$(document).ajaxComplete(function() {
-		$("#loading-status").hide();
-		$('#shadow-box').hide();
+		hideLoader();
 	});
 	
-	function verifyTableLoaded() {
-		var filterLoaded = $(".dataTables_filter");
-		while(filterLoaded.length == 0) {
-			filterLoaded = $(".dataTables_filter");
-			$("#loading-status").show();
-			$('#shadow-box').show();
-		}
+	function showLoader() {
+		$("#loading-status").show();
+		$('#shadow-box').show();
+	}
+	
+	function hideLoader() {
 		$("#loading-status").hide();
 		$('#shadow-box').hide();
 	}
+
 </script>

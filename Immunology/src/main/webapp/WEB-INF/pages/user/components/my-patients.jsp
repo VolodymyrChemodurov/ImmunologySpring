@@ -81,12 +81,10 @@
 <script type="text/javascript">
 	//Run Datables plugin and create 3 variants of settings
 	function AllTables() {
-		$("#loading-status").show();
-		$('#shadow-box').show();
+		showLoader();
 		TestTable3();
 		Select2Script(MakeSelect2);
-		$("#loading-status").hide();
-		$('#shadow-box').hide();
+		hideLoader();
 	}
 	function MakeSelect2() {
 		$('select[name=datatable-3_length').select2();

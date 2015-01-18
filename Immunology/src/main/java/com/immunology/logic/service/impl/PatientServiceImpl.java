@@ -28,7 +28,7 @@ public class PatientServiceImpl implements PatientService{
 	}
 
 	public List<Patient> getAllPatients() {
-		return crudDao.getAll(Patient.class);
+		return patientDao.getAllPatients();
 	}
 
 	public List<Patient> getMyPatients(User user) {
@@ -36,7 +36,7 @@ public class PatientServiceImpl implements PatientService{
 	}
 
 	public Patient getPatientById(long patientId) {
-		return crudDao.find(Patient.class, patientId);
+		return patientDao.getPatientById(patientId);
 	}
 
 }

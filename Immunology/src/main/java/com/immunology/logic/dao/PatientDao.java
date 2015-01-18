@@ -9,4 +9,8 @@ public interface PatientDao {
 	List<Patient> fingByUserId(long userId);
 
 	List retrievePatientSexStatistic();
+	
+	Patient getPatientById(Long patientId);
+	
+	List<Patient> getAllPatients();
 }

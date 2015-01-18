@@ -7,7 +7,6 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -25,10 +24,10 @@ public class Patient {
 	
 	@Id
 	@GeneratedValue
-	private long id;
+	private Long id;
 
 	@JsonIgnore
-	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "patients", cascade = CascadeType.ALL)
+	@ManyToMany(mappedBy = "patients", cascade = CascadeType.ALL)
 	private Set<User> users = new HashSet<User>();
 	
 	@OneToMany(mappedBy = "patient")

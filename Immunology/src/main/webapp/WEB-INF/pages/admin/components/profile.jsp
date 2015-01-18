@@ -4,7 +4,7 @@
 	<div id="breadcrumb" class="col-md-12">
 		<ol class="breadcrumb">
  			<li><a href="/admin">Головна</a></li>
-			<li><a href="#">Профіль</a></li> 
+			<li>Профіль</li> 
 		</ol>
 	</div>
 </div>

@@ -8,7 +8,7 @@
 		<ol class="breadcrumb">
 			<li>Головна</li>
 			<li>Користувачі</li>
-			<li><a href="#">Всі користувачі</a></li>
+			<li>Всі користувачі</li>
 		</ol>
 	</div>
 </div>

@@ -7,7 +7,7 @@
 	<div id="breadcrumb" class="col-md-12">
 		<ol class="breadcrumb">
 			<li><a href="#" onclick="doAjaxGet('patients/my');">Головна</a></li>
-			<li><a href="#">Всі пацієнти</a></li>
+			<li>Всі пацієнти</li>
 		</ol>
 	</div>
 </div>

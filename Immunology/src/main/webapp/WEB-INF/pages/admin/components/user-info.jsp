@@ -14,7 +14,7 @@ display: none;
 		<ol class="breadcrumb">
 			<li><a href="#" onclick="doAjaxGet('/users');">Головна</a></li>
 			<li><a href="#" onclick="doAjaxGet('/users');">Всі користувачі</a></li>
-			<li><a href="#"> ${user.lastName} ${user.firstName}</a></li>
+			<li> ${user.lastName} ${user.firstName}</li>
 		</ol>
 	</div>
 </div>

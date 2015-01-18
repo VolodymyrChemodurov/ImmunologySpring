@@ -6,7 +6,7 @@
 <div class="row">
 	<div id="breadcrumb" class="col-md-12">
 		<ol class="breadcrumb">
-			<li><a href="#">Мої пацієнти</a></li>
+			<li>Мої пацієнти</li>
 		</ol>
 	</div>
 </div>

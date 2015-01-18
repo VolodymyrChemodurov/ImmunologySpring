@@ -10,7 +10,7 @@
 		<ol class="breadcrumb">
 			<li><a href="#" onclick="doAjaxGet('patients/my');">Головна</a></li>
 			<li>Аналітика</li>
-			<li><a href="#">Діаграми</a></li>
+			<li>Діаграми</li>
 
 		</ol>
 	</div>

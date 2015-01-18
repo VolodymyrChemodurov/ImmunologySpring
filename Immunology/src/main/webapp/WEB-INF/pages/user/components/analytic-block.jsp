@@ -11,7 +11,7 @@
 		<ol class="breadcrumb">
 			<li><a href="#" onclick="doAjaxGet('patients/my');">Головна</a></li>
 			<li>Аналітика</li>
-			<li><a href="#">Аналітичний блок</a></li>
+			<li>Аналітичний блок</li>
 			
 		</ol>
 	</div>

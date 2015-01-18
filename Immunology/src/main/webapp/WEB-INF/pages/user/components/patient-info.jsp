@@ -16,7 +16,7 @@
 	<div id="breadcrumb" class="col-md-12">
 		<ol class="breadcrumb">
 			<li><a href="#" onclick="doAjaxGet('patients/my');">Мої пацієнти</a></li>
-			<li><a href="#">${patient.firstName} ${patient.lastName}</a></li>
+			<li>${patient.firstName} ${patient.lastName}</li>
 		</ol>
 	</div>
 </div>

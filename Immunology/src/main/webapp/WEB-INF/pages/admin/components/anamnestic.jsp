@@ -5,7 +5,7 @@
 		<ol class="breadcrumb">
 			<li><a href="#" onclick="doAjaxGet('/users');">Головна</a></li>
 			<li>Форми обстежень</li>
-			<li><a href="#">Анамнестичні дані</a></li>
+			<li>Анамнестичні дані</li>
 		</ol>
 	</div>
 </div>

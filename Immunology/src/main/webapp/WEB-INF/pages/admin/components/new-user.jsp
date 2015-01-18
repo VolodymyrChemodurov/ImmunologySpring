@@ -6,7 +6,7 @@
 		<ol class="breadcrumb">
 			<li><a href="#" onclick="doAjaxGet('/users');">Головна</a></li>
 			<li><a href="#" onclick="doAjaxGet('/users');">Користувачі</a></li>
-			<li><a href="#">Додати нового користувача</a></li>
+			<li>Додати нового користувача</li>
 		</ol>
 	</div>
 </div>

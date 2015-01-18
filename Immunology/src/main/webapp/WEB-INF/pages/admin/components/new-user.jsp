@@ -4,8 +4,8 @@
 <div class="row">
 	<div id="breadcrumb" class="col-md-12">
 		<ol class="breadcrumb">
-			<li><a href="index.html">Головна</a></li>
-			<li><a href="#">Користувачі</a></li>
+			<li><a href="#" onclick="doAjaxGet('/users');">Головна</a></li>
+			<li><a href="#" onclick="doAjaxGet('/users');">Користувачі</a></li>
 			<li><a href="#">Додати нового користувача</a></li>
 		</ol>
 	</div>
@@ -81,11 +81,6 @@
 							</div>
 						</div>
 					</fieldset>
-
-
-
-
-
 
 					<div class="form-group">
 						<div class="col-sm-11 col-sm-offset-3">

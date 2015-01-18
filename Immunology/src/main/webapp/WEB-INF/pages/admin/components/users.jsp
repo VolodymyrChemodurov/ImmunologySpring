@@ -6,8 +6,8 @@
 <div class="row">
 	<div id="breadcrumb" class="col-md-12">
 		<ol class="breadcrumb">
-			<li><a href="#">Головна</a></li>
-			<li><a href="#">Користувачі</a></li>
+			<li>Головна</li>
+			<li>Користувачі</li>
 			<li><a href="#">Всі користувачі</a></li>
 		</ol>
 	</div>

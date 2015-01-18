@@ -15,8 +15,7 @@
 <div class="row">
 	<div id="breadcrumb" class="col-md-12">
 		<ol class="breadcrumb">
-			<li><a href="index.html">Головна</a></li>
-			<li><a href="#">Мої пацієнти</a></li>
+			<li><a href="#" onclick="doAjaxGet('patients/my');">Мої пацієнти</a></li>
 			<li><a href="#">${patient.firstName} ${patient.lastName}</a></li>
 		</ol>
 	</div>
@@ -104,9 +103,9 @@
 												<td>${survey.creationDate}</td>
 												<td>${survey.severityLevel}</td>
 												<td>${survey.insufficiencyLevel}</td>
-												<%-- <td>${survey.user.firstName} ${survey.user.lastName}</td> --%>
-												<td class='custom-size'>
-													<button type='button' class='btn btn-primary efficiency'>Ефективність</button>
+												<!-- <td>${survey.user.firstName} ${survey.user.lastName}</td> -->
+												<td class="custom-size">
+													<button type="button" class="btn btn-primary efficiency">Ефективність</button>
 												</td>
 											</tr>
 										</c:forEach>
@@ -135,124 +134,53 @@
 		</div>
 	</div>
 </div>
-
 <input type="hidden" id="patient_id" value="${patient.id}" />
-
-
-
-
-<script>
+<script type="text/javascript">
 	var medCard = new Builder("medCard");
 	var anamnesticData = new Builder("anamnesticData");
-	function DemoSelect2() {
-		//$('#s2_with_tag').select2({placeholder: "Select OS"});
-		//	$('#country').select2();
-		//	$('#sex').select2();
-		$('select[name=datatable-3_length').select2();
-	}
-
-	$(document).ready(function() {
-		// Create jQuery-UI tabs
-		$("#tabs").tabs();
-		$('#dateOfBirth').datepicker({
-			dateFormat : "dd/mm/yy",
-			changeMonth : true,
-			changeYear : true,
-			yearRange : "-110:+2"
-		});
-		$('#datepicker').click(function() {
-			$('#dateOfBirth').datepicker("show");
-		});
-		TestTable3();
-		initSyndromeEvent();
-
-		// Add tooltip to form-controls
-		$('.form-control').tooltip();
-		Select2Script(DemoSelect2);
-		BootstrapValidatorScript(PatientValidator);
-		// New Form Builder //
-		//1) ID Container div 2) Patient Id 3) Form Type;
-		medCard.init('#container', "MedicalCardForm", $('#patient_id').val());
-
-		WinMove();
-
-	});
-
-	function initSyndromeEvent() {
-		$("#select_syndrome_button").click(
-				function() {
-					$("#newSurveyButton").css("display", "inline");
-					anamnesticData.init('#AnamnesticDataContainer',
-							"AnamnesticDataForm", $('#patient_id').val(), $(
-									'#syndrom').val());
-					refreshTable($('#syndrom').val());
-				});
-		$("#newSurveyButton").click(
-				function() {
-					if ($("#syndrom").val() != null) {
-						var href = 'survey/patientId/'
-								+ $("#patient_id").val() + '/syndrome/'
-								+ $('#syndrom').val();
-						doAjaxGet(href);
-					}
-				});
-	}
-	function initSurveyRowesEvent() {
-		$(".surveyRow").click(
-				function() {
-					var href = 'survey/edit/patientId/'
-							+ $("#patient_id").val() + '/surveyId/'
-							+ $(this).attr("surveyId") + '/syndrome/'
-							+ $('#syndrom').val();
-					doAjaxGet(href);
-				});
-		$('.efficiency').click(function() {
-			$('#efficiency-modal').modal('show');
-			return false;
-		})
-
-	}
-	function refreshTable(syndromName) {
-		var patientId = "${patient.id}";
-		var syndromName = $('#syndrom').val();
-		var table = $("#survey-table-body");
-		$.ajax({
-					type : "get",
-					url : "/syndromes/patient/{id}/{name}".replace("{id}",
-							patientId).replace("{name}", syndromName),
-					dataType : "json",
-					async : false,
-					success : function(response) {
-						console.log(response);
-						table.html("");
-						for (var int = 0; int < response.surveys.length; int++) {
-							if (response.surveys[int].id != null) {
-								var tr = $("<tr class='surveyRow' surveyId='"+response.surveys[int].id+"'/>");
-								tr.append("<td>"
-												+ (int + 1)
-												+ "</td><td>"
-												+ response.surveys[int].creationDate
-												+ "</td><td>"
-												+ response.surveys[int].severityLevel
-												+ "</td><td>"
-												+ response.surveys[int].insufficiencyLevel
+	var patientId = "${patient.id}";
+</script>
+<script src="${param.baseURL}/resources/js/user-page/js/user-patient-info.js"></script>
+<script type="text/javascript">
+function refreshTable(syndromName) {
+	var syndromName = $('#syndrom').val();
+	var table = $("#survey-table-body");
+	$.ajax({
+				type : "get",
+				url : "/syndromes/patient/{id}/{name}".replace("{id}",
+						patientId).replace("{name}", syndromName),
+				dataType : "json",
+				async : false,
+				success : function(response) {
+					console.log(response);
+					table.html("");
+					for (var int = 0; int < response.surveys.length; int++) {
+						if (response.surveys[int].id != null) {
+							var tr = $("<tr class='surveyRow' surveyId='"+response.surveys[int].id+"'/>");
+							tr.append("<td>"
+											+ (int + 1)
+											+ "</td><td>"
+											+ response.surveys[int].creationDate
+											+ "</td><td>"
+											+ response.surveys[int].severityLevel
+											+ "</td><td>"
+											+ response.surveys[int].insufficiencyLevel
 /* 												+ "</td><td>"
 												+ response.surveys[int].user.firstName + " " + response.surveys[int].user.lastName */
-												+ "</td>"
-												+ "<td class='custom-size'>"
-												+ "<button "+
-										"type='button'"+"class='btn btn-primary efficiency'>Ефективність</button></td>");
-								//+"<td>"+response.surveys[int].user.firstName +"</td>");
-								table.append(tr);
-							}
+											+ "</td>"
+											+ "<td class='custom-size'>"
+											+ "<button "+
+									"type='button'"+"class='btn btn-primary efficiency'>Ефективність</button></td>");
+							//+"<td>"+response.surveys[int].user.firstName +"</td>");
+							table.append(tr);
 						}
-						//			response.surveys[int].user.firstName;
-						initSurveyRowesEvent();
-					},
-					error : function(request, status, error) {
-						alert(error);
 					}
-				})
-
-	}
+					//			response.surveys[int].user.firstName;
+					initSurveyRowesEvent();
+				},
+				error : function(request, status, error) {
+					alert(error);
+				}
+			});
+}
 </script>

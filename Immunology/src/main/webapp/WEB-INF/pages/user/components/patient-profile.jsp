@@ -5,8 +5,6 @@
 	<div id="validation">
 		<fieldset>
 			<legend></legend>
-
-			
 				<div class="form-group">
 					<label class="col-sm-3 control-label">Прізвище</label>
 					<div class="col-sm-5">
@@ -30,8 +28,6 @@
 						id="middleName" value="${patient.middleName}" />
 				</div>
 			</div>
-
-
 		</fieldset>
 		<fieldset>
 			<legend></legend>
@@ -42,8 +38,6 @@
 						<option value="${patient.sex}">${patient.sex}</option>
 						<option value="чоловік">Чоловіча</option>
 						<option value="жінка">Жіноча</option>
-
-
 					</select>
 				</div>
 			</div>
@@ -55,12 +49,8 @@
 						value="${patient.dateOfBirth}"> <span
 						class="fa fa-calendar form-control-feedback" id="datepicker"></span>
 				</div>
-
-
 			</div>
 		</fieldset>
-
-
 		<fieldset>
 			<legend></legend>
 			<div class="form-group">
@@ -79,7 +69,6 @@
 					</select>
 				</div>
 			</div>
-
 			<div class="form-group">
 				<label class="col-sm-3 control-label">Регіон</label>
 				<div class="col-sm-5">
@@ -87,7 +76,6 @@
 						value="${patient.region}" />
 				</div>
 			</div>
-
 			<div class="form-group">
 				<label class="col-sm-3 control-label">Місто</label>
 				<div class="col-sm-5">
@@ -95,7 +83,6 @@
 						value="${patient.city}" />
 				</div>
 			</div>
-
 			<div class="form-group">
 				<label class="col-sm-3 control-label">Вулиця</label>
 				<div class="col-sm-5">
@@ -103,7 +90,6 @@
 						value="${patient.street}" />
 				</div>
 			</div>
-
 			<div class="form-group">
 				<label class="col-sm-3 control-label">Будинок</label>
 				<div class="col-sm-5">
@@ -113,7 +99,6 @@
 			</div>
 		</fieldset>
 	</div>
-
 	<div class="form-group">
 		<div class="col-sm-11 col-sm-offset-3">
 			<button type="submit" class="btn btn-primary">ОК</button>

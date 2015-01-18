@@ -12,8 +12,8 @@ display: none;
 <div class="row">
 	<div id="breadcrumb" class="col-md-12">
 		<ol class="breadcrumb">
-			<li><a href="index.html">Головна</a></li>
-			<li><a href="#">Всі користувачі</a></li>
+			<li><a href="#" onclick="doAjaxGet('/users');">Головна</a></li>
+			<li><a href="#" onclick="doAjaxGet('/users');">Всі користувачі</a></li>
 			<li><a href="#"> ${user.lastName} ${user.firstName}</a></li>
 		</ol>
 	</div>

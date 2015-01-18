@@ -27,8 +27,6 @@
 			<div class="box-content">
 				<form id="defaultForm" method="POST" action="/cabinet/profile/edit"
 					class="form-horizontal">
-
-
 					<fieldset>
 						<legend></legend>
 						<div class="form-group">
@@ -64,8 +62,6 @@
 							</div>
 						</div>
 					</fieldset>
-
-
 					<div class="form-group">
 						<div class="col-sm-11 col-sm-offset-3">
 							<button type="submit" class="btn btn-primary">Редагувати</button>
@@ -116,8 +112,6 @@
 							</div>
 						</div>
 					</fieldset>
-
-
 					<div class="form-group">
 						<div class="col-sm-11 col-sm-offset-3">
 							<button class="btn btn-primary" onClick="changePassword();">Зберегти</button>

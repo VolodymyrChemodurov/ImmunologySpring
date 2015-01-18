@@ -6,7 +6,7 @@
 <div class="row">
 	<div id="breadcrumb" class="col-md-12">
 		<ol class="breadcrumb">
-			<li><a href="#">Головна</a></li>
+			<li><a href="#" onclick="doAjaxGet('patients/my');">Головна</a></li>
 			<li><a href="#">Всі пацієнти</a></li>
 		</ol>
 	</div>
@@ -53,15 +53,19 @@
 								<td><c:out
 										value="${patient.key.street}, ${patient.key.house}"></c:out></td>
 							<td class="custom-size">
-									<c:if test="${!patient.value}">
-										<button class="btn btn-primary btn-table"
-											onclick="addPatient(${patient.key.id})">Додати</button>
-									</c:if>
+									<c:choose>
+									  <c:when test="${!patient.value}">
+											<button class="btn btn-primary btn-table"
+													onclick="addPatient(${patient.key.id})">Додати</button>
+									  </c:when>
+									  <c:otherwise>
+									    <button class="btn btn-primary btn-table" disabled="disabled"
+													onclick="addPatient(${patient.key.id})">Додати</button>
+									  </c:otherwise>
+									</c:choose>
 								</td>
 							</tr>
 						</c:forEach>
-
-
 					</tbody>
 					<tfoot>
 						<tr>
@@ -79,44 +83,5 @@
 		</div>
 	</div>
 </div>
-<script type="text/javascript">
-	// Run Datables plugin and create 3 variants of settings
-	function AllTables() {
-		TestTable3();
-		Select2Script(MakeSelect2);
-	}
-	function MakeSelect2() {
-		$('select[name=datatable-3_length').select2();
-		$('#dropdownValues').select2();
-		$('.dataTables_filter').each(
-				function() {
-					$(this).find('label input[type=text]').attr('placeholder',
-							'Пошук');
-				});
-	}
-	$(document).ready(function() {
-		// Load Datatables and run plugin on tables 
-		DataTablesScripts(AllTables);
-		// Add Drag-n-Drop feature
-		WinMove();
-	});
-	
-	function addPatient(id){
-		var patient = "patients/"+id;
-		$.ajax({
-			type : "post",
-			url : patient,
-			success : function(response) {
-				/* alert(patient); */
-				location.href = "/cabinet";
-			}, 
-			
-			error: function (request, status, error) {
-				alert(error);
-		    }
-
-		});
-	
-	}
-</script>
+<script src="${param.baseURL}/resources/js/user-page/js/user-all-patients.js"></script>
 </html>

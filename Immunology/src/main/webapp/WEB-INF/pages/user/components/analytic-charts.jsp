@@ -8,8 +8,8 @@
 <div class="row">
 	<div id="breadcrumb" class="col-md-12">
 		<ol class="breadcrumb">
-			<li><a href="#">Головна</a></li>
-			<li><a href="#">Аналітика</a></li>
+			<li><a href="#" onclick="doAjaxGet('patients/my');">Головна</a></li>
+			<li>Аналітика</li>
 			<li><a href="#">Діаграми</a></li>
 
 		</ol>

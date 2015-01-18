@@ -7,7 +7,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 	<head>
-
 		<meta charset="utf-8">
 		<title>Immunology</title>
 		<meta name="description" content="description">
@@ -17,26 +16,21 @@
 		<c:set var="baseURL" value="${fn:replace(pageContext.request.requestURL,
 		pageContext.request.requestURI, pageContext.request.contextPath)}" />
 		
-		 <jsp:include page="/WEB-INF/pages/head.jsp">
+		<jsp:include page="/WEB-INF/pages/head.jsp">
     		<jsp:param value="${baseURL}" name="baseURL"/>
     	</jsp:include>
-
-
 	</head>
 <body>
 
 <jsp:include page="/WEB-INF/pages/user/components/modal/efficiency-modal.jsp"></jsp:include>
-
 <!--Start Header-->
-
-	<jsp:include page="/WEB-INF/pages/user/components/navbar.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/pages/user/components/navbar.jsp"></jsp:include>
 <!--End Header-->
 <!--Start Container-->
 <div id="main" class="container-fluid">
 	<div class="row">
 		<div id="sidebar-left" class="col-xs-2 col-sm-2">
 			<ul class="nav main-menu">
-				
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle">
 						<i class="fa fa-user"></i>
@@ -47,14 +41,12 @@
 						<li><a class="ajax-link" href="#" onclick="doAjaxGet('patients/my');">Список моїх пацієнтів</a></li>
 					</ul>
 				</li>
-				
 				<li>
 					<a href="#" class="" onclick="doAjaxGet('patients/all');">
 						<i class="fa fa-users"></i>
 						<span class="hidden-xs">Всі пацієнти</span>
 					</a>
 				</li>
-				
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle">
 						<i class="fa fa-align-left"></i>
@@ -65,8 +57,6 @@
 						<li><a class="ajax-link" href="#" onclick="doAjaxGet('cabinet/analytic/charts');">Діаграми</a></li>
 					</ul>
 				</li>
-
-			
 			</ul>
 		</div>
 		<!--Start Content-->
@@ -81,38 +71,9 @@
 </div>
 
 <jsp:include page="/WEB-INF/pages/loading-screen.jsp" />
- 
 <jsp:include page="/WEB-INF/pages/base-scripts.jsp">
 	<jsp:param value="${baseURL}" name="baseURL"/>
 </jsp:include>
-
-<script type="text/javascript">
-function doAjaxGet(pageName) {
-    $.ajax({
-        type: "GET",
-        url: "/" + pageName,
-        success: function(response) {
-            $("#content").html(response);
-        }
-    });
-}
-function doAjaxPost(pageName) {
-	console.info('doAjaxPost()');
-    $.ajax({
-        type: "POST",
-        url: "/" + pageName,
-        success: function(response) {
-            $("#content").html(response);
-        }
-    });
-}
-
-
-$( document ).ready(function() {
-	  doAjaxGet("patients/my");
-	});
-</script>
-	
+<script src="${param.baseURL}/resources/js/user-page/js/user-main.js"></script>
 </body>
-
 </html>

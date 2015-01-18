@@ -3,8 +3,8 @@
 <div class="row">
 	<div id="breadcrumb" class="col-md-12">
 		<ol class="breadcrumb">
-			<li><a href="#">Головна</a></li>
-			<li><a href="#">Форми обстежень</a></li>
+			<li><a href="#" onclick="doAjaxGet('/users');">Головна</a></li>
+			<li>Форми обстежень</li>
 			<li><a href="#">Анамнестичні дані</a></li>
 		</ol>
 	</div>

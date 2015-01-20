@@ -110,8 +110,14 @@ public class SyndromeDaoImpl extends GenericMongoDao<Syndrome> implements Syndro
 	}
 
 	public Boolean updateSyndromeTemplate(String templateName, Syndrome syndrome) {
-		WriteResult result = collection.update(
-				"{'name':'" + templateName + "'}").with(syndrome);
+		ObjectMapper mapper = new ObjectMapper();
+		String serializedSyndrome = null;
+		try {
+			serializedSyndrome = mapper.writeValueAsString(syndrome);
+		} catch (JsonProcessingException e) {
+			LOG.error(e.toString());
+		}
+		WriteResult result = collection.update("{'name':'" + templateName + "'}").with(serializedSyndrome);
 		return result.isUpdateOfExisting();
 	}
 

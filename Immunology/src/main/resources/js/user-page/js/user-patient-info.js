@@ -28,7 +28,7 @@ $(document).ready(function() {
 	//1) ID Container div 2) Patient Id 3) Form Type;
 	medCard.init('#container', "MedicalCardForm", $('#patient_id').val());
 
-	WinMove();
+	//WinMove();
 
 });
 

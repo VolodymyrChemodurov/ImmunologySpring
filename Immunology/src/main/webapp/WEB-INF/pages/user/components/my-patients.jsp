@@ -86,7 +86,7 @@
 		// Load Datatables and run plugin on tables 
 		DataTablesScripts(AllTables);
 		// Add Drag-n-Drop feature
-		WinMove();
+		//WinMove();
 	});
 </script>
 </html>

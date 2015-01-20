@@ -127,7 +127,7 @@
 		$('.form-control').tooltip();
 		BootstrapValidatorScript(PatientValidator);
 		BootstrapValidatorScript(PasswordValidator);
-		WinMove();
+		//WinMove();
 	});	
 	function changePassword(){
 		var oldPassword = $("#oldPassword").val();

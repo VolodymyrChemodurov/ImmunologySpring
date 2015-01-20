@@ -165,6 +165,6 @@
 		// Load example of form validation
 		BootstrapValidatorScript(PatientValidator);
 		// Add drag-n-drop feature to boxes
-		WinMove();
+		//WinMove();
 	});
 </script>

@@ -670,7 +670,7 @@ this.initNewSurveyFormWithNewUrl = function(blockID,type, url) {
 			selectDiv = $('<div class = "col-sm-5"/>');
 			select = $('<select class = "form-control dropdown">');
 			$(Object.keys(dropDown.values)).each(function(key, optionElement) {
-				if(key == dropDown.choosed){
+				if(key == dropDown.selected){
 					option = $('<option value="' + key + '" selected = "selected">' + optionElement + '</option>');
 				}else {
 					option = $('<option value="' + key + '">' + optionElement + '</option>');
@@ -868,9 +868,9 @@ this.initNewSurveyFormWithNewUrl = function(blockID,type, url) {
 	},
 	this.setDropDownValue = function(panel_index, element_index,sub_panel_index, value){
 		if(sub_panel_index == undefined){
-			this.formObject.panels[panel_index].elements[element_index].choosed = value;
+			this.formObject.panels[panel_index].elements[element_index].selected = value;
 		}else{
-			this.formObject.panels[panel_index].elements[sub_panel_index].elements[element_index].choosed = value;
+			this.formObject.panels[panel_index].elements[sub_panel_index].elements[element_index].selected = value;
 		}
 		
 		

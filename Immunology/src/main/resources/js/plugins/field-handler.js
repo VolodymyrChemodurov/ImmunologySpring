@@ -63,9 +63,9 @@ function storeValue(panelIndex,elementIndex,subElemIndex){
 function storeDropDownValue(panelIndex,elementIndex,subElemIndex){
 	var elementId = "#panel_"+panelIndex+"_dropDownElement_"+elementIndex +"_"+ subElemIndex;
 	if(subElemIndex == null){
-		formObj.panels[panelIndex].elements[elementIndex].choosed = $(elementId).val();
+		formObj.panels[panelIndex].elements[elementIndex].selected = $(elementId).val();
 	}else{
-		formObj.panels[panelIndex].elements[elementIndex].elements[subElemIndex].choosed = $(elementId).val();
+		formObj.panels[panelIndex].elements[elementIndex].elements[subElemIndex].selected = $(elementId).val();
 	}
 	console.log($(elementId).val());
 }

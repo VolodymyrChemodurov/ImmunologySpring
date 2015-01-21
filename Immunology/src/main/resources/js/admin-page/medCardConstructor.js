@@ -772,10 +772,10 @@ function createButtonGroup(panelIndex,subPanelIndex,title,values){
 	groupButton["value"] = 0;
 	groupButton["multiplier"] = 0;
  	if(parseInt(subPanelIndex) == -1 || subPanelIndex == null){
- 		groupButton["order"] = formObject.panels[panelIndex].elements.lengh + 1; 
+ 		groupButton["order"] = formObject.panels[panelIndex].elements.length + 1; 
  		formObject.panels[panelIndex].elements.push(groupButton);
  	}else{
- 		groupButton["order"] = formObject.panels[panelIndex].elements[subPanelIndex].elements + 1;
+ 		groupButton["order"] = formObject.panels[panelIndex].elements[subPanelIndex].elements.length + 1;
  		formObject.panels[panelIndex].elements[subPanelIndex].elements.push(groupButton);
  	}
  	renderPreviewMedForm();

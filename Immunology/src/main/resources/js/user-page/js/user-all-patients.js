@@ -9,7 +9,7 @@ function MakeSelect2() {
 	$('.dataTables_filter').each(
 			function() {
 				$(this).find('label input[type=text]').attr('placeholder',
-						'Пошук');
+						'РџРѕС€СѓРє');
 			});
 }
 $(document).ready(function() {

@@ -4,8 +4,8 @@
 function Builder(object_Name) {
 	//Constants
 	this.MED_CARD_CONSTANTS = {
-		date: "Creation Date",	
-		addition: "Addition info"
+		date: "Дата створення",	
+		addition: "Додаткова інформація"
 	},
 	this.TYPE = {
 		MED_CARD : "MedicalCardForm",

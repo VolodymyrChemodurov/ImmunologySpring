@@ -96,6 +96,16 @@
 	var syndrom_id = "${syndrom.id}";
 	var survey_id = "${surveyId}";
 	var patient_id = "${patient.id}";
+	var forms = [];
+	forms.push(complaintsData);
+	forms.push(clinicalManifestationData);
+	forms.push(laboratoryData);
+	forms.push(morphologicalData);
+	forms.push(instrumentalData);
+	forms.push(diagnosisVerificationData);
+	forms.push(mainTreatmentData);
+	forms.push(rehabilitationData);
+	forms.push(preventiveMeasuresData);
 </script>
 <script src="${param.baseURL}/resources/js/user-page/js/user-survey.js"></script>
 </body>

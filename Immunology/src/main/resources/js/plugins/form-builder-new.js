@@ -10,15 +10,15 @@ function Builder(object_Name) {
 	this.TYPE = {
 		MED_CARD : "MedicalCardForm",
 		ANAMNESTIC_DATA : "AnamnesticDataForm",
-		COMPLAINTS_DATA : "ComplaintsForm",
-		CLINICAL_MANIFESTATIONS_DATA : "ClinicalManifestationsForm",
-		LABORATORY_DATA	: "LaboratoryDataForm",
-		MORPHOLOGICAL_DATA : "MorphologicalData",
-		INSTRUMENTAL_DATA : "InstrumentalData",
-		DIAGNOSIS_VERIFICATION_DATA: "DiagnosisVerificationData",
-		MAIN_TREATMENT_DATA : "MainTreatmentData",
-		REHABILITATION_DATA : "RehabilitationData",
-		PREVENTIVE_MEASURES_DATA : "PreventiveMeasuresData"
+		COMPLAINTS_DATA : "COMPLAINTS_FORM",
+		CLINICAL_MANIFESTATIONS_DATA : "CLINICAL_MANIFESTATIONS_FORM",
+		LABORATORY_DATA	: "LABORATORY_DATA_FORM",
+		MORPHOLOGICAL_DATA : "MORPHOLOGICAL_DATA",
+		INSTRUMENTAL_DATA : "INSTRUMENTAL_DATA",
+		DIAGNOSIS_VERIFICATION_DATA: "DIAGNOSIS_VERIFICATION_DATA",
+		MAIN_TREATMENT_DATA : "MAIN_TREATMENT_DATA",
+		REHABILITATION_DATA : "REHABILITATION_DATA",
+		PREVENTIVE_MEASURES_DATA : "PREVENTIVE_MEASURES_DATA"
 	},
 	this.URL = {
 		MED_CARD_URL : "/patients/${id}/medical_card/",
@@ -65,56 +65,16 @@ function Builder(object_Name) {
 			this.setForm(formObject);
 			this.renderMedCardFields();
 			this.renderFormBody(false);
-		}
-		if(formObject.objectType == this.TYPE.ANAMNESTIC_DATA){
-			//this.setSyndrom(formObject);
+		} else {
+			/*this.formName = formName;
+			this.patientId = patientId;*/
+			this.setContainer($(blockID));
+			this.container.html("");
+			this.container.attr("object",this.objectName);
 			this.setForm(formObject);
 			this.renderFormBody(false);
-		}
-		if(formObject.objectType == this.TYPE.COMPLAINTS_DATA){
-			//this.setSyndrom(formObject);
-			this.setForm(formObject);
-			this.renderFormBody(false);
-		}
-		if(formObject.objectType == this.TYPE.CLINICAL_MANIFESTATIONS_DATA){
-			//this.setSyndrom(formObject);
-			this.setForm(formObject);
-			this.renderFormBody(false);
-		}
-		if(formObject.objectType == this.TYPE.LABORATORY_DATA){
-			//this.setSyndrom(formObject);
-			this.setForm(formObject);
-			this.renderFormBody(false);
-		}
-		if(formObject.objectType == this.TYPE.MORPHOLOGICAL_DATA){
-			//this.setSyndrom(formObject);
-			this.setForm(formObject);
-			this.renderFormBody(false);
-		}
-		if(formObject.objectType == this.TYPE.INSTRUMENTAL_DATA){
-			//this.setSyndrom(formObject);
-			this.setForm(formObject);
-			this.renderFormBody(false);
-		}
-		if(formObject.objectType == this.TYPE.DIAGNOSIS_VERIFICATION_DATA){
-			//this.setSyndrom(formObject);
-			this.setForm(formObject);
-			this.renderFormBody(false);
-		}
-		if(formObject.objectType == this.TYPE.MAIN_TREATMENT_DATA){
-			//this.setSyndrom(formObject);
-			this.setForm(formObject);
-			this.renderFormBody(false);
-		}
-		if(formObject.objectType == this.TYPE.REHABILITATION_DATA){
-			//this.setSyndrom(formObject);
-			this.setForm(formObject);
-			this.renderFormBody(false);
-		}
-		if(formObject.objectType == this.TYPE.PREVENTIVE_MEASURES_DATA){
-			//this.setSyndrom(formObject);
-			this.setForm(formObject);
-			this.renderFormBody(false);
+			this.event.init();
+			this.prepareForm();
 		}
 		
 		
@@ -132,301 +92,58 @@ function Builder(object_Name) {
 			this.gettingFormObject("get",this.URL.MED_CARD_URL, patientId, formName);
 			console.log(this.formObject);
 			this.renderMedCard();
-		}
-		if(type == this.TYPE.ANAMNESTIC_DATA){
+		} else if(type == this.TYPE.ANAMNESTIC_DATA){
+			this.gettingFormObject("get",this.URL.SYNDROME_DATA_URL, patientId, formName);
+			console.log(this.formObject);
+			this.renderFormBody(true);
+		} else {
 			this.gettingFormObject("get",this.URL.SYNDROME_DATA_URL, patientId, formName);
 			console.log(this.formObject);
 			this.renderFormBody(true);
 		}
-		if(type == this.TYPE.COMPLAINTS_DATA){
-			this.gettingFormObject("get",this.URL.SYNDROME_DATA_URL, patientId, formName);
-			console.log(this.formObject);
-			this.renderFormBody(true);
-		}
-		if(type == this.TYPE.MORPHOLOGICAL_DATA){
-			this.gettingFormObject("get",this.URL.SYNDROME_DATA_URL, patientId, formName);
-			console.log(this.formObject);
-			this.renderFormBody(true);
-		}
-		if(type == this.TYPE.INSTRUMENTAL_DATA){
-			this.gettingFormObject("get",this.URL.SYNDROME_DATA_URL, patientId, formName);
-			console.log(this.formObject);
-			this.renderFormBody(true);
-		}
-		if(type == this.TYPE.DIAGNOSIS_VERIFICATION_DATA){
-			this.gettingFormObject("get",this.URL.SYNDROME_DATA_URL, patientId, formName);
-			console.log(this.formObject);
-			this.renderFormBody(true);
-		}
-		if(type == this.TYPE.MAIN_TREATMENT_DATA){
-			this.gettingFormObject("get",this.URL.SYNDROME_DATA_URL, patientId, formName);
-			console.log(this.formObject);
-			this.renderFormBody(true);
-		}
-		if(type == this.TYPE.REHABILITATION_DATA){
-			this.gettingFormObject("get",this.URL.SYNDROME_DATA_URL, patientId, formName);
-			console.log(this.formObject);
-			this.renderFormBody(true);
-		}
-		if(type == this.TYPE.PREVENTIVE_MEASURES_DATA){
-			this.gettingFormObject("get",this.URL.SYNDROME_DATA_URL, patientId, formName);
-			console.log(this.formObject);
-			this.renderFormBody(true);
-		}
-		
 		this.event.init();
 		this.prepareForm();
 	};
 	
-this.initNewSurveyForm = function(blockID,type ,patientId, formName) {
-		
+	this.initNewSurveyForm = function(blockID, type , patientId, formName, survey) {
 		this.formName = formName;
 		this.patientId = patientId;
 		this.setContainer($(blockID));
 		this.container.html("");
 		this.container.attr("object",this.objectName);
-		
-		if(type == this.TYPE.LABORATORY_DATA){
-			this.gettingLaboratoryDataObject("get",this.URL.SYNDRONE_TEMPLATR_URL, patientId, formName);
-			console.log(this.formObject);
-			this.renderFormBody(false);
-		}
-		if(type == this.TYPE.COMPLAINTS_DATA){
-			this.gettingComplaintsDataObject("get",this.URL.SYNDRONE_TEMPLATR_URL, patientId, formName);
-			console.log(this.formObject);
-			this.renderFormBody(false);
-		}
-		if(type == this.TYPE.CLINICAL_MANIFESTATIONS_DATA){
-			this.gettingClinicalManifestationDataObject("get",this.URL.SYNDRONE_TEMPLATR_URL, patientId, formName);
-			console.log(this.formObject);
-			this.renderFormBody(false);
-		}
-		if(type == this.TYPE.MORPHOLOGICAL_DATA){
-			this.gettingFormData("get",this.URL.SYNDRONE_TEMPLATR_URL, patientId, formName, "morphologicalData");
-			console.log(this.formObject);
-			this.renderFormBody(false);
-		}
-		if(type == this.TYPE.INSTRUMENTAL_DATA){
-			this.gettingFormData("get",this.URL.SYNDRONE_TEMPLATR_URL, patientId, formName, "instrumentalData");
-			console.log(this.formObject);
-			this.renderFormBody(false);
-		}
-		if(type == this.TYPE.DIAGNOSIS_VERIFICATION_DATA){
-			this.gettingFormData("get",this.URL.SYNDRONE_TEMPLATR_URL, patientId, formName, "diagnosisVerificationData");
-			console.log(this.formObject);
-			this.renderFormBody(false);
-		}
-		if(type == this.TYPE.MAIN_TREATMENT_DATA){
-			this.gettingFormData("get",this.URL.SYNDRONE_TEMPLATR_URL, patientId, formName, "mainTreatmentData");
-			console.log(this.formObject);
-			this.renderFormBody(false);
-		}
-		if(type == this.TYPE.REHABILITATION_DATA){
-			this.gettingFormData("get",this.URL.SYNDRONE_TEMPLATR_URL, patientId, formName, "rehabilitationData");
-			console.log(this.formObject);
-			this.renderFormBody(false);
-		}
-		if(type == this.TYPE.PREVENTIVE_MEASURES_DATA){
-			this.gettingFormData("get",this.URL.SYNDRONE_TEMPLATR_URL, patientId, formName, "preventiveMeasuresData");
-			console.log(this.formObject);
-			this.renderFormBody(false);
-		}
-		
+		//	this.gettingLaboratoryDataObject("get",this.URL.SYNDRONE_TEMPLATR_URL, patientId, formName);
+		this.setSurvey(survey);
+		this.setForm(findSyrveyFormByType(survey, type));
+		this.renderFormBody(false);
 		this.event.init();
 		this.prepareForm();
 	};
-this.initNewSurveyFormWithNewUrl = function(blockID,type, url) {
-		
-		//this.formName = formName;
-		//this.patientId = patientId;
+	
+	this.initNewSurveyFormWithNewUrl = function(blockID, type, survey) {
 		this.setContainer($(blockID));
 		this.container.html("");
-		this.container.attr("object",this.objectName);
-		
-		if(type == this.TYPE.LABORATORY_DATA){
-			$.ajax({
-				type : "get",
-				url :  url,
-				dataType : "json",
-				async:   false,
-				success : function(response) {
-						survey = response;
-						form = response.laboratoryDataForm;
-				},
-				error: function (request, status, error) {
-					alert(error);
-			    }
-			});
-			this.setForm(form);
-			this.setSurvey(survey);
-			console.log(this.formObject);
-			this.renderFormBody(false);
-		}
-		if(type == this.TYPE.COMPLAINTS_DATA){
-			$.ajax({
-				type : "get",
-				url :  url,
-				dataType : "json",
-				async:   false,
-				success : function(response) {
-						survey = response;
-						form = response.complaintsForm;
-				},
-				error: function (request, status, error) {
-					alert(error);
-			    }
-			});
-			this.setForm(form);
-			this.setSurvey(survey);
-			console.log(this.formObject);
-			this.renderFormBody(false);
-		}
-		if(type == this.TYPE.CLINICAL_MANIFESTATIONS_DATA){
-			$.ajax({
-				type : "get",
-				url :  url,
-				dataType : "json",
-				async:   false,
-				success : function(response) {
-						survey = response;
-						form = response.clinicalManifestationsForm;
-				},
-				error: function (request, status, error) {
-					alert(error);
-			    }
-			});
-			this.setForm(form);
-			this.setSurvey(survey);
-			console.log(this.formObject);
-			this.renderFormBody(false);
-		}
-		if(type == this.TYPE.MORPHOLOGICAL_DATA){
-			$.ajax({
-				type : "get",
-				url :  url,
-				dataType : "json",
-				async:   false,
-				success : function(response) {
-						survey = response;
-						form = response.morphologicalData;
-				},
-				error: function (request, status, error) {
-					alert(error);
-			    }
-			});
-			this.setForm(form);
-			this.setSurvey(survey);
-			console.log(this.formObject);
-			this.renderFormBody(false);
-		}
-		if(type == this.TYPE.INSTRUMENTAL_DATA){
-			$.ajax({
-				type : "get",
-				url :  url,
-				dataType : "json",
-				async:   false,
-				success : function(response) {
-						survey = response;
-						form = response.instrumentalData;
-				},
-				error: function (request, status, error) {
-					alert(error);
-			    }
-			});
-			this.setForm(form);
-			this.setSurvey(survey);
-			console.log(this.formObject);
-			this.renderFormBody(false);
-		}
-		if(type == this.TYPE.DIAGNOSIS_VERIFICATION_DATA){
-			$.ajax({
-				type : "get",
-				url :  url,
-				dataType : "json",
-				async:   false,
-				success : function(response) {
-						survey = response;
-						form = response.diagnosisVerificationData;
-				},
-				error: function (request, status, error) {
-					alert(error);
-			    }
-			});
-			this.setForm(form);
-			this.setSurvey(survey);
-			console.log(this.formObject);
-			this.renderFormBody(false);
-		}
-		if(type == this.TYPE.MAIN_TREATMENT_DATA){
-			$.ajax({
-				type : "get",
-				url :  url,
-				dataType : "json",
-				async:   false,
-				success : function(response) {
-						survey = response;
-						form = response.mainTreatmentData;
-				},
-				error: function (request, status, error) {
-					alert(error);
-			    }
-			});
-			this.setForm(form);
-			this.setSurvey(survey);
-			console.log(this.formObject);
-			this.renderFormBody(false);
-		}
-		if(type == this.TYPE.REHABILITATION_DATA){
-			$.ajax({
-				type : "get",
-				url :  url,
-				dataType : "json",
-				async:   false,
-				success : function(response) {
-						survey = response;
-						form = response.rehabilitationData;
-				},
-				error: function (request, status, error) {
-					alert(error);
-			    }
-			});
-			this.setForm(form);
-			this.setSurvey(survey);
-			console.log(this.formObject);
-			this.renderFormBody(false);
-		}
-		if(type == this.TYPE.PREVENTIVE_MEASURES_DATA){
-			$.ajax({
-				type : "get",
-				url :  url,
-				dataType : "json",
-				async:   false,
-				success : function(response) {
-						survey = response;
-						form = response.preventiveMeasuresData;
-				},
-				error: function (request, status, error) {
-					alert(error);
-			    }
-			});
-			this.setForm(form);
-			this.setSurvey(survey);
-			console.log(this.formObject);
-			this.renderFormBody(false);
-		}
-		
+		this.container.attr("object", this.objectName);
+		this.setForm(findSyrveyFormByType(survey, type));
+		this.setSurvey(survey);
+		this.renderFormBody(false);
 		this.event.init();
 		this.prepareForm();
-};
+	};
 	
-	
-	
+	function findSyrveyFormByType(survey, type) {
+		for(var i = 0; i < survey.forms.length; i++) {
+			if(survey.forms[i].formType === type) {
+				return survey.forms[i]; 
+			}
+		}
+		return null;
+	}
 	
 	this.renderMedCard = function() {
 		this.renderMedCardFields();
 		this.renderFormBody(true);
-		
-	}; 
+	};
+	
 	this.renderMedCardFields = function(){
 		panel = $('<fieldset class= "panel-fieldset"></fieldset>');
 		panelDateRow = $('<div class="com-sm-7"></div>');
@@ -446,8 +163,10 @@ this.initNewSurveyFormWithNewUrl = function(blockID,type, url) {
 		this.container.append(panel);
 	};
 	this.renderFormBody = function(renderSaveButton){
-		if( this.formObject != null){
+		if(this.formObject != null){
+			this.formObject.panels.sort(comparator);
 			for ( var i = 0; i < this.formObject.panels.length; i++ ) {
+				this.formObject.panels[i].elements.sort(comparator);
 				this.container.append(this.utils.generatePanel(this.formObject.panels[i],i));
 			}
 		}
@@ -457,8 +176,13 @@ this.initNewSurveyFormWithNewUrl = function(blockID,type, url) {
 		
 	};
 
-	
-	
+	function comparator(a,b) {
+		  if (a.place < b.place)
+		     return -1;
+		  if (a.place > b.place)
+		    return 1;
+		  return 0;
+	};
 	
 	this.gettingFormObject = function(type, url, patientID, formName){
 		var form;
@@ -486,118 +210,6 @@ this.initNewSurveyFormWithNewUrl = function(blockID,type, url) {
 		this.setForm(form);
 		this.setSyndrom(syndrom);
 	},	
-	
-	
-	
-	//////////////////////////////////////////////////TO DO: NEED REFACTORING
-	//gets object from form by his name;
-	this.gettingFormData = function(type, url, patientID, formName, formFieldName){
-		var form;
-		var syndrom;
-		console.log(url.replace("${id}", patientID).replace("${name}", formName));
-		$.ajax({
-			type : type,
-			url :  url.replace("${id}", patientID).replace("${name}", formName),
-			dataType : "json",
-			async:   false,
-			success : function(response) {
-					syndrom = response;
-					this.surveyObject = response;
-					if(formFieldName == "morphologicalData"){
-						form = response.surveys[0].morphologicalData;
-					}
-					if(formFieldName == "instrumentalData"){
-						form = response.surveys[0].instrumentalData;
-					}
-					if(formFieldName == "diagnosisVerificationData"){
-						form = response.surveys[0].diagnosisVerificationData;
-					}
-					if(formFieldName == "mainTreatmentData"){
-						form = response.surveys[0].mainTreatmentData;
-					}
-					if(formFieldName == "rehabilitationData"){
-						form = response.surveys[0].rehabilitationData;
-					}
-					if(formFieldName == "preventiveMeasuresData"){
-						form = response.surveys[0].preventiveMeasuresData;
-					}
-									
-			},
-			error: function (request, status, error) {
-				alert(error);
-		    }
-		});
-		this.setForm(form);
-		this.setSyndrom(syndrom);
-	},	
-	
-	
-	
-	this.gettingLaboratoryDataObject = function(type, url, patientID, formName){
-		var form;
-		var syndrom;
-		console.log(url.replace("${id}", patientID).replace("${name}", formName));
-		$.ajax({
-			type : type,
-			url :  url.replace("${id}", patientID).replace("${name}", formName),
-			dataType : "json",
-			async:   false,
-			success : function(response) {
-					syndrom = response;
-					this.surveyObject = response;
-					form = response.surveys[0].laboratoryDataForm;
-			},
-			error: function (request, status, error) {
-				alert(error);
-		    }
-		});
-		this.setForm(form);
-		this.setSyndrom(syndrom);
-	},	
-	this.gettingComplaintsDataObject = function(type, url, patientID, formName){
-		var form;
-		var syndrom;
-		console.log(url.replace("${id}", patientID).replace("${name}", formName));
-		$.ajax({
-			type : type,
-			url :  url.replace("${id}", patientID).replace("${name}", formName),
-			dataType : "json",
-			async:   false,
-			success : function(response) {
-					syndrom = response;
-					this.surveyObject = response;
-					form = response.surveys[0].complaintsForm;
-			},
-			error: function (request, status, error) {
-				alert(error);
-		    }
-		});
-		this.setForm(form);
-		this.setSyndrom(syndrom);
-	},	
-	this.gettingClinicalManifestationDataObject = function(type, url, patientID, formName){
-		var form;
-		var syndrom;
-		console.log(url.replace("${id}", patientID).replace("${name}", formName));
-		$.ajax({
-			type : type,
-			url :  url.replace("${id}", patientID).replace("${name}", formName),
-			dataType : "json",
-			async:   false,
-			success : function(response) {
-					syndrom = response;
-					form = response.surveys[0].clinicalManifestationsForm;
-			},
-			error: function (request, status, error) {
-				alert(error);
-		    }
-		});
-		this.setForm(form);
-		this.setSyndrom(syndrom);
-	},	
-	//////////////////////////////////////////////TO DO: REFACTOR THIS FUCKING CODE
-	
-	
 	
 // -------------	this UTILES-------------
 	this.utils = {
@@ -627,6 +239,7 @@ this.initNewSurveyFormWithNewUrl = function(blockID,type, url) {
 				return this.generateDropDown(elementObj, elementIndex);
 				break;
 			case 'Panel' :
+				elementObj.elements.sort(comparator);
 				return this.generateSubPanel(elementObj, elementIndex);
 				break;
 			case 'ButtonGroup' :
@@ -750,9 +363,6 @@ this.initNewSurveyFormWithNewUrl = function(blockID,type, url) {
 		}
 		
 	},
-	
-	
-	
 	
 // ---------	EVENTS ----------
 	this.event = {
@@ -938,10 +548,4 @@ this.initNewSurveyFormWithNewUrl = function(blockID,type, url) {
 			alert(error);
 	    }});
 	}
-//	MORPHOLOGICAL_DATA : "MorphologicalData",
-//	INSTRUMENTAL_DATA : "InstrumentalData",
-//	DIAGNOSIS_VERIFICATION_DATA: "DiagnosisVerificationData",
-//	MAIN_TREATMENT_DATA : "MainTreatmentData",
-//	REHABILITATION_DATA : "RehabilitationData",
-//	PREVENTIVE_MEASURES_DATA : "PreventiveMeasuresData"
 };

@@ -13,6 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.immunology.logic.utils.enums.DrugTolerance;
+import com.immunology.logic.utils.enums.EfficacyEvaluation;
+import com.immunology.logic.utils.enums.SideEffectsSeverityDegree;
 import com.immunology.model.Drug;
 
 @Entity

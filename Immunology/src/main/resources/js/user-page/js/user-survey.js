@@ -5,26 +5,38 @@ $(document).ready(function() {
 		$("#sub-tabs").css("display", "block");
 		$("#tabs").css("display", "inline");
 		if(survey_id.length > 0){
-			complaintsData.initNewSurveyFormWithNewUrl("#complaints", "ComplaintsForm",surveyURL );
-			laboratoryData.initNewSurveyFormWithNewUrl('#laboratoryData', "LaboratoryDataForm", surveyURL);
-			clinicalManifestationData.initNewSurveyFormWithNewUrl('#clinicalManifestations', "ClinicalManifestationsForm", surveyURL);
-			morphologicalData.initNewSurveyFormWithNewUrl('#morphologicalData', "MorphologicalData", surveyURL);
-			instrumentalData.initNewSurveyFormWithNewUrl('#instrumentalData', "InstrumentalData", surveyURL);
-			diagnosisVerificationData.initNewSurveyFormWithNewUrl('#diagnosisVerificationData', "DiagnosisVerificationData", surveyURL);
-			mainTreatmentData.initNewSurveyFormWithNewUrl('#mainTreatmentData', "MainTreatmentData", surveyURL);
-			rehabilitationData.initNewSurveyFormWithNewUrl('#rehabilitationData', "RehabilitationData", surveyURL);
-			preventiveMeasuresData.initNewSurveyFormWithNewUrl('#preventiveMeasuresData', "PreventiveMeasuresData", surveyURL);
-		}else{
-			complaintsData.initNewSurveyForm("#complaints", "ComplaintsForm", $('#patient_id').val(), syndrom_name);
-			laboratoryData.initNewSurveyForm('#laboratoryData', "LaboratoryDataForm", $('#patient_id').val(),  syndrom_name);
-			clinicalManifestationData.initNewSurveyForm('#clinicalManifestations', "ClinicalManifestationsForm", $('#patient_id').val(), syndrom_name);
-			morphologicalData.initNewSurveyForm('#morphologicalData', "MorphologicalData", $('#patient_id').val(), syndrom_name);
-			instrumentalData.initNewSurveyForm('#instrumentalData', "InstrumentalData", $('#patient_id').val(), syndrom_name);
-			diagnosisVerificationData.initNewSurveyForm('#diagnosisVerificationData', "DiagnosisVerificationData", $('#patient_id').val(), syndrom_name);
-			mainTreatmentData.initNewSurveyForm('#mainTreatmentData', "MainTreatmentData", $('#patient_id').val(), syndrom_name);
-			rehabilitationData.initNewSurveyForm('#rehabilitationData', "RehabilitationData", $('#patient_id').val(), syndrom_name);
-			preventiveMeasuresData.initNewSurveyForm('#preventiveMeasuresData', "PreventiveMeasuresData", $('#patient_id').val(), syndrom_name);
+			$.ajax({
+				type : "get",
+				url :  surveyURL,
+				dataType : "json",
+				async:   false,
+				success : function(response) {
+					var survey = response;
+					complaintsData.initNewSurveyFormWithNewUrl("#complaints", "COMPLAINTS_FORM", survey);
+					laboratoryData.initNewSurveyFormWithNewUrl('#laboratoryData', "LABORATORY_DATA_FORM", survey);
+					clinicalManifestationData.initNewSurveyFormWithNewUrl('#clinicalManifestations', "CLINICAL_MANIFESTATIONS_FORM", survey);
+					morphologicalData.initNewSurveyFormWithNewUrl('#morphologicalData', "MORPHOLOGICAL_DATA", survey);
+					instrumentalData.initNewSurveyFormWithNewUrl('#instrumentalData', "INSTRUMENTAL_DATA", survey);
+					diagnosisVerificationData.initNewSurveyFormWithNewUrl('#diagnosisVerificationData', "DIAGNOSIS_VERIFICATION_DATA", survey);
+					mainTreatmentData.initNewSurveyFormWithNewUrl('#mainTreatmentData', "MAIN_TREATMENT_DATA", survey);
+					rehabilitationData.initNewSurveyFormWithNewUrl('#rehabilitationData', "REHABILITATION_DATA", survey);
+					preventiveMeasuresData.initNewSurveyFormWithNewUrl('#preventiveMeasuresData', "PREVENTIVE_MEASURES_DATA", survey);
+				},
+				error: function (request, status, error) {
+					alert(error);
+			    }
+			});
+		} else {
 			getSurveyTemplate();
+			complaintsData.initNewSurveyForm("#complaints", "COMPLAINTS_FORM", $('#patient_id').val(), syndrom_name, currentSurvey);
+			laboratoryData.initNewSurveyForm('#laboratoryData', "LABORATORY_DATA_FORM", $('#patient_id').val(),  syndrom_name, currentSurvey);
+			clinicalManifestationData.initNewSurveyForm('#clinicalManifestations', "CLINICAL_MANIFESTATIONS_FORM", $('#patient_id').val(), syndrom_name, currentSurvey);
+			morphologicalData.initNewSurveyForm('#morphologicalData', "MORPHOLOGICAL_DATA", $('#patient_id').val(), syndrom_name, currentSurvey);
+			instrumentalData.initNewSurveyForm('#instrumentalData', "INSTRUMENTAL_DATA", $('#patient_id').val(), syndrom_name, currentSurvey);
+			diagnosisVerificationData.initNewSurveyForm('#diagnosisVerificationData', "DIAGNOSIS_VERIFICATION_DATA", $('#patient_id').val(), syndrom_name, currentSurvey);
+			mainTreatmentData.initNewSurveyForm('#mainTreatmentData', "MAIN_TREATMENT_DATA", $('#patient_id').val(), syndrom_name, currentSurvey);
+			rehabilitationData.initNewSurveyForm('#rehabilitationData', "REHABILITATION_DATA", $('#patient_id').val(), syndrom_name, currentSurvey);
+			preventiveMeasuresData.initNewSurveyForm('#preventiveMeasuresData', "PREVENTIVE_MEASURES_DATA", $('#patient_id').val(), syndrom_name, currentSurvey);
 		}
 		$("#complaints").append('<button type="button" style="margin-left: 48%;" onClick="saveSyrvey();" class="btn btn-primary">Save</button>');
 		$("#clinicalManifestations").append('<button type="button" style="margin-left: 48%;" onClick="saveSyrvey();" class="btn btn-primary">Save</button>');
@@ -55,15 +67,12 @@ function saveSyrvey(){
 	patientId = patient_id;
 	syndromName = syndrom_name;
 	currentSurvey = complaintsData.surveyObject;
-	currentSurvey.complaintsForm = complaintsData.formObject;
-	currentSurvey.laboratoryDataForm = laboratoryData.formObject;
-	currentSurvey.clinicalManifestationsForm = clinicalManifestationData.formObject;
-	currentSurvey.morphologicalData = morphologicalData.formObject;
-	currentSurvey.instrumentalData = instrumentalData.formObject;
-	currentSurvey.diagnosisVerificationData = diagnosisVerificationData.formObject;
-	currentSurvey.mainTreatmentData = mainTreatmentData.formObject;
- 	currentSurvey.rehabilitationData = rehabilitationData.formObject;
-	currentSurvey.preventiveMeasuresData = preventiveMeasuresData.formObject;
+	currentSurvey.forms = [];
+	for(var i = 0; i < forms.length; i++) {
+		if(forms[i].formObject !== null) {
+			currentSurvey.forms.push(forms[i].formObject);
+		}
+	}
 	if(!isNaN(currentSurveyId)) {
 		currentSurvey.id = currentSurveyId;
 		if(surveyCreationDate) {

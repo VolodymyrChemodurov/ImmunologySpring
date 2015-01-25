@@ -1,6 +1,8 @@
 package com.immunology.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,28 +11,25 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.immunology.logic.utils.json.CustomJsonDateDeserializer;
 import com.immunology.logic.utils.json.CustomJsonDateSerializer;
-import com.immunology.model.ui.ClinicalManifestationsForm;
-import com.immunology.model.ui.ComplaintsForm;
-import com.immunology.model.ui.DiagnosisVerificationData;
 import com.immunology.model.ui.EfficacyData;
-import com.immunology.model.ui.InstrumentalData;
-import com.immunology.model.ui.LaboratoryDataForm;
-import com.immunology.model.ui.MainTreatmentData;
-import com.immunology.model.ui.MorphologicalData;
-import com.immunology.model.ui.PreventiveMeasuresData;
-import com.immunology.model.ui.RehabilitationData;
+import com.immunology.model.ui.SurveyForm;
 
 @Entity
 @Table(name = "surveys")
@@ -58,41 +57,10 @@ public class Survey {
 	@JsonBackReference("surveys_reference")
 	private Syndrome disease;
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name = "complaints_form_id")
-	private ComplaintsForm complaintsForm;
-	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name = "clinical_manifestations_form_id")
-	private ClinicalManifestationsForm clinicalManifestationsForm;
-	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name = "laboratory_data_form_id")
-	private LaboratoryDataForm laboratoryDataForm;
-	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name = "morphological_data_id")
-	private MorphologicalData morphologicalData;
-
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name = "instrumental_data_id")
-	private InstrumentalData instrumentalData;
-	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name = "diagnosis_verification_data_id")
-	private DiagnosisVerificationData diagnosisVerificationData;
-	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name = "main_treatment_data_id")
-	private MainTreatmentData mainTreatmentData;
-	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name = "rehabilitation_data_id")
-	private RehabilitationData rehabilitationData;
-	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name = "preventive_measures_data_id")
-	private PreventiveMeasuresData preventiveMeasuresData;
+	@OneToMany(mappedBy = "survey", cascade = CascadeType.MERGE)
+	@JsonManagedReference("survey_forms_reference")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<SurveyForm> forms = new ArrayList<SurveyForm>();
 	
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "efficacy_data_data_id")
@@ -143,79 +111,12 @@ public class Survey {
 		this.disease = disease;
 	}
 
-	public ComplaintsForm getComplaintsForm() {
-		return complaintsForm;
+	public List<SurveyForm> getForms() {
+		return forms;
 	}
 
-	public void setComplaintsForm(ComplaintsForm complaintsForm) {
-		this.complaintsForm = complaintsForm;
-	}
-
-	public ClinicalManifestationsForm getClinicalManifestationsForm() {
-		return clinicalManifestationsForm;
-	}
-
-	public void setClinicalManifestationsForm(
-			ClinicalManifestationsForm clinicalManifestationsForm) {
-		this.clinicalManifestationsForm = clinicalManifestationsForm;
-	}
-
-	public LaboratoryDataForm getLaboratoryDataForm() {
-		return laboratoryDataForm;
-	}
-
-	public void setLaboratoryDataForm(LaboratoryDataForm laboratoryDataForm) {
-		this.laboratoryDataForm = laboratoryDataForm;
-	}
-
-	public MorphologicalData getMorphologicalData() {
-		return morphologicalData;
-	}
-
-	public void setMorphologicalData(MorphologicalData morphologicalData) {
-		this.morphologicalData = morphologicalData;
-	}
-
-	public InstrumentalData getInstrumentalData() {
-		return instrumentalData;
-	}
-
-	public void setInstrumentalData(InstrumentalData instrumentalData) {
-		this.instrumentalData = instrumentalData;
-	}
-
-	public DiagnosisVerificationData getDiagnosisVerificationData() {
-		return diagnosisVerificationData;
-	}
-
-	public void setDiagnosisVerificationData(
-			DiagnosisVerificationData diagnosisVerificationData) {
-		this.diagnosisVerificationData = diagnosisVerificationData;
-	}
-
-	public MainTreatmentData getMainTreatmentData() {
-		return mainTreatmentData;
-	}
-
-	public void setMainTreatmentData(MainTreatmentData mainTreatmentData) {
-		this.mainTreatmentData = mainTreatmentData;
-	}
-
-	public RehabilitationData getRehabilitationData() {
-		return rehabilitationData;
-	}
-
-	public void setRehabilitationData(RehabilitationData rehabilitationData) {
-		this.rehabilitationData = rehabilitationData;
-	}
-
-	public PreventiveMeasuresData getPreventiveMeasuresData() {
-		return preventiveMeasuresData;
-	}
-
-	public void setPreventiveMeasuresData(
-			PreventiveMeasuresData preventiveMeasuresData) {
-		this.preventiveMeasuresData = preventiveMeasuresData;
+	public void setForms(List<SurveyForm> forms) {
+		this.forms = forms;
 	}
 
 	public EfficacyData getEfficacyData() {

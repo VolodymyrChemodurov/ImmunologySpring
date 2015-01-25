@@ -1,4 +1,4 @@
-package com.immunology.model.ui;
+package com.immunology.logic.utils.enums;
 
 public enum EfficacyEvaluation {
 

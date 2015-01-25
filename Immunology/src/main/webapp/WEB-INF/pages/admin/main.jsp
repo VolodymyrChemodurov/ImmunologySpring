@@ -74,16 +74,16 @@
 									<span id="formIdhidden" class="hidden-xs">Форми обстежень</span>
 								</a>
 								<ul class="dropdown-menu" style="display: block;">
-									<li><a class="ajax-link" href="#"  data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'comlaints'">Скарги</a></li>
-									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'clinicalManifestation'" >Клінічні симптоми</a></li>
-									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'laboratoryData'" >Лабораторні дані</a></li>
+									<li><a class="ajax-link" href="#"  data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'COMPLAINTS_FORM'">Скарги</a></li>
+									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'CLINICAL_MANIFESTATIONS_FORM'" >Клінічні симптоми</a></li>
+									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'LABORATORY_DATA_FORM'" >Лабораторні дані</a></li>
 									
-									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'morphologicalData'" >Морфологічні дані</a></li>
-									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'instrumentalData'" >Інструментальні дані</a></li>
-									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'diagnosisVerificationData'" >Верифікація діагнозу</a></li>
-									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'mainTreatmentData'" >Основне лікування</a></li>
-									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'rehabilitationData'" >Реабілітація</a></li>
-									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'preventiveMeasuresData'" >Профілактичні заходи</a></li>
+									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'MORPHOLOGICAL_DATA'" >Морфологічні дані</a></li>
+									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'INSTRUMENTAL_DATA'" >Інструментальні дані</a></li>
+									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'DIAGNOSIS_VERIFICATION_DATA'" >Верифікація діагнозу</a></li>
+									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'MAIN_TREATMENT_DATA'" >Основне лікування</a></li>
+									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'REHABILITATION_DATA'" >Реабілітація</a></li>
+									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'PREVENTIVE_MEASURES_DATA'" >Профілактичні заходи</a></li>
 								</ul>
 							</li>
 						</li>

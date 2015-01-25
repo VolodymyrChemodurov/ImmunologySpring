@@ -22,16 +22,8 @@ import com.immunology.model.ui.elements.impl.Panel;
 @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.PROPERTY, property="objectType")
 @JsonSubTypes({
         @JsonSubTypes.Type(value=MedicalCardForm.class),
-        @JsonSubTypes.Type(value=LaboratoryDataForm.class),
-        @JsonSubTypes.Type(value=ClinicalManifestationsForm.class),
-        @JsonSubTypes.Type(value=ComplaintsForm.class),
         @JsonSubTypes.Type(value=AnamnesticDataForm.class),
-        @JsonSubTypes.Type(value=DiagnosisVerificationData.class),
-        @JsonSubTypes.Type(value=InstrumentalData.class),
-        @JsonSubTypes.Type(value=MainTreatmentData.class),
-        @JsonSubTypes.Type(value=MorphologicalData.class),
-        @JsonSubTypes.Type(value=PreventiveMeasuresData.class),
-        @JsonSubTypes.Type(value=RehabilitationData.class)
+        @JsonSubTypes.Type(value=SurveyForm.class)
 })
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)

@@ -75,13 +75,13 @@ public abstract class Element {
 		this.panel = panel;
 	}
 
-	public Integer getOrder() {
+/*	public Integer getOrder() {
 		return place;
 	}
 
 	public void setOrder(Integer order) {
 		this.place = order;
-	}
+	}*/
 
 	public Integer getPlace() {
 		return place;

@@ -33,7 +33,7 @@
 <script>
 	$(document).ajaxError(function(response) {
 		console.log(response);
-    	window.location = "/login";
+    	//window.location = "/login";
 	});
 	$(document).ajaxSend(function() {
 		showLoader();

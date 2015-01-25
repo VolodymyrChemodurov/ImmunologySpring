@@ -80,22 +80,22 @@ function saveSyrvey(){
 		}
 	}
 	console.log(currentSurvey);
-	 $.ajax({
-			type : "post",
-			url :   "/survey/patient/{patientId}/syndrome/{syndromeName}".replace("{patientId}", patientId).replace("{syndromeName}", syndromName),
-			data: JSON.stringify(currentSurvey),
-		    contentType: "application/json; charset=utf-8",
-		    dataType: "json",
-		    async: false,
-			success : function(response) {
-				console.log(response);
-				currentSurvey = response;
-				currentSurveyId = response.id;
-				surveyCreationDate = response.creationDate; 
-				console.log("Survey Saved");
-			},
-			error: function (request, status, error) {
-				alert(error);
-		    }
-		});
+	$.ajax({
+		type : "post",
+		url :   "/survey/patient/{patientId}/syndrome/{syndromeName}".replace("{patientId}", patientId).replace("{syndromeName}", syndromName),
+		data: JSON.stringify(currentSurvey),
+		contentType: "application/json; charset=utf-8",
+		dataType: "json",
+		async: false,
+		success : function(response) {
+			console.log(response);
+			currentSurvey = response;
+			currentSurveyId = response.id;
+			surveyCreationDate = response.creationDate; 
+			console.log("Survey Saved");
+		},
+		error: function (request, status, error) {
+			alert(error);
+		}
+	});
 }

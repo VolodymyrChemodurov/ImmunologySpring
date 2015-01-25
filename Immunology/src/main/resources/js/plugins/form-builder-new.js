@@ -111,7 +111,6 @@ function Builder(object_Name) {
 		this.setContainer($(blockID));
 		this.container.html("");
 		this.container.attr("object",this.objectName);
-		//	this.gettingLaboratoryDataObject("get",this.URL.SYNDRONE_TEMPLATR_URL, patientId, formName);
 		this.setSurvey(survey);
 		this.setForm(findSyrveyFormByType(survey, type));
 		this.renderFormBody(false);
@@ -431,7 +430,7 @@ function Builder(object_Name) {
 				var obj =window[container.attr("object")];
 				console.log($(this));
 				obj.setGroupButtonValue($(fieldset).attr("index"), $(row).attr("index"),subPanelBlock.attr("index"), $(this).text());
-			})
+			});
 			
 		},
 		},
@@ -502,9 +501,6 @@ function Builder(object_Name) {
 		
 	};
 	
-	this.test = function(){
-		alert("ok");
-	};
 	this.sendForm =  function(){
 		var saveURL;
 		var saveObject;
@@ -516,18 +512,6 @@ function Builder(object_Name) {
 			saveURL = this.SAVE_BUTTON_URL.ANAMNESTIC_DATA_URL;
 			saveObject = this.syndromObject;
 			saveObject.anamnesticData = this.formObject;
-			
-		}
-		if(this.formObject.objectType == this.TYPE.COMPLAINTS_DATA){
-			saveURL = this.SAVE_BUTTON_URL.ANAMNESTIC_DATA_URL;
-			saveObject = this.syndromObject;
-			saveObject.surveys[0].complaintsForm = this.formObject;
-			
-		}
-		if(this.formObject.objectType == this.TYPE.MORPHOLOGICAL_DATA){
-			saveURL = this.SAVE_BUTTON_URL.ANAMNESTIC_DATA_URL;
-			saveObject = this.syndromObject;
-			saveObject.surveys[0].morphologicalData = this.formObject;
 			
 		}
 		
@@ -544,8 +528,9 @@ function Builder(object_Name) {
 	    	  console.log(resposeJsonObject);
 	      },
 		
-		error: function (request, status, error) {
+	      error: function (request, status, error) {
 			alert(error);
-	    }});
-	}
+	      }
+	    });
+	};
 };

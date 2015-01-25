@@ -252,87 +252,18 @@
 			newSyndromObject = {};
 			newSyndromObject["name"] = syndromName;
 			newSyndromObject["surveys"] = [];
-			
-			
-			
 			newSyndromObject["anamnesticData"] = {};
-			
+			newSyndromObject["formulas"] = [];
 			var anamnesticData = {};
 			anamnesticData["name"] = "";
 			anamnesticData["objectType"] = "AnamnesticDataForm";
 			anamnesticData["panels"] = [];
 			newSyndromObject.anamnesticData = anamnesticData;
 			
-			
 			var survey = {};
-			survey["complaintsForm"]= {};
-			 var  complaintsForm = {};
-			 complaintsForm["name"] = "";
-			 complaintsForm["panels"] = [];
-			 complaintsForm["objectType"] = "ComplaintsForm";
-			 survey.complaintsForm = complaintsForm;
-			 
-			survey["clinicalManifestationsForm"] ={};
-			 var clinicalManifestationsForm = {};
-			 clinicalManifestationsForm["name"] = ""; 
-			 clinicalManifestationsForm["panels"] = [];
-			 clinicalManifestationsForm["objectType"] = "ClinicalManifestationsForm"
-			 survey.clinicalManifestationsForm = clinicalManifestationsForm;
-				 
-			survey["laboratoryDataForm"]= {};
-			 var laboratoryDataForm = {};
-			 laboratoryDataForm["name"] = "";
-			 laboratoryDataForm["panels"] = [];
-			 laboratoryDataForm["objectType"] = "LaboratoryDataForm";
-			 survey.laboratoryDataForm = laboratoryDataForm;
-			 
-			 survey["morphologicalData"]= {};
-			 var morphologicalData = {};
-			 morphologicalData["name"] = "";
-			 morphologicalData["panels"] = [];
-			 morphologicalData["objectType"] = "MorphologicalData";
-			 survey.morphologicalData = morphologicalData;
-			 
-			 survey["instrumentalData"]= {};
-			 var instrumentalData = {};
-			 instrumentalData["name"] = "";
-			 instrumentalData["panels"] = [];
-			 instrumentalData["objectType"] = "InstrumentalData";
-			 survey.instrumentalData = instrumentalData;
-			 
-			 survey["diagnosisVerificationData"]= {};
-			 var diagnosisVerificationData = {};
-			 diagnosisVerificationData["name"] = "";
-			 diagnosisVerificationData["panels"] = [];
-			 diagnosisVerificationData["objectType"] = "DiagnosisVerificationData";
-			 survey.diagnosisVerificationData = diagnosisVerificationData;
-			 
-			 survey["mainTreatmentData"]= {};
-			 var mainTreatmentData = {};
-			 mainTreatmentData["name"] = "";
-			 mainTreatmentData["panels"] = [];
-			 mainTreatmentData["objectType"] = "MainTreatmentData";
-			 survey.mainTreatmentData = mainTreatmentData;
-			 
-			 survey["rehabilitationData"]= {};
-			 var rehabilitationData = {};
-			 rehabilitationData["name"] = "";
-			 rehabilitationData["panels"] = [];
-			 rehabilitationData["objectType"] = "RehabilitationData";
-			 survey.rehabilitationData = rehabilitationData;
-			 
-			 survey["preventiveMeasuresData"]= {};
-			 var preventiveMeasuresData = {};
-			 preventiveMeasuresData["name"] = "";
-			 preventiveMeasuresData["panels"] = [];
-			 preventiveMeasuresData["objectType"] = "PreventiveMeasuresData";
-			 survey.preventiveMeasuresData = preventiveMeasuresData;
-			
-			 
-			 newSyndromObject.surveys.push(survey);
-			 //response.surveys.push(survey);
-			
-		}else{
+			survey["forms"]= [];
+			newSyndromObject.surveys.push(survey);
+		} else {
 		// Get Parent Template;
 		$.ajax({
 			type : "get",

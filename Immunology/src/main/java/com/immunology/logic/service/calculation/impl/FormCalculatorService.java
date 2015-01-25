@@ -20,7 +20,7 @@ public class FormCalculatorService implements CalculatorService<Form> {
 
 	public Double calculate(Form entity, Formula formula) {
 		Double result = 0.0;
-		if (formula.getFormulaExpression() != null && entity != null) {
+		if (formula != null && formula.getFormulaExpression() != null && entity != null) {
 			List<Panel> panels = entity.getPanels();
 			for (Panel panel : panels) {
 				result += calculate(panel, formula);

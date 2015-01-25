@@ -12,8 +12,8 @@ import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.immunology.model.calculation.Formula;
-import com.immunology.model.ui.ComplaintsForm;
 import com.immunology.model.ui.Form;
+import com.immunology.model.ui.SurveyForm;
 import com.immunology.model.ui.elements.Computable;
 import com.immunology.model.ui.elements.Element;
 import com.immunology.model.ui.elements.impl.ButtonGroup;
@@ -36,7 +36,7 @@ public class FormCalculatorServiceTest {
 		formula = new Formula();
 		formula.setFormulaExpression("x");
 		
-		form = new ComplaintsForm();
+		form = new SurveyForm();
 		Panel panel = new Panel();
 		Panel subPanel = new Panel();
 		subPanel.setPanel(panel);

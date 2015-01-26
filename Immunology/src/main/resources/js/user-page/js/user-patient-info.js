@@ -36,6 +36,7 @@ function initSyndromeEvent() {
 	$("#select_syndrome_button").click(
 			function() {
 				$("#newSurveyButton").css("display", "inline");
+				$(".box-content #tabs .hide").addClass('show');
 				anamnesticData.init('#AnamnesticDataContainer',
 						"AnamnesticDataForm", $('#patient_id').val(), $(
 								'#syndrom').val());

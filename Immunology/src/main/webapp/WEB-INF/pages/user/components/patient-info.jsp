@@ -65,8 +65,8 @@
 					<ul>
 						<li><a href="#tabs-1">Профіль</a></li>
 						<li><a href="#tabs-2">Медична картка</a></li>
-						<li><a href="#tabs-3">Анамнестичні дані</a></li>
-						<li><a href="#tabs-4">Обстеження</a></li>
+						<li><a href="#tabs-3" class="hide">Анамнестичні дані</a></li>
+						<li><a href="#tabs-4" class="hide">Обстеження</a></li>
 					</ul>
 					<div id="tabs-1">
 						<jsp:include

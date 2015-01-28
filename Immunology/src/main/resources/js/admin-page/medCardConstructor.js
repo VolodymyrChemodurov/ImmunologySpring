@@ -137,26 +137,8 @@ function initPanelNames(){
 		optionElement.val(index);
 		$(panelNameSelects).append(optionElement); 
 	});
-//	panelIndex = panelNameSelects.val();
-//	var subPanelSelect = $("select[name=sub-panel-names]");
-//	$(formObject.panels[parseInt(panelIndex)].elements).each(function(index, element){
-//		if(element.objectType == "Panel"){
-//			optionElement = $("<option>"+element.name+"</option>");
-//			optionElement.val(index);
-//			$(subPanelSelect).append(optionElement); 
-//		}else{
-//			if(elementPanelSelect != null){
-//				optionElement = $("<option>"+element.name+"</option>");
-//				optionElement.val(index);
-//				$(elementPanelSelect).append(optionElement); 
-//			}
-//		}
-//		
-//	});
-	
-//	$(subPanelSelect).append("<option value='-1'>- EMPTY -</option>");
-	
 };
+
 function renderPreviewMedForm(){
 	var constructor = new Builder("constructor");
 	constructor.constructorInit('#container', formObject);
@@ -191,8 +173,6 @@ function spClick(){
 				$(formElementSelect).append(optionElement); 
 			});
 		}
-		
-	
 };
 
 function initEvents(){
@@ -333,23 +313,7 @@ function initEvents(){
 	
 }
 
-function setUpPositions(form) {
-	for(var i = 0; i < form.panels.length; i++) {
-		var panel = form.panels[i]; 
-		panel.place = i;
-		setUpPanelContentPositions(panel);
-	}
-}
 
-function setUpPanelContentPositions(panel) {
-	for(var j = 0; j < panel.elements.length; j++) {
-		var element = panel.elements[j]; 
-		element.place = j;
-		if(element.hasOwnProperty('elements')) {
-			setUpPanelContentPositions(element);
-		}
-	}
-}
 
 function saveMedicalCard() {
 	setUpPositions(formObject);
@@ -416,6 +380,7 @@ function createPanel(title){
  	panel["name"] = title;
  	panel["checked"] = false;
  	panel["objectType"] = "Panel";
+ 	panel["formElementId"] = getElementId(); 
  	panel["elements"] = [];
  	
  	if(formObject == null){
@@ -433,6 +398,7 @@ function createSubPanel(index,title){
 	subPanel["name"] =title;
 	subPanel["checked"] = false;
 	subPanel["objectType"] = "Panel";
+	subPanel["formElementId"] = getElementId();
 	subPanel["elements"] = [];
 	formObject.panels[index].elements.push(subPanel); 
 	renderPreviewMedForm();
@@ -443,6 +409,7 @@ function createTextBox(panelIndex,subPanelIndex,title){
  	textBox["checked"] = false;
  	textBox["objectType"] = "TextBox";
  	textBox["text"] = "";
+ 	textBox["formElementId"] = getElementId();
  	textBox["multiplier"] = 0;
  	if(parseInt(subPanelIndex) == -1 || subPanelIndex == null){
  		formObject.panels[panelIndex].elements.push(textBox);
@@ -457,6 +424,7 @@ function createDropDown(panelIndex,subPanelIndex,title,values){
  	dropDown["name"]=title;
  	dropDown["checked"] = false;
  	dropDown["objectType"] ="DropDown";
+ 	dropDown["formElementId"] = getElementId();
  	dropDown["values"] = values;
  	if(parseInt(subPanelIndex) == -1 || subPanelIndex == null){
  		formObject.panels[panelIndex].elements.push(dropDown);
@@ -471,6 +439,7 @@ function createButtonGroup(panelIndex,subPanelIndex,title,values){
 	groupButton["name"] = title;
 	groupButton["checked"] = false;
 	groupButton["objectType"] ="ButtonGroup";
+	groupButton["formElementId"] = getElementId();
 	groupButton["value"] = 0;
 	groupButton["multiplier"] = 0;
  	if(parseInt(subPanelIndex) == -1 || subPanelIndex == null){
@@ -483,6 +452,24 @@ function createButtonGroup(panelIndex,subPanelIndex,title,values){
 }
 
 // HELPER METHODS //
+function setUpPositions(form) {
+	for(var i = 0; i < form.panels.length; i++) {
+		var panel = form.panels[i]; 
+		panel.place = i;
+		setUpPanelContentPositions(panel);
+	}
+}
+
+function setUpPanelContentPositions(panel) {
+	for(var j = 0; j < panel.elements.length; j++) {
+		var element = panel.elements[j]; 
+		element.place = j;
+		if(element.hasOwnProperty('elements')) {
+			setUpPanelContentPositions(element);
+		}
+	}
+}
+
 function cleanConstructorFields() {
 	$(arguments).each(function() {
 		this.val("");
@@ -497,4 +484,8 @@ function cleanDropDowns() {
 	$(".select2-search-choice").each(function() {
 		$(this).remove();
 	});
+}
+
+function getElementId() {
+	return Math.floor(Math.random() * 1000001);
 }

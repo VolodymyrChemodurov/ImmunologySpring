@@ -2,6 +2,7 @@ package com.immunology.model.ui.elements.impl;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.immunology.model.ui.elements.Computable;
@@ -15,6 +16,7 @@ public class ButtonGroup extends Element implements Computable {
 
 	private Double value;
 	
+	@Transient
 	private Double multiplier;
 
 	public Double getMultiplier() {

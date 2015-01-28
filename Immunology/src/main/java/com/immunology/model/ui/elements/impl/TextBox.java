@@ -2,6 +2,7 @@ package com.immunology.model.ui.elements.impl;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -15,6 +16,7 @@ public class TextBox extends Element implements Computable {
 
 	private String text;
 
+	@Transient
 	private Double multiplier;
 	
 	public String getText() {

@@ -41,6 +41,8 @@ public abstract class Element {
 	@Column(name = "element_id")
 	protected Long id;
 	
+	protected Long formElementId;
+	
 	protected String name;
 	
 	protected Integer place;
@@ -91,10 +93,19 @@ public abstract class Element {
 		this.checked = checked;
 	}
 
+	public Long getFormElementId() {
+		return formElementId;
+	}
+
+	public void setFormElementId(Long formElementId) {
+		this.formElementId = formElementId;
+	}
+
 	@Override
 	public String toString() {
-		return "Element [id=" + id + ", name=" + name + ", checked=" + checked
-				+ "]";
+		return "Element [id=" + id + ", formElementId=" + formElementId
+				+ ", name=" + name + ", place=" + place + ", checked="
+				+ checked + "]";
 	}
 
 }

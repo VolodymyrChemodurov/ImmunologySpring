@@ -2,8 +2,6 @@ package com.immunology.logic.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -31,8 +29,6 @@ import com.immunology.model.calculation.Formula;
 @RequestMapping(value = "/survey")
 public class SurveyController {
 
-	private static final Logger LOG = LoggerFactory.getLogger(SurveyController.class);
-	
 	@Autowired
 	private SyndromeService syndromeService;
 	@Autowired
@@ -76,7 +72,8 @@ public class SurveyController {
 	@RequestMapping(value = "/patient/{patientId}/syndrome/{syndromeName}", method = RequestMethod.POST)
 	public @ResponseBody Survey saveOrUpdateSurvey(@RequestBody Survey survey, @PathVariable("patientId") Long patientId,
 			@PathVariable("syndromeName") String syndromeName, HttpServletRequest request) {
-		Syndrome syndrome = syndromeService.getPatientSyndrome(patientId, URIUtils.decodePathVariable(request.getRequestURI(), 4));
+		String decodedSyndromeName = URIUtils.decodePathVariable(request.getRequestURI(), 4);
+		Syndrome syndrome = syndromeService.getPatientSyndrome(patientId, decodedSyndromeName);
 		if(syndrome.getPatient() == null) {
 			syndrome.setPatient(patientService.getPatientById(patientId));
 			ReferenceHelper.setTemplatesReferences(syndrome);
@@ -85,10 +82,11 @@ public class SurveyController {
 		User user = UserUtils.getCurrentUser();
 		survey.setUser(userService.getUserByLogin(user.getUsername()));
 		
+		Survey surveyTemplate = syndromeService.getSyndromeByName(decodedSyndromeName).getSurveys().get(0);
 		Formula insufficiencyLevelFormula = syndromeService.getSyndromeFormula(syndrome.getName(), FormulaType.INSUFFICIENCY_LEVEL);
 		Formula severityLevelFormula = syndromeService.getSyndromeFormula(syndrome.getName(), FormulaType.SEVERITY_LEVEL);
-		survey.setInsufficiencyLevel(surveyCalculatorService.calculate(survey, insufficiencyLevelFormula));
-		survey.setSeverityLevel(surveyCalculatorService.calculate(survey, severityLevelFormula));
+		survey.setInsufficiencyLevel(surveyCalculatorService.calculate(survey, surveyTemplate, insufficiencyLevelFormula));
+		survey.setSeverityLevel(surveyCalculatorService.calculate(survey, surveyTemplate, severityLevelFormula));
 		
 		return surveyService.saveOrUpdateSurvey(survey);
 	}

@@ -5,6 +5,6 @@ import com.immunology.model.calculation.Formula;
 
 public interface CalculatorService<T> {
 
-	Double calculate(T entity, Formula Formula);
+	Double calculate(T entity, T template, Formula Formula);
 	
 }

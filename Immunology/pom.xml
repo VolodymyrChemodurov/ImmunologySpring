@@ -27,6 +27,7 @@
 		<mockito.version>1.9.5</mockito.version>
 		<powermock.version>1.5.4</powermock.version>
 		<exp4j.version>0.4.3.BETA-3</exp4j.version>
+		<guava.version>18.0</guava.version>
 	</properties>
 
 	<dependencies>
@@ -146,11 +147,19 @@
 		</dependency>
 		<!-- Hibernate dependencies end -->
 		<!-- DB dependencies -->
+		
+		<!-- Other -->
 		<dependency>
 			<groupId>net.objecthunter</groupId>
 			<artifactId>exp4j</artifactId>
 			<version>${exp4j.version}</version>
 		</dependency>
+		<dependency>
+    		<groupId>com.google.guava</groupId>
+    		<artifactId>guava</artifactId>
+    		<version>${guava.version}</version>
+		</dependency>
+		<!-- Other end -->
 		<!-- loggining -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -169,7 +178,7 @@
   		</dependency>
 		<!-- loggining end -->
 
-		<!-- Junit -->
+		<!-- Testing -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

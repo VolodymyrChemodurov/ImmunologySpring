@@ -78,10 +78,6 @@ public class SyndromeServiceImpl implements SyndromeService {
 
 	public Boolean updateSyndromeTemplate(String templateName, Syndrome syndrome) {
 		cleanSyndromeTemplateBeforeSaving(syndrome);
-/*		List<Syndrome> syndromes = syndromeDao.getSyndromesByName(templateName);
-		for(Syndrome currentSyndrome: syndromes) {
-			adjustSyndromeMultipliers(currentSyndrome, syndrome);
-		}*/
 		return syndromeDao.updateSyndromeTemplate(templateName, syndrome);
 	}
 
@@ -147,24 +143,4 @@ public class SyndromeServiceImpl implements SyndromeService {
 		syndromeTemplate.setUsers(cleanedUsers);
 	}
 	
-/*	private void adjustSyndromeMultipliers(Syndrome syndrome, Syndrome template) {
-		List<Survey> surveys = syndrome.getSurveys();
-		for(Survey survey: surveys) {
-			
-		}
-	}
-	
-	private void adjustFormMultipliers(Form form, From template) {
-		List<Panel> panels = form.getPanels(); 
-		for(int i = 0; i < panels.size(); i++) {
-			Element[] elements = new Element[panels.get(i).getElements().size()];
-			panels.get(i).getElements().toArray(elements);
-			for(int j = 0; j < elements.length; j++) {
-				Element element = elements[j];
-				if(element instanceof Computable) {
-					((Computable) element).setMultiplier(multiplier);
-				}
-			}
-		}
-	}*/
 }

@@ -86,7 +86,6 @@ function saveSyrvey(){
 		data: JSON.stringify(currentSurvey),
 		contentType: "application/json; charset=utf-8",
 		dataType: "json",
-		async: false,
 		success : function(response) {
 			console.log(response);
 			currentSurvey = response;

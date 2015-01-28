@@ -290,21 +290,24 @@ function initEvents(){
 		
 		var panelSelect = $(parent).find("select[name=panel-names]");
 		var subPanelSelect = $(parent).find("select[name=sub-panel-names]");
-		var elementSelect = $(parent).find("select[name=sp-remove]");
+		var elementSelect = $(parent).find("select[name=element-title]");
 		
 		var panelIndex = parseInt($(panelSelect).val());
 		var subPanelIndex = parseInt($(subPanelSelect).val());
 		var elementIndex = parseInt($(elementSelect).val());
 		
-		if(subPanelIndex == -1){
-			formObject.panels.splice(panelIndex,1);
-		}else{
-			if(elementIndex == -1){
-				formObject.panels[panelIndex].elements.splice(subPanelIndex,1);
-			}else{
+		if(panelIndex != -1) {
+			if(subPanelIndex != -1 && elementIndex != -1) {
 				formObject.panels[panelIndex].elements[subPanelIndex].elements.splice(elementIndex,1);
+			} else if(subPanelIndex != -1 && elementIndex == -1) {
+				formObject.panels[panelIndex].elements.splice(subPanelIndex, 1);
+			} else {
+				formObject.panels[panelIndex].elements.splice(elementIndex, 1);
 			}
+		} else {
+			formObject.panels.splice(panelIndex,1);
 		}
+		
 		renderPreviewMedForm();
 		initPanelNames();
 		

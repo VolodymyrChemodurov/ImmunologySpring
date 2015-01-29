@@ -409,7 +409,7 @@ function Builder(object_Name) {
 				var subPanelBlock = $(this).parents(".sub-panel");
 				var container = $(this).parents(".form-container");
 				var obj =window[container.attr("object")];
-				obj.setDropDownValue($(fieldset).attr("index"), $(row).attr("index"),subPanelBlock.attr("index"), $(this).val());
+				obj.setDropDownValue($(fieldset).attr("index"), $(row).attr("index"),subPanelBlock.attr("index"), $(this).find("option:selected").text());
 				
 				
 			});

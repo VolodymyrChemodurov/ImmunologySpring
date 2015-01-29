@@ -20,10 +20,8 @@ import com.immunology.logic.service.calculation.impl.SurveyCalculatorService;
 import com.immunology.logic.utils.ReferenceHelper;
 import com.immunology.logic.utils.URIUtils;
 import com.immunology.logic.utils.UserUtils;
-import com.immunology.logic.utils.enums.FormulaType;
 import com.immunology.model.Survey;
 import com.immunology.model.Syndrome;
-import com.immunology.model.calculation.Formula;
 
 @Controller
 @RequestMapping(value = "/survey")
@@ -82,11 +80,11 @@ public class SurveyController {
 		User user = UserUtils.getCurrentUser();
 		survey.setUser(userService.getUserByLogin(user.getUsername()));
 		
-		Survey surveyTemplate = syndromeService.getSyndromeByName(decodedSyndromeName).getSurveys().get(0);
+		/*Survey surveyTemplate = syndromeService.getSyndromeByName(decodedSyndromeName).getSurveys().get(0);
 		Formula insufficiencyLevelFormula = syndromeService.getSyndromeFormula(syndrome.getName(), FormulaType.INSUFFICIENCY_LEVEL);
 		Formula severityLevelFormula = syndromeService.getSyndromeFormula(syndrome.getName(), FormulaType.SEVERITY_LEVEL);
 		survey.setInsufficiencyLevel(surveyCalculatorService.calculate(survey, surveyTemplate, insufficiencyLevelFormula));
-		survey.setSeverityLevel(surveyCalculatorService.calculate(survey, surveyTemplate, severityLevelFormula));
+		survey.setSeverityLevel(surveyCalculatorService.calculate(survey, surveyTemplate, severityLevelFormula));*/
 		
 		return surveyService.saveOrUpdateSurvey(survey);
 	}

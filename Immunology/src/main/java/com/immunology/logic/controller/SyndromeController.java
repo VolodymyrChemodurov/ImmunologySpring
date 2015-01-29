@@ -20,11 +20,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.immunology.logic.service.PatientService;
 import com.immunology.logic.service.SyndromeService;
 import com.immunology.logic.service.UserService;
+import com.immunology.logic.service.calculation.impl.SurveyCalculatorService;
 import com.immunology.logic.utils.URIUtils;
 import com.immunology.logic.utils.UserUtils;
 import com.immunology.logic.utils.calculation.CalculationHelper;
 import com.immunology.logic.utils.enums.FormulaType;
 import com.immunology.model.Patient;
+import com.immunology.model.Survey;
 import com.immunology.model.Syndrome;
 import com.immunology.model.calculation.Formula;
 
@@ -40,6 +42,8 @@ public class SyndromeController {
 	private UserService userService;
 	@Autowired
 	private PatientService patientService;
+	@Autowired
+	private SurveyCalculatorService surveyCalculatorService;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public @ResponseBody List<Syndrome> getUserSyndromes() {
@@ -59,7 +63,15 @@ public class SyndromeController {
 		LOG.info("getPatientSyndrome");
 		model.addAttribute("surveyId", null);
 		model.addAttribute("survey", null);
-		return syndromeService.getPatientSyndrome(id, URIUtils.decodePathVariable(request.getRequestURI(), 3));
+		
+		Syndrome syndrome = syndromeService.getPatientSyndrome(id, URIUtils.decodePathVariable(request.getRequestURI(), 3));
+		Survey surveyTemplate = syndromeService.getSyndromeByName(syndrome.getName()).getSurveys().get(0);
+		
+		for(Survey survey: syndrome.getSurveys()) {
+			surveyCalculatorService.calculateSurveyValues(survey, surveyTemplate, syndrome.getName());
+		}
+		
+		return syndrome;
 	}
 	
 	@RequestMapping(value = "/patient/{id}", method = RequestMethod.POST)

@@ -14,7 +14,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 import com.immunology.model.calculation.Formula;
 import com.immunology.model.ui.Form;
 import com.immunology.model.ui.SurveyForm;
-import com.immunology.model.ui.elements.Computable;
 import com.immunology.model.ui.elements.Element;
 import com.immunology.model.ui.elements.impl.ButtonGroup;
 import com.immunology.model.ui.elements.impl.Panel;
@@ -23,11 +22,13 @@ import com.immunology.model.ui.elements.impl.TextBox;
 @RunWith(MockitoJUnitRunner.class)
 public class FormCalculatorServiceTest {
 
+	private static final double RESULT = 2.5;
+
 	private FormCalculatorService target;
 	
 	private Form form;
+	private Form formTemplate;
 	private Formula formula;
-	private List<Element> elements = new ArrayList<Element>();
 	
 	@Before
 	public void init() {
@@ -36,20 +37,37 @@ public class FormCalculatorServiceTest {
 		formula = new Formula();
 		formula.setFormulaExpression("x");
 		
-		form = new SurveyForm();
+		form = buildForm(false);
+		formTemplate = buildForm(true);
+	}
+	
+	@Test
+	public void testCalculate() {
+		double result = target.calculate(form, formTemplate, formula);
+		Assert.assertEquals(RESULT, result, 0.0001);
+	}
+
+	private Form buildForm(Boolean isTemplate) {
+		SurveyForm form = new SurveyForm();
 		Panel panel = new Panel();
 		Panel subPanel = new Panel();
 		subPanel.setPanel(panel);
 		
 		TextBox textBox = new TextBox();
 		textBox.setChecked(true);
-		textBox.setValue(0.5);
-		textBox.setMultiplier(1.0);
+		textBox.setFormElementId(1L);
 		
 		ButtonGroup buttonGroup = new ButtonGroup();
 		buttonGroup.setChecked(true);
-		buttonGroup.setValue(0.5);
-		buttonGroup.setMultiplier(1.0);
+		buttonGroup.setFormElementId(2L);
+		
+		if(isTemplate) {
+			textBox.setMultiplier(0.5);
+			buttonGroup.setMultiplier(1.0);
+		} else {
+			textBox.setValue(1.0);
+			buttonGroup.setValue(2.0);
+		}
 		
 		List<Panel> formPanels = new ArrayList<Panel>();
 		formPanels.add(panel);
@@ -64,19 +82,6 @@ public class FormCalculatorServiceTest {
 		subPanel.setElements(subPanelElements);
 		
 		form.setPanels(formPanels);
-		
-		elements.add(textBox);
-		elements.add(buttonGroup);
+		return form;
 	}
-	
-	@Test
-	public void testCalculate() {
-		double result = target.calculate(form, formula);
-		double expected = 0.0;
-		for(Element element: elements) {
-			expected += ((Computable)element).getValue() * ((Computable)element).getMultiplier();
-		}
-		Assert.assertEquals(expected, result, 0.0001);
-	}
-
 }

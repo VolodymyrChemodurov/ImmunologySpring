@@ -68,10 +68,10 @@
 							
 							
 						
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle active-parent active">
+							<li id="dropdowmFormsid" class="dropdown">
+								<a href="#" id="aForms" class="dropdown-toggle active-parent active">
 									<i id="formsId" class="fa fa-plus-square"></i>
-									<span id="formIdhidden" class="hidden-xs">Форми обстежень</span>
+									<span class="hidden-xs">Форми обстежень</span>
 								</a>
 								<ul class="dropdown-menu" style="display: block;">
 									<li><a class="ajax-link" href="#"  data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'COMPLAINTS_FORM'">Скарги</a></li>
@@ -233,14 +233,6 @@
 			location.reload();
 			
 		});
-		$(".fa-plus-square").click(
-				function() {
-					$("#formsId").toggleClass('fa-minus-square');
-				});
-		$("#formIdhidden.hidden-xs").click(
-				function() {
-					$("#formsId").toggleClass('fa-minus-square');
-				});
 	});
 	
 	function createNewSyndrom(){

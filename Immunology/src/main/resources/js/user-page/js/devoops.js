@@ -2204,11 +2204,19 @@ $(document).ready(function () {
 			var current = $(this).next();
 			if (current.is(':visible')) {
 				li.find("ul.dropdown-menu").slideUp('fast');
-				li.find("ul.dropdown-menu a").removeClass('active')
+				li.find("ul.dropdown-menu a").removeClass('active');
+				$("#formsId").removeClass('fa-minus-square').addClass('fa-plus-square');
 			}
 			else {
 				another_items.find("ul.dropdown-menu").slideUp('fast');
+				if (li.attr('id')!='dropdowmFormsid'){
+					$("#formsId").removeClass('fa-minus-square').addClass('fa-plus-square');
+				}
+				
 				current.slideDown('fast');
+				if (this.id=='aForms'){
+					$("#formsId").removeClass('fa-plus-square').addClass('fa-minus-square');
+				}
 			}
 		}
 		else {

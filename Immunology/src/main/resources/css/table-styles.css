@@ -9,3 +9,7 @@
 	text-align: center;
 }
 
+tr[onclick]:not([onclick=""]):hover{
+ 	cursor:pointer;
+}
+

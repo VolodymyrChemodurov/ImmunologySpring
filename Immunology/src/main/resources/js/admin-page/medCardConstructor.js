@@ -381,6 +381,7 @@ function createPanel(title){
  	panel["objectType"] = "Panel";
  	panel["formElementId"] = getElementId(); 
  	panel["elements"] = [];
+ 	panel["place"] = formObject.panels.length; 
  	
  	if(formObject == null){
  		formObject = {};
@@ -399,6 +400,7 @@ function createSubPanel(index,title){
 	subPanel["objectType"] = "Panel";
 	subPanel["formElementId"] = getElementId();
 	subPanel["elements"] = [];
+	subPanel["place"] = formObject.panels[index].elements.length;
 	formObject.panels[index].elements.push(subPanel); 
 	renderPreviewMedForm();
 }
@@ -410,11 +412,13 @@ function createTextBox(panelIndex,subPanelIndex,title){
  	textBox["text"] = "";
  	textBox["formElementId"] = getElementId();
  	textBox["multiplier"] = 0;
+ 	
  	if(parseInt(subPanelIndex) == -1 || subPanelIndex == null){
+ 		textBox["place"] = formObject.panels[panelIndex].elements.length;
  		formObject.panels[panelIndex].elements.push(textBox);
  	}else{
+ 		textBox["place"] = formObject.panels[panelIndex].elements[subPanelIndex].elements.length;
  		formObject.panels[panelIndex].elements[subPanelIndex].elements.push(textBox);
- 		
  	}
  	renderPreviewMedForm();
 }
@@ -426,8 +430,10 @@ function createDropDown(panelIndex,subPanelIndex,title,values){
  	dropDown["formElementId"] = getElementId();
  	dropDown["values"] = values;
  	if(parseInt(subPanelIndex) == -1 || subPanelIndex == null){
+ 		dropDown["place"] = formObject.panels[panelIndex].elements.length;
  		formObject.panels[panelIndex].elements.push(dropDown);
  	}else{
+ 		dropDown["place"] = formObject.panels[panelIndex].elements[subPanelIndex].elements.length;
  		formObject.panels[panelIndex].elements[subPanelIndex].elements.push(dropDown);
  	}
  	renderPreviewMedForm();
@@ -442,8 +448,10 @@ function createButtonGroup(panelIndex,subPanelIndex,title,values){
 	groupButton["value"] = 0;
 	groupButton["multiplier"] = 0;
  	if(parseInt(subPanelIndex) == -1 || subPanelIndex == null){
+ 		groupButton["place"] = formObject.panels[panelIndex].elements.length;
  		formObject.panels[panelIndex].elements.push(groupButton);
  	}else{
+ 		groupButton["place"] = formObject.panels[panelIndex].elements[subPanelIndex].elements.length;
  		formObject.panels[panelIndex].elements[subPanelIndex].elements.push(groupButton);
  	}
  	renderPreviewMedForm();

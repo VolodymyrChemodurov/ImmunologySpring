@@ -7,10 +7,11 @@ function initCoefficientEvents(){
 		$(this).css("outline","1px solid");
 		$(this).css("outline-color","rgb(33, 145, 192)");
 		});
-	$(".element_row").click(function(){
-		 getObject($(this));
-		 $('#coeficient-modal').modal('show');
-	})
+	$(".element_row").click(function(e){
+		e.preventDefault();
+		getObject($(this));
+		$('#coeficient-modal').modal('show');
+	});
 }
 
 function getObject(element){

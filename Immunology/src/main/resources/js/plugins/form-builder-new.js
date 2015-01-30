@@ -247,7 +247,7 @@ function Builder(object_Name) {
 		}
 		},
 		generateTextBox: function(textBoxObj, elementIndex){
-			row = $('<div class = "col-sm-12 element_row" style="margin-top: 2px;"/>').attr("index", elementIndex);
+			row = $('<div class = "col-sm-12 element_row" />').attr("index", elementIndex);
 			rowTitle = $('<div class="col-sm-5"/>');
 			rowTitle.append(this.generateCheckBox(textBoxObj.name, textBoxObj.checked, elementIndex));
 			rowRightSide = $('<div class="col-sm-7" />');
@@ -272,8 +272,15 @@ function Builder(object_Name) {
 			div.append(label);
 			return div;
 		},
+		generateLabel: function(title, elementIndex) {
+			var div = $('<div class="form-label" />');
+			var label = $('<label style="margin: 0px;"/>');
+			label.append(title);
+			div.append(label);
+			return div;
+		},
 		generateDropDown: function(dropDown, elementIndex){
-			row = $('<div class = "col-sm-12 element_row" style="margin-top: 2px;"/>').attr("index", elementIndex);
+			row = $('<div class = "col-sm-12 element_row" />').attr("index", elementIndex);
 			
 			rowTitle = $('<div class="col-sm-12 "/>');
 			rowTitle.append(this.generateCheckBox(dropDown.name, dropDown.checked, elementIndex));
@@ -313,13 +320,13 @@ function Builder(object_Name) {
 			for ( var i = 0; i < subPanel.elements.length; i++ ) {
 				subPanelBody.append(this.generateElement(subPanel.elements[i],i));
 			}
-			subPanelBlock.append(div.append(this.generateCheckBox(subPanel.name, subPanel.checked, subElementIndex)));
+			subPanelBlock.append(div.append(this.generateLabel(subPanel.name, subElementIndex)));
 			subPanelBlock.append(subPanelBody);
 			
 			return subPanelBlock;
 		},
 		generateButtonGroup: function(buttonGroup, elementIndex){
-			row = $('<div class = "col-sm-12 element_row" style="margin-top: 2px;"/>').attr("index", elementIndex);
+			row = $('<div class = "col-sm-12 element_row" />').attr("index", elementIndex);
 			rowTitle = $('<div class="col-sm-5"/>');
 			rowTitle.append(this.generateCheckBox(buttonGroup.name, buttonGroup.checked, elementIndex));
 			rowRightSide = $('<div class="col-sm-7" />');

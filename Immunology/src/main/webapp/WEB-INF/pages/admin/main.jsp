@@ -17,6 +17,7 @@
     	</jsp:include>
 	</head>
 <body>
+	<jsp:include page="/WEB-INF/pages/loading-screen.jsp" />
 	<jsp:include page="/WEB-INF/pages/admin/components/navbar.jsp"></jsp:include>
 	
 	<div id="main" class="container-fluid">
@@ -195,8 +196,6 @@
 			</div>
 	</div>
 			
-	<jsp:include page="/WEB-INF/pages/loading-screen.jsp" />
-	
 	<jsp:include page="/WEB-INF/pages/base-scripts.jsp">
 		<jsp:param value="${baseURL}" name="baseURL"/>
 	</jsp:include>

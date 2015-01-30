@@ -297,7 +297,6 @@ function initEvents(){
 	$("button[name=save-button]").click(function(){
 		console.log(formObject);
 		
-		
 		if(formObject.objectType ==  "MedicalCardForm"){
 			saveMedicalCard();
 		}

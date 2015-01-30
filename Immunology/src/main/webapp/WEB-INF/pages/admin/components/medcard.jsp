@@ -28,22 +28,22 @@
 				<ul class="nav nav-pills nav-stacked">
 				  <li class="active">
 				    <a href="#" data-toggle="modal" data-target="#create-panel">
-				      Створити Panel
+				      Створити панель
 				    </a>
 				  </li>
 				  <li class="active">
 				    <a href="#" data-toggle="modal" data-target="#create-sub-panel">
-				      Створити Sub-Panel
+				      Створити саб-панель
 				    </a>
 				  </li>
 				  <li class="active">
 				    <a href="#" data-toggle="modal" data-target="#create-dropdown">
-				      Створити DropDown
+				      Створити випадаючий список
 				    </a>
 				  </li>
 				   <li class="active">
 				    <a href="#" data-toggle="modal" data-target="#create-textbox">
-				      Створити TextBox
+				      Створити текстове поле
 				    </a>
 				  </li>
 				  <li class="active">
@@ -53,7 +53,7 @@
 				  </li>
 				</ul>
 				<div class="col-sm-5" style="margin-top: 5px;">
-					<button type="button" name="save-button"  class="btn btn-default btn-lg">Зберегти і показати</button>
+					<button type="button" name="save-button"  class="btn btn-default btn-lg">Зберегти</button>
 				</div>
 
 			</div>

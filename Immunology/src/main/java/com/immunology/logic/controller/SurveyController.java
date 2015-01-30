@@ -80,12 +80,6 @@ public class SurveyController {
 		User user = UserUtils.getCurrentUser();
 		survey.setUser(userService.getUserByLogin(user.getUsername()));
 		
-		/*Survey surveyTemplate = syndromeService.getSyndromeByName(decodedSyndromeName).getSurveys().get(0);
-		Formula insufficiencyLevelFormula = syndromeService.getSyndromeFormula(syndrome.getName(), FormulaType.INSUFFICIENCY_LEVEL);
-		Formula severityLevelFormula = syndromeService.getSyndromeFormula(syndrome.getName(), FormulaType.SEVERITY_LEVEL);
-		survey.setInsufficiencyLevel(surveyCalculatorService.calculate(survey, surveyTemplate, insufficiencyLevelFormula));
-		survey.setSeverityLevel(surveyCalculatorService.calculate(survey, surveyTemplate, severityLevelFormula));*/
-		
 		return surveyService.saveOrUpdateSurvey(survey);
 	}
 	

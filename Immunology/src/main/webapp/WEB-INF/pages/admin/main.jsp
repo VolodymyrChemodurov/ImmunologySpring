@@ -35,7 +35,7 @@
 						</ul>
 					</li>
 					<li>
-						<a href="#"  data-toggle="modal" data-target="#formula-modal" class="ajax-link">
+						<a href="#" onclick="doAjaxGet('/formulas');" class="ajax-link">
 							<i class="fa fa-flask"></i> 
 							<span class="hidden-xs">Аналітичний блок</span>
 						</a>
@@ -163,37 +163,6 @@
 					</div>
 				</div>
 			</div>
-<!-- 			Analitic Block <Formula> -->
-	<div class="modal fade" id="formula-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">
-								<span aria-hidden="true">&times;</span><span class="sr-only">Закрити</span>
-							</button>
-							<h4 class="modal-title" id="myModalLabel">Синдроми</h4>
-						</div>
-						<div class="modal-body">
-							<label class="col-sm-12 control-label">Вибрати синдром:</label> 
-							<select class="form-control" id="syndrrom-names" name="syndrrom-names" style="margin-bottom: 20px;">
-							<c:forEach items="${syndromes}" var="syndrome">
-    							<option>${syndrome}</option>
-							</c:forEach>
-							</select>
-							<label class="col-sm-12 control-label" style="margin-left: 10px;">Формула обрахунку степені важкості:</label> 
-							<h3 style="width: 3%; float: left;">Σ</h3><input type="text" class="form-control" id="severity-formula" style="width: 96%; float: right;">
-							<small style="float: right;">Можна використовувати наступні символи: ' * ' , ' ^ ' , ' / ' , ' X ' ; де Х - значення коефіцієнта </small>
-							<label class="col-sm-12 control-label"  style="margin-left: 10px;">Формула обрахунку степені недостатності:</label>
-							<h3 style="width: 3%; float: left;">Σ</h3><input type="text" class="form-control" id="insufficiency-formula" style="width: 96%; float: right;">
-							<small style="float: right;">Можна використовувати наступні символи: ' * ' , ' ^ ' , ' / ' , ' X ' ; де Х - значення коефіцієнта </small>
-							<div class="modal-footer" style="margin-top: 160px; height: 40px;">
-								<button type="button" class="btn btn-default" data-dismiss="modal">Закрити</button>
-								<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="sendFormulaValues();">Зберегти</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
 	</div>
 			
 	<jsp:include page="/WEB-INF/pages/base-scripts.jsp">
@@ -290,65 +259,8 @@
 		}});
 		
 	}
-	function getFormulaForSyndrom(formulaType){
-		 var syndromName = $("#syndrrom-names").val();
-		 var url= "/syndromes/template/{name}/{formulaType}".replace("{formulaType}",formulaType).replace("{name}",syndromName)
-		 $.ajax({
-			  type:"GET", 
-		      url: url,
-		     // dataType: "json",
-		      async:   false,
-		      success: function(response){
-		    	 console.log(response);
-		    	 if(formulaType == "severityLevel"){
-		    		 $("#severity-formula").val(response);
-		    	 }
-		    	 if(formulaType == "insufficiencyLevel"){
-		    		 $("#insufficiency-formula").val(response);
-		    	 }
-		    	 
-		      },
-			
-			error: function (request, status, error) {
-				console.log(formulaType +"= null;");
-		}});
-	}
-	function saveFormulaForSyndrom(formulaType, formula){
-		 var syndromName = $("#syndrrom-names").val();
-		 var url= "/syndromes/template/{name}/{formulaType}".replace("{formulaType}",formulaType).replace("{name}",syndromName)
-		$.ajax({
-			  type:"POST", 
-		      url: url,
-		      data:  {"formula": formula},
-		      dataType: "json",
-		      async:   false,
-		      success: function(response){
-		    	 console.log(response);
-		      },
-			
-			error: function (request, status, error) {
-				alert(error);
-		}});
-	}
-	function sendFormulaValues(){
-		var severity = $("#severity-formula").val();
-		var insufficiency = $("#insufficiency-formula").val();
-		
-		saveFormulaForSyndrom("severityLevel", severity);
-		saveFormulaForSyndrom("insufficiencyLevel", insufficiency);
-		
-	}
-	function refreshFormulaValues(){
-		getFormulaForSyndrom("severityLevel");
-		getFormulaForSyndrom("insufficiencyLevel");
-	}
 	
-	$( document ).ready(function() {
-		refreshFormulaValues();
-	});
-	
-	
-	</script>
+</script>
 	
 </body>
 

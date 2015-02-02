@@ -129,4 +129,12 @@ public class AdminController {
 		}
 		return match;
 	}
+	
+	@RequestMapping(value = "/formulas", method = RequestMethod.GET)
+	public ModelAndView getFormulas(ModelAndView model) {
+		List<String> syndromesNames = syndromeService.getSyndromeNames();
+		model.addObject("syndromes", syndromesNames);
+		model.setViewName("admin/components/formulas");
+		return model;
+	}
 }

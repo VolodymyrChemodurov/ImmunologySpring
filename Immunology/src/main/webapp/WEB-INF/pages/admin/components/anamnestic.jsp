@@ -19,7 +19,7 @@
 				</div>
 				<div class="no-move"></div>
 			</div>
-			<div class="box-content" style="height: 300px;">
+			<div class="box-content" style="height: 320px;">
 				<ul class="nav nav-pills nav-stacked">
 				  <li class="active">
 				    <a href="#" data-toggle="modal" data-target="#create-panel">

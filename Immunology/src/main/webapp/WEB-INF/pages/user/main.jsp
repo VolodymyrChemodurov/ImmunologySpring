@@ -74,6 +74,5 @@
 	<jsp:param value="${baseURL}" name="baseURL"/>
 </jsp:include>
 <script src="${param.baseURL}/resources/js/user-page/js/user-main.js"></script>
-<script src="${param.baseURL}/resources/js/user-page/js/efficiency.js"></script>
 </body>
 </html>

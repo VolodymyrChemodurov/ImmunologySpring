@@ -28,24 +28,24 @@
 					</div>
 					<div class="col-sm-4">
 						<select id="drug_tolerance" name="drug_tolerance" class="form-control dropdown effinciency_select">
-							<option value="good">Добра</option>
-							<option value="satisfactory">Задовільна</option>
-							<option value="poor">Незадовільна</option>
+							<option value="GOOD">Добра</option>
+							<option value="SATISFACTORY">Задовільна</option>
+							<option value="POOR">Незадовільна</option>
 						</select> 
 						<select id="efficacy_evaluation" name="efficacy_evaluation" class="form-control dropdown effinciency_select">
-							<option value="without">Відсутність ефекту</option>
-							<option value="high">Висока (позит. динаміка > 70)</option>
-							<option value="moderate">Помірна (позит. динаміка 50-70)</option>
+							<option value="NO_EFFECT">Відсутність ефекту</option>
+							<option value="HIGH">Висока (позит. динаміка > 70)</option>
+							<option value="MODERATE">Помірна (позит. динаміка 50-70)</option>
 						</select> 
 						<input id="side_effect_description" name="side_effect_description" type="text" class="form-control" style="margin-left:9px"/> 
 						<select id="side_effects_severity_degree" name="side_effects_severity_degree" class="form-control dropdown effinciency_select">
-							<option value="easy">Легкий</option>
-							<option value="middle">Середній</option>
-							<option value="hard">Тяжкий</option>
+							<option value="LIGHT">Легкий</option>
+							<option value="MIDDLE">Середній</option>
+							<option value="HARD">Тяжкий</option>
 						</select> 
 						<select id="cancel" name="cancel" class="form-control dropdown effinciency_select">
-							<option value="yes">Так</option>
-							<option value="no">Ні</option>
+							<option value="true">Так</option>
+							<option value="false">Ні</option>
 						</select>
 					</div>
 					<div class="col-sm-4" style="float: right">

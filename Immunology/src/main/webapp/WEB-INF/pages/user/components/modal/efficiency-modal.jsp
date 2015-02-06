@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-	
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <!-- Modal  Panel-->
 <div class="modal fade" id="efficiency-modal" tabindex="-1"
 	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -28,20 +27,23 @@
 							скасування?</div>
 					</div>
 					<div class="col-sm-4">
-						<select name="drug_tolerance" class="form-control dropdown effinciency_select">
+						<select id="drug_tolerance" name="drug_tolerance" class="form-control dropdown effinciency_select">
 							<option value="good">Добра</option>
 							<option value="satisfactory">Задовільна</option>
 							<option value="poor">Незадовільна</option>
-						</select> <select name="efficacy_evaluation" class="form-control dropdown effinciency_select">
+						</select> 
+						<select id="efficacy_evaluation" name="efficacy_evaluation" class="form-control dropdown effinciency_select">
 							<option value="without">Відсутність ефекту</option>
 							<option value="high">Висока (позит. динаміка > 70)</option>
 							<option value="moderate">Помірна (позит. динаміка 50-70)</option>
-						</select> <input name="side_effect_description" type="text" class="form-control" style="margin-left:9px"/> <select
-							name="side_effects_severity_degree" class="form-control dropdown effinciency_select">
+						</select> 
+						<input id="side_effect_description" name="side_effect_description" type="text" class="form-control" style="margin-left:9px"/> 
+						<select id="side_effects_severity_degree" name="side_effects_severity_degree" class="form-control dropdown effinciency_select">
 							<option value="easy">Легкий</option>
 							<option value="middle">Середній</option>
 							<option value="hard">Тяжкий</option>
-						</select> <select name="cancel" class="form-control dropdown effinciency_select">
+						</select> 
+						<select id="cancel" name="cancel" class="form-control dropdown effinciency_select">
 							<option value="yes">Так</option>
 							<option value="no">Ні</option>
 						</select>

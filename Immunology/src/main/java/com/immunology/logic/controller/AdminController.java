@@ -36,15 +36,13 @@ public class AdminController {
 	private MedicalCardFormService medicalCardFormService;
 	@Autowired
 	private SyndromeService syndromeService;
-
 	@Autowired
 	private PasswordEncoder encoder;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String admin(ModelMap model) {
 		User user = UserUtils.getCurrentUser();
-		model.addAttribute("user",
-				userService.getUserByLogin(user.getUsername()));
+		model.addAttribute("user", userService.getUserByLogin(user.getUsername()));
 		List<String> syndromes = syndromeService.getSyndromeNames();
 		model.addAttribute("syndromes", syndromes);
 		return "admin/main";
@@ -70,9 +68,7 @@ public class AdminController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String createNewPatinet(@RequestParam("user_role") String role,
-			com.immunology.model.User user, Model model,
-			HttpServletResponse response) {
+	public String createNewPatinet(@RequestParam("user_role") String role, com.immunology.model.User user, Model model, HttpServletResponse response) {
 		userService.createUser(user, role);
 		return "redirect:/admin";
 	}
@@ -85,8 +81,7 @@ public class AdminController {
 
 	// /ToDo: Shoulde be change to get Templates
 	@RequestMapping(value = "/medical_card", method = RequestMethod.GET)
-	public @ResponseBody MedicalCardForm getMedicalForm()
-			throws JsonProcessingException {
+	public @ResponseBody MedicalCardForm getMedicalForm() throws JsonProcessingException {
 		MedicalCardForm form = medicalCardFormService.getMedicalCardTemplate();
 		return form;
 	}
@@ -94,8 +89,7 @@ public class AdminController {
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public String getMyProfile(Model model) {
 		User user = UserUtils.getCurrentUser();
-		model.addAttribute("user",
-				userService.getUserByLogin(user.getUsername()));
+		model.addAttribute("user", userService.getUserByLogin(user.getUsername()));
 		return "admin/components/profile";
 	}
 
@@ -103,8 +97,7 @@ public class AdminController {
 	public String editProfile(com.immunology.model.User editedUser,
 			Model model, HttpServletResponse response) {
 		User user = UserUtils.getCurrentUser();
-		com.immunology.model.User immunologyUser = userService
-				.getUserByLogin(user.getUsername());
+		com.immunology.model.User immunologyUser = userService.getUserByLogin(user.getUsername());
 
 		immunologyUser.setFirstName(editedUser.getFirstName());
 		immunologyUser.setLastName(editedUser.getLastName());
@@ -115,17 +108,13 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/change/password", method = RequestMethod.POST)
-	public @ResponseBody Boolean changePassword(Model model,
-			@RequestParam String password, @RequestParam String oldPassword) {
+	public @ResponseBody Boolean changePassword(Model model, @RequestParam String password, @RequestParam String oldPassword) {
 		User user = UserUtils.getCurrentUser();
-		com.immunology.model.User immunologyUser = userService
-				.getUserByLogin(user.getUsername());
-		boolean match = encoder.matches(oldPassword,
-				immunologyUser.getPassword());
+		com.immunology.model.User immunologyUser = userService.getUserByLogin(user.getUsername());
+		boolean match = encoder.matches(oldPassword, immunologyUser.getPassword());
 		if (match) {
 			immunologyUser.setPassword(encoder.encode(password));
 			userService.updateUser(immunologyUser);
-
 		}
 		return match;
 	}

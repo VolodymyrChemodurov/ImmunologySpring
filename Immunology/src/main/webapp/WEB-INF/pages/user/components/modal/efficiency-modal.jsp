@@ -40,7 +40,7 @@
 						<input id="side_effect_description" name="side_effect_description" type="text" class="form-control" style="margin-left:9px"/> 
 						<select id="side_effects_severity_degree" name="side_effects_severity_degree" class="form-control dropdown effinciency_select">
 							<option value="LIGHT">Легкий</option>
-							<option value="MIDDLE">Середній</option>
+							<option value="MEDIUM">Середній</option>
 							<option value="HARD">Тяжкий</option>
 						</select> 
 						<select id="cancel" name="cancel" class="form-control dropdown effinciency_select">

@@ -3,6 +3,7 @@ package com.immunology.logic.service;
 import java.util.List;
 
 import com.immunology.model.Drug;
+import com.immunology.model.ui.EfficacyData;
 
 public interface DrugService {
 
@@ -13,5 +14,7 @@ public interface DrugService {
 	List getDrugNames(String species);
 
 	List<Drug> getDrugsType();
+	
+	void saveEfficiencyData(EfficacyData data, Long surveyId);
 
 }

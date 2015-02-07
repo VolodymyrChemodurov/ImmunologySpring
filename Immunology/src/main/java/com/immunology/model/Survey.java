@@ -62,8 +62,7 @@ public class Survey {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<SurveyForm> forms = new ArrayList<SurveyForm>();
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name = "efficacy_data_data_id")
+	@OneToOne(mappedBy="survey", cascade=CascadeType.MERGE)
 	private EfficacyData efficacyData;
 	
 	@ManyToOne(cascade=CascadeType.ALL)

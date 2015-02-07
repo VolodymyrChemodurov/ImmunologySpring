@@ -2,6 +2,8 @@ package com.immunology.logic.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,29 +21,27 @@ import com.immunology.model.ui.EfficacyData;
 @RequestMapping(value = "/drugs")
 public class DrugContoller {
 
-	private String typeOfDrugs;
-	private String speciesOfDrugs;
-
+	private static final Logger LOG = LoggerFactory.getLogger(DrugContoller.class);
+	
 	@Autowired
 	private DrugService drugService;
 
 	
 	@RequestMapping(value = "/getDrugSpecies", method = RequestMethod.POST)
-	public @ResponseBody List getDrugSpecies(Model model,
-			@RequestParam String typeOfDrugs) {
-		this.typeOfDrugs= typeOfDrugs;
+	public @ResponseBody List getDrugSpecies(Model model, @RequestParam String typeOfDrugs) {
 		return drugService.getDrugSpecies(typeOfDrugs);
 	}
 	
 	@RequestMapping(value = "/getDrugNames", method = RequestMethod.POST)
-	public @ResponseBody List getDrugNames(Model model,
-			@RequestParam String speciesOfDrugs) {
-			this.speciesOfDrugs = speciesOfDrugs.trim();
+	public @ResponseBody List getDrugNames(Model model, @RequestParam String speciesOfDrugs) {
 			return drugService.getDrugNames(speciesOfDrugs);
 	}
 	
 	@RequestMapping(value="/efficiency/{surveyId}", method = RequestMethod.POST)
-	public void saveEfficiencyData(@RequestBody EfficacyData data, @PathVariable Long surveyId) {
-		//TODO actual saving
+	public @ResponseBody Boolean saveEfficiencyData(@RequestBody EfficacyData data, @PathVariable Long surveyId) {
+		LOG.info(data.toString());
+		LOG.info(surveyId.toString());
+		drugService.saveEfficiencyData(data, surveyId);
+		return true;
 	}
 }

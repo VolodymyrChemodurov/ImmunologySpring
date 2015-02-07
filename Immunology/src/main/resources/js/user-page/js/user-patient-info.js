@@ -65,7 +65,7 @@ function initSurveyRowesEvent() {
 			});
 	$('.efficiency').click(function() {
 		$('#efficiency-modal').modal('show');
-		surveyId = $(this).parent().parent().attr("surveyId")
+		surveyId = $(this).parent().parent().attr("surveyId");
 		return false;
 	});
 

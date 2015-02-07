@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.immunology.logic.dao.DrugDao;
 import com.immunology.model.Drug;
+import com.immunology.model.ui.EfficacyData;
 
 @Repository
 public class DrugDaoImp implements DrugDao {
@@ -51,4 +52,11 @@ public class DrugDaoImp implements DrugDao {
 	public List  retrieveCancel(String name) {
 		return em.createNativeQuery("SELECT cancel,count(drug_tolerance) FROM efficacy_data JOIN drug_efficacy_data ON drug_efficacy_data.efficacy_data_id=efficacy_data.id JOIN drugs ON drug_efficacy_data.drug_id=drugs.id WHERE name= :name GROUP BY cancel").setParameter("name", name).getResultList();
 		}
+
+	public EfficacyData getEfficacyDataBySurveyId(Long surveyId) {
+		TypedQuery<EfficacyData> query = em.createQuery("SELECT f FROM EfficacyData f WHERE f.survey.id = :surveyId", EfficacyData.class)
+				.setParameter("surveyId", surveyId);
+		List<EfficacyData> results = query.getResultList();
+		return results.isEmpty() ? null : results.get(0); 
+	}
 }

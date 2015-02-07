@@ -3,6 +3,7 @@ package com.immunology.logic.dao;
 import java.util.List;
 
 import com.immunology.model.Drug;
+import com.immunology.model.ui.EfficacyData;
 
 public interface DrugDao {
 
@@ -22,4 +23,5 @@ public interface DrugDao {
 	
 	List retrieveCancel(String name);
 
+	EfficacyData getEfficacyDataBySurveyId(Long surveyId);
 }

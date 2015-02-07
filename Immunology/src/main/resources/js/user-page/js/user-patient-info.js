@@ -66,6 +66,20 @@ function initSurveyRowesEvent() {
 	$('.efficiency').click(function() {
 		$('#efficiency-modal').modal('show');
 		surveyId = $(this).parent().parent().attr("surveyId");
+		
+		$.ajax({
+			type : "GET",
+			url : "/drugs/efficiency/{surveyId}".replace("{surveyId}", surveyId),
+			success : function(response) {
+				console.log(response);
+				$("#side_effect_description").val(response.sideEffectDescription);
+				$('#drug_tolerance option[value="' + response.drugTolerance + '"]').prop('selected', true);
+				$('#efficacy_evaluation option[value="' + response.efficacyEvaluation + '"]').prop('selected', true);
+				$('#cancel option[value="' + response.cancel + '"]').prop('selected', true);
+				$('#side_effects_severity_degree option[value="' + response.sideEffectsSeverityDegree + '"]').prop('selected', true);
+			}
+		});
+		
 		return false;
 	});
 

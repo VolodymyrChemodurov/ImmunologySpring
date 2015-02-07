@@ -26,7 +26,6 @@ public class DrugContoller {
 	@Autowired
 	private DrugService drugService;
 
-	
 	@RequestMapping(value = "/getDrugSpecies", method = RequestMethod.POST)
 	public @ResponseBody List getDrugSpecies(Model model, @RequestParam String typeOfDrugs) {
 		return drugService.getDrugSpecies(typeOfDrugs);
@@ -43,5 +42,10 @@ public class DrugContoller {
 		LOG.info(surveyId.toString());
 		drugService.saveEfficiencyData(data, surveyId);
 		return true;
+	}
+	
+	@RequestMapping(value = "/efficiency/{surveyId}", method = RequestMethod.GET)
+	public @ResponseBody EfficacyData getEfficacyData(@PathVariable Long surveyId) {
+		return drugService.getEfficacyDataBySurveyId(surveyId);
 	}
 }

@@ -29,8 +29,8 @@
 					<div class="col-sm-4">
 						<select id="drug_tolerance" name="drug_tolerance" class="form-control dropdown effinciency_select">
 							<option value="GOOD">Добра</option>
-							<option value="SATISFACTORY">Задовільна</option>
-							<option value="POOR">Незадовільна</option>
+							<option value="SATISFYING">Задовільна</option>
+							<option value="BAD">Незадовільна</option>
 						</select> 
 						<select id="efficacy_evaluation" name="efficacy_evaluation" class="form-control dropdown effinciency_select">
 							<option value="NO_EFFECT">Відсутність ефекту</option>

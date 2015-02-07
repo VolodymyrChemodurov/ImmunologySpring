@@ -47,4 +47,8 @@ public class DrugServiceImpl implements DrugService {
 		crudDao.saveOrUpdate(data);
 	}
 
+	public EfficacyData getEfficacyDataBySurveyId(Long surveyId) {
+		return drugDao.getEfficacyDataBySurveyId(surveyId);
+	}
+
 }

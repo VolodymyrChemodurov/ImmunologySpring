@@ -17,4 +17,5 @@ public interface DrugService {
 	
 	void saveEfficiencyData(EfficacyData data, Long surveyId);
 
+	EfficacyData getEfficacyDataBySurveyId(Long surveyId);
 }

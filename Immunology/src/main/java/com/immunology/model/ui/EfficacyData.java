@@ -17,6 +17,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.immunology.logic.utils.enums.DrugTolerance;
 import com.immunology.logic.utils.enums.EfficacyEvaluation;
 import com.immunology.logic.utils.enums.SideEffectsSeverityDegree;
@@ -33,6 +34,7 @@ public class EfficacyData {
 	
 	@OneToOne
 	@JoinColumn(name="syndrome_id", referencedColumnName = "id")
+	@JsonBackReference("efficacy_reference")
 	private Survey survey;
 	
 	@Column(name = "drug_tolerance")

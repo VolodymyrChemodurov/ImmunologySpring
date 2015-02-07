@@ -63,6 +63,7 @@ public class Survey {
 	private List<SurveyForm> forms = new ArrayList<SurveyForm>();
 	
 	@OneToOne(mappedBy="survey", cascade=CascadeType.MERGE)
+	@JsonManagedReference("efficacy_reference")
 	private EfficacyData efficacyData;
 	
 	@ManyToOne(cascade=CascadeType.ALL)

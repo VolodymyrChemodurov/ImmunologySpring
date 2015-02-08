@@ -10,7 +10,6 @@
 		<meta charset="utf-8">
 		<title>Immunology</title>
 		<meta name="description" content="description">
-		<meta name="author" content="DevOOPS">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
 		<c:set var="baseURL" value="${fn:replace(pageContext.request.requestURL,

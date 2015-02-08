@@ -1,5 +1,6 @@
 package com.immunology.model.ui;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,15 +13,23 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.immunology.logic.utils.enums.DrugTolerance;
 import com.immunology.logic.utils.enums.EfficacyEvaluation;
 import com.immunology.logic.utils.enums.SideEffectsSeverityDegree;
+import com.immunology.logic.utils.json.CustomJsonDateDeserializer;
+import com.immunology.logic.utils.json.CustomJsonDateSerializer;
 import com.immunology.model.Drug;
 import com.immunology.model.Survey;
 
@@ -31,6 +40,12 @@ public class EfficacyData {
 	@Id
 	@GeneratedValue
 	private Long id;
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name = "update_date")
+	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
+	@JsonSerialize(using = CustomJsonDateSerializer.class)
+	private Date updateDate;
 	
 	@OneToOne
 	@JoinColumn(name="syndrome_id", referencedColumnName = "id")
@@ -57,6 +72,20 @@ public class EfficacyData {
 	@ManyToMany(mappedBy = "efficacyData", cascade = CascadeType.ALL)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Drug> drugs;
+	
+	@PrePersist
+	private void prePersist() {
+		this.update();
+	}
+	
+	@PreUpdate
+	private void preUpdate() {
+		this.update();
+	}
+	
+	private void update() {
+		this.updateDate = new Date();
+	}
 	
 	public DrugTolerance getDrugTolerance() {
 		return drugTolerance;
@@ -125,6 +154,14 @@ public class EfficacyData {
 
 	public void setDrugs(List<Drug> drugs) {
 		this.drugs = drugs;
+	}
+
+	public Date getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
 	}
 			
 }

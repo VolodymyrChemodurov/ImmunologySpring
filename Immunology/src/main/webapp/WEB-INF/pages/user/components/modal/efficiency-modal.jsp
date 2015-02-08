@@ -55,9 +55,12 @@
 						<div class="effinciency_div_second"></div>
 						<div class="effinciency_div_second"></div>
 					</div>
+					<div id="update-time-block" class="col-sm-12" style="padding-left: 0px; display: none;">
+						Дата оновлення: <span id="update-time-label"></span>
+					</div>
 				</div>
 			</div>
-			<div class="modal-footer" style="margin-top: 180px;">
+			<div class="modal-footer" style="margin-top: 200px;">
 				<button type="button" class="btn btn-primary"
 					id="save-sub-efficiency-button" data-dismiss="modal">Зберегти</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal">Закрити</button>

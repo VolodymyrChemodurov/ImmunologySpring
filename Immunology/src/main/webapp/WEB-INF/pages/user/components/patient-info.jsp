@@ -9,7 +9,6 @@
 .DTTT {
 	display: none;
 }
-<jsp:include page="/WEB-INF/pages/user/components/modal/efficiency-modal.jsp"></jsp:include>
 
 </style>
 <div class="row">
@@ -175,7 +174,6 @@ function refreshTable(syndromName) {
 							table.append(tr);
 						}
 					}
-					//			response.surveys[int].user.firstName;
 					initSurveyRowesEvent();
 				},
 				error : function(request, status, error) {

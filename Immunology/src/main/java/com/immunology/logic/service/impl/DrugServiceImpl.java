@@ -1,5 +1,6 @@
 package com.immunology.logic.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,7 @@ public class DrugServiceImpl implements DrugService {
 	public void saveEfficiencyData(EfficacyData data, Long surveyId) {
 		Survey survey = crudDao.find(Survey.class, surveyId);
 		if(survey.getEfficacyData() == null) {
+			data.setUpdateDate(new Date());
 			survey.setEfficacyData(data);
 		} else {
 			data.setId(survey.getEfficacyData().getId());

@@ -12,7 +12,7 @@
 <script src="${param.baseURL}/resources/js/user-page/plugins/justified-gallery/jquery.justifiedgallery.min.js"></script>
 <script src="${param.baseURL}/resources/js/user-page/plugins/tinymce/tinymce.min.js"></script>
 <script src="${param.baseURL}/resources/js/user-page/plugins/tinymce/jquery.tinymce.min.js"></script>
-
+<script src="${param.baseURL}/resources/js/user-page/js/efficiency.js"></script>
 
 <!-- dataTables -->
 <script src="${param.baseURL}/resources/js/user-page/plugins/datatables/jquery.dataTables.js"></script>

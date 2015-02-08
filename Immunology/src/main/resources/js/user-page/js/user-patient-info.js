@@ -64,11 +64,19 @@ function initSurveyRowesEvent() {
 			url : "/drugs/efficiency/{surveyId}".replace("{surveyId}", surveyId),
 			success : function(response) {
 				console.log(response);
-				$("#side_effect_description").val(response.sideEffectDescription);
-				$('#drug_tolerance option[value="' + response.drugTolerance + '"]').prop('selected', true);
-				$('#efficacy_evaluation option[value="' + response.efficacyEvaluation + '"]').prop('selected', true);
-				$('#cancel option[value="' + response.cancel + '"]').prop('selected', true);
-				$('#side_effects_severity_degree option[value="' + response.sideEffectsSeverityDegree + '"]').prop('selected', true);
+				if(response != '') {
+					$("#side_effect_description").val(response.sideEffectDescription);
+					$('#drug_tolerance option[value="' + response.drugTolerance + '"]').prop('selected', true);
+					$('#efficacy_evaluation option[value="' + response.efficacyEvaluation + '"]').prop('selected', true);
+					$('#cancel option[value="' + response.cancel + '"]').prop('selected', true);
+					$('#side_effects_severity_degree option[value="' + response.sideEffectsSeverityDegree + '"]').prop('selected', true);
+				} else {
+					$("#side_effect_description").val('');
+					$('#drug_tolerance').prop('selectedIndex', 0);
+					$('#efficacy_evaluation').prop('selectedIndex', 0);
+					$('#cancel').prop('selectedIndex', 0);
+					$('#side_effects_severity_degree option[value=0]').prop('selectedIndex', 0);
+				}
 				if(response.updateDate != undefined) {
 					$('#update-time-block').show();
 					$('#update-time-label').text(response.updateDate);

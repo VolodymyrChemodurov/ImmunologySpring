@@ -31,7 +31,7 @@ public class SurveyCalculatorService implements CalculatorService<Survey> {
 			SurveyForm formTemplate = findSurveyFormTemplate(form, template);
 			result += formCalculatorService.calculate(form, formTemplate, formula); 
 		}
-		return result;
+		return (double) (Math.round(result * 100)) / 100;
 	}
 
 	private SurveyForm findSurveyFormTemplate(SurveyForm form, Survey template) {

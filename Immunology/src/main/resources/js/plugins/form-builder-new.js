@@ -58,12 +58,14 @@ function Builder(object_Name) {
 		this.container = object;
 	};
 	
-	this.constructorInit = function(blockID,formObject){
+	this.constructorInit = function(blockID,formObject, constructorMode){
 		this.setContainer($(blockID));
 		this.container.html("");
 		if(formObject.objectType == this.TYPE.MED_CARD){
 			this.setForm(formObject);
-			this.renderMedCardFields();
+			if(!constructorMode) {
+				this.renderMedCardFields();
+			}
 			this.renderFormBody(false);
 		} else {
 			/*this.formName = formName;

@@ -141,7 +141,7 @@ function initPanelNames(){
 
 function renderPreviewMedForm(){
 	var constructor = new Builder("constructor");
-	constructor.constructorInit('#container', formObject);
+	constructor.constructorInit('#container', formObject, true);
 	cleanConstructorFields($("#panelName"), $("#sub-panel-name"), $("#text-box-name"), $("#group-button-name"), $("#dropdownName"));
 	initCoefficientEvents();
  }

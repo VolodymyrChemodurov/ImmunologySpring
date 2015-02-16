@@ -155,7 +155,7 @@ function Builder(object_Name) {
 							+ this.formObject.creationDate + '" class="form-control med_panel_left_input"/>');
 		
 		panelAdditionRowTitle = this.utils.generatePanelTitle(this.MED_CARD_CONSTANTS.addition);
-		panelAdditionRowField = $('<div class = "col-sm-9"><div class="col-sm-5"><textarea type="text" class="form-control med_panel_left_input">'
+		panelAdditionRowField = $('<div class = "col-sm-9"><div class="col-sm-5"><textarea id="additional-info-text" type="text" class="form-control med_panel_left_input">'
 				+ this.formObject.additionalInfo + '</textArea>');
 		panelDateRow.append(panelDateRowTitle).append(panelDateRowField);
 		panelAdditionRow.append(panelAdditionRowTitle).append(panelAdditionRowField);
@@ -516,6 +516,7 @@ function Builder(object_Name) {
 		if(this.formObject.objectType == this.TYPE.MED_CARD){
 			saveURL = this.SAVE_BUTTON_URL.MED_CARD_URL;
 			saveObject = this.formObject;
+			saveObject.additionalInfo = $('#additional-info-text').val();
 		}
 		if(this.formObject.objectType == this.TYPE.ANAMNESTIC_DATA){
 			saveURL = this.SAVE_BUTTON_URL.ANAMNESTIC_DATA_URL;

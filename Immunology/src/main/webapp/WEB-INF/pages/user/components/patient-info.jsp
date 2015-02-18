@@ -20,6 +20,7 @@
 	</div>
 </div>
 
+<c:if test="${not empty syndromes}">
 <div class="row">
 	<div class="col-xs-12">
 		<div class="box">
@@ -30,7 +31,9 @@
 				<div class="no-move"></div>
 			</div>
 			<div class="box-content" style="display: list-item;">
+			
 				<div class="col-sm-9">
+					
 					<select id="syndrom" class="form-control">
 						<c:forEach items="${syndromes}" var="syndrome">
 							<option>${syndrome}</option>
@@ -42,12 +45,12 @@
 						class="btn btn-default">
 						<i class="fa fa-arrow-circle-down"></i> Вибрати
 					</button>
-
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+</c:if>
 
 <div class="row">
 	<div class="col-xs-12">

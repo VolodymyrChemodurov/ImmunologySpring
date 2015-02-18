@@ -38,14 +38,14 @@ $(document).ready(function() {
 			rehabilitationData.initNewSurveyForm('#rehabilitationData', "REHABILITATION_DATA", $('#patient_id').val(), syndrom_name, currentSurvey);
 			preventiveMeasuresData.initNewSurveyForm('#preventiveMeasuresData', "PREVENTIVE_MEASURES_DATA", $('#patient_id').val(), syndrom_name, currentSurvey);
 		}
-		$("#complaints").append('<button type="button" style="margin-left: 48%;" onClick="saveSyrvey();" class="btn btn-primary">Save</button>');
-		$("#clinicalManifestations").append('<button type="button" style="margin-left: 48%;" onClick="saveSyrvey();" class="btn btn-primary">Save</button>');
-		$("#laboratoryData").append('<button type="button" style="margin-left: 48%;" onClick="saveSyrvey();" class="btn btn-primary">Save</button>');
-		$("#morphologicalData").append('<button type="button" style="margin-left: 48%;" onClick="saveSyrvey();" class="btn btn-primary">Save</button>');
-		$("#instrumentalData").append('<button type="button" style="margin-left: 48%;" onClick="saveSyrvey();" class="btn btn-primary">Save</button>');
-		$("#diagnosisVerificationData").append('<button type="button" style="margin-left: 48%;" onClick="saveSyrvey();" class="btn btn-primary">Save</button>');
-		$("#mainTreatmentData").append('<button type="button" style="margin-left: 48%;" onClick="saveSyrvey();" class="btn btn-primary">Save</button>');
-		$("#rehabilitationData").append('<button type="button" style="margin-left: 48%;" onClick="saveSyrvey();" class="btn btn-primary">Save</button>');
+		$("#complaints").append('<button type="button" style="margin-left: 48%;" onClick="saveSyrvey();" class="btn btn-primary">Зберегти</button>');
+		$("#clinicalManifestations").append('<button type="button" style="margin-left: 48%;" onClick="saveSyrvey();" class="btn btn-primary">Зберегти</button>');
+		$("#laboratoryData").append('<button type="button" style="margin-left: 48%;" onClick="saveSyrvey();" class="btn btn-primary">Зберегти</button>');
+		$("#morphologicalData").append('<button type="button" style="margin-left: 48%;" onClick="saveSyrvey();" class="btn btn-primary">Зберегти</button>');
+		$("#instrumentalData").append('<button type="button" style="margin-left: 48%;" onClick="saveSyrvey();" class="btn btn-primary">Зберегти</button>');
+		$("#diagnosisVerificationData").append('<button type="button" style="margin-left: 48%;" onClick="saveSyrvey();" class="btn btn-primary">Зберегти</button>');
+		$("#mainTreatmentData").append('<button type="button" style="margin-left: 48%;" onClick="saveSyrvey();" class="btn btn-primary">Зберегти</button>');
+		$("#rehabilitationData").append('<button type="button" style="margin-left: 48%;" onClick="saveSyrvey();" class="btn btn-primary">Зберегти</button>');
 	});
 
 function getSurveyTemplate(){

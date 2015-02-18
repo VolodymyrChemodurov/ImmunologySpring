@@ -359,7 +359,7 @@ function Builder(object_Name) {
 		
 		generateSaveButton: function(){
 			var fieldset = $('<fieldset class= "panel-fieldset" style="text-align: center; "/>');
-			var button = $('<button type="button" class="btn btn-primary">Save</button>');
+			var button = $('<button type="button" class="btn btn-primary">Зберегти</button>');
 			$(button).click(function(){
 				var container = $(this).parents(".form-container");
 				var obj =window[container.attr("object")];

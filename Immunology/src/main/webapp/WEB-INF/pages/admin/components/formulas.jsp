@@ -32,14 +32,20 @@
 				</c:forEach>
 				</select> 
 				<label class="col-sm-12 control-label" style="margin-left: 10px;">Формула 1:</label>
-				<h3 style="width: 3%; float: left;">Σ</h3>
-				<input type="text" class="form-control" id="severity-formula" style="width: 96%; float: right;"> 
+				<div class="control-group">
+					<label class="control-label" style="font-size: large;">Σ</label>
+					<input type="text" class="form-control" id="severity-formula" style="width: 96%; float: right;">
+				</div> 
 				<label class="col-sm-12 control-label" style="margin-left: 10px; margin-top: 10px;">Формула 2:</label>
-				<h3 style="width: 3%; float: left;">Σ</h3>
-				<input type="text" class="form-control" id="insufficiency-formula" style="width: 96%; float: right;">
-				<label style="margin-left: 10px; margin-top: 10px; font-weight: inherit;">*Можна використовувати наступні символи: ' * ' , ' ^ ' , ' / ' , ' X ' ; де Х - значення коефіцієнта</label>
-				<div class="modal-footer" style="height: 40px; text-align: center;">
-					<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="sendFormulaValues();">Зберегти</button>
+				<div class="control-group">
+					<label class="control-label" style="font-size: large;">Σ</label>
+					<input type="text" class="form-control" id="insufficiency-formula" style="width: 96%; float: right;">
+				</div>
+				<div class="control-group">
+					<label style="margin-left: 10px; margin-top: 10px; font-weight: inherit;">*Можна використовувати наступні символи: ' * ' , ' ^ ' , ' / ' , ' X ' ; де Х - значення коефіцієнта</label>
+					<div class="modal-footer" style="height: 40px; text-align: center;">
+						<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="sendFormulaValues();">Зберегти</button>
+					</div>
 				</div>
 			</div>
 		</div>

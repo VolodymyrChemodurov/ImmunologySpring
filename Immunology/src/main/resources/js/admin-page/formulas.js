@@ -1,3 +1,5 @@
+var formulaRegExp = new RegExp('^([0-9+-/*^xX()])+$');
+
 function getFormulaForSyndrom(formulaType) {
 	var syndromName = $("#syndrrom-names").val();
 	var url = "/syndromes/template/{name}/{formulaType}".replace("{formulaType}", formulaType).replace("{name}", syndromName);
@@ -41,13 +43,23 @@ function saveFormulaForSyndrom(formulaType, formula) {
 	});
 }
 function sendFormulaValues() {
-	var severity = $("#severity-formula").val();
-	var insufficiency = $("#insufficiency-formula").val();
-
-	saveFormulaForSyndrom("severityLevel", severity);
-	saveFormulaForSyndrom("insufficiencyLevel", insufficiency);
-
+	saveFormulaIfValid($("#severity-formula"), "severityLevel");
+	saveFormulaIfValid($("#insufficiency-formula"), "insufficiencyLevel");
 }
+
+function saveFormulaIfValid(input, type) {
+	var value = input.val();
+	result = formulaRegExp.test(value);
+	if(!result) {
+		input.parent().removeClass("has-success");
+		input.parent().addClass("has-error");
+	} else {
+		input.parent().removeClass("has-error");
+		input.parent().addClass("has-success");
+		saveFormulaForSyndrom(type, value);
+	}
+}
+
 function refreshFormulaValues() {
 	getFormulaForSyndrom("severityLevel");
 	getFormulaForSyndrom("insufficiencyLevel");

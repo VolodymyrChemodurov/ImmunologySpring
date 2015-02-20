@@ -281,12 +281,12 @@ function initEvents(){
 				formObject.panels[panelIndex].elements[subPanelIndex].elements.splice(elementIndex,1);
 			} else if(subPanelIndex != -1 && elementIndex == -1) {
 				formObject.panels[panelIndex].elements.splice(subPanelIndex, 1);
-			} else {
+			} else if(subPanelIndex == -1 && elementIndex != -1) {
 				formObject.panels[panelIndex].elements.splice(elementIndex, 1);
+			} else {
+				formObject.panels.splice(panelIndex, 1);
 			}
-		} else {
-			formObject.panels.splice(panelIndex,1);
-		}
+		} 
 		
 		renderPreviewMedForm();
 		initPanelNames();

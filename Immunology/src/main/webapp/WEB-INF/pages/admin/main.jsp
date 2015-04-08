@@ -115,6 +115,8 @@
 			<jsp:include page="/WEB-INF/pages/admin/components/modal/remove-element-modal.jsp"></jsp:include>
 			<jsp:include page="/WEB-INF/pages/admin/components/modal/coeficient-modal.jsp"></jsp:include>
 			<jsp:include page="/WEB-INF/pages/admin/components/modal/edit-drug-modal.jsp"></jsp:include>
+			<jsp:include page="/WEB-INF/pages/admin/components/modal/create-drug-type-modal.jsp"></jsp:include>
+			<jsp:include page="/WEB-INF/pages/admin/components/modal/create-drug-species-modal.jsp"></jsp:include>
 			<!-- Anamnestic DATA -->
 			<div class="modal fade" id="select-syndrom-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
@@ -268,7 +270,7 @@
 	}
 	
 </script>
-	
+<script src="${param.baseURL}/resources/js/admin-page/drugs.js"></script>
 </body>
 
 </html>

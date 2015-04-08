@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.immunology.logic.service.DrugService;
 import com.immunology.model.drug.Drug;
+import com.immunology.model.drug.DrugSpecies;
+import com.immunology.model.drug.DrugType;
 import com.immunology.model.ui.EfficacyData;
 
 @Controller
@@ -27,9 +29,19 @@ public class DrugContoller {
 	@Autowired
 	private DrugService drugService;
 
+	@RequestMapping(value = "/type", method = RequestMethod.POST)
+	public @ResponseBody Boolean createDrugType(@RequestBody DrugType drugType) {
+		return drugService.saveOrUpdate(drugType);
+	}
+	
+	@RequestMapping(value = "/species", method = RequestMethod.POST)
+	public @ResponseBody Boolean createDrugSpecies(@RequestBody DrugSpecies drugSpecies) {
+		return drugService.saveOrUpdate(drugSpecies);
+	}
+	
 	@RequestMapping(method = RequestMethod.POST)
 	public @ResponseBody Boolean save(@RequestBody Drug drug) {
-		return saveOrUpdate(drug);
+		return drugService.saveOrUpdate(drug);
 	}
 	
 	@RequestMapping(value = "/{drugId}", method = RequestMethod.POST)

@@ -3,6 +3,8 @@ package com.immunology.logic.service;
 import java.util.List;
 
 import com.immunology.model.drug.Drug;
+import com.immunology.model.drug.DrugSpecies;
+import com.immunology.model.drug.DrugType;
 import com.immunology.model.ui.EfficacyData;
 
 public interface DrugService {
@@ -20,6 +22,10 @@ public interface DrugService {
 	EfficacyData getEfficacyDataBySurveyId(Long surveyId);
 	
 	Boolean saveOrUpdate(Drug drug);
+	
+	Boolean saveOrUpdate(DrugType drugType);
+	
+	Boolean saveOrUpdate(DrugSpecies drugSpecies);
 	
 	Drug getById(Long id);
 }

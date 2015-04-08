@@ -74,11 +74,11 @@
 				<div class="modal-body form-horizontal">
 					<fieldset>
 					<div class="form-group">
-						<button type="button" class="btn btn-primary" id="create-drug"
+						<button type="button" class="btn btn-primary" id="create-drug" onclick="createDrug()"
 							data-dismiss="modal">Створити новий препарат</button>
-						<button type="button" class="btn btn-primary" id="create-drug-type"
+						<button type="button" class="btn btn-primary" id="create-drug-type" onclick="createDrugType()"
 							data-dismiss="modal">Створити новий тип</button>
-						<button type="button" class="btn btn-primary" id="create-drug-species"
+						<button type="button" class="btn btn-primary" id="create-drug-species" onclick="createDrugSpecies()"
 							data-dismiss="modal">Створити новий вид</button>
 					</div>
 					</fieldset>
@@ -87,120 +87,3 @@
 		</div>
 	</div>
 </div>
-
-<script>
-	var globalDrugTypes;
-	var globalDrugSpecies;
-	
-	function getDrug(url) {
-		$.ajax({
-			type : "GET",
-			url : url,
-			contentType : "application/json; charset=utf-8",
-			dataType : "json",
-			success : function(response) {
-				console.log(response);
-				$("#drug_name").val(response.name);
-				$("#drug_id").val(response.id);
-				getDrugTypes(response.typeName);
-				getDrugSpecies(response.typeName, response.speciesName);
-				$('#edit-drug-modal').modal('show'); 
-			},
-			error : function(request, status, error) {
-				alert(error);
-			}
-		});
-	}
-	
-	function getDrugTypes(type) {
-		$.ajax({
-			type : "GET",
-			url : "drugs/getDrugTypes",
-			contentType : "application/json; charset=utf-8",
-			dataType : "json",
-			async: false,
-			success : function(response) {
-				console.log(response);
-				globalDrugTypes = response; 
-				var drugTypes = $("#typeOfDrugs");
-				drugTypes[0].options.length = 0;
-				$.each(response, function() {
-					drugTypes.append('<option>' + this + '</option>');
-				});
-				if(type !== null) {
-					drugTypes.val(type);
-				} else {
-					$('#typeOfDrugs :nth-child(0)').prop('selected', true);
-				}
-			},
-			error : function(request, status, error) {
-				alert(error);
-			}
-		});
-	}
-	
-	function getDrugSpecies(type, species) {
-		$.ajax({
-			type : "POST",
-			url : "drugs/getDrugSpecies",
-			data : {
-				'typeOfDrugs' : type
-			},
-			async: false,
-			success : function(response) {
-				console.log(response);
-				var speciesOfDrugs = $("#speciesOfDrugs");
-				speciesOfDrugs[0].options.length = 0;
-				$.each(response, function() {
-					speciesOfDrugs.append('<option>' + this + '</option>');
-				});
-				if(species !== null) {
-					speciesOfDrugs.val(species);
-				} else {
-					$('#speciesOfDrugs :nth-child(0)').prop('selected', true); 
-				}
-			},
-			error : function(request, status, error) {
-				alert(error);
-			}
-		});
-	}
-	
-	$("#create-drug").click(
-			function() {
-				getDrugTypes(null);
-				getDrugSpecies(globalDrugTypes[0], null);
-				$('#edit-drug-modal').modal('show'); 
-	});
-	
-	$("#save-drug").click(
-			function() {
-				var drug = {};
-				drug.name = $("#drug_name").val();
-				drug.speciesName = $("#speciesOfDrugs").val();
-				drug.id = $("#drug_id").val();
-				drug.typeName = $("#typeOfDrugs").val();
-				
-				console.log(drug);
-
-				$.ajax({
-					type : "POST",
-					url : "/drugs/{drugId}".replace("{drugId}", drug.id),
-					data : JSON.stringify(drug),
-					contentType : "application/json; charset=utf-8",
-					dataType : "json",
-					success : function(response) {
-						console.log("Success Save");
-						doAjaxGet('drugs');
-					},
-					error : function(request, status, error) {
-						alert(error);
-					}
-				});
-	});
-	
-	$('#typeOfDrugs').on('change', function (e) {
-		var type = this.value;
-	    getDrugSpecies(type, null);
-	});
-</script>

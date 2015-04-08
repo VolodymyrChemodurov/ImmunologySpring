@@ -71,4 +71,13 @@ public class DrugServiceImpl implements DrugService {
 		return crudDao.find(Drug.class, id);
 	}
 
+	public Boolean saveOrUpdate(DrugType drugType) {
+		return crudDao.saveOrUpdate(drugType) != null ? true : false;
+	}
+
+	public Boolean saveOrUpdate(DrugSpecies drugSpecies) {
+		drugSpecies.getType().setId(drugDao.getDrugTypeIdByName(drugSpecies.getType().getName()));
+		return crudDao.saveOrUpdate(drugSpecies) != null ? true : false;
+	}
+
 }

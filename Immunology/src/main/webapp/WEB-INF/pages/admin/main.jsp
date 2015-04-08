@@ -41,6 +41,12 @@
 						</a>
 					</li>
 					<li>
+						<a href="#" onclick="doAjaxGet('drugs');" class="ajax-link">
+							<i class="fa fa-medkit"></i> 
+							<span class="hidden-xs">Препарати</span>
+						</a>
+					</li>
+					<li>
 						<a href="#" onclick="doAjaxGet('/medcard');" class="ajax-link">
 							<i class="fa fa-file-o"></i>
 							<span class="hidden-xs">Медична картка</span>
@@ -108,6 +114,7 @@
 			<jsp:include page="/WEB-INF/pages/admin/components/modal/new-group-button.jsp"></jsp:include>
 			<jsp:include page="/WEB-INF/pages/admin/components/modal/remove-element-modal.jsp"></jsp:include>
 			<jsp:include page="/WEB-INF/pages/admin/components/modal/coeficient-modal.jsp"></jsp:include>
+			<jsp:include page="/WEB-INF/pages/admin/components/modal/edit-drug-modal.jsp"></jsp:include>
 			<!-- Anamnestic DATA -->
 			<div class="modal fade" id="select-syndrom-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog">

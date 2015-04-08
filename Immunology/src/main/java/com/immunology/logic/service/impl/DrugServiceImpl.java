@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 import com.immunology.logic.dao.CrudDao;
 import com.immunology.logic.dao.DrugDao;
 import com.immunology.logic.service.DrugService;
-import com.immunology.model.Drug;
 import com.immunology.model.Survey;
+import com.immunology.model.drug.Drug;
+import com.immunology.model.drug.DrugSpecies;
+import com.immunology.model.drug.DrugType;
 import com.immunology.model.ui.EfficacyData;
 
 @Service
@@ -51,6 +53,22 @@ public class DrugServiceImpl implements DrugService {
 
 	public EfficacyData getEfficacyDataBySurveyId(Long surveyId) {
 		return drugDao.getEfficacyDataBySurveyId(surveyId);
+	}
+
+	public Boolean saveOrUpdate(Drug drug) {
+		DrugSpecies species = new DrugSpecies();
+		species.setName(drug.getSpeciesName());
+		species.setId(drugDao.getDrugSpeciesIdByName(species.getName()));
+		drug.setSpecies(species);
+		DrugType type = new DrugType();
+		type.setName(drug.getTypeName());
+		type.setId(drugDao.getDrugTypeIdByName(type.getName()));
+		species.setType(type);
+		return crudDao.saveOrUpdate(drug) != null ? true : false;
+	}
+
+	public Drug getById(Long id) {
+		return crudDao.find(Drug.class, id);
 	}
 
 }

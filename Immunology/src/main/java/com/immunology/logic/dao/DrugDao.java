@@ -2,7 +2,9 @@ package com.immunology.logic.dao;
 
 import java.util.List;
 
-import com.immunology.model.Drug;
+import com.immunology.model.drug.Drug;
+import com.immunology.model.drug.DrugSpecies;
+import com.immunology.model.drug.DrugType;
 import com.immunology.model.ui.EfficacyData;
 
 public interface DrugDao {
@@ -15,7 +17,7 @@ public interface DrugDao {
 	
 	List getDrugNames(String species);
 	
-	List<Drug> getDrugsType();
+	List getDrugsType();
 	
 	List retrieveDrugEvaluation(String name);
 
@@ -24,4 +26,12 @@ public interface DrugDao {
 	List retrieveCancel(String name);
 
 	EfficacyData getEfficacyDataBySurveyId(Long surveyId);
+	
+	DrugType fingDrugTypeByName(String name);
+	
+	DrugSpecies fingDrugSpeciesByName(String name);
+	
+	Long getDrugTypeIdByName(String name);
+	
+	Long getDrugSpeciesIdByName(String name);
 }

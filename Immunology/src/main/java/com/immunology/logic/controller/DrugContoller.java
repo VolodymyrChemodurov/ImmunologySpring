@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.immunology.logic.service.DrugService;
+import com.immunology.model.drug.Drug;
 import com.immunology.model.ui.EfficacyData;
 
 @Controller
@@ -26,6 +27,29 @@ public class DrugContoller {
 	@Autowired
 	private DrugService drugService;
 
+	@RequestMapping(method = RequestMethod.POST)
+	public @ResponseBody Boolean save(@RequestBody Drug drug) {
+		return saveOrUpdate(drug);
+	}
+	
+	@RequestMapping(value = "/{drugId}", method = RequestMethod.POST)
+	public @ResponseBody Boolean saveOrUpdate(@RequestBody Drug drug) {
+		return drugService.saveOrUpdate(drug);
+	}
+	
+	@RequestMapping(value = "/{drugId}", method = RequestMethod.GET)
+	public @ResponseBody Drug getDrugSpecies(@PathVariable Long drugId) {
+		Drug drug = drugService.getById(drugId);
+		drug.setSpeciesName(drug.getSpecies().getName());
+		drug.setTypeName(drug.getSpecies().getType().getName());
+		return drug;
+	}
+	
+	@RequestMapping(value = "/getDrugTypes", method = RequestMethod.GET)
+	public @ResponseBody List getDrugTypes() {
+		return drugService.getDrugsType();
+	}
+	
 	@RequestMapping(value = "/getDrugSpecies", method = RequestMethod.POST)
 	public @ResponseBody List getDrugSpecies(Model model, @RequestParam String typeOfDrugs) {
 		return drugService.getDrugSpecies(typeOfDrugs);

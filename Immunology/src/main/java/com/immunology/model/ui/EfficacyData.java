@@ -30,8 +30,8 @@ import com.immunology.logic.utils.enums.EfficacyEvaluation;
 import com.immunology.logic.utils.enums.SideEffectsSeverityDegree;
 import com.immunology.logic.utils.json.CustomJsonDateDeserializer;
 import com.immunology.logic.utils.json.CustomJsonDateSerializer;
-import com.immunology.model.Drug;
 import com.immunology.model.Survey;
+import com.immunology.model.drug.Drug;
 
 @Entity
 @Table(name = "efficacy_data")

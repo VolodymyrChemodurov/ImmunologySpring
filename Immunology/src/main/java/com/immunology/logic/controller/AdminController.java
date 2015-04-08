@@ -17,11 +17,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.immunology.logic.service.DrugService;
 import com.immunology.logic.service.MedicalCardFormService;
 import com.immunology.logic.service.SyndromeService;
 import com.immunology.logic.service.UserRoleService;
 import com.immunology.logic.service.UserService;
 import com.immunology.logic.utils.UserUtils;
+import com.immunology.model.drug.Drug;
 import com.immunology.model.ui.MedicalCardForm;
 
 @Controller
@@ -38,6 +40,8 @@ public class AdminController {
 	private SyndromeService syndromeService;
 	@Autowired
 	private PasswordEncoder encoder;
+	@Autowired
+	private DrugService drugService;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String admin(ModelMap model) {
@@ -124,6 +128,14 @@ public class AdminController {
 		List<String> syndromesNames = syndromeService.getSyndromeNames();
 		model.addObject("syndromes", syndromesNames);
 		model.setViewName("admin/components/formulas");
+		return model;
+	}
+	
+	@RequestMapping(value = "/drugs", method = RequestMethod.GET)
+	public ModelAndView getDrugSpecies(ModelAndView model) {
+		List<Drug> drugs = drugService.getAllDrags();
+		model.addObject("drugs", drugs);
+		model.setViewName("admin/components/drugs");
 		return model;
 	}
 }

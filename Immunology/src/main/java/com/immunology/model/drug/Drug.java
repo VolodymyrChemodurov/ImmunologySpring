@@ -1,4 +1,4 @@
-package com.immunology.model;
+package com.immunology.model.drug;
 
 import java.util.List;
 
@@ -11,23 +11,29 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.immunology.model.ui.EfficacyData;
 
 @Entity
 @Table(name = "drugs")
+@JsonInclude(Include.NON_NULL)
 public class Drug {
+	
 	@Id
 	@GeneratedValue
-	private long id;
+	private Long id;
 
-	@Column(name = "species")
-	private String species;
-
-	@Column(name = "type")
-	private String type;
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "species_id")
+	@JsonBackReference(value = "drug_reference")
+	private DrugSpecies species;
 	
 	@Column(name = "name")
 	private String name;
@@ -39,6 +45,12 @@ public class Drug {
 		inverseJoinColumns={@JoinColumn(name="efficacy_data_id")})
 	private List<EfficacyData> efficacyData;
 
+	@Transient
+	private String speciesName;
+	
+	@Transient
+	private String typeName;
+	
 	public String getName() {
 		return name;
 	}
@@ -47,33 +59,20 @@ public class Drug {
 		this.name = name;
 	}
 
-
-
 	public long getId() {
 		return id;
 	}
 
-	public Drug setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
-		return this;
 	}
 
-	public String getSpecies() {
+	public DrugSpecies getSpecies() {
 		return species;
 	}
 
-	public Drug setSpecies(String species) {
+	public void setSpecies(DrugSpecies species) {
 		this.species = species;
-		return this;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public Drug setType(String type) {
-		this.type = type;
-		return this;
 	}
 
 	public List<EfficacyData> getEfficacyData() {
@@ -84,10 +83,20 @@ public class Drug {
 		this.efficacyData = efficacyData;
 	}
 
-	@Override
-	public String toString() {
-		return "Drug [id=" + id + ", species=" + species + ", type=" + type
-				+ ", name=" + name + ", efficacyData=" + efficacyData + "]";
+	public String getSpeciesName() {
+		return speciesName;
+	}
+
+	public void setSpeciesName(String speciesName) {
+		this.speciesName = speciesName;
+	}
+
+	public String getTypeName() {
+		return typeName;
+	}
+
+	public void setTypeName(String typeName) {
+		this.typeName = typeName;
 	}
 
 }

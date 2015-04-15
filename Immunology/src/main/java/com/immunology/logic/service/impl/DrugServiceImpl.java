@@ -84,9 +84,12 @@ public class DrugServiceImpl implements DrugService {
 		return crudDao.saveOrUpdate(drugSpecies) != null ? true : false;
 	}
 
-	@Override
 	public Boolean deleteDrug(Long drugId) {
 		return drugDao.deleteById(drugId);
+	}
+
+	public List<Drug> getSyndromeDrugs(String syndromeName) {
+		return drugDao.getSyndromeDrugs(syndromeName);
 	}
 
 }

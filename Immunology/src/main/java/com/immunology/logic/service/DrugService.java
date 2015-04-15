@@ -30,4 +30,6 @@ public interface DrugService {
 	Drug getById(Long id);
 	
 	Boolean deleteDrug(Long drugId);
+	
+	List<Drug> getSyndromeDrugs(String syndromeName);
 }

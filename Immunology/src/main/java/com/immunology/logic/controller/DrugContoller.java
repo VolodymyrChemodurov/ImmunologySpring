@@ -29,6 +29,11 @@ public class DrugContoller {
 	@Autowired
 	private DrugService drugService;
 
+	@RequestMapping(value = "/syndrome/{syndromeName}", method = RequestMethod.GET)
+	public @ResponseBody List<Drug> getSyndromeDrugs(@PathVariable String syndromeName) {
+		return drugService.getSyndromeDrugs(syndromeName);
+	}
+	
 	@RequestMapping(value = "/type", method = RequestMethod.POST)
 	public @ResponseBody Boolean createDrugType(@RequestBody DrugType drugType) {
 		return drugService.saveOrUpdate(drugType);

@@ -15,10 +15,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.immunology.model.Syndrome;
 import com.immunology.model.ui.EfficacyData;
 
 @Entity
@@ -45,6 +49,10 @@ public class Drug {
 		inverseJoinColumns={@JoinColumn(name="efficacy_data_id")})
 	private List<EfficacyData> efficacyData;
 
+	@ManyToMany(mappedBy = "drugs")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<Syndrome> syndromes;
+	
 	@Transient
 	private String speciesName;
 	
@@ -97,6 +105,14 @@ public class Drug {
 
 	public void setTypeName(String typeName) {
 		this.typeName = typeName;
+	}
+
+	public List<Syndrome> getSyndromes() {
+		return syndromes;
+	}
+
+	public void setSyndromes(List<Syndrome> syndromes) {
+		this.syndromes = syndromes;
 	}
 
 }

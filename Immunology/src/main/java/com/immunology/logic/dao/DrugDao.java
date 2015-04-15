@@ -36,4 +36,6 @@ public interface DrugDao {
 	Long getDrugSpeciesIdByName(String name);
 	
 	Boolean deleteById(Long id);
+	
+	List<Drug> getSyndromeDrugs(String syndromeName);
 }

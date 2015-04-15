@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -23,6 +25,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.immunology.model.calculation.Formula;
+import com.immunology.model.drug.Drug;
 import com.immunology.model.ui.AnamnesticDataForm;
 
 @Entity
@@ -51,6 +54,12 @@ public class Syndrome {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Survey> surveys;
 
+	@ManyToMany
+	@JoinTable(name = "syndrome_drugs", 
+				joinColumns = {@JoinColumn(name = "syndrome_id")},
+				inverseJoinColumns = {@JoinColumn(name = "drug_id")})
+	private List<Drug> drugs;
+	
 //	@ManyToMany(mappedBy = "syndromeTemplates")
 //	@LazyCollection(LazyCollectionOption.FALSE)
 	@Transient
@@ -116,6 +125,14 @@ public class Syndrome {
 
 	public void setFormulas(List<Formula> formulas) {
 		this.formulas = formulas;
+	}
+
+	public List<Drug> getDrugs() {
+		return drugs;
+	}
+
+	public void setDrugs(List<Drug> drugs) {
+		this.drugs = drugs;
 	}
 
 	@Override

@@ -1,8 +1,11 @@
 package com.immunology.logic.dao.impl;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -11,17 +14,26 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import com.immunology.logic.dao.DrugDao;
+import com.immunology.logic.dao.GenericMongoDao;
+import com.immunology.model.Syndrome;
 import com.immunology.model.drug.Drug;
 import com.immunology.model.drug.DrugSpecies;
 import com.immunology.model.drug.DrugType;
 import com.immunology.model.ui.EfficacyData;
 
 @Repository
-public class DrugDaoImp implements DrugDao {
+public class DrugDaoImp extends GenericMongoDao<Drug> implements DrugDao {
+	
+	private static final String SYNDROME_TEMPLATE_COLLECTION = "syndromeTemplates";
 	
 	@PersistenceContext
 	private EntityManager em;
 
+	@PostConstruct
+	public void init() {
+		super.init(SYNDROME_TEMPLATE_COLLECTION);
+	}
+	
 	public List<Drug> getAllDrags() {
 		TypedQuery<Drug> query = em.createQuery("SELECT * FROM drugs", Drug.class);
 		List<Drug> results = query.getResultList();
@@ -91,10 +103,21 @@ public class DrugDaoImp implements DrugDao {
 		return result;
 	}
 
-	@Override
 	@Transactional
 	public Boolean deleteById(Long id) {
 		int result = em.createNativeQuery("DELETE FROM drugs WHERE id = :id").setParameter("id", id).executeUpdate();
 		return result > 0 ? true : false;
+	}
+
+	public List<Drug> getSyndromeDrugs(String syndromeName) {
+		Iterable<Syndrome> templates = collection
+				.find("{'name': '#'}", syndromeName).as(Syndrome.class);
+		List<Drug> items = null;
+		Iterator<Syndrome> iterator = templates.iterator();
+		while (iterator.hasNext()) {
+			Syndrome syndrome = iterator.next();
+			items = syndrome.getDrugs();
+		}
+		return items;
 	}
 }

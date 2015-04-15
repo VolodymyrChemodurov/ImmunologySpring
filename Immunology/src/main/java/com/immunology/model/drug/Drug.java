@@ -30,7 +30,7 @@ public class Drug {
 	@GeneratedValue
 	private Long id;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "species_id")
 	@JsonBackReference(value = "drug_reference")
 	private DrugSpecies species;

@@ -3,6 +3,7 @@ var globalDrugTypes;
 var globalDrugSpecies;
 
 function getDrug(url) {
+	$("#delete-drug").show();
 	$.ajax({
 		type : "GET",
 		url : url,
@@ -77,23 +78,21 @@ function getDrugSpecies(type, species) {
 	});
 }
 
-//$("#create-drug").click(
 function createDrug() {
-			getDrugTypes(null, "#typeOfDrugs");
-			getDrugSpecies(globalDrugTypes[0], null);
-			$('#edit-drug-modal').modal('show'); 
-};//);
+		$("#delete-drug").hide();
+		getDrugTypes(null, "#typeOfDrugs");
+		getDrugSpecies(globalDrugTypes[0], null);
+		$('#edit-drug-modal').modal('show'); 
+};
 
-//$("#create-drug-type").click(
 function createDrugType() {
 			$('#create-drug-type-modal').modal('show'); 
-}//);
+}
 
-//$("#create-drug-species").click(
 function createDrugSpecies() {
 			getDrugTypes(null, '#selectedTypeOfDrugs');
 			$('#create-drug-species-modal').modal('show'); 
-};//);
+};
 
 $("#save-drug").click(
 		function() {
@@ -171,4 +170,24 @@ $("#save-new-drug-species").click(
 $('#typeOfDrugs').on('change', function (e) {
 	var type = this.value;
     getDrugSpecies(type, null);
+});
+
+$("#delete-drug").click(
+		function() {
+			drugId = $("#drug_id").val();
+
+			$.ajax({
+				type : "DELETE",
+				url : "/drugs/{drugId}".replace("{drugId}", drugId),
+				contentType : "application/json; charset=utf-8",
+				dataType : "json",
+				async: false,
+				success : function(response) {
+					console.log("Success delete");
+					doAjaxGet('drugs');
+				},
+				error : function(request, status, error) {
+					alert(error);
+				}
+			});
 });

@@ -34,4 +34,6 @@ public interface DrugDao {
 	Long getDrugTypeIdByName(String name);
 	
 	Long getDrugSpeciesIdByName(String name);
+	
+	Boolean deleteById(Long id);
 }

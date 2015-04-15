@@ -28,4 +28,6 @@ public interface DrugService {
 	Boolean saveOrUpdate(DrugSpecies drugSpecies);
 	
 	Drug getById(Long id);
+	
+	Boolean deleteDrug(Long drugId);
 }

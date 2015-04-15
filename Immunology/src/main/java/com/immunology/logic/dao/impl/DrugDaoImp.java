@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
@@ -88,5 +89,12 @@ public class DrugDaoImp implements DrugDao {
 		Long result = ((BigInteger) em.createNativeQuery("SELECT id FROM drug_species WHERE name = :name")
 				.setParameter("name", name).getSingleResult()).longValue();
 		return result;
+	}
+
+	@Override
+	@Transactional
+	public Boolean deleteById(Long id) {
+		int result = em.createNativeQuery("DELETE FROM drugs WHERE id = :id").setParameter("id", id).executeUpdate();
+		return result > 0 ? true : false;
 	}
 }

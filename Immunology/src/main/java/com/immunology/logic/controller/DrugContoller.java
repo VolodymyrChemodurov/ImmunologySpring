@@ -57,6 +57,11 @@ public class DrugContoller {
 		return drug;
 	}
 	
+	@RequestMapping(value = "/{drugId}", method = RequestMethod.DELETE)
+	public @ResponseBody Boolean deleteDrug(@PathVariable Long drugId) {
+		return drugService.deleteDrug(drugId);
+	}
+	
 	@RequestMapping(value = "/getDrugTypes", method = RequestMethod.GET)
 	public @ResponseBody List getDrugTypes() {
 		return drugService.getDrugsType();

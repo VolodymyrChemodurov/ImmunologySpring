@@ -40,6 +40,8 @@
 				<button type="button" class="btn btn-default" data-dismiss="modal">Закрити</button>
 				<button type="button" class="btn btn-primary" id="save-drug"
 					data-dismiss="modal">Зберегти зміни</button>
+				<button type="button" class="btn btn-danger" id="delete-drug"
+					data-dismiss="modal">Видалити</button>
 			</div>
 		</div>
 	</div>

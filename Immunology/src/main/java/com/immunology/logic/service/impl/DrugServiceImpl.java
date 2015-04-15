@@ -3,6 +3,8 @@ package com.immunology.logic.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,8 @@ import com.immunology.model.ui.EfficacyData;
 @Service
 public class DrugServiceImpl implements DrugService {
 
+	private static final Logger LOG = LoggerFactory.getLogger(DrugServiceImpl.class);
+	
 	@Autowired
 	private CrudDao crudDao;
 	@Autowired
@@ -78,6 +82,11 @@ public class DrugServiceImpl implements DrugService {
 	public Boolean saveOrUpdate(DrugSpecies drugSpecies) {
 		drugSpecies.getType().setId(drugDao.getDrugTypeIdByName(drugSpecies.getType().getName()));
 		return crudDao.saveOrUpdate(drugSpecies) != null ? true : false;
+	}
+
+	@Override
+	public Boolean deleteDrug(Long drugId) {
+		return drugDao.deleteById(drugId);
 	}
 
 }

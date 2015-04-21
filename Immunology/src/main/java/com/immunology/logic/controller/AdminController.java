@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -136,6 +137,13 @@ public class AdminController {
 		List<Drug> drugs = drugService.getAllDrags();
 		model.addObject("drugs", drugs);
 		model.setViewName("admin/components/drugs");
+		return model;
+	}
+	
+	@RequestMapping(value = "/drugs/syndrome/{syndromeName}", method = RequestMethod.GET)
+	public ModelAndView getSyndromeDrugs(ModelAndView model, @PathVariable String syndromeName) {
+		model.setViewName("admin/components/syndrome-drugs");
+		model.addObject("drugs", drugService.getSyndromeDrugs(syndromeName));
 		return model;
 	}
 }

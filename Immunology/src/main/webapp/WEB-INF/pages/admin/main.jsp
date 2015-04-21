@@ -88,7 +88,7 @@
 									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'MORPHOLOGICAL_DATA'" >Морфологічні дані</a></li>
 									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'INSTRUMENTAL_DATA'" >Інструментальні дані</a></li>
 									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'DIAGNOSIS_VERIFICATION_DATA'" >Верифікація діагнозу</a></li>
-									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'MAIN_TREATMENT_DATA'" >Основне лікування</a></li>
+									<li><a class="ajax-link" href="#" onclick="showSyndromeDrugs();" >Основне лікування</a></li>
 									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'REHABILITATION_DATA'" >Реабілітація</a></li>
 									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'PREVENTIVE_MEASURES_DATA'" >Профілактичні заходи</a></li>
 								</ul>
@@ -241,7 +241,7 @@
 			async:   false,
 			success : function(response) {
 				newSyndromObject = response;
-				newSyndromObject.name = syndromName
+				newSyndromObject.name = syndromName;
 			},
 			error: function (request, status, error) {
 				alert(error);
@@ -267,8 +267,11 @@
 				alert(error);
 		}});
 		
-	}
+	};
 	
+	function showSyndromeDrugs() {
+		doAjaxGet('drugs/syndrome/' + $('select[name=syndrrom-names]')[0].value);
+	};
 </script>
 <script src="${param.baseURL}/resources/js/admin-page/drugs.js"></script>
 </body>

@@ -58,7 +58,7 @@
 					<li id="survey-parent" class="dropdown">
 						<a  href="#"  class="dropdown-toggle">
 							<i class="fa fa-pencil-square-o"></i>
-						 	<span class="hidden-xs">Форми обстежень</span>
+						 	<span class="hidden-xs">Синдроми</span>
 						</a>
 						<ul class="dropdown-menu">
 						<li class="dropdown">
@@ -88,7 +88,7 @@
 									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'MORPHOLOGICAL_DATA'" >Морфологічні дані</a></li>
 									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'INSTRUMENTAL_DATA'" >Інструментальні дані</a></li>
 									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'DIAGNOSIS_VERIFICATION_DATA'" >Верифікація діагнозу</a></li>
-									<li><a class="ajax-link" href="#" onclick="showSyndromeDrugs();" >Основне лікування</a></li>
+									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="drugsShow = true">Основне лікування</a></li>
 									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'REHABILITATION_DATA'" >Реабілітація</a></li>
 									<li><a class="ajax-link" href="#" data-toggle="modal" data-target="#select-syndrom-modal" onclick="formType = 'PREVENTIVE_MEASURES_DATA'" >Профілактичні заходи</a></li>
 								</ul>
@@ -136,7 +136,7 @@
 							</select>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default" data-dismiss="modal">Закрити</button>
-								<button type="button" class="btn btn-primary" onclick="doAjaxGet('anamnestic'); initSurveyForm($('select[name=syndrrom-names]')[0].value)" data-dismiss="modal">Вибрати</button>
+								<button type="button" class="btn btn-primary" onclick="selectSyndromeAction();" data-dismiss="modal">Вибрати</button>
 							</div>
 						</div>
 					</div>
@@ -181,7 +181,7 @@
 	<script type="text/javascript">
 	//neads for recognize what form you try to show;
 	var formType = "None"; 
-	
+	var drugsShow = false;
 	
 	function doAjaxGet(pageName) {
     	$.ajax({
@@ -267,6 +267,16 @@
 				alert(error);
 		}});
 		
+	};
+	
+	function selectSyndromeAction() {
+		if(drugsShow) {
+			showSyndromeDrugs();
+			drugsShow = false;
+		} else {
+			doAjaxGet('anamnestic'); 
+			initSurveyForm($('select[name=syndrrom-names]')[0].value);
+		}
 	};
 	
 	function showSyndromeDrugs() {

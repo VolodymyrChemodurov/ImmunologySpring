@@ -2,6 +2,7 @@ package com.immunology.logic.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import com.immunology.logic.service.MedicalCardFormService;
 import com.immunology.logic.service.SyndromeService;
 import com.immunology.logic.service.UserRoleService;
 import com.immunology.logic.service.UserService;
+import com.immunology.logic.utils.URIUtils;
 import com.immunology.logic.utils.UserUtils;
 import com.immunology.model.drug.Drug;
 import com.immunology.model.ui.MedicalCardForm;
@@ -141,7 +143,8 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value = "/drugs/syndrome/{syndromeName}", method = RequestMethod.GET)
-	public ModelAndView getSyndromeDrugs(ModelAndView model, @PathVariable String syndromeName) {
+	public ModelAndView getSyndromeDrugs(ModelAndView model, HttpServletRequest request) {
+		String syndromeName = URIUtils.decodePathVariable(request.getRequestURI(), 3);
 		model.setViewName("admin/components/syndrome-drugs");
 		model.addObject("drugs", drugService.getSyndromeDrugs(syndromeName));
 		return model;

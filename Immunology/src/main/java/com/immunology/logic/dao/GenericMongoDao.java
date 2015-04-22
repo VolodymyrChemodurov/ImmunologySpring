@@ -15,7 +15,7 @@ import com.mongodb.DB;
 public abstract class GenericMongoDao<T> {
 
 	@Autowired
-	private DB db;
+	protected DB db;
 	
 	protected MongoCollection collection;
 

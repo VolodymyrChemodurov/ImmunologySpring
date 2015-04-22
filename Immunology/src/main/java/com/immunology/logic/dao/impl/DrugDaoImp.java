@@ -11,15 +11,18 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
+import org.bson.LazyBSONList;
 import org.springframework.stereotype.Repository;
 
 import com.immunology.logic.dao.DrugDao;
 import com.immunology.logic.dao.GenericMongoDao;
-import com.immunology.model.Syndrome;
 import com.immunology.model.drug.Drug;
 import com.immunology.model.drug.DrugSpecies;
 import com.immunology.model.drug.DrugType;
 import com.immunology.model.ui.EfficacyData;
+import com.mongodb.BasicDBList;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
 
 @Repository
 public class DrugDaoImp extends GenericMongoDao<Drug> implements DrugDao {
@@ -110,14 +113,25 @@ public class DrugDaoImp extends GenericMongoDao<Drug> implements DrugDao {
 	}
 
 	public List<Drug> getSyndromeDrugs(String syndromeName) {
-		Iterable<Syndrome> templates = collection
-				.find("{'name': '#'}", syndromeName).as(Syndrome.class);
-		List<Drug> items = null;
-		Iterator<Syndrome> iterator = templates.iterator();
-		while (iterator.hasNext()) {
-			Syndrome syndrome = iterator.next();
-			items = syndrome.getDrugs();
+		DBObject syndromeDrugsIds = db.getCollection(SYNDROME_TEMPLATE_COLLECTION).findOne(new BasicDBObject("name", syndromeName), new BasicDBObject("drugs", 1));
+		List<Long> drugsIds = parseDrugIds(syndromeDrugsIds); 
+		
+		List<Drug> syndromeDrugs = new ArrayList<Drug>(drugsIds.size());
+		for(Long id : drugsIds) {
+			Drug currentDrug = em.find(Drug.class, id);
+			syndromeDrugs.add(currentDrug);
 		}
-		return items;
+		
+		return syndromeDrugs;
+	}
+	
+	private List<Long> parseDrugIds(DBObject drugIds) {
+		List<Long> drugsIds = new ArrayList<Long>();
+		LazyBSONList drugs = (LazyBSONList) drugIds.get("drugs");
+		for(int i = 0; i < drugs.size(); i++) {
+			DBObject currentDrug = (DBObject) drugs.get(i);
+			drugsIds.add(Long.parseLong(currentDrug.get("id").toString())); 
+		}
+		return drugsIds;
 	}
 }

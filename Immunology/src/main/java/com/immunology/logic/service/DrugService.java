@@ -32,4 +32,7 @@ public interface DrugService {
 	Boolean deleteDrug(Long drugId);
 	
 	List<Drug> getSyndromeDrugs(String syndromeName);
+	
+	Long findDrugId(String type, String species, String name);
+	
 }

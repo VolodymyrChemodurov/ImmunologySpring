@@ -92,4 +92,9 @@ public class DrugServiceImpl implements DrugService {
 		return drugDao.getSyndromeDrugs(syndromeName);
 	}
 
+	@Override
+	public Long findDrugId(String type, String species, String name) {
+		return drugDao.findDrugId(type, species, name);
+	}
+
 }

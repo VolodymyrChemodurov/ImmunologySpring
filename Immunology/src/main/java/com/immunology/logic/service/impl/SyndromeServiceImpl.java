@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.immunology.logic.dao.CrudDao;
 import com.immunology.logic.dao.SyndromeDao;
 import com.immunology.logic.dao.UserDao;
+import com.immunology.logic.service.DrugService;
 import com.immunology.logic.service.SyndromeService;
 import com.immunology.logic.service.calculation.FormulaBuilder;
 import com.immunology.logic.service.calculation.impl.SurveyCalculatorService;
@@ -22,6 +23,7 @@ import com.immunology.logic.utils.UserUtils;
 import com.immunology.logic.utils.enums.FormulaType;
 import com.immunology.model.Syndrome;
 import com.immunology.model.calculation.Formula;
+import com.immunology.model.drug.Drug;
 
 @Service
 public class SyndromeServiceImpl implements SyndromeService {
@@ -36,6 +38,9 @@ public class SyndromeServiceImpl implements SyndromeService {
 	
 	@Autowired
 	private CrudDao crudDao;
+	
+	@Autowired
+	private DrugService drugService;
 	
 	@Autowired
 	private SurveyCalculatorService surveyCalculatorService;
@@ -142,5 +147,29 @@ public class SyndromeServiceImpl implements SyndromeService {
 		}
 		syndromeTemplate.setUsers(cleanedUsers);
 	}
+
+	@Override
+	public Boolean wireDrugToSyndromeTemplate(String syndromeName, String drugType, String drugSpecies, String drugName) {
+		boolean result = false;
+		Syndrome syndrome = syndromeDao.findSyndrome(syndromeName);
+		Long drugId = drugService.findDrugId(drugType, drugSpecies, drugName);
+		if(isDrugAlreadyAsigned(syndrome, drugId)) {
+			Drug drug = new Drug();
+			drug.setId(drugId);
+			syndrome.getDrugs().add(drug);
+			result = syndromeDao.updateSyndromeTemplate(syndromeName, syndrome);
+		}
+		return result;
+	}
 	
+	private boolean isDrugAlreadyAsigned(Syndrome syndrome, Long drugId) {
+		boolean result = true;
+		for(Drug currentDrug: syndrome.getDrugs()) {
+			if(currentDrug.getId() == drugId) {
+				result = false;
+				break;
+			}
+		}
+		return result;
+	}
 }

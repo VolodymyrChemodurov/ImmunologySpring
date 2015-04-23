@@ -132,4 +132,11 @@ public class DrugDaoImp extends GenericMongoDao<Drug> implements DrugDao {
 		}
 		return drugsIds;
 	}
+
+	@Override
+	public Long findDrugId(String type, String species, String name) {
+		Long result = ((BigInteger) em.createNativeQuery("SELECT drugs.id FROM drugs JOIN drug_species ON drugs.species_id = drug_species.id JOIN drug_types ON drug_species.type_id = drug_types.id WHERE drugs.name = :drugName AND drug_species.name = :speciesName AND drug_types.name = :typeName")
+				.setParameter("drugName", name).setParameter("typeName", type).setParameter("speciesName", species).getSingleResult()).longValue();
+		return result;
+	}
 }

@@ -33,4 +33,6 @@ public interface SyndromeService {
 	void saveSyndromeFormula(String syndormeName, FormulaType formulaType, String formula);
 	
 	void removeSyndromeTemplateFromUser(String syndromeName, Long userId);
+	
+	Boolean wireDrugToSyndromeTemplate(String syndromeName, String drugType, String drugSpecies, String drugName);
 }

@@ -38,4 +38,6 @@ public interface DrugDao {
 	Boolean deleteById(Long id);
 	
 	List<Drug> getSyndromeDrugs(String syndromeName);
+	
+	Long findDrugId(String type, String species, String name);
 }

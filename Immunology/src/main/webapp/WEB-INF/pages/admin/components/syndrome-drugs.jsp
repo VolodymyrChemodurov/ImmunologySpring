@@ -20,7 +20,7 @@
 			<div class="box-header">
 				<div class="box-name">
 					<i class="fa fa-medkit"></i>
-					<span>Список усіх препаратів</span>
+					<span>Список препаратів</span>
 				</div>
 				<div class="box-icons">
 					<a class="collapse-link">
@@ -41,7 +41,7 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${drugs}" var="drug"> 
-							<tr onclick="getDrug('drugs/${drug.id}')">
+							<tr>
 								<td>${drug.id}</td>
 								<td>${drug.species.type.name}</td>
 								<td>${drug.species.name}</td>
@@ -50,6 +50,35 @@
 						</c:forEach>
 					</tbody>
 				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-xs-12">
+		<div class="box">
+			<div class="box-header">
+				<div class="box-name">
+					<i class="fa fa-medkit"></i>
+					<span>Дії</span>
+				</div>
+				<div class="box-icons">
+					<a class="collapse-link">
+						<i class="fa fa-chevron-up"></i>
+					</a>
+				</div>
+				<div class="no-move"></div>
+			</div>
+			<div class="box-content no-padding" style="text-align: center;">
+				<div class="modal-body form-horizontal">
+					<fieldset>
+					<div class="form-group">
+						<button type="button" class="btn btn-primary" id="create-drug" onclick="addDrugToSyndrome()"
+							data-dismiss="modal">Додати препарат</button>
+					</div>
+					</fieldset>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -149,4 +149,9 @@ public class SyndromeController {
 		return result;
 	}
 
+	@RequestMapping(value = "/template/{name}/drug", method = RequestMethod.POST)
+	public @ResponseBody Boolean wireDrugToSyndromeTemplate(@RequestParam(value="type") String drugType, @RequestParam(value="species") String drugSpecies, @RequestParam(value="name") String drugName, HttpServletRequest request) {
+		String syndromeName = URIUtils.decodePathVariable(request.getRequestURI(), 2);
+		return true;
+	}
 }

@@ -2,7 +2,6 @@ package com.immunology.logic.dao.impl;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -20,7 +19,6 @@ import com.immunology.model.drug.Drug;
 import com.immunology.model.drug.DrugSpecies;
 import com.immunology.model.drug.DrugType;
 import com.immunology.model.ui.EfficacyData;
-import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 
